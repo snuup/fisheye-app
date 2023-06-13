@@ -44,6 +44,16 @@ button {
     font-size: x-large;
 }
 
-.bar{
+.bar {
     outline: solid 1px turquoise;
+}
+
+path.a {
+    fill: darkseagreen;
+}
+path.b {
+    fill: aquamarine;
+}
+path.c {
+    fill: coral;
 }

@@ -16,7 +16,7 @@ html {
 
 body {
     padding: 1em;
-    background: lightcyan;
+    /* background: lightcyan; */
     font-size: medium;
     font-family: calibri;
     user-select: none;
@@ -59,4 +59,23 @@ path.family_relationship {
 }
 path.partnership {
     fill: rgb(161, 106, 85);
+}
+
+.degreecontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    align-items: stretch;
+    gap: 1em;
+}
+
+.degree {
+    display: grid;
+}
+
+.nodename{
+    font-weight: bold;
+}
+
+.red{
+    color: rgb(216, 3, 3);
 }

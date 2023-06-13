@@ -1,4 +1,4 @@
-import { Graph } from "../algo/graph"
+import { Graph } from "../analysis/graph"
 import { mount } from "../utils/common"
 
 export const mraw = {
@@ -14,6 +14,8 @@ export const mraw = {
     graph: new Graph(),
     selection: [], // ids as string[]
     //linkselection: [], // ?? as string[]
+
+
 }
 
 type Model = typeof mraw

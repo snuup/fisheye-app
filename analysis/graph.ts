@@ -1,5 +1,5 @@
 import { m } from "../app/model"
-import { mc1 } from "../data/data.min"
+import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 
 export class FishNode {
@@ -14,6 +14,8 @@ export class FishNode {
         this.nid = cleanid(original.id)
         this.marks = []
     }
+
+    static create(original) { return new FishNode(original) }
 
     get id() { return this.nid }
     get id10() { return this.nid.truncate(10) }
@@ -74,6 +76,8 @@ export class FishLink {
         this.sid = this.source = cleanid(original.source)
         this.tid = this.target = cleanid(original.target)
     }
+
+    static create(original) { return new FishLink(original) }
 
     get key() { return this.sid + "|" + this.tid }
 
@@ -167,6 +171,25 @@ export class Graph {
     appendlinks(ls: FishLink[]) {
         ls.forEach(this.appendlink)
     }
+
+    get stats() {
+        return {
+            nodecount: this.nodes.length,
+            linkcount: this.links.length,
+            degrees:
+                this.links
+                    .groupBy(l => l.source)
+                    .entries.map(([nodeid, links]) => ({nid:nodeid, count:links.length, links}))
+                    .sortBy(o => -o.count)
+                    .slice(0, 25) as Degree[]
+        }
+    }
+}
+
+export interface Degree {
+    nid: string
+    count: number
+    links:FishLink[]
 }
 
 const cleanid = (id) => typeof id === "number" ? "#" + id : id

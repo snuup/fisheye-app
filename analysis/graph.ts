@@ -136,8 +136,8 @@ export class Mark {
 
 export class Graph {
 
-    nodes: any[]
-    links: any[]
+    nodes: FishNode[]
+    links: FishLink[]
 
     constructor(nodes?: FishNode[], links?: FishLink[]) {
         this.nodes = nodes ?? []
@@ -145,18 +145,18 @@ export class Graph {
         rebind(this)
     }
 
-    hasnode(n: FishNode | string): boolean {
-        if ((n as any).trim) return this.nodes.find(n => n.id === n)
-        return this.nodes.includes(n)
-    }
+    // hasnode(n: FishNode | string): boolean {
+    //     if (n instanceof String) return this.nodes.find(n => n.id === n)
+    //     return this.nodes.includes(n)
+    // }
 
-    appendnode(n: FishNode) {
-        if (!this.hasnode(n)) this.nodes.push(n)
-    }
+    // appendnode(n: FishNode) {
+    //     if (!this.hasnode(n)) this.nodes.push(n)
+    // }
 
-    appendnodes(ns: FishNode[]) {
-        ns.forEach(this.appendnode)
-    }
+    // appendnodes(ns: FishNode[]) {
+    //     ns.forEach(this.appendnode)
+    // }
 
     haslink(e: FishLink): boolean {
         return this.links.includes(e)
@@ -170,18 +170,37 @@ export class Graph {
         ls.forEach(this.appendlink)
     }
 
+    getlinks(n: string) {
+        return this.links.filter(l => l.sid == n)
+    }
+
     get stats() {
+
+        let degrees =
+            this.links
+                .groupBy(l => l.source)
+                .entries.map(([nodeid, links]) => ({ nid: nodeid, count: links.length, links }))
+                .sortBy(o => -o.count)
+                .slice(0, 25) as Degree[]
+
+        let names = degrees.map(d => d.nid)
+
+        let missings = m.investigatees.filter(inv => !names.includes(inv))
+        let postfix = missings.map(nid =>  {
+            let links = this.getlinks(nid)
+            return ({ nid, count: links.length, links })
+        }).sortBy(o => -o.count)
+
+        degrees.push(...postfix)
+
+        console.log(degrees)
+
         return {
             nodecount: this.nodes.length,
             linkcount: this.links.length,
-            nodetypes: this.nodes.countBy(n => n.type),
+            nodetypes: this.nodes.countBy(n => n.type ?? ""),
             linktypes: this.links.countBy(l => l.type),
-            degrees:
-                this.links
-                    .groupBy(l => l.source)
-                    .entries.map(([nodeid, links]) => ({nid:nodeid, count:links.length, links}))
-                    .sortBy(o => -o.count)
-                    .slice(0, 25) as Degree[]
+            degrees
         }
     }
 }
@@ -189,7 +208,7 @@ export class Graph {
 export interface Degree {
     nid: string
     count: number
-    links:FishLink[]
+    links: FishLink[]
 }
 
 const cleanid = (id) => typeof id === "number" ? "#" + id : id

@@ -40,7 +40,7 @@ const ObjectAsTable = ({ o }: { o: any }) => (
         {Object.entries(o)
             .sortBy(([k, v]) => -v)
             .map(([k, v]) => (
-                <tr>
+                <tr class={k}>
                     <td>{k}</td>
                     <td>{v}</td>
                 </tr>

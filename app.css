@@ -6,7 +6,6 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
-    margin: 4px;
     padding: 0;
 }
 
@@ -48,17 +47,21 @@ button {
     outline: solid 1px turquoise;
 }
 
-path.ownership {
+.ownership {
     fill: rgb(57, 65, 62);
+    color: rgb(57, 65, 62);
 }
-path.membership {
+.membership {
     fill: rgb(127, 170, 211);
+    color: rgb(127, 170, 211);
 }
-path.family_relationship {
+.family_relationship {
     fill: rgb(187, 125, 173);
+    color: rgb(187, 125, 173);
 }
-path.partnership {
+.partnership {
     fill: rgb(161, 106, 85);
+    color: rgb(161, 106, 85);
 }
 
 .degreecontainer {

@@ -21,7 +21,7 @@ interface Array<T> {
     sortBy(selector?): T[]
     distinctBy(selector?): T[]
     get combinations(): T[]
-    sum(selector: (x:T) => any): number
+    sumBy(selector: (x:T) => number): number
     sortnumeric(selector): Array<T>
     get last(): T
 }

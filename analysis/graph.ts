@@ -39,9 +39,7 @@ export class FishNode {
     marks: Mark[]
 
     addmark(mark: Mark) {
-        //console.log("addmark", mark.key)
         if (this.marks.find(m => m.key == mark.key)) return
-        //console.log("ok")
         this.marks.push(mark)
     }
 
@@ -50,7 +48,7 @@ export class FishNode {
     }
 
     get score() {
-        let sum = this.marks?.sum(m => 1 / m.length) ?? 0
+        let sum = this.marks?.sumBy(m => 1 / m.length) ?? 0
         return sum
     }
 

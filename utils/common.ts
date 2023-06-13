@@ -53,7 +53,7 @@ mergePrototype(class extends Array {
         let m = new Map(this.map(x => [selector(x), x]))
         return [...m.values()]
     }
-    sum(selector) {
+    sumBy(selector) {
         selector = selector ?? identity
         return this.reduce((acc, b) => acc + selector(b), 0)
     }

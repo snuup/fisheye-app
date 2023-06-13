@@ -21,10 +21,11 @@ export const GraphStats = () => {
 
 const DegreeView = (d: Degree) => (
     <tr>
+        <td><Donut data={ d.links.countBy(l => l.type).entries.map(([type, value]) => ({ type, value })) } /></td>
         <td>({d.count})</td>
         <td>{m.investigatees.includes(d.nid) && '!'}</td>
         <td>{d.nid}</td>
-        <td>
+        {/* <td>
             {d.links
                 .countBy(l => l.type)
                 .entries.map(([k, v]) => `(${v}) ${k.trim()}`)
@@ -32,7 +33,7 @@ const DegreeView = (d: Degree) => (
         </td>
         <td>
             <Bar value={15} />
-        </td>
+        </td> */}
     </tr>
 )
 
@@ -57,4 +58,5 @@ const Bar = ({ value, classname }: { value: number; classname?: string }) => (
 
 import * as d3 from '../lib/d3'
 import { mount } from 'jmx/util/common'
+import { Donut } from '../visuals/pie'
 mount({ d3 })

@@ -17,7 +17,7 @@ html {
 body {
     padding: 1em;
     background: lightcyan;
-    font-size: x-large;
+    font-size: medium;
     font-family: calibri;
     user-select: none;
 }
@@ -48,12 +48,15 @@ button {
     outline: solid 1px turquoise;
 }
 
-path.a {
-    fill: darkseagreen;
+path.ownership {
+    fill: rgb(57, 65, 62);
 }
-path.b {
-    fill: aquamarine;
+path.membership {
+    fill: rgb(127, 170, 211);
 }
-path.c {
-    fill: coral;
+path.family_relationship {
+    fill: rgb(187, 125, 173);
+}
+path.partnership {
+    fill: rgb(161, 106, 85);
 }

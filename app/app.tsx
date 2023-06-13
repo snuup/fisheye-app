@@ -6,8 +6,11 @@ import "../utils/common"
 import { GraphStats } from './stats'
 import { m } from './model'
 import { Controller } from './controller'
+import { run } from '../visuals/pie'
 
 // let z: Hase = 'hui'
+
+run()
 
 let c = new Controller()
 
@@ -26,6 +29,6 @@ let App = () => (
     </body>
 )
 
-patch(document.body, <App />)
+//patch(document.body, <App />)
 
 mount({ m, c, mc1 })

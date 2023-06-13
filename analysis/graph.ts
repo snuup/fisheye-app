@@ -176,6 +176,8 @@ export class Graph {
         return {
             nodecount: this.nodes.length,
             linkcount: this.links.length,
+            nodetypes: this.nodes.countBy(n => n.type),
+            linktypes: this.links.countBy(l => l.type),
             degrees:
                 this.links
                     .groupBy(l => l.source)

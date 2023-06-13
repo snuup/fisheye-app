@@ -43,3 +43,7 @@ button {
     padding: 4px;
     font-size: x-large;
 }
+
+.bar{
+    outline: solid 1px turquoise;
+}

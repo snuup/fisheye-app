@@ -26,6 +26,9 @@ export function PieChart(data, {
     const V = d3.map(data, value)
     const I = d3.range(N.length).filter(i => !isNaN(V[i]))
 
+    console.log({ N, V, I })
+
+
     // Unique the names.
     if (names === undefined) names = N
     names = new d3.InternSet(names)
@@ -109,15 +112,58 @@ let population = [
 ]
 
 export function run() {
-    let chart = PieChart(population, {
-        name: d => d.name,
-        value: d => d.value,
-        width: 300,
-        height: 500
-    });
+
+    // let chart = PieChart(population, {
+    //     name: d => d.name,
+    //     value: d => d.value,
+    //     width: 300,
+    //     height: 500
+    // });
+
+    const width = 450,
+        height = 450,
+        margin = 40
+
+    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+    const radius = Math.min(width, height) / 2 - margin
+
+    // append the svg object to the div called 'my_dataviz'
+    const svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2}, ${height / 2})`)
+
+    debugger
+
+    // Create dummy data
+    const data = { a: 9, b: 20, c: 30, d: 8, e: 12 }
+
+    // set the color scale
+    const color = d3.scaleOrdinal().range(["red", "green", "orangered", "brown", "navy"])
+
+    // Compute the position of each group on the pie:
+    const pie = d3.pie().value(function (d) { return d[1] })
+
+    const data_ready = pie(Object.entries(data))
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+    svg
+        .selectAll('whatever')
+        .data(data_ready)
+        .join('path')
+        .attr('d', d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius)
+        )
+        .attr('fill', function (d) { return (color(d.data[1])) })
+        //.attr("stroke", "black")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
 
     //d3.select(document.body).append(chart)
-    document.body.append(chart)
+    document.body.append(svg)
 }
 
 mount({ run })

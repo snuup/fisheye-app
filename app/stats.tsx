@@ -55,6 +55,6 @@ const Bar = ({ value, classname }: { value: number; classname?: string }) => (
     </div>
 )
 
-import * as d3 from "../lib/d3"
+import * as d3 from '../lib/d3'
 import { mount } from 'jmx/util/common'
-mount({d3})
+mount({ d3 })

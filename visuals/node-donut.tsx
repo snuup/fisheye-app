@@ -52,7 +52,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             let inner
             let outer
             let w
-            if (d.data.ins) {
+            if (d.ins) {
                 portion = d.data.ins / d.value
                 w = width * portion
                 inner = 12
@@ -83,15 +83,17 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .data(d => {
                 //console.log('d', d)
                 return [
-                    d.data.outs && { ...d, data: { outs: d.data.outs } },
-                    d.data.ins && { ...d, data: { ins: d.data.ins } },
+                    d.data.outs && { ...d, outs: 1 },
+                    d.data.ins && { ...d, ins: 1 },
                 ].filter(identity)
             })
             .join('path')
             .attr('d', arc)
-            .attr('class', d => (d.data.ins ? 'ins' : 'outs'))
+            .attr('class', d => (d.ins ? 'ins' : 'outs'))
             .style('stroke', 'white')
             .style('stroke-width', '2.5px')
+            .append('title')
+            .text(d => d.data.type + (d.ins ? '<-' : '->'))
         //.attr('class', d => d.data.type)
 
         //.on('mouseover', (_, d) => console.log(d.data.type))

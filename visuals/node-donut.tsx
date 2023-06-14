@@ -2,10 +2,17 @@ import * as d3 from '../lib/d3'
 import { jsx } from 'jmx/core'
 import { FishNode } from '../analysis/fishnode'
 
+let linkTypeSortOrder = {
+    partnership: 0,
+    family_relationship: 1,
+    membership: 2,
+    ownership: 3,
+}
+
 export function NodeDonut({ n }: { n: FishNode }) {
     let data = (n.outlinks ?? [])
         ?.countBy(l => l.type)
-        .entries.sortBy(([type, value]) => type)
+        .entries.sortBy(([type, _]) => linkTypeSortOrder[type])
         .map(([type, value]) => ({ type, value }))
 
     console.log('DegreeDonut', n.id, data)
@@ -20,7 +27,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .padAngle(0.02)
             .value(x => x.value)(data)
 
-        console.log(piedata);
+        console.log(piedata)
 
         d3.select(n)
             .attr('width', radius * 2)
@@ -34,7 +41,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .attr('class', d => d.data.type)
             .attr('stroke', 'white')
             .style('stroke-width', '2px')
-            //.on('mouseover', (_, d) => console.log(d.data.type))
+        //.on('mouseover', (_, d) => console.log(d.data.type))
     }
     return <svg patch={rund3}></svg>
 }

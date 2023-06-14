@@ -18,7 +18,7 @@ body {
     /* background: lightcyan; */
     font-size: medium;
     font-family: calibri;
-    user-select: none;
+    /* user-select: none; */
 }
 
 li {

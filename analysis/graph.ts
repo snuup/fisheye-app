@@ -1,152 +1,29 @@
 import { m } from "../app/model"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
+import { FishLink } from "./fishlink"
+import { FishNode } from "./fishnode"
+import { DirectedLink, Mark } from "./mark"
 
-export class FishNode {
-
-    original: MC1Node
-    nid
-    _x
-    _vx
-
-    constructor(original) {
-        this.original = original
-        this.nid = cleanid(original.id)
-        this.marks = []
-    }
-
-    static create(original) { return new FishNode(original) }
-
-    get id() { return this.nid }
-    get id10() { return this.nid.truncate(10) }
-    get type() { return this.original.type }
-
-    toString() { return `FN(${this.nid})` }
-
-    set x(v) {
-        if (Number.isNaN(v)) debugger
-        this._x = v
-    }
-    get x() { return this._x }
-
-    set vx(v) {
-        if (Number.isNaN(v)) debugger
-        this._vx = v
-    }
-    get vx() { return this._vx }
-
-    // analysis
-    marks: Mark[]
-
-    addmark(mark: Mark) {
-        if (this.marks.find(m => m.key == mark.key)) return
-        this.marks.push(mark)
-    }
-
-    clearmarks() {
-        this.marks = []
-    }
-
-    get score() {
-        let sum = this.marks?.sumBy(m => 1 / m.length) ?? 0
-        return sum
-    }
-
-    get properties() {
-        return {
-            "prop-header": "node",
-            ...this.original,
-            score: this.score.toFixed(2)
-        }
-    }
-}
-
-export class FishLink {
-
-    original: MC1Link
-    sid: string
-    tid: string
-    source: string | any // nid, reassigned by d3
-    target: string | any // nid, reassigned by d3
-
-    constructor(original) {
-        this.original = original
-        this.sid = this.source = cleanid(original.source)
-        this.tid = this.target = cleanid(original.target)
-    }
-
-    static create(original) { return new FishLink(original) }
-
-    get key() { return this.sid + "|" + this.tid }
-
-    get type() { return this.original.type }
-    get weight() { return this.original.weight }
-    get nodes() { return [this.sid, this.tid] }
-
-    toString() {
-        return `${this.sid} -> ${this.tid}`
-    }
-}
-
-export class DirectedLink {
-
-    link: FishLink
-    rev: boolean
-
-    constructor(link: FishLink, rev: boolean) {
-        this.link = link
-        this.rev = rev
-    }
-
-    get key() { return this.link.key + "|" + this.rev.toString() }
-    get original() { return this.link.original }
-    get nodes() { return this.link.nodes }
-
-    get sid() { return this.rev ? this.link.tid : this.link.sid }
-    get tid() { return this.rev ? this.link.sid : this.link.tid }
-}
-
-export class Mark {
-
-    chain: DirectedLink[]
-
-    constructor(chain: DirectedLink[]) {
-        this.chain = chain
-    }
-
-    get key() {
-        return this.chain.map(fl => fl.key).join("|")
-    }
-
-    get length() {
-        return this.chain.length
-    }
-
-    get properties() {
-        return {
-            "prop-header": "mark",
-            //origin: this.origin.id,
-            //distance: this.distance,
-            //link: this.link?.type,
-            //chain: `${this.chain.length}:\n` + this.chain.map(l => `${l.original.source} - ${l.original.type} - ${l.original.target}`).join("\n\n")
-            chain: `${this.chain.length}:\n` + this.chain.map(l => `${l.original.type}`).join("\n")
-        }
-    }
-}
 
 export class Graph {
 
     nodes: FishNode[]
     links: FishLink[]
 
+    // enriched
+    nodemap_: Map<string, FishNode>
+    get nodemap() { return this.nodemap_ ?? (this.nodemap_ = new Map(this.nodes.map(n => [n.nid, n]))) }
+
     constructor(nodes?: FishNode[], links?: FishLink[]) {
         this.nodes = nodes ?? []
         this.links = links ?? []
         rebind(this)
+        this.enrichnodes()
     }
 
-    getnode(nid) {
-        return this.nodes.find(n => n.id === nid)
+    getnode(nid) : FishNode {
+        return this.nodemap.get(nid)!
     }
 
     // hasnode(n: FishNode | string): boolean {
@@ -206,6 +83,22 @@ export class Graph {
             linktypes: this.links.countBy(l => l.type),
             degrees
         }
+    }
+
+    get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
+    get linkcountsByType() { return this.links.countBy(n => n.type) }
+
+    enrichnodes() {
+
+        this.links
+            .groupBy(l => l.sid)
+            .entries
+            .forEach(([nid, links]) => this.getnode(nid).outlinks = links)
+
+        this.links
+            .groupBy(l => l.tid)
+            .entries
+            .forEach(([nid, links]) => this.getnode(nid).inlinks = links)
     }
 }
 

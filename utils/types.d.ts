@@ -16,8 +16,8 @@ interface HTMLElement {
 }
 
 interface Array<T> {
-    countBy(selector: (x: T) => string): any
-    groupBy(selector: (x: T) => string): any
+    countBy(selector: (x: T) => string): { [key:string]: number }
+    groupBy(selector: (x: T) => string): { [key:string]: T[] }
     sortBy(selector?): T[]
     distinctBy(selector?): T[]
     get combinations(): T[]
@@ -28,6 +28,8 @@ interface Array<T> {
 
 interface Object {
     get entries(): [string, any][]
+    //get entries(o: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
+    //get entries(): [string, ThisType<T>][];
 }
 
 interface String {

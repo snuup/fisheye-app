@@ -2,13 +2,16 @@ import { mount } from 'jmx/util/common'
 import * as d3 from '../lib/d3'
 import { jsx, patch } from 'jmx/core'
 
+//import d3 from 'd3'
+//let z = d3.version
+
 export function Donut({ data }: { data: { type: string; value: number }[] }) {
     function patch(n) {
         const sum = data.sumBy(d => d.value)
         const radius = 15 + Math.sqrt(sum)
         // console.log(radius, sum, (radius * radius - 15 * 15) / sum)
 
-        const piedata = d3.pie().value(x => x.value)(data)
+        const piedata = d3.pie().padAngle(0.02).value(x => x.value)(data)
 
         d3.select(n)
             .attr('width', radius * 2)
@@ -19,8 +22,10 @@ export function Donut({ data }: { data: { type: string; value: number }[] }) {
             .data(piedata)
             .join('path')
             .attr('d', d3.arc().innerRadius(12).outerRadius(radius))
-            .on("mouseover", (_,d) => console.log(d.data.type))
             .attr('class', d => d.data.type)
+            .attr("stroke", "white")
+            .style("stroke-width", "2px")
+            .on("mouseover", (_,d) => console.log(d.data.type))
     }
     return <svg patch={patch}></svg>
 }

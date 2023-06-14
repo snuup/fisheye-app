@@ -3,7 +3,9 @@ import { mc1 } from "../data/data"
 import { rebind } from "../utils/common"
 import { mraw as m } from "./model"
 import { updateview } from "jmx/core"
-import { FishLink, FishNode, Graph } from "../analysis/graph"
+import { Graph } from "../analysis/graph"
+import { FishNode } from "../analysis/fishnode"
+import { FishLink } from "../analysis/fishlink"
 
 export class Controller {
 

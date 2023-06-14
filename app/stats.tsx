@@ -3,18 +3,24 @@ import { m } from './model'
 import { Degree } from '../analysis/graph'
 
 export const GraphStats = () => {
+    let g = m.graph
     let s = m.graph.stats
     return (
         <article>
-            <h2>stats</h2>
-            <div>{s.nodecount} nodes</div>
-            <div>{s.linkcount} links</div>
+
+            <h2>graph statistics</h2>
+            <div>{g.nodes.length} nodes</div>
+            <div>{g.links.length} links</div>
+
             <h3>node types</h3>
-            <div>{<ObjectAsTable o={s.nodetypes} />}</div>
+            <div>{<ObjectAsTable o={g.nodecountsByType} />}</div>
+
             <h3>link types</h3>
-            <div>{<ObjectAsTable o={s.linktypes} />}</div>
+            <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
+
             <h3>degrees</h3>
             <div class='degreecontainer'>{s.degrees.map(DegreeView)}</div>
+
         </article>
     )
 }

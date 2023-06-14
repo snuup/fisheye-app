@@ -1,10 +1,14 @@
 import { jsx } from 'jmx/core'
+import { cc, mount } from '../utils/common'
 import { m } from './model'
-import { Degree } from '../analysis/graph'
+import * as d3 from '../lib/d3'
+import { FishNode } from '../analysis/fishnode'
+import { NodeDonut } from '../visuals/node-donut'
+
+mount({ d3 })
 
 export const GraphStats = () => {
     let g = m.graph
-    let s = m.graph.stats
     return (
         <article>
 
@@ -19,7 +23,7 @@ export const GraphStats = () => {
             <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
 
             <h3>degrees</h3>
-            <div class='degreecontainer'>{g.gettopdegrees().map(DegreeView)}</div>
+            <div class='degreecontainer'>{g.gettopdegrees().map(n => DegreeView(n))}</div>
 
         </article>
     )
@@ -32,10 +36,7 @@ const NodeName = ({ nid }: { nid: string }) => {
 
 const DegreeView = (n: FishNode) => (
     <div class='degree'>
-        <Donut
-            data={n.outlinks?.countBy(l => l.type)
-                .entries.map(([type, value]) => ({ type, value }))}
-        />
+        <NodeDonut n={n} />
         <NodeName nid={n.id} />
         <span>{n?.type}</span>
         <span>{n.country}</span>
@@ -55,15 +56,9 @@ const ObjectAsTable = ({ o }: { o: any }) => (
     </table>
 )
 
-const Bar = ({ value, classname }: { value: number; classname?: string }) => (
-    <div class='bar' style={'width:20px'}>
-        bar{value}
-    </div>
-)
+// const Bar = ({ value, classname }: { value: number; classname?: string }) => (
+//     <div class='bar' style={'width:20px'}>
+//         bar{value}
+//     </div>
+// )
 
-import * as d3 from '../lib/d3'
-import { mount } from 'jmx/util/common'
-import { Donut } from '../visuals/pie'
-import { cc } from '../utils/common'
-import { FishNode } from '../analysis/fishnode'
-mount({ d3 })

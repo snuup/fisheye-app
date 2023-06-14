@@ -55,36 +55,6 @@ export class Graph {
         return this.links.filter(l => l.sid == n)
     }
 
-    get stats() {
-
-        let degrees =
-            this.links
-                .groupBy(l => l.source)
-                .entries.map(([nodeid, links]) => ({ nid: nodeid, count: links.length, links }))
-                .sortBy(o => -o.count)
-                .slice(0, 25) as Degree[]
-
-        let names = degrees.map(d => d.nid)
-
-        let missings = m.investigatees.filter(inv => !names.includes(inv))
-        let postfix = missings.map(nid => {
-            let links = this.getlinks(nid)
-            return ({ nid, count: links.length, links })
-        }).sortBy(o => -o.count)
-
-        degrees.push(...postfix)
-
-        console.log(degrees)
-
-        return {
-            nodecount: this.nodes.length,
-            linkcount: this.links.length,
-            nodetypes: this.nodes.countBy(n => n.type ?? ""),
-            linktypes: this.links.countBy(l => l.type),
-            degrees
-        }
-    }
-
     get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
     get linkcountsByType() { return this.links.countBy(n => n.type) }
 

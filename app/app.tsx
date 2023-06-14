@@ -6,7 +6,7 @@ import "../utils/common"
 import { GraphStats } from './stats'
 import { m } from './model'
 import { Controller } from './controller'
-import { run } from '../visuals/pie'
+import { run } from '../visuals/node-donut'
 
 // let z: Hase = 'hui'
 

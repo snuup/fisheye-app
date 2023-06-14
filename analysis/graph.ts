@@ -59,7 +59,7 @@ export class Graph {
     get linkcountsByType() { return this.links.countBy(n => n.type) }
 
     gettopdegrees(inludeInvestigatees = true) {
-        let tops = m.graph.nodes.sortBy(n => -n.degree).slice(0, 25)
+        let tops = m.graph.nodes.sortBy(n => -n.degree)//.slice(0, 25)
         let names = tops.map(n => n.nid)
 
         let missings = m.investigatees.filter(inv => !names.includes(inv)).map(this.getnode)

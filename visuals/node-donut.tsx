@@ -1,6 +1,7 @@
 import * as d3 from '../lib/d3'
 import { jsx } from 'jmx/core'
 import { FishNode } from '../analysis/fishnode'
+import { identity } from '../utils/common'
 
 let linkTypeSortOrder = {
     partnership: 0,
@@ -82,9 +83,9 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .data(d => {
                 //console.log('d', d)
                 return [
-                    { ...d, data: { outs: d.data.outs } },
-                    { ...d, data: { ins: d.data.ins } },
-                ]
+                    d.data.outs && { ...d, data: { outs: d.data.outs } },
+                    d.data.ins && { ...d, data: { ins: d.data.ins } },
+                ].filter(identity)
             })
             .join('path')
             .attr('d', arc)

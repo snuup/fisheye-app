@@ -89,6 +89,10 @@ button {
     color: rgb(216, 3, 3);
 }
 
+path{
+    cursor: pointer;
+}
+
 /* path {
     opacity: 0.5;
 }

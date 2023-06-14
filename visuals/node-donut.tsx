@@ -19,15 +19,15 @@ export function NodeDonut({ n }: { n: FishNode }) {
         return { type, outs, ins, total: outs + ins }
     })
 
-    console.log('data_', data)
-    window.data = data
+  //  console.log('data_', data)
+  //  window.data = data
 
     // let data = (n.outlinks ?? [])
     //     ?.countBy(l => l.type)
     //     .entries.sortBy(([type, _]) => linkTypeSortOrder[type])
     //     .map(([type, value]) => ({ type, value }))
 
-    console.log('DegreeDonut', n.id, data)
+//    console.log('DegreeDonut', n.id, data)
 
     function rund3(n) {
         const sum = data.sumBy(d => d.total)

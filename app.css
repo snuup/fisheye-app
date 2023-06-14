@@ -89,14 +89,12 @@ button {
     color: rgb(216, 3, 3);
 }
 
-path {
+/* path {
     opacity: 0.5;
 }
 path.ins {
-    opacity: 0.5;
     fill: lightseagreen;
 }
 path.outs {
-    opacity: 0.5;
     fill: lightcoral;
-}
+} */

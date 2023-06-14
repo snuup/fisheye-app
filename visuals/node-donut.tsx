@@ -13,8 +13,8 @@ export function NodeDonut({ n }: { n: FishNode }) {
     let outcounts = n.outlinks?.countBy(l => l.type)
     let incounts = n.inlinks?.countBy(l => l.type)
     let data = Object.keys(linkTypeSortOrder).map(type => {
-        let outs = outcounts[type]
-        let ins = incounts[type]
+        let outs = outcounts?.[type] ?? 0
+        let ins = incounts?.[type] ?? 0
         return { type, outs, ins, total: outs + ins }
     })
 
@@ -30,23 +30,23 @@ export function NodeDonut({ n }: { n: FishNode }) {
 
     function rund3(n) {
         const sum = data.sumBy(d => d.total)
-        console.log(sum)
+        //console.log(sum)
 
         const radius = 15 + Math.sqrt(sum)
-        console.log(radius)
+        //console.log(radius)
 
         const piedata = d3
             .pie()
             .sort(null)
-            //.padAngle(0.075)
+            //.padAngle(0.1)
             .value(d => d.total)(data)
 
-        console.log(piedata)
+        //console.log(piedata)
 
         let width = radius - 12
 
         const arc = d => {
-            console.log('arc', d)
+            //console.log('arc', d)
             let portion
             let inner
             let outer
@@ -62,7 +62,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
                 inner = radius - w
                 outer = radius
             }
-            console.log(d.data, portion, inner, outer)
+            //console.log(d.data, portion, inner, outer)
 
             return d3.arc().innerRadius(inner).outerRadius(outer)(d)
         }
@@ -76,10 +76,11 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .selectAll('g')
             .data(piedata)
             .join('g')
+            .attr('class', d => d.data.type)
 
             .selectAll('path')
             .data(d => {
-                console.log('d', d)
+                //console.log('d', d)
                 return [
                     { ...d, data: { outs: d.data.outs } },
                     { ...d, data: { ins: d.data.ins } },
@@ -89,7 +90,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .attr('d', arc)
             .attr('class', d => (d.data.ins ? 'ins' : 'outs'))
             .style('stroke', 'white')
-            .style('stroke-width', '1px')
+            .style('stroke-width', '2.5px')
         //.attr('class', d => d.data.type)
 
         //.on('mouseover', (_, d) => console.log(d.data.type))

@@ -10,22 +10,22 @@ mount({ d3 })
 export const GraphStats = () => {
     let g = m.graph
     return (
-        <article>
+        // <article>
 
-            <h2>graph statistics</h2>
-            <div>{g.nodes.length} nodes</div>
-            <div>{g.links.length} links</div>
+        //     <h2>graph statistics</h2>
+        //     <div>{g.nodes.length} nodes</div>
+        //     <div>{g.links.length} links</div>
 
-            <h3>node types</h3>
-            <div>{<ObjectAsTable o={g.nodecountsByType} />}</div>
+        //     <h3>node types</h3>
+        //     <div>{<ObjectAsTable o={g.nodecountsByType} />}</div>
 
-            <h3>link types</h3>
-            <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
+        //     <h3>link types</h3>
+        //     <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
 
-            <h3>degrees</h3>
+        //     <h3>degrees</h3>
             <div class='degreecontainer'>{g.gettopdegrees().map(n => DegreeView(n))}</div>
 
-        </article>
+        // </article>
     )
 }
 

@@ -63,6 +63,9 @@ button {
     fill: rgb(161, 106, 85);
     color: rgb(161, 106, 85);
 }
+.ownership, .membership, .family_relationship, .partnership {
+    font-weight: bold;
+}
 
 .degreecontainer {
     display: grid;
@@ -75,10 +78,10 @@ button {
     display: grid;
 }
 
-.nodename{
+.nodename {
     font-weight: bold;
 }
 
-.red{
+.red {
     color: rgb(216, 3, 3);
 }

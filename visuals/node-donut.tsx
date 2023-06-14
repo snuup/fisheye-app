@@ -5,13 +5,10 @@ import { FishNode } from '../analysis/fishnode'
 export function NodeDonut({ n }: { n: FishNode }) {
     let data = (n.outlinks ?? [])
         ?.countBy(l => l.type)
-        .entries.map(([type, value]) => ({ type, value }))
+        .entries.sortBy(([type, value]) => type)
+        .map(([type, value]) => ({ type, value }))
 
-    console.log('DegreeDonut', n, data)
-
-    //return `DegreeDonut(${n.id})`
-
-    //console.log('?????????????????????')
+    console.log('DegreeDonut', n.id, data)
 
     function rund3(n) {
         const sum = data.sumBy(d => d.value)
@@ -19,8 +16,11 @@ export function NodeDonut({ n }: { n: FishNode }) {
 
         const piedata = d3
             .pie()
+            .sort(null)
             .padAngle(0.02)
             .value(x => x.value)(data)
+
+        console.log(piedata);
 
         d3.select(n)
             .attr('width', radius * 2)
@@ -34,7 +34,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .attr('class', d => d.data.type)
             .attr('stroke', 'white')
             .style('stroke-width', '2px')
-            .on('mouseover', (_, d) => console.log(d.data.type))
+            //.on('mouseover', (_, d) => console.log(d.data.type))
     }
     return <svg patch={rund3}></svg>
 }

@@ -1,4 +1,1 @@
-
-
-A = r * r * pi
-
+currently only outgoing links in stats -> make switchable

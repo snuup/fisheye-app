@@ -145,6 +145,10 @@ export class Graph {
         rebind(this)
     }
 
+    getnode(nid) {
+        return this.nodes.find(n => n.id === nid)
+    }
+
     // hasnode(n: FishNode | string): boolean {
     //     if (n instanceof String) return this.nodes.find(n => n.id === n)
     //     return this.nodes.includes(n)
@@ -186,7 +190,7 @@ export class Graph {
         let names = degrees.map(d => d.nid)
 
         let missings = m.investigatees.filter(inv => !names.includes(inv))
-        let postfix = missings.map(nid =>  {
+        let postfix = missings.map(nid => {
             let links = this.getlinks(nid)
             return ({ nid, count: links.length, links })
         }).sortBy(o => -o.count)

@@ -32,6 +32,8 @@ const DegreeView = (d: Degree) => (
                 .entries.map(([type, value]) => ({ type, value }))}
         />
         <NodeName nid={d.nid} />
+        <span>{m.graph.getnode(d.nid)?.type}</span>
+        <span>{m.graph.getnode(d.nid)?.original?.country}</span>
     </div>
 )
 

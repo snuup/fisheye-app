@@ -19,7 +19,7 @@ export const GraphStats = () => {
             <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
 
             <h3>degrees</h3>
-            <div class='degreecontainer'>{s.degrees.map(DegreeView)}</div>
+            <div class='degreecontainer'>{g.gettopdegrees().map(DegreeView)}</div>
 
         </article>
     )
@@ -30,16 +30,15 @@ const NodeName = ({ nid }: { nid: string }) => {
     return <span class={cc('nodename', { red })}>{nid}</span>
 }
 
-const DegreeView = (d: Degree) => (
+const DegreeView = (n: FishNode) => (
     <div class='degree'>
         <Donut
-            data={d.links
-                .countBy(l => l.type)
+            data={n.outlinks?.countBy(l => l.type)
                 .entries.map(([type, value]) => ({ type, value }))}
         />
-        <NodeName nid={d.nid} />
-        <span>{m.graph.getnode(d.nid)?.type}</span>
-        <span>{m.graph.getnode(d.nid)?.original?.country}</span>
+        <NodeName nid={n.id} />
+        <span>{n?.type}</span>
+        <span>{n.country}</span>
     </div>
 )
 
@@ -66,4 +65,5 @@ import * as d3 from '../lib/d3'
 import { mount } from 'jmx/util/common'
 import { Donut } from '../visuals/pie'
 import { cc } from '../utils/common'
+import { FishNode } from '../analysis/fishnode'
 mount({ d3 })

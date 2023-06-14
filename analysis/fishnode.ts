@@ -6,7 +6,7 @@ export class FishNode {
 
     original: MC1Node
 
-    nid
+    nid: string
     outlinks: FishLink[]
     inlinks: FishLink[]
 
@@ -21,6 +21,7 @@ export class FishNode {
     get id() { return this.nid }
     get id10() { return this.nid.truncate(10) }
     get type() { return this.original.type }
+    get country() { return this.original.country }
     get degree() { return this.outlinks?.length ?? 0 + this.inlinks?.length ?? 0}
 
     toString() { return `FN(${this.nid})` }

@@ -6,6 +6,9 @@ import { jsx, patch } from 'jmx/core'
 //let z = d3.version
 
 export function Donut({ data }: { data: { type: string; value: number }[] }) {
+
+    if(!data) return <div>nyx</div>
+
     function patch(n) {
         const sum = data.sumBy(d => d.value)
         const radius = 15 + Math.sqrt(sum)
@@ -30,33 +33,33 @@ export function Donut({ data }: { data: { type: string; value: number }[] }) {
     return <svg patch={patch}></svg>
 }
 
-const data = [
-    { type: 'a', value: 50 },
-    { type: 'b', value: 20 },
-    { type: 'c', value: 30 },
-]
+// const data = [
+//     { type: 'a', value: 50 },
+//     { type: 'b', value: 20 },
+//     { type: 'c', value: 30 },
+// ]
 
-const data2 = [
-    { type: 'a', value: 30 },
-    { type: 'b', value: 12 },
-    { type: 'c', value: 5 },
-    { type: 'd', value: 27 },
-]
+// const data2 = [
+//     { type: 'a', value: 30 },
+//     { type: 'b', value: 12 },
+//     { type: 'c', value: 5 },
+//     { type: 'd', value: 27 },
+// ]
 
-const data3 = [
-    { type: 'a', value: 5 },
-    { type: 'b', value: 4 },
-]
+// const data3 = [
+//     { type: 'a', value: 5 },
+//     { type: 'b', value: 4 },
+// ]
 
-export function run() {
-    patch(
-        document.body,
-        <body>
-            <Donut data={data} />
-            <Donut data={data2} />
-            <Donut data={data3} />
-        </body>
-    )
-}
+// export function run() {
+//     patch(
+//         document.body,
+//         <body>
+//             <Donut data={data} />
+//             <Donut data={data2} />
+//             <Donut data={data3} />
+//         </body>
+//     )
+// }
 
-mount({ run })
+// mount({ run })

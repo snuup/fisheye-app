@@ -38,12 +38,34 @@ export function NodeDonut({ n }: { n: FishNode }) {
         const piedata = d3
             .pie()
             .sort(null)
-            .padAngle(0.075)
+            //.padAngle(0.075)
             .value(d => d.total)(data)
 
         console.log(piedata)
 
-        const arc = d3.arc().innerRadius(12).outerRadius(radius)
+        let width = radius - 12
+
+        const arc = d => {
+            console.log('arc', d)
+            let portion
+            let inner
+            let outer
+            let w
+            if (d.data.ins) {
+                portion = d.data.ins / d.value
+                w = width * portion
+                inner = 12
+                outer = inner + w
+            } else {
+                portion = d.data.outs / d.value
+                w = width * portion
+                inner = radius - w
+                outer = radius
+            }
+            console.log(d.data, portion, inner, outer)
+
+            return d3.arc().innerRadius(inner).outerRadius(outer)(d)
+        }
 
         d3.select(n)
             .attr('width', radius * 2)
@@ -60,12 +82,14 @@ export function NodeDonut({ n }: { n: FishNode }) {
                 console.log('d', d)
                 return [
                     { ...d, data: { outs: d.data.outs } },
-                    { ...d, data: { ins: d.data.ins } }
+                    { ...d, data: { ins: d.data.ins } },
                 ]
             })
             .join('path')
-            .attr('d', d => arc(d))
-            .attr('class', d => d.data.ins ? "ins" : "outs")
+            .attr('d', arc)
+            .attr('class', d => (d.data.ins ? 'ins' : 'outs'))
+            .style('stroke', 'white')
+            .style('stroke-width', '1px')
         //.attr('class', d => d.data.type)
 
         //.on('mouseover', (_, d) => console.log(d.data.type))

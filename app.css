@@ -63,7 +63,10 @@ button {
     fill: rgb(161, 106, 85);
     color: rgb(161, 106, 85);
 }
-.ownership, .membership, .family_relationship, .partnership {
+.ownership,
+.membership,
+.family_relationship,
+.partnership {
     font-weight: bold;
 }
 
@@ -84,4 +87,16 @@ button {
 
 .red {
     color: rgb(216, 3, 3);
+}
+
+path {
+    opacity: 0.5;
+}
+path.ins {
+    opacity: 0.5;
+    fill: lightseagreen;
+}
+path.outs {
+    opacity: 0.5;
+    fill: lightcoral;
 }

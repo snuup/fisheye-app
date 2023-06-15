@@ -45,19 +45,23 @@ button {
     outline: solid 1px turquoise;
 }
 
-.ownership, .owner {
+.ownership,
+.owner {
     fill: rgb(57, 65, 62);
     color: rgb(57, 65, 62);
 }
-.membership, .member {
+.membership,
+.member {
     fill: rgb(127, 170, 211);
     color: rgb(127, 170, 211);
 }
-.family_relationship, .family {
+.family_relationship,
+.family {
     fill: rgb(187, 125, 173);
     color: rgb(187, 125, 173);
 }
-.partnership, .partner {
+.partnership,
+.partner {
     fill: rgb(161, 106, 85);
     color: rgb(161, 106, 85);
 }
@@ -91,21 +95,22 @@ path {
     cursor: pointer;
 }
 
-/* path {
-    opacity: 0.5;
-}
-path.ins {
-    fill: lightseagreen;
-}
-path.outs {
-    fill: lightcoral;
-} */
-
 .namevalue .value {
     margin-left: 1em;
     font-weight: bold;
 }
 
-h3{
-    margin-top: 1em;
+h3 {
+    margin: .5em 0;
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+.gridtable {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0 1em;
 }

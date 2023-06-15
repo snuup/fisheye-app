@@ -1,4 +1,4 @@
-import { jsx } from "../jmx-lib/core"
+import { jsx, jsxf } from "../jmx-lib/core"
 import { cc, mount, nicelinktypename } from '../utils/common'
 import { m } from '../app/model'
 import * as d3 from '../lib/d3'
@@ -17,18 +17,20 @@ export const GraphStats = () => {
             <div class="stats-top">
                 <div>
                     <h3>counts</h3>
-                    <NameValue name="nodes" value={g.nodes.length} />
-                    <NameValue name="links" value={g.links.length} />
+                    {<ObjectAsTable o={{
+                        nodes: g.nodes.length,
+                        links: g.links.length
+                    }} />}
                 </div>
 
                 <div>
                     <h3>node types</h3>
-                    <div>{<ObjectAsTable o={g.nodecountsByType} />}</div>
+                    {<ObjectAsTable o={g.nodecountsByType} />}
                 </div>
 
                 <div>
                     <h3>link types</h3>
-                    <div>{<ObjectAsTable o={g.linkcountsByType.mapKeys(nicelinktypename)} />}</div>
+                    {<ObjectAsTable o={g.linkcountsByType.mapKeys(nicelinktypename)} />}
                 </div>
             </div>
 
@@ -58,7 +60,7 @@ const DegreeView = (n: FishNode) => (
 )
 
 const ObjectAsTable = ({ o }: { o: any }) => (
-    <div>
+    <div class="gridtable">
         {o.entries
             .sortBy(([k, v]) => -v)
             .map(([k, v]) => <NameValue name={k} value={v} className={k} />)

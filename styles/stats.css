@@ -11,5 +11,6 @@
 
 .stats-top{
     display: flex;
+    flex-wrap: wrap;
     gap: 1em;
 }

@@ -114,9 +114,3 @@ h2 {
     grid-template-columns: auto auto;
     gap: 0 1em;
 }
-
-body {
-    display: grid;
-    place-items: center;
-    grid-template-rows: 100vh;
-}

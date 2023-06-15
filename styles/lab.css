@@ -1,0 +1,29 @@
+body {
+    display: grid;
+    place-items: center;
+    grid-template-rows: 100vh;
+}
+
+.ownership,
+.owner {
+    fill: rgb(57, 65, 62);
+    color: rgb(57, 65, 62);
+}
+
+.membership,
+.member {
+    fill: rgb(127, 170, 211);
+    color: rgb(127, 170, 211);
+}
+
+.family_relationship,
+.family {
+    fill: rgb(187, 125, 173);
+    color: rgb(187, 125, 173);
+}
+
+.partnership,
+.partner {
+    fill: rgb(161, 106, 85);
+    color: rgb(161, 106, 85);
+}

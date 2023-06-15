@@ -8,6 +8,7 @@ import { Link } from './routes'
 import { mount } from '../utils/common'
 import { GraphView } from "../comp/graphview"
 import { Navigation } from "../comp/nav"
+import { NodeDonut } from "../comp/node-donut"
 
 let c = new Controller()
 
@@ -31,6 +32,9 @@ let App = () => (
         </article>
 
         <footer>footer</footer>
+
+        {/* <NodeDonut n={m.graph.getnode("SeaSpray Wave SRL Solutions")} /> */}
+
     </body>
 )
 

@@ -4,12 +4,17 @@ import { mount } from "../utils/common"
 import { Controller } from "./controller"
 import { m } from "./model"
 
-let c = new Controller()
-let n = m.investigatees[1]
+//let c = new Controller()
+//let n = m.investigatees[1]
+
+let n = [
+    {type: "partner", outs: 5, ins: 5, total: 10 },
+    {type: "family", outs: 10, ins: 20, total: 30 }
+]
 
 let App = () =>
     <body>
-        <NodeDonut n={window.n} />
+        <NodeDonut n={n} />
     </body>
 
 patch(document.body, <App />)

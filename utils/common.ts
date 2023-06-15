@@ -176,3 +176,11 @@ export function nicelinktypename(rawlinktype: string) {
         default: return rawlinktype
     }
 }
+
+export function nicenodetypename(rawnodetype: string) {
+    switch (rawnodetype) {
+        case undefined: return "undefined"
+        case "political_organization": return "political-org"
+        default: return rawnodetype
+    }
+}

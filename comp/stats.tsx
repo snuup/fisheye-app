@@ -1,5 +1,5 @@
 import { jsx, jsxf } from "../jmx-lib/core"
-import { cc, mount, nicelinktypename } from '../utils/common'
+import { cc, mount, nicelinktypename, nicenodetypename } from '../utils/common'
 import { m } from '../app/model'
 import * as d3 from '../lib/d3'
 import { FishNode } from '../analysis/fishnode'
@@ -25,7 +25,7 @@ export const GraphStats = () => {
 
                 <div>
                     <h3>node types</h3>
-                    {<ObjectAsTable o={g.nodecountsByType} />}
+                    {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetypename)} />}
                 </div>
 
                 <div>

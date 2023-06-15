@@ -101,7 +101,7 @@ path {
 }
 
 h3 {
-    margin: .5em 0;
+    margin: 0.5em 0;
     font-weight: bold;
 }
 
@@ -113,4 +113,10 @@ h2 {
     display: grid;
     grid-template-columns: auto auto;
     gap: 0 1em;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    grid-template-rows: 100vh;
 }

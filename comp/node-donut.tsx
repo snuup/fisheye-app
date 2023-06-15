@@ -3,17 +3,19 @@ import { jsx } from "../jmx-lib/core"
 import { FishNode } from '../analysis/fishnode'
 import { identity } from '../utils/common'
 
-let linkTypeSortOrder = {
+const linkTypeSortOrder = {
     partnership: 0,
     family_relationship: 1,
     membership: 2,
     ownership: 3,
 }
 
+const linktypes = Object.keys(linkTypeSortOrder)
+
 export function NodeDonut({ n }: { n: FishNode }) {
     let outcounts = n.outlinks?.countBy(l => l.type)
     let incounts = n.inlinks?.countBy(l => l.type)
-    let data = Object.keys(linkTypeSortOrder).map(type => {
+    let data = linktypes.map(type => {
         let outs = outcounts?.[type] ?? 0
         let ins = incounts?.[type] ?? 0
         return { type, outs, ins, total: outs + ins }
@@ -21,8 +23,8 @@ export function NodeDonut({ n }: { n: FishNode }) {
 
     function rund3(n) {
         const sum = data.sumBy(d => d.total)
-        const innerRadius = 15
         const width = Math.sqrt(sum)
+        const innerRadius = 10
         const outerRadius = innerRadius + width
 
         const piedata = d3
@@ -38,11 +40,13 @@ export function NodeDonut({ n }: { n: FishNode }) {
             if (d.ins) {
                 portion = d.data.ins / d.value
                 w = width * portion
-                inner = innerRadius
-                outer = inner + w
+                //w = Math.min(10, w)
+                inner = innerRadius - 0
+                outer = innerRadius + w
             } else {
                 portion = d.data.outs / d.value
                 w = width * portion
+                //w = Math.max(10, w)
                 inner = outerRadius - w
                 outer = outerRadius
             }
@@ -50,6 +54,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             return d3.arc()
                 .innerRadius(inner)
                 .outerRadius(outer)
+                //.padAngle(.1)
                 .cornerRadius(2.5)
                 (d)
         }

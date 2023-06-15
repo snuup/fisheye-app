@@ -36,9 +36,12 @@ export function NodeDonut({ n }: { n: NodeLinkData[] | FishNode }) {
     }
 
     const sum = data.sumBy(d => d.total)
-    const width = Math.sqrt(sum)
+
+    let widthScale = d3.scaleSqrt().domain([0, 300]).range([5, 20])
+
+    //const width = Math.sqrt(sum)
     const innerRadius = 10
-    const outerRadius = innerRadius + width
+    const outerRadius = innerRadius + widthScale(sum)
     const scaleRadius = d3.scaleLinear().range([innerRadius, outerRadius])
 
     function rund3(n) {

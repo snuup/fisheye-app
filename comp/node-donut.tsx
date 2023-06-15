@@ -37,7 +37,7 @@ export function NodeDonut({ n }: { n: NodeLinkData[] | FishNode }) {
 
     const sum = data.sumBy(d => d.total)
 
-    let widthScale = d3.scaleSqrt().domain([0, 300]).range([5, 20])
+    let widthScale = d3.scaleSqrt([0, 300], [5, 20])
 
     //const width = Math.sqrt(sum)
     const innerRadius = 10
@@ -53,13 +53,13 @@ export function NodeDonut({ n }: { n: NodeLinkData[] | FishNode }) {
 
         const arc = d => {
             const midRadius = scaleRadius(d.data.ins / d.value)
-            let [inner, outer] = d.ins ? [innerRadius, midRadius - 1] : [midRadius + 1, outerRadius]
+            let [inner, outer] = d.ins ? [innerRadius, midRadius] : [midRadius, outerRadius]
 
             return d3.arc()
                 .innerRadius(inner)
                 .outerRadius(outer)
-                .padAngle(.05)
-                .cornerRadius(2)
+                //.padAngle(.05)
+                //.cornerRadius(2)
                 (d)
         }
 
@@ -85,8 +85,8 @@ export function NodeDonut({ n }: { n: NodeLinkData[] | FishNode }) {
             .join('path')
             .attr('d', arc)
             .attr('class', d => (d.ins ? 'ins' : 'outs'))
-            //.style('stroke', '#eee')
-            //.style('stroke-width', '2px')
+            .style('stroke', '#eee')
+            .style('stroke-width', '2px')
             .append('title')
             .text(d => {
                 return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)

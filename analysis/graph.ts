@@ -22,7 +22,7 @@ export class Graph {
         this.enrichnodes()
     }
 
-    getnode(nid) : FishNode {
+    getnode(nid): FishNode {
         return this.nodemap.get(nid)!
     }
 
@@ -62,8 +62,8 @@ export class Graph {
         let tops = m.graph.nodes.sortBy(n => -n.degree).slice(0, 25)
         let names = tops.map(n => n.nid)
 
-        let missings = m.investigatees.filter(inv => !names.includes(inv)).map(this.getnode)
-        if(inludeInvestigatees){
+        let missings = m.investigatees.filter(inv => !names.includes(inv.id)).map(this.getnode)
+        if (inludeInvestigatees) {
             tops.push(...missings)
             tops.sortBy(n => -n.degree)
         }
@@ -72,6 +72,9 @@ export class Graph {
     }
 
     enrichnodes() {
+
+        console.log("enrichnodes");
+
 
         this.links
             .groupBy(l => l.sid)
@@ -172,7 +175,7 @@ export function flood(investigatee: FishNode) {
 
 // flood(mar)
 export function initscores() {
-    m.investigatees.map(id => nodemap.get(id)).forEach(flood)
+    m.investigatees.map(n => nodemap.get(n.id)).forEach(flood)
     window.tops = all.nodes.sortBy(n => -n.score).slice(0, 20)
 }
 

@@ -24,3 +24,13 @@ operations:
 - select node
 - flood suspect
 - pin board
+- scoping: link type
+- grouping ?
+- path list
+- mute
+- lens -> detail view
+- selection: single link, all of a type,
+- summary stats for the current model
+
+a small set of efficient tools
+great and complex explanation of the effect of those tools

@@ -1,4 +1,4 @@
-import { jsx } from "jmx/core"
+import { jsx } from "../jmx-lib/core"
 
 
 export const GraphView = () => {

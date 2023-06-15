@@ -1,8 +1,8 @@
-import { initrouter } from "jmx/router"
+import { initrouter } from "../jmx-lib/router"
+import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { updateview } from "jmx/core"
 import { Graph } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
@@ -12,8 +12,21 @@ export class Controller {
 
     constructor() {
         rebind(this)
-        m.graph = new Graph(mc1.nodes.map(FishNode.create), mc1.links.map(FishLink.create))
+        this.prepareData()
         initrouter(this.setroute)
+    }
+
+    prepareData() {
+        m.graph = new Graph(mc1.nodes.map(FishNode.create), mc1.links.map(FishLink.create))
+
+        m.investigatees =
+            [
+                "Mar de la Vida OJSC",
+                "#979893388",
+                "Oceanfront Oasis Inc Carriers",
+                "#8327"
+            ]
+            .map(m.graph.getnode)
     }
 
     setroute() {

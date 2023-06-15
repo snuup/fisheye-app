@@ -1,9 +1,9 @@
-import { jsx } from 'jmx/core'
+import { jsx } from "../jmx-lib/core"
 import { cc, mount } from '../utils/common'
-import { m } from './model'
+import { m } from '../app/model'
 import * as d3 from '../lib/d3'
 import { FishNode } from '../analysis/fishnode'
-import { NodeDonut } from '../visuals/node-donut'
+import { NodeDonut } from './node-donut'
 
 mount({ d3 })
 
@@ -30,7 +30,7 @@ export const GraphStats = () => {
 }
 
 const NodeName = ({ nid }: { nid: string }) => {
-    let red = m.investigatees.includes(nid)
+    let red = m.investigatees.find(n => n.id === nid)
     return <span class={cc('nodename', { red })}>{nid}</span>
 }
 

@@ -1,21 +1,19 @@
-import { patch, jsx, When } from 'jmx/core'
-import { mount } from 'jmx/util/common'
+import { patch, jsx, When } from "../jmx-lib/core"
 import { mc1 } from '../data/data'
 import '../utils/common'
-import { GraphStats } from './stats'
+import { GraphStats } from '../comp/stats'
 import { m } from './model'
 import { Controller } from './controller'
 import { Link } from './routes'
-import { GraphView } from './graphview'
+import { mount } from '../utils/common'
+import { GraphView } from "../comp/graphview"
 
 let c = new Controller()
 
 let App = () => (
     <body>
-
-        <h1>Mini Challenge 1</h1>
-
         <header id='toolbar'>
+            <h2>Mini Challenge 1</h2>
             <Link url={['stats']} />
             <Link url={['graph']} />
         </header>
@@ -31,10 +29,7 @@ let App = () => (
             </When>
         </article>
 
-        <footer>
-            footer
-        </footer>
-
+        <footer>footer</footer>
     </body>
 )
 

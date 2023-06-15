@@ -1,4 +1,4 @@
-html {
+/* html {
     box-sizing: border-box;
 }
 
@@ -7,41 +7,19 @@ html {
 *:after {
     box-sizing: inherit;
     padding: 0;
-}
+} */
 
 *:focus {
     background: rgb(174, 187, 118);
 }
 
 body {
-    padding: 1em;
-    /* background: lightcyan; */
     font-size: medium;
     font-family: calibri;
     /* user-select: none; */
 }
 
-/* layout */
 
-body {
-    display: grid;
-    grid-template-areas:
-        'header header'
-        'nav main'
-        'footer';
-}
-
-nav {
-    grid-area: nav;
-}
-
-body > article {
-    grid-area: main;
-}
-
-footer {
-    grid-area: footer;
-}
 
 li {
     padding: 2px;

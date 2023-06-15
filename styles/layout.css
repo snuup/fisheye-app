@@ -1,0 +1,46 @@
+body {
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'nav main'
+        'footer footer';
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 10px;
+    overflow: hidden;
+}
+
+header {
+    grid-area: header;
+    /* background-color: lightskyblue; */
+}
+
+nav {
+    grid-area: nav;
+    /* background-color: lightcyan; */
+}
+
+#main {
+    grid-area: main;
+    /* background-color: lightsalmon; */
+    overflow: auto;
+}
+
+footer {
+    grid-area: footer;
+    /* background-color: lightseagreen; */
+}
+
+#main,
+nav {
+    padding: 1em;
+}
+
+#main,
+nav,
+header,
+footer {
+    background-color: #eee;
+}

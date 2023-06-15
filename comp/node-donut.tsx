@@ -1,5 +1,5 @@
 import * as d3 from '../lib/d3'
-import { jsx } from 'jmx/core'
+import { jsx } from "../jmx-lib/core"
 import { FishNode } from '../analysis/fishnode'
 import { identity } from '../utils/common'
 
@@ -91,7 +91,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .join('path')
             .attr('d', arc)
             .attr('class', d => (d.ins ? 'ins' : 'outs'))
-            .style('stroke', 'white')
+            .style('stroke', '#eee')
             .style('stroke-width', '2.5px')
             .append('title')
             .text(d => d.data.type + (d.ins ? '<-' : '->'))

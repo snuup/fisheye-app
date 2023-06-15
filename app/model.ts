@@ -1,3 +1,4 @@
+import { FishNode } from "../analysis/fishnode"
 import { Graph } from "../analysis/graph"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
@@ -6,14 +7,7 @@ export const mraw = {
 
     url: ['stats'] as Url,
 
-    investigatees:
-    [
-        "Mar de la Vida OJSC",
-        "#979893388",
-        "Oceanfront Oasis Inc Carriers",
-        "#8327",
-        //"all"
-    ],
+    investigatees: [] as FishNode[],
     entity: "",
     graph: new Graph(),
     selection: [], // ids as string[]

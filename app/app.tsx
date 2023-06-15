@@ -13,7 +13,7 @@ let c = new Controller()
 
 let App = () => (
     <body>
-        <header id='toolbar'>
+        <header>
             <h2>Mini Challenge 1</h2>
             <Link url={['stats']} />
             <Link url={['graph']} />

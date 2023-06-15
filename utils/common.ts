@@ -77,6 +77,9 @@ mergePrototype(class extends Object {
     get entries() {
         return Object.entries(this)
     }
+    mapKeys(fmap) {
+        return Object.fromEntries(this.entries.map(([k,v]) => [fmap(k), v]))
+    }
 }, Object)
 
 mergePrototype(class extends String {
@@ -162,5 +165,14 @@ export function rebind(o) {
             .map(([name,]) => name)
     for (const name of names) {
         o[name] = o[name].bind(o)
+    }
+}
+export function nicelinktypename(rawlinktype: string) {
+    switch (rawlinktype) {
+        case "membership": return "member"
+        case "partnership": return "partner"
+        case "family_relationship": return "family"
+        case "ownership": return "owner"
+        default: return rawlinktype
     }
 }

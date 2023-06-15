@@ -2,7 +2,6 @@ import { jsx } from "../jmx-lib/core"
 import { cc } from "../utils/common"
 
 export function NameValue({ name, value, className }: { name: string, value?: number | string, className?: string }, { children }) {
-    console.log("nv", children, children())
     let cn = children()
     if (!cn.length && value === undefined) return null
     return (

@@ -45,19 +45,19 @@ button {
     outline: solid 1px turquoise;
 }
 
-.ownership {
+.ownership, .owner {
     fill: rgb(57, 65, 62);
     color: rgb(57, 65, 62);
 }
-.membership {
+.membership, .member {
     fill: rgb(127, 170, 211);
     color: rgb(127, 170, 211);
 }
-.family_relationship {
+.family_relationship, .family {
     fill: rgb(187, 125, 173);
     color: rgb(187, 125, 173);
 }
-.partnership {
+.partnership, .partner {
     fill: rgb(161, 106, 85);
     color: rgb(161, 106, 85);
 }
@@ -100,14 +100,6 @@ path.ins {
 path.outs {
     fill: lightcoral;
 } */
-
-#toolbar {
-    display: flex;
-    flex-direction: row;
-}
-#toolbar a {
-    margin: 1em;
-}
 
 .namevalue .value {
     margin-left: 1em;

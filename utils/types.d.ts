@@ -28,6 +28,7 @@ interface Array<T> {
 
 interface Object {
     get entries(): [string, any][]
+    mapKeys(fmap: (string) => string): any
     //get entries(o: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
     //get entries(): [string, ThisType<T>][];
 }

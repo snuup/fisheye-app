@@ -58,16 +58,12 @@ const DegreeView = (n: FishNode) => (
 )
 
 const ObjectAsTable = ({ o }: { o: any }) => (
-    <table>
+    <div>
         {o.entries
             .sortBy(([k, v]) => -v)
-            .map(([k, v]) => (
-                <tr class={k}>
-                    <td>{k}</td>
-                    <td>{v}</td>
-                </tr>
-            ))}
-    </table>
+            .map(([k, v]) => <NameValue name={k} value={v} className={k} />)
+        }
+    </div>
 )
 
 // const Bar = ({ value, classname }: { value: number; classname?: string }) => (

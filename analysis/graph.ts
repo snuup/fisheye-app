@@ -58,23 +58,13 @@ export class Graph {
     get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
     get linkcountsByType() { return this.links.countBy(n => n.type) }
 
-    gettopdegrees(inludeInvestigatees = true) {
-        let tops = m.graph.nodes.sortBy(n => -n.degree).slice(0, 25)
-        let names = tops.map(n => n.nid)
-
-        let missings = m.investigatees.filter(inv => !names.includes(inv.id)).map(this.getnode)
-        if (inludeInvestigatees) {
-            tops.push(...missings)
-            tops.sortBy(n => -n.degree)
-        }
-
-        return tops
+    gettopdegrees(count = 25) {
+        return m.graph.nodes.sortBy(n => -n.degree).slice(0, count)
     }
 
     enrichnodes() {
 
         console.log("enrichnodes");
-
 
         this.links
             .groupBy(l => l.sid)

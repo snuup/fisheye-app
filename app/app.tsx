@@ -1,4 +1,4 @@
-import { patch, jsx, When } from "../jmx-lib/core"
+import { patch, jsx, When, updateview } from "../jmx-lib/core"
 import { mc1 } from '../data/data'
 import '../utils/common'
 import { GraphStats } from '../comp/stats'
@@ -7,6 +7,7 @@ import { Controller } from './controller'
 import { Link } from './routes'
 import { mount } from '../utils/common'
 import { GraphView } from "../comp/graphview"
+import { Navigation } from "../comp/nav"
 
 let c = new Controller()
 
@@ -18,7 +19,7 @@ let App = () => (
             <Link url={['graph']} />
         </header>
 
-        <nav>navi</nav>
+        <Navigation />
 
         <article id='main'>
             <When cond={m.url[0] == 'stats'}>
@@ -35,4 +36,4 @@ let App = () => (
 
 patch(document.body, <App />)
 
-mount({ m, c, mc1 })
+mount({ m, c, mc1, updateview })

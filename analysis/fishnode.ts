@@ -22,7 +22,9 @@ export class FishNode {
     get id10() { return this.nid.truncate(10) }
     get type() { return this.original.type }
     get country() { return this.original.country }
-    get degree() { return this.outlinks?.length ?? 0 + this.inlinks?.length ?? 0}
+    get outdegree() { return this.outlinks?.length ?? 0}
+    get indegree() { return this.inlinks?.length ?? 0}
+    get degree() { return this.outdegree + this.indegree}
 
     toString() { return `FN(${this.nid})` }
 

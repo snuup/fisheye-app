@@ -12,8 +12,6 @@ export const mraw = {
     graph: new Graph(),
     selection: [], // ids as string[]
     //linkselection: [], // ?? as string[]
-
-
 }
 
 type Model = typeof mraw

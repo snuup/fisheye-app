@@ -27,6 +27,9 @@ export class Controller {
                 "#8327"
             ]
             .map(m.graph.getnode)
+
+        // dev
+        window.n = m.investigatees[1]
     }
 
     setroute() {

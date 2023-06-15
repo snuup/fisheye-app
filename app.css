@@ -21,6 +21,28 @@ body {
     /* user-select: none; */
 }
 
+/* layout */
+
+body {
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'nav main'
+        'footer';
+}
+
+nav {
+    grid-area: nav;
+}
+
+body > article {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
 li {
     padding: 2px;
     margin: 2px;
@@ -89,7 +111,7 @@ button {
     color: rgb(216, 3, 3);
 }
 
-path{
+path {
     cursor: pointer;
 }
 
@@ -102,3 +124,11 @@ path.ins {
 path.outs {
     fill: lightcoral;
 } */
+
+#toolbar {
+    display: flex;
+    flex-direction: row;
+}
+#toolbar a {
+    margin: 1em;
+}

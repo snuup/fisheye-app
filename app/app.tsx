@@ -1,30 +1,40 @@
-import { patch, jsx, updateview } from 'jmx/core'
-import { initrouter } from 'jmx/router'
-import { mount, rebind } from 'jmx/util/common'
+import { patch, jsx, When } from 'jmx/core'
+import { mount } from 'jmx/util/common'
 import { mc1 } from '../data/data'
-import "../utils/common"
+import '../utils/common'
 import { GraphStats } from './stats'
 import { m } from './model'
 import { Controller } from './controller'
-
-// let z: Hase = 'hui'
-
-// run()
+import { Link } from './routes'
+import { GraphView } from './graphview'
 
 let c = new Controller()
 
-let Counter = ({
-    value,
-    inc,
-}: {
-    value: number
-    inc: ActionT<PointerEvent>
-}) => <div onclick={inc}>{value}</div>
-
 let App = () => (
     <body>
+
         <h1>Mini Challenge 1</h1>
-        <GraphStats />
+
+        <header id='toolbar'>
+            <Link url={['stats']} />
+            <Link url={['graph']} />
+        </header>
+
+        <nav>navi</nav>
+
+        <article id='main'>
+            <When cond={m.url[0] == 'stats'}>
+                <GraphStats />
+            </When>
+            <When cond={m.url[0] == 'graph'}>
+                <GraphView />
+            </When>
+        </article>
+
+        <footer>
+            footer
+        </footer>
+
     </body>
 )
 

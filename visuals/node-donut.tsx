@@ -39,15 +39,13 @@ export function NodeDonut({ n }: { n: FishNode }) {
         const piedata = d3
             .pie()
             .sort(null)
-            //.padAngle(0.1)
+
             .value(d => d.total)(data)
 
-        //console.log(piedata)
 
         let width = radius - 12
 
         const arc = d => {
-            //console.log('arc', d)
             let portion
             let inner
             let outer
@@ -63,9 +61,12 @@ export function NodeDonut({ n }: { n: FishNode }) {
                 inner = radius - w
                 outer = radius
             }
-            //console.log(d.data, portion, inner, outer)
 
-            return d3.arc().innerRadius(inner).outerRadius(outer)(d)
+            return d3.arc()
+                .innerRadius(inner)
+                .outerRadius(outer)
+                .cornerRadius(2.5)
+                (d)
         }
 
         d3.select(n)

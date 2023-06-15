@@ -1,7 +1,11 @@
 import { Graph } from "../analysis/graph"
 import { mount } from "../utils/common"
+import { Url } from "./routes"
 
 export const mraw = {
+
+    url: ['stats'] as Url,
+
     investigatees:
     [
         "Mar de la Vida OJSC",

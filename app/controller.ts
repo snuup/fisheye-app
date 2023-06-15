@@ -6,6 +6,7 @@ import { updateview } from "jmx/core"
 import { Graph } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
+import { Url } from "./routes"
 
 export class Controller {
 
@@ -16,7 +17,9 @@ export class Controller {
     }
 
     setroute() {
-        //m.url = document.location.pathname.split('/').slice(1) as Url
+        m.url = document.location.pathname.split('/').slice(1) as Url
+        console.log("setroute")
+
         updateview('#main')
     }
 

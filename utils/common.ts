@@ -178,8 +178,10 @@ export function nicelinktypename(rawlinktype: string) {
 }
 
 export function nicenodetypename(rawnodetype: string) {
+    console.log("rawnodetype", `|${rawnodetype}|`)
+
     switch (rawnodetype) {
-        case undefined: return "undefined"
+        case "": return "undefined"
         case "political_organization": return "political-org"
         default: return rawnodetype
     }

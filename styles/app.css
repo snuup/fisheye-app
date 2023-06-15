@@ -112,5 +112,5 @@ h2 {
 .gridtable {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 0 1em;
+    gap: .25em 1em;
 }

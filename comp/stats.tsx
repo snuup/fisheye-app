@@ -4,28 +4,42 @@ import { m } from '../app/model'
 import * as d3 from '../lib/d3'
 import { FishNode } from '../analysis/fishnode'
 import { NodeDonut } from './node-donut'
+import { NameValue } from "./namevalue"
 
 mount({ d3 })
 
 export const GraphStats = () => {
     let g = m.graph
     return (
-        <article>
+        <div class="stats">
             <h2>graph statistics</h2>
-            <div>{g.nodes.length} nodes</div>
-            <div>{g.links.length} links</div>
 
-            <h3>node types</h3>
-            <div>{<ObjectAsTable o={g.nodecountsByType} />}</div>
+            <div class="stats-top">
+                <div>
+                    <h3>counts</h3>
+                    <NameValue name="nodes" value={g.nodes.length} />
+                    <NameValue name="links" value={g.links.length} />
+                </div>
 
-            <h3>link types</h3>
-            <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
+                <div>
+                    <h3>node types</h3>
+                    <div>{<ObjectAsTable o={g.nodecountsByType} />}</div>
+                </div>
 
-            <h3>degrees</h3>
-            <div class='degreecontainer'>
-                {g.gettopdegrees().map(n => DegreeView(n))}
+                <div>
+                    <h3>link types</h3>
+                    <div>{<ObjectAsTable o={g.linkcountsByType} />}</div>
+                </div>
             </div>
-        </article>
+
+            <div class="topdegrees">
+                <h3>top 25 nodes with heighest degrees</h3>
+                <div class='degreecontainer'>
+                    {g.gettopdegrees().map(n => DegreeView(n))}
+                </div>
+            </div>
+
+        </div>
     )
 }
 

@@ -25,9 +25,11 @@ const PathMatrix = () => {
 
         rows
             .selectAll('p')
-            .data(d => d.paths.groupBy(p => p.source).entries)
+            .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv.id]]))
             .join('p')
-            .text(([name, paths]) => `${paths.first.length} ${name} ${paths.length}`)
+            .text(([ inv, paths ]) => {
+                return `${inv.id} ${paths?.first.length ?? 0}`
+            })
     }
 
     return <div patch={rund3} />

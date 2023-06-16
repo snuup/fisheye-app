@@ -46,6 +46,10 @@ export class FishNode {
         return sum
     }
 
+    get pathsByInv() {
+        return this.paths.groupBy(p => p.source)
+    }
+
     get properties() {
         return {
             "prop-header": "node",
@@ -53,4 +57,8 @@ export class FishNode {
             score: this.score.toFixed(2)
         }
     }
+
+    // return this.g.nodes
+    //         .filter(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length > 2)
+    //         .sortBy(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length)
 }

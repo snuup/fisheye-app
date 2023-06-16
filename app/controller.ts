@@ -41,7 +41,7 @@ export class Controller {
         m.url = document.location.pathname.split('/').slice(1) as Url
         console.log("setroute", m.url)
 
-        updateview('#main')
+        updateview('#main', false, true)
     }
 
     // inc1(ev: PointerEvent) {

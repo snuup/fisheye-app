@@ -117,8 +117,9 @@ export class PathMatrixBuilder {
         investigatees.forEach(this.flood)
 
         return this.g.nodes
-            .filter(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length > 2)
-            .sortBy(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length)
+            .filter(n => n.includeinmatrix)
+            .sortBy(n => -n.numberOfPathsBetterEqual2)
+            //.sortBy(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length)
     }
 }
 

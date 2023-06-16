@@ -46,8 +46,9 @@ export class FishNode {
         return sum
     }
 
+    _pathsByInv
     get pathsByInv() {
-        return this.paths.groupBy(p => p.source)
+        return this._pathsByInv ?? (this._pathsByInv = this.paths.groupBy(p => p.source))
     }
 
     get properties() {
@@ -58,7 +59,20 @@ export class FishNode {
         }
     }
 
-    // return this.g.nodes
-    //         .filter(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length > 2)
-    //         .sortBy(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length)
+    get investigatePaths() : Path[][] {
+        return Object.values(this.pathsByInv)
+    }
+
+    get investigatePaths1() : Path[] {
+        return this.investigatePaths.map(ps => ps.first)
+    }
+
+    get includeinmatrix() {
+        return this.investigatePaths1.filter((p: Path) => p.length <= 2).length > 0
+    }
+
+    // higher is better
+    get numberOfPathsBetterEqual2(){
+        return this.investigatePaths1.filter(p => p.length <= 2).length
+    }
 }

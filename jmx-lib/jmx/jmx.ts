@@ -269,7 +269,7 @@ export function patch(e: Node, h: HNode, patchElementOnly = false) {
 }
 
 // uses attached comps to patch elements
-export function updateview(selector: string | Node = "body", patchElementOnly?: false, replace?: false) {
+export function updateview(selector: string | Node = "body", patchElementOnly?: false, replace = false) {
     //console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
     const ns = (typeof selector == "string") ? document.querySelectorAll(selector) : [selector]
     let n: Node | null

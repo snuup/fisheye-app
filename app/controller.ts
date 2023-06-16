@@ -3,7 +3,7 @@ import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph } from "../analysis/graph"
+import { Graph, PathMatrixBuilder } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
@@ -30,6 +30,9 @@ export class Controller {
 
         // dev
         window.n = m.investigatees[1]
+
+        let mb = new PathMatrixBuilder(m.graph)
+        mb.initscores(m.investigatees)
     }
 
     setroute() {

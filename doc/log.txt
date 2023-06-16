@@ -20,6 +20,8 @@ app frame
 
 can select nodes to get their main display / property grid display ?
 
+meaningfullness of link direction ?
+
 operations:
 - select node
 - flood suspect

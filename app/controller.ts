@@ -3,10 +3,11 @@ import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph, PathMatrixBuilder } from "../analysis/graph"
+import { Graph } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
+import { PathMatrixBuilder } from "../analysis/path"
 
 export class Controller {
 
@@ -32,12 +33,13 @@ export class Controller {
         window.n = m.investigatees[1]
 
         let mb = new PathMatrixBuilder(m.graph)
-        mb.initscores(m.investigatees)
+        m.tops = mb.initscores(m.investigatees)
+        m.top = m.tops[0]
     }
 
     setroute() {
         m.url = document.location.pathname.split('/').slice(1) as Url
-        console.log("setroute")
+        console.log("setroute", m.url)
 
         updateview('#main')
     }

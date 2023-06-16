@@ -61,6 +61,9 @@ mergePrototype(class extends Array {
         selector = selector ?? identity
         return this.sort((a, b) => selector(a) - selector(b))
     }
+    get first() {
+        return this[0]
+    }
     get last() {
         return this[this.length - 1]
     }
@@ -178,7 +181,7 @@ export function nicelinktypename(rawlinktype: string) {
 }
 
 export function nicenodetypename(rawnodetype: string) {
-    console.log("rawnodetype", `|${rawnodetype}|`)
+    //console.log("rawnodetype", `|${rawnodetype}|`)
 
     switch (rawnodetype) {
         case "": return "undefined"

@@ -1,7 +1,7 @@
 import { mount, rebind } from "../utils/common"
 import { FishLink } from "./fishlink"
 import { FishNode } from "./fishnode"
-import { DirectedLink, Mark } from "./mark"
+import { DirectedLink, Path } from "./path"
 
 
 export class Graph {
@@ -75,110 +75,3 @@ export class Graph {
             .forEach(([nid, links]) => this.getnode(nid).inlinks = links)
     }
 }
-
-export interface Degree {
-    nid: string
-    count: number
-    links: FishLink[]
-}
-
-const cleanid = (id) => typeof id === "number" ? "#" + id : id
-
-// let all = {
-//     nodes: mc1.nodes.map(o => new FishNode(o)) as FishNode[],
-//     links: mc1.links.map(o => new FishLink(o)) as FishLink[]
-// }
-
-// export const nodemap = new Map(all.nodes.map(n => [n.nid, n]))
-
-// export function getsubgraph(nid: string): Graph {
-//     console.log("getsubgraph", nid)
-//     let links = all.links.filter((l) => l.sid === nid || l.tid == nid)
-//     return getgraph(links)
-// }
-
-// export function getsuspectgraph(n: FishNode) {
-//     console.log("getsuspectgraph", n)
-//     let links = n.marks.flatMap(m => m.chain.map(dl => dl.link)).distinctBy(l => l.key)
-//     return getgraph(links)
-// }
-
-// export function addlinks(ns: FishNode[]) {
-//     let nids = ns.map(n => n.id)
-//     let adds = all.links.filter(l => nids.includes(l.sid) && nids.includes(l.tid))
-//     m.graph.appendlinks(adds)
-// }
-
-// function getgraph(links: FishLink[]) {
-//     let nodes = [...new Set(links.flatMap(l => [nodemap.get(l.sid), nodemap.get(l.tid)]))] as FishNode[]
-//     return new Graph(nodes, links)
-// }
-
-// analysis
-
-export class PathMatrixBuilder {
-
-    g: Graph
-    dlinkmap: Map<string, DirectedLink[]>
-    tops: FishNode[]
-
-    constructor(g: Graph) {
-
-        this.g = g
-        rebind(this)
-
-        this.dlinkmap = new Map(
-            g.links
-                .flatMap(l => [new DirectedLink(l, false), new DirectedLink(l, true)])
-                .groupBy(l => l.sid)
-                .entries)
-    }
-
-    getlinks(nid: string) { return this.dlinkmap.get(nid) ?? [] }
-
-    bfs(n: FishNode, linkchain: DirectedLink[], visited: Set<string>) {
-
-        //console.log("bfs", n.id)
-
-        if (linkchain.length > 2) return // termination criteria
-        if (visited.has(n.id)) return
-        visited.add(n.id)
-
-        //console.log("bfs process", n.id)
-
-        let links = this.getlinks(n.id)
-
-        // flood next neighbors
-        let fronteer: any[] = []
-        for (let l of links) {
-
-            if (visited.has(l.tid)) continue
-
-            let n = this.g.nodemap.get(l.tid)
-            if (!n) throw "nüll!"
-            let chain = [...linkchain, l]
-            n.addmark(new Mark(chain))
-            fronteer.push([n, chain])
-        }
-
-        //console.log("fronteer", fronteer)
-
-        for (let [n, chain] of fronteer) {
-            this.bfs(n, chain, visited)
-        }
-    }
-
-    flood(investigatee: FishNode) {
-        console.log("flood", investigatee.id)
-        this.bfs(investigatee, [], new Set<string>())
-    }
-
-    // flood(mar)
-    initscores(investigatees: FishNode[]) {
-        console.log("initscores - call this once only!!")
-        investigatees.forEach(this.flood)
-        this.tops = this.g.nodes.sortBy(n => -n.score).slice(0, 20)
-    }
-}
-
-mount({ PathMatrixBuilder })

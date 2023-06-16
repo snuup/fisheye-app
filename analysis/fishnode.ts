@@ -1,6 +1,6 @@
 import { cleanid } from "./common"
 import { FishLink } from "./fishlink"
-import { Mark } from "./mark"
+import { Path } from "./path"
 
 export class FishNode {
 
@@ -9,11 +9,12 @@ export class FishNode {
     nid: string
     outlinks: FishLink[]
     inlinks: FishLink[]
+    paths: Path[]
 
     constructor(original) {
         this.original = original
         this.nid = cleanid(original.id)
-        this.marks = []
+        this.paths = []
     }
 
     static create(original) { return new FishNode(original) }
@@ -30,19 +31,18 @@ export class FishNode {
 
     // analysis
 
-    marks: Mark[]
-
-    addmark(mark: Mark) {
-        if (this.marks.find(m => m.key == mark.key)) return
-        this.marks.push(mark)
+    addpath(mark: Path) {
+        if (this.paths.find(m => m.key == mark.key)) return
+        this.paths.push(mark)
+        this.paths.sortBy(p => p.length)
     }
 
     clearmarks() {
-        this.marks = []
+        this.paths = []
     }
 
     get score() {
-        let sum = this.marks?.sumBy(m => 1 / m.length) ?? 0
+        let sum = this.paths?.sumBy(m => 1 / m.length) ?? 0
         return sum
     }
 

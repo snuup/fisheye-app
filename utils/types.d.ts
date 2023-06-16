@@ -23,6 +23,7 @@ interface Array<T> {
     get combinations(): T[]
     sumBy(selector: (x:T) => number): number
     sortnumeric(selector): Array<T>
+    get first(): T
     get last(): T
 }
 

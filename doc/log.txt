@@ -8,7 +8,7 @@ countries !
 
 degree rank - degree order number
 
-degree diagram
+degree diagram - bins with types stacked
 
 radial stack -> each flow a circle
 
@@ -34,3 +34,11 @@ operations:
 
 a small set of efficient tools
 great and complex explanation of the effect of those tools
+
+
+// adjacency matrix:
+model: simple
+flood nodes into ->
+cool visualisation for that fludding
+
+suspect flood

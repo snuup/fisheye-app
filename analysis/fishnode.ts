@@ -68,7 +68,7 @@ export class FishNode {
     }
 
     get includeinmatrix() {
-        return this.investigatePaths1.filter((p: Path) => p.length <= 2).length > 0
+        return this.investigatePaths1.filter((p: Path) => p.length <= 2).length > 2
     }
 
     // higher is better

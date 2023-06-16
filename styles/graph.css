@@ -1,3 +1,8 @@
 .nid{
     font-weight: bold;
 }
+
+.matrix td {
+    /* background-color: lightcoral; */
+    padding: 4px;
+}

@@ -15,22 +15,19 @@ const PathMatrix = () => {
     function rund3(e) {
         console.log('rund3 in graphview')
 
-        let rows = d3
-            .select(e)
-            .selectAll('div')
-            .data(m.tops)
-            .join('div')
-            .text(d => d.id)
-            .attr("class", "nid")
+        let rows = d3.select(e).selectAll('tr').data(m.tops).join('tr')
 
-        rows
-            .selectAll('p')
+        rows.append('td')
+            .text(d => d.id + " " + d.degree)
+            .attr('class', 'nid')
+
+        rows.selectAll('p')
             .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv.id]]))
-            .join('p')
-            .text(([ inv, paths ]) => {
-                return `${inv.id} ${paths?.first.length ?? 0}`
+            .join('td')
+            .text(([inv, paths]) => {
+                return `${paths?.first.length ?? 0}` // ${inv.id}
             })
     }
 
-    return <div patch={rund3} />
+    return <div class='matrix' patch={rund3} />
 }

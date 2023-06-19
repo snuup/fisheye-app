@@ -101,10 +101,8 @@ const NodeLinkView = () => {
                         .attr('fill-opacity', d =>
                             m.investigatees.includes(d.id) ? 1 : 0.4
                         )
-                        .attr('stroke-width', d =>
-                            d.score == Infinity ? 10 : Math.log(d.score) * 2
-                        )
-                        .attr('stroke', '#a33')
+                        .attr('stroke-width', 4)
+                        .attr('stroke', d => (m.investigatees.includes(d) ? '#a33' : 'transparent'))
 
                     n.append('text')
                         .attr('fill', '#333')

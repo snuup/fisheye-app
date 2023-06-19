@@ -23,6 +23,7 @@ export class DirectedLink {
 
     get text() { return this.sid + " - " + this.tid }
     get longtext() { return this.sid + ` (${this.original.type}/${this.original.weight}) ` + this.tid }
+    get longtext1() { return this.sid + ` (${this.original.type}/${this.original.weight}) `}
 }
 
 export class Path {
@@ -52,7 +53,7 @@ export class Path {
     get target() { return this.links.last.tid }
 
     get text() { return this.source + " - " + this.target + ` (${this.links.length})` }
-    get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.longtext).join(" ") }
+    get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.longtext1).join(" ") + " " + this.target}
 }
 
 export class PathMatrixBuilder {

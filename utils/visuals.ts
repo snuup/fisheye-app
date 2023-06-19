@@ -21,7 +21,7 @@ export function nodeColorScale(x) {
 }
 
 export function linkColorScale(x) {
-    return "#333"
+    return "#aaa"
     x = String(x) // ensure that undefined and 'undefined' map to same color
     let r = getcolor(x)
     //console.log("nodecolor", x, r)

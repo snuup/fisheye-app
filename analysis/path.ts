@@ -23,7 +23,7 @@ export class DirectedLink {
 
     get text() { return this.sid + " - " + this.tid }
     get longtext() { return this.sid + ` (${this.original.type}/${this.original.weight}) ` + this.tid }
-    get longtext1() { return this.sid + ` (${this.original.type}/${this.original.weight}) `}
+    get longtext1() { return this.sid + ` (${this.original.type}/${this.original.weight}) ` }
 }
 
 export class Path {
@@ -51,9 +51,10 @@ export class Path {
 
     get source() { return this.links[0].sid }
     get target() { return this.links.last.tid }
+    get ends() { return [this.source, this.target] }
 
     get text() { return this.source + " - " + this.target + ` (${this.links.length})` }
-    get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.longtext1).join(" ") + " " + this.target}
+    get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.longtext1).join(" ") + " " + this.target }
 }
 
 export class PathMatrixBuilder {
@@ -120,7 +121,7 @@ export class PathMatrixBuilder {
         return this.g.nodes
             .filter(n => n.includeinmatrix)
             .sortBy(n => -n.numberOfPathsBetterEqual2)
-            //.sortBy(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length)
+        //.sortBy(n => n.paths.filter(p => p.length <= 2).map(p => p.source).distinctBy().length)
     }
 }
 

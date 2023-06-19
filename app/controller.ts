@@ -48,8 +48,16 @@ export class Controller {
                     m.graphfocusnode = m.graph.getnode(m.graphfocus)
                     let ls = m.graphfocusnode.investigatePaths.flat().flatMap(p => p.links)
                     window.ls = ls
+
+                    // all nodes within paths
                     let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
                     let links = ls.flatMap(dl => dl.link).distinctBy()
+
+                    // just the paths:
+                    // let paths = m.graphfocusnode.investigatePaths.flatMap(p => [p.source, p.target])
+                    // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
+                    // let links = ls.flatMap(dl => dl.link).distinctBy()
+
                     m.subgraph = new Graph(nodes, links)
                 }
                 else {

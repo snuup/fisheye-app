@@ -1,7 +1,7 @@
 import { m } from '../app/model'
 import { When, jsx } from '../jmx-lib/core'
 import * as d3 from '../lib/d3'
-import { linkColorScale, nodeColorScale } from '../utils/visuals'
+import { nodeColorScale } from '../utils/visuals'
 import { NodeView } from './node-view'
 
 export const GraphView = () => {
@@ -32,25 +32,29 @@ const NodeLinkView = () => {
 
         let w = svgdom.clientWidth
         let h = svgdom.clientHeight
+        let hcenter = w / 2
+        let vcenter = h / 2
 
         console.log(w, h)
 
-        simulation?.stop()
+        //simulation?.stop()
 
         let g = m.subgraph
 
         simulation = d3
             .forceSimulation(g.nodes)
-            .force('charge', d3.forceManyBody().strength(-1000))
-            .force(
-                'link',
-                d3
-                    .forceLink(g.links)
-                    .id(d => (d as any).id)
-                    .distance(150)
-                    .strength(1)
-            )
-            .force('center', d3.forceCenter(w / 2, h / 2))
+            .force("charge", d3.forceCollide().radius(5))
+            //.force('charge', d3.forceManyBody().strength(-3000))
+            // .force(
+            //     'link',
+            //     d3
+            //         .forceLink(g.links)
+            //         .id(d => (d as any).id)
+            //         .distance(100)
+            //         .strength(0.5)
+            // )
+            .force('r', d3.forceRadial(100, hcenter, vcenter))
+            //.force('center', d3.forceCenter(w / 2, h / 2))
         // .force('cluster', alpha => {
         //     if (g.nodes.length > 180) return // only cluster small graphs
         //     for (let [group, members] of groups.entries) {
@@ -75,7 +79,6 @@ const NodeLinkView = () => {
                         .append('path')
                         .attr('class', 'link')
                         .attr('class', d => d.type)
-                        .attr('stroke', d => linkColorScale(d.type))
                         .attr('stroke-width', 2)
                         .attr('fill', 'none'),
                 //.attr('opacity', d => d.weight)
@@ -135,8 +138,8 @@ const NodeLinkView = () => {
             //node.attr('y', d => d.y)
 
             node.attr('transform', d => {
-                if (Number.isNaN(d.x)) debugger
-                if (Number.isNaN(d.y)) debugger
+                //if (Number.isNaN(d.x)) debugger
+                //if (Number.isNaN(d.y)) debugger
                 return 'translate(' + d.x + ',' + d.y + ')'
             })
             link.attr('d', d =>

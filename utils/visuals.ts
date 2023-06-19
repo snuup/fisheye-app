@@ -20,11 +20,13 @@ export function nodeColorScale(x) {
     return c
 }
 
-export function linkColorScale(l) {
-    console.log("linkColorScale", l)
-    return "#aaa"
-    //x = String(x) // ensure that undefined and 'undefined' map to same color
-    //let r = getcolor(x)
-    //console.log("nodecolor", x, r)
-    //return r
-}
+// export function linkColorScale(l) {
+//     console.log("linkColorScale", l)
+//     switch(l){
+//         case "membership: "
+//     }
+//     //x = String(x) // ensure that undefined and 'undefined' map to same color
+//     //let r = getcolor(x)
+//     //console.log("nodecolor", x, r)
+//     //return r
+// }

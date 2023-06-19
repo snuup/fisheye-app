@@ -1,6 +1,7 @@
 import { m } from '../app/model'
 import { When, jsx } from '../jmx-lib/core'
 import * as d3 from '../lib/d3'
+import { linkColorScale, nodeColorScale } from '../utils/visuals'
 import { NodeView } from './node-view'
 
 export const GraphView = () => {
@@ -17,11 +18,16 @@ export const GraphView = () => {
     )
 }
 
+let simulation: any = null
+const lineGenerator = d3.line()
+
 const NodeLinkView = () => {
     function rund3(e) {
         console.log('rund3 in graphview')
 
-        let svg = e.querySelector("svg") ? d3.select(e).select("svg") : d3.select(e).append("svg")
+        let svg = e.querySelector('svg')
+            ? d3.select(e).select('svg')
+            : d3.select(e).append('svg')
         let svgdom = e.querySelector('svg')
 
         let w = svgdom.clientWidth
@@ -29,25 +35,146 @@ const NodeLinkView = () => {
 
         console.log(w, h)
 
-        // let rows =
-        //     d3.select(e)
-        //         .selectAll('tr')
-        //         .data(m.tops)
-        //         .join('tr')
+        simulation?.stop()
 
-        // rows.append('td')
-        //     .text(d => d.id + " " + d.degree)
-        //     .attr('class', 'nid')
+        let g = m.subgraph
 
-        // rows.selectAll('p')
-        //     .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv.id]]))
-        //     .join('td')
-        //     .text(([inv, paths]) => {
-        //         return `${paths?.first.length ?? 0}` // ${inv.id}
-        //     })
+        simulation = d3
+            .forceSimulation(g.nodes)
+            .force('charge', d3.forceManyBody().strength(-1000))
+            .force(
+                'link',
+                d3
+                    .forceLink(g.links)
+                    .id(d => (d as any).id)
+                    .distance(150)
+                    .strength(1)
+            )
+            .force('center', d3.forceCenter(w / 2, h / 2))
+        // .force('cluster', alpha => {
+        //     if (g.nodes.length > 180) return // only cluster small graphs
+        //     for (let [group, members] of groups.entries) {
+        //         var k = (0.5 * alpha) / members.length
+        //         for (let [a, b] of members.combinations) {
+        //             let midx = (a.x + b.x) / 2
+        //             let midy = (a.y + b.y) / 2
+        //             a.x += (midx - a.x) * k
+        //             b.x += (midx - b.x) * k
+        //             a.y += (midy - a.y) * k
+        //             b.y += (midy - b.y) * k
+        //         }
+        //     }
+        // })
+
+        const link = svg
+            .selectAll('path.link')
+            .data(g.links)
+            .join(
+                enter =>
+                    enter
+                        .append('path')
+                        .attr('class', 'link')
+                        .attr('stroke', d => linkColorScale(d.type))
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none'),
+                //.attr('opacity', d => d.weight)
+                //.on("click", e => c.selectlink(e.target.__data__)),
+                update => update,
+
+                exit => exit.remove()
+            )
+
+        const node = svg
+            .selectAll('text')
+            .data(g.nodes, n => (n as any).id)
+            .join(
+                enter => {
+                    let n = enter.append('g').call(drag(simulation))
+
+                    n.append('circle')
+                        .attr('r', 15)
+                        .attr('fill', d =>
+                            m.investigatees.includes(d.id)
+                                ? 'red'
+                                : nodeColorScale(d.type)
+                        )
+                        .attr('fill-opacity', d =>
+                            m.investigatees.includes(d.id) ? 1 : 0.4
+                        )
+                        .attr('stroke-width', d =>
+                            d.score == Infinity ? 10 : Math.log(d.score) * 2
+                        )
+                        .attr('stroke', '#a33')
+
+                    n.append('text')
+                        .attr('fill', '#333')
+                        //     .attr("dx", 6)
+                        .text(d => d.id10)
+
+                    // n.on('click', e =>
+                    //     c.selectnode(e.target.__data__, e.shiftKey)
+                    // )
+
+                    return n
+                },
+                update => {
+                    //console.log("update", update)
+                    return update
+                        .style('stroke-color', 'red')
+                        .style('stroke-width', 3)
+                },
+                exit => {
+                    //console.log("exit", exit)
+                    return exit.remove()
+                }
+            )
+
+        //node.call(d3. drag)
+
+        simulation.on('tick', () => {
+            //node.attr('x', d => d.x)
+            //node.attr('y', d => d.y)
+
+            node.attr('transform', d => {
+                if (Number.isNaN(d.x)) debugger
+                if (Number.isNaN(d.y)) debugger
+                return 'translate(' + d.x + ',' + d.y + ')'
+            })
+            link.attr('d', d =>
+                lineGenerator([
+                    [d.source.x, d.source.y],
+                    [d.target.x, d.target.y],
+                ])
+            )
+        })
     }
 
     return <div class='nodelink' patch={rund3} />
+}
+
+function drag(simulation) {
+    function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(0.3).restart()
+        event.subject.fx = event.subject.x
+        event.subject.fy = event.subject.y
+    }
+
+    function dragged(event) {
+        event.subject.fx = event.x
+        event.subject.fy = event.y
+    }
+
+    function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0)
+        event.subject.fx = null
+        event.subject.fy = null
+    }
+
+    return d3
+        .drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended)
 }
 
 // visualize that paths

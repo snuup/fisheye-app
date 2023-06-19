@@ -1,46 +1,11 @@
-currently only outgoing links in stats -> make switchable
-
-make weight switchable
-
-adjacency matrix (page 462)
-
-countries !
-
-degree rank - degree order number
-
-degree diagram - bins with types stacked
-
-radial stack -> each flow a circle
-
-icons
-
-arrows in node circle to indicate in / out
-
-app frame
-
-can select nodes to get their main display / property grid display ?
-
-meaningfullness of link direction ?
-
-operations:
-- select node
-- flood suspect
-- pin board
-- scoping: link type
-- grouping ?
-- path list
-- mute
-- lens -> detail view
-- selection: single link, all of a type,
-- summary stats for the current model
-
-a small set of efficient tools
-great and complex explanation of the effect of those tools
+- d3 inspiration
+- visualize Amanda Mckenzie
+- compute weights with kirchhoff, score
+- collect literature
+- chord diagram that shows which relations exist between the investigatees
 
 
-// adjacency matrix:
-model: simple
-flood nodes into ->
-cool visualisation for that fludding
-
-suspect flood
+19.6.
+- add a enw route for matrix
+- for route graph/nid
+    show the subgraph of nix + investigatees + illegal

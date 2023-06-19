@@ -1,4 +1,4 @@
-.nid{
+.nid {
     font-weight: bold;
 }
 
@@ -6,3 +6,27 @@
     /* background-color: lightcoral; */
     padding: 4px;
 }
+
+#graphview {
+    position: relative;
+    height: 100%;
+    background: #ddd;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.nodelink {
+    width: 100%;
+    height: 100%;
+}
+
+#graphview svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #ddd;
+  }

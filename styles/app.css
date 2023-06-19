@@ -110,7 +110,8 @@ h2 {
 }
 
 .gridtable {
-    display: grid;
+    display: inline-grid;
     grid-template-columns: auto auto;
     gap: .25em 1em;
 }
+

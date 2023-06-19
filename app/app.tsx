@@ -9,6 +9,7 @@ import { mount } from '../utils/common'
 import { GraphView } from "../comp/graphview"
 import { Navigation } from "../comp/nav"
 import { NodeDonut } from "../comp/node-donut"
+import { MatrixView } from "../comp/matrixview"
 
 let c = new Controller()
 
@@ -17,6 +18,7 @@ let App = () => (
         <header>
             <h2>Mini Challenge 1</h2>
             <Link url={['stats']} />
+            <Link url={['matrix']} />
             <Link url={['graph']} />
         </header>
 
@@ -25,6 +27,9 @@ let App = () => (
         <article id='main'>
             <When cond={m.url[0] == 'stats'}>
                 <GraphStats />
+            </When>
+            <When cond={m.url[0] == 'matrix'}>
+                <MatrixView />
             </When>
             <When cond={m.url[0] == 'graph'}>
                 <GraphView />

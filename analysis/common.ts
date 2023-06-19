@@ -1,1 +1,1 @@
-export const cleanid = (id) => typeof id === "number" ? "#" + id : id
+export const cleanid = (id) => typeof id === "number" ? "n" + id : id

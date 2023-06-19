@@ -23,11 +23,11 @@ export class Controller {
         m.investigatees =
             [
                 "Mar de la Vida OJSC",
-                "#979893388",
+                "n979893388",
                 "Oceanfront Oasis Inc Carriers",
-                "#8327"
+                "n8327"
             ]
-            .map(m.graph.getnode)
+                .map(m.graph.getnode)
 
         // dev
         window.n = m.investigatees[1]
@@ -38,8 +38,26 @@ export class Controller {
     }
 
     setroute() {
-        m.url = document.location.pathname.split('/').slice(1) as Url
+        m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
         console.log("setroute", m.url)
+
+        switch (m.url[0]) {
+            case "graph":
+                m.graphfocus = m.url[1]
+                if (m.graphfocus) {
+                    m.graphfocusnode = m.graph.getnode(m.graphfocus)
+                    let ls = m.graphfocusnode.investigatePaths.flat().flatMap(p => p.links)
+                    let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
+                    let links = ls.flatMap(dl => dl.link).distinctBy()
+                    m.subgraph = new Graph(nodes, links)
+                }
+                else {
+                    m.graphfocusnode = undefined
+                }
+
+
+                break
+        }
 
         updateview('#main', false, true)
     }

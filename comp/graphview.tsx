@@ -1,33 +1,53 @@
 import { m } from '../app/model'
-import { jsx } from '../jmx-lib/core'
+import { When, jsx } from '../jmx-lib/core'
 import * as d3 from '../lib/d3'
+import { NodeView } from './node-view'
 
 export const GraphView = () => {
+    console.log(m.graphfocus, m.graphfocusnode)
+
     return (
-        <div>
-            <h3>graph view!</h3>
-            <PathMatrix />
+        <div id='graphview'>
+            <div class='overlay'>
+                <h2>graph view!</h2>
+                {m.graphfocusnode && <NodeView n={m.graphfocusnode} />}
+            </div>
+            <NodeLinkView />
         </div>
     )
 }
 
-const PathMatrix = () => {
+const NodeLinkView = () => {
     function rund3(e) {
         console.log('rund3 in graphview')
 
-        let rows = d3.select(e).selectAll('tr').data(m.tops).join('tr')
+        let svg = e.querySelector("svg") ? d3.select(e).select("svg") : d3.select(e).append("svg")
+        let svgdom = e.querySelector('svg')
 
-        rows.append('td')
-            .text(d => d.id + " " + d.degree)
-            .attr('class', 'nid')
+        let w = svgdom.clientWidth
+        let h = svgdom.clientHeight
 
-        rows.selectAll('p')
-            .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv.id]]))
-            .join('td')
-            .text(([inv, paths]) => {
-                return `${paths?.first.length ?? 0}` // ${inv.id}
-            })
+        console.log(w, h)
+
+        // let rows =
+        //     d3.select(e)
+        //         .selectAll('tr')
+        //         .data(m.tops)
+        //         .join('tr')
+
+        // rows.append('td')
+        //     .text(d => d.id + " " + d.degree)
+        //     .attr('class', 'nid')
+
+        // rows.selectAll('p')
+        //     .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv.id]]))
+        //     .join('td')
+        //     .text(([inv, paths]) => {
+        //         return `${paths?.first.length ?? 0}` // ${inv.id}
+        //     })
     }
 
-    return <div class='matrix' patch={rund3} />
+    return <div class='nodelink' patch={rund3} />
 }
+
+// visualize that paths

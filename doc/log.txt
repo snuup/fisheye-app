@@ -9,3 +9,5 @@
 - add a enw route for matrix
 - for route graph/nid
     show the subgraph of nix + investigatees + illegal
+
+color links first

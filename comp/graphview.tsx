@@ -74,6 +74,7 @@ const NodeLinkView = () => {
                     enter
                         .append('path')
                         .attr('class', 'link')
+                        .attr('class', d => d.type)
                         .attr('stroke', d => linkColorScale(d.type))
                         .attr('stroke-width', 2)
                         .attr('fill', 'none'),

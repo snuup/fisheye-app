@@ -41,9 +41,14 @@ const NodeLinkView = () => {
 
         let g = m.subgraph
 
+        g.nodes.forEach(n => {
+            n.x = w / 2 + Math.random() * 5
+            n.y = w / 2 + Math.random() * 5
+        })
+
         simulation = d3
             .forceSimulation(g.nodes)
-            .force("charge", d3.forceCollide().radius(5))
+            .force('charge', d3.forceCollide().radius(5).strength(1))
             //.force('charge', d3.forceManyBody().strength(-3000))
             // .force(
             //     'link',
@@ -53,8 +58,8 @@ const NodeLinkView = () => {
             //         .distance(100)
             //         .strength(0.5)
             // )
-            .force('r', d3.forceRadial(100, hcenter, vcenter))
-            //.force('center', d3.forceCenter(w / 2, h / 2))
+            .force('r', d3.forceRadial(100, w / 2, w / 2).strength(3))
+        //.force('center', d3.forceCenter(w / 2, h / 2))
         // .force('cluster', alpha => {
         //     if (g.nodes.length > 180) return // only cluster small graphs
         //     for (let [group, members] of groups.entries) {
@@ -70,23 +75,23 @@ const NodeLinkView = () => {
         //     }
         // })
 
-        const link = svg
-            .selectAll('path.link')
-            .data(g.links)
-            .join(
-                enter =>
-                    enter
-                        .append('path')
-                        .attr('class', 'link')
-                        .attr('class', d => d.type)
-                        .attr('stroke-width', 2)
-                        .attr('fill', 'none'),
-                //.attr('opacity', d => d.weight)
-                //.on("click", e => c.selectlink(e.target.__data__)),
-                update => update,
+        // const link = svg
+        //     .selectAll('path.link')
+        //     .data(g.links)
+        //     .join(
+        //         enter =>
+        //             enter
+        //                 .append('path')
+        //                 .attr('class', 'link')
+        //                 .attr('class', d => d.type)
+        //                 .attr('stroke-width', 2)
+        //                 .attr('fill', 'none'),
+        //         //.attr('opacity', d => d.weight)
+        //         //.on("click", e => c.selectlink(e.target.__data__)),
+        //         update => update,
 
-                exit => exit.remove()
-            )
+        //         exit => exit.remove()
+        //     )
 
         const node = svg
             .selectAll('text')
@@ -106,7 +111,9 @@ const NodeLinkView = () => {
                             m.investigatees.includes(d.id) ? 1 : 0.4
                         )
                         .attr('stroke-width', 4)
-                        .attr('stroke', d => (m.investigatees.includes(d) ? '#a33' : 'transparent'))
+                        .attr('stroke', d =>
+                            m.investigatees.includes(d) ? '#a33' : 'transparent'
+                        )
 
                     n.append('text')
                         .attr('fill', '#333')
@@ -142,12 +149,12 @@ const NodeLinkView = () => {
                 //if (Number.isNaN(d.y)) debugger
                 return 'translate(' + d.x + ',' + d.y + ')'
             })
-            link.attr('d', d =>
-                lineGenerator([
-                    [d.source.x, d.source.y],
-                    [d.target.x, d.target.y],
-                ])
-            )
+            // link.attr('d', d =>
+            //     lineGenerator([
+            //         [d.source.x, d.source.y],
+            //         [d.target.x, d.target.y],
+            //     ])
+            // )
         })
     }
 

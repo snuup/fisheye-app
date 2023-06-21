@@ -1,0 +1,7 @@
+kirchhoff air-flows (flood suspect)
+
+investigatees = sources (which are also nodes, but perfect red)
+
+
+// iterate towards goal
+pump

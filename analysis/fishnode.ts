@@ -11,6 +11,9 @@ export class FishNode {
     inlinks: FishLink[]
     paths: Path[]
 
+    x: number
+    y: number
+
     constructor(original) {
         this.original = original
         this.nid = cleanid(original.id)
@@ -26,6 +29,7 @@ export class FishNode {
     get outdegree() { return this.outlinks?.length ?? 0 }
     get indegree() { return this.inlinks?.length ?? 0 }
     get degree() { return this.outdegree + this.indegree }
+    get alllinks() { return this.inlinks.concat(this.outlinks) }
 
     toString() { return `FN(${this.nid})` }
 

@@ -24,6 +24,11 @@ export class Graph {
         return this.nodemap.get(nid)!
     }
 
+    searchnode(nidstart: string): FishNode | undefined {
+        nidstart = nidstart.toLowerCase()
+        return this.nodes.find(n => n.id.toLowerCase().startsWith(nidstart))
+    }
+
     // hasnode(n: FishNode | string): boolean {
     //     if (n instanceof String) return this.nodes.find(n => n.id === n)
     //     return this.nodes.includes(n)

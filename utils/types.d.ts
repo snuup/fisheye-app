@@ -25,6 +25,7 @@ interface Array<T> {
     sortnumeric(selector): Array<T>
     get first(): T
     get last(): T
+    toReversed(): T[]
 }
 
 interface Object {

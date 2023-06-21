@@ -17,7 +17,11 @@ export const mraw = {
     subgraph: new Graph(),
 
     tops: [] as FishNode[],
-    top: null as FishNode | null
+    top: null as FishNode | null,
+
+    getsubgraphchildren(n: FishNode): FishNode[] {
+        return n.outlinks.map(l => m.graph.getnode(l.tid))
+    }
 }
 
 type Model = typeof mraw

@@ -1,13 +1,13 @@
 import { initrouter } from "../jmx-lib/router"
 import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
-import { rebind } from "../utils/common"
+import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
 import { Graph } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
-import { PathMatrixBuilder } from "../analysis/path"
+import { Path, PathMatrixBuilder } from "../analysis/path"
 
 export class Controller {
 
@@ -83,3 +83,34 @@ export class Controller {
     //     updateview('#sum')
     // }
 }
+
+export function lab() {
+    let fn = m.graphfocusnode!
+    let root = {
+        name: "root",
+        id: fn.id,
+        children: [] as any
+    }
+    for (let paths of fn.investigatePaths) {
+        let invname = paths[0].links[0].sid
+        root.children.push({
+            name: "level1",
+            "paths-to": invname,
+            paths: paths.map(createpathcontainer)
+        })
+    }
+    return root
+}
+
+export function createpathcontainer(p: Path) {
+    let nodes = p.links.flatMap(dl => dl.ends).distinctBy().toReversed()
+    let head = { id: nodes[0] } as any
+    nodes.slice(1).reduce((acc, n) => {
+        let o = { id: n }
+        acc.children = [o]
+        return o
+    }, head)
+    return head
+}
+
+mount({ lab, createpathcontainer })

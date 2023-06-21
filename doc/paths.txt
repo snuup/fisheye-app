@@ -1,0 +1,52 @@
+1 n979893388 (membership/0.8730826)  Amanda Mckenzie
+2 n979893388 (family_relationship/0.9250021)  Sept (membership/0.88797146)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (membership/0.82293105)  n43685541 (partnership/0.8567654)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (ownership/0.8191037)  Turkish Mussels Ltd. Liability Co Marine biology (membership/0.9287137)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (partnership/0.9050164)  b8567859-bf54-49fd-8332-5775e19c65af (partnership/0.84722596)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.8614878)  n341411 (membership/0.92350876)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.8614878)  n341411 (ownership/0.86933744)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.88049114)  Playa del Cielo Kga (partnership/0.93736565)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.83714163)  png xi  Line (membership/0.80690557)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.83714163)  png xi  Line (ownership/0.8873191)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (ownership/0.8793665)  SeaSpray Wave SRL Solutions (partnership/0.830771)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (ownership/0.8793665)  SeaSpray Wave SRL Solutions (partnership/0.83155537)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (membership/0.82755584)  n903311212 (partnership/0.81910384)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (partnership/0.86291546)  77b46bc7-7e31-41a0-973c-e633011d21b0 (partnership/0.91257226)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.8940515)  n2262 (membership/0.9134895)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (partnership/0.86831474)  Mario Richardson (family_relationship/0.9327139)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (membership/0.844323)  b1d6e468-f3c5-45f3-90a2-e76b2f329b2d (membership/0.90532446)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.9018619)  Ocean Fisheries Llc (partnership/0.88495827)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (family_relationship/0.95351213)  Sonia Fisheries Pvt (membership/0.8611533)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (partnership/0.9018322)  Estrella de Coral Ltd. Corporation Logistics (partnership/0.8000882)  Amanda Mckenzie
+3 n979893388 (partnership/0.8558467)  Faroe Islands Shrimp Shark (partnership/0.9018322)  Estrella de Coral Ltd. Corporation Logistics (partnership/0.979983)  Amanda Mckenzie
+3 n979893388 (partnership/0.8604943)  n69150209 (partnership/0.94104576)  Aquacultureâ (partnership/0.8252303)  Amanda Mckenzie
+3 n979893388 (partnership/0.8604943)  n69150209 (partnership/0.88346577)  Mar del Oeste Pic (ownership/0.91372263)  Amanda Mckenzie
+3 n979893388 (partnership/0.8604943)  n69150209 (partnership/0.88346577)  Mar del Oeste Pic (partnership/0.8803468)  Amanda Mckenzie
+3 n979893388 (family_relationship/0.8949433)  n435054320 (ownership/0.8105779)  Jeremy Norris (family_relationship/0.8676632)  Amanda Mckenzie
+3 n979893388 (family_relationship/0.8778388)  n1560 (ownership/0.1436)  su y CJSC Canal (membership/0.8391783)  Amanda Mckenzie
+2 Mar de la Vida OJSC (family_relationship/0.86787194)  b8567859-bf54-49fd-8332-5775e19c65af (partnership/0.84722596)  Amanda Mckenzie
+3 Mar de la Vida OJSC (membership/0.9243419)  n9345 (ownership/0.9136068)  Jerry Welch (family_relationship/0.86624163)  Amanda Mckenzie
+3 Mar de la Vida OJSC (membership/0.9243419)  n9345 (ownership/0.819125)  n979893388 (membership/0.8730826)  Amanda Mckenzie
+3 Mar de la Vida OJSC (membership/0.4604)  FishEye International (ownership/0.4353)  n903311212 (partnership/0.81910384)  Amanda Mckenzie
+3 Mar de la Vida OJSC (family_relationship/0.86787194)  b8567859-bf54-49fd-8332-5775e19c65af (family_relationship/0.8185814)  n341411 (membership/0.92350876)  Amanda Mckenzie
+3 Mar de la Vida OJSC (family_relationship/0.86787194)  b8567859-bf54-49fd-8332-5775e19c65af (family_relationship/0.8185814)  n341411 (ownership/0.86933744)  Amanda Mckenzie
+3 Mar de la Vida OJSC (family_relationship/0.86787194)  b8567859-bf54-49fd-8332-5775e19c65af (partnership/0.8085621)  Calvin Salas (family_relationship/0.8044495)  Amanda Mckenzie
+3 Mar de la Vida OJSC (family_relationship/0.86787194)  b8567859-bf54-49fd-8332-5775e19c65af (partnership/0.8620263)  FV Snake (partnership/0.80954945)  Amanda Mckenzie
+3 Mar de la Vida OJSC (family_relationship/0.86787194)  b8567859-bf54-49fd-8332-5775e19c65af (partnership/0.80413216)  FV Thunder (partnership/0.84670615)  Amanda Mckenzie
+2 Oceanfront Oasis Inc Carriers (family_relationship/0.83553725)  n2262 (membership/0.9134895)  Amanda Mckenzie
+3 Oceanfront Oasis Inc Carriers (family_relationship/0.83553725)  n2262 (membership/0.8605607)  Playa del Cielo Kga (partnership/0.93736565)  Amanda Mckenzie
+3 Oceanfront Oasis Inc Carriers (family_relationship/0.83553725)  n2262 (ownership/0.8599207)  Alan Wells (family_relationship/0.8651784)  Amanda Mckenzie
+2 n8327 (partnership/0.900931)  Calvin Salas (family_relationship/0.8044495)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (membership/0.81639224)  n341411 (membership/0.92350876)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (membership/0.81639224)  n341411 (ownership/0.86933744)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (ownership/0.8105779)  Jeremy Norris (family_relationship/0.8676632)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (family_relationship/0.8949433)  n979893388 (membership/0.8730826)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (family_relationship/0.82426447)  Playa del Cielo Kga (partnership/0.93736565)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (ownership/0.83293635)  SeaSpray Wave SRL Solutions (partnership/0.830771)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (ownership/0.83293635)  SeaSpray Wave SRL Solutions (partnership/0.83155537)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (ownership/0.84258646)  png xi  Line (membership/0.80690557)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (ownership/0.84258646)  png xi  Line (ownership/0.8873191)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (ownership/0.8167687)  n903311212 (partnership/0.81910384)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (membership/0.89181435)  Mar del Oeste Pic (ownership/0.91372263)  Amanda Mckenzie
+3 n8327 (membership/0.90199476)  n435054320 (membership/0.89181435)  Mar del Oeste Pic (partnership/0.8803468)  Amanda Mckenzie
+3 n8327 (membership/0.90622)  water (family_relationship/0.893028)  b8567859-bf54-49fd-8332-5775e19c65af (partnership/0.84722596)  Amanda Mckenzie

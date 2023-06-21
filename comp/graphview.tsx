@@ -24,6 +24,7 @@ const lineGenerator = d3.line()
 const NodeLinkView = () => {
     function rund3(e) {
         console.log('rund3 in graphview')
+        return
 
         let svg = e.querySelector('svg')
             ? d3.select(e).select('svg')

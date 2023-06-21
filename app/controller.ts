@@ -84,33 +84,3 @@ export class Controller {
     // }
 }
 
-export function lab() {
-    let fn = m.graphfocusnode!
-    let root = {
-        name: "root",
-        id: fn.id,
-        children: [] as any
-    }
-    for (let paths of fn.investigatePaths) {
-        let invname = paths[0].links[0].sid
-        root.children.push({
-            name: "level1",
-            "paths-to": invname,
-            paths: paths.map(createpathcontainer)
-        })
-    }
-    return root
-}
-
-export function createpathcontainer(p: Path) {
-    let nodes = p.links.flatMap(dl => dl.ends).distinctBy().toReversed()
-    let head = { id: nodes[0] } as any
-    nodes.slice(1).reduce((acc, n) => {
-        let o = { id: n }
-        acc.children = [o]
-        return o
-    }, head)
-    return head
-}
-
-mount({ lab, createpathcontainer })

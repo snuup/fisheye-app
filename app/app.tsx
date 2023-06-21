@@ -10,6 +10,7 @@ import { GraphView } from "../comp/graphview"
 import { Navigation } from "../comp/nav"
 import { NodeDonut } from "../comp/node-donut"
 import { MatrixView } from "../comp/matrixview"
+import { HierarchyView } from "../comp/hierarchyview"
 
 let c = new Controller()
 
@@ -32,7 +33,7 @@ let App = () => (
                 <MatrixView />
             </When>
             <When cond={m.url[0] == 'graph'}>
-                <GraphView />
+                <HierarchyView />
             </When>
         </article>
 

@@ -1,3 +1,17 @@
+20.6.
+. create hierarchy from subgraph
+
+d3.group(m.graphfocusnode.investigatePaths, x => x[0].links[0].sid)
+
+m.graphfocusnode.investigatePaths.flatMap((paths, i) => ({paths, i}))
+ipath : { paths: Array(26), i: 0 }
+
+ipaths.paths.map((p, j) => ({ p, j, i }))
+
+ijpath:
+
+------
+
 - d3 inspiration
 - visualize Amanda Mckenzie
 - compute weights with kirchhoff, score

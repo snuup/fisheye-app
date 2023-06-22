@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/10121312/algorithm-to-shorten-city-names-to-human-readable-codes
+
+https://stackoverflow.com/questions/23960189/how-is-this-kind-of-algorithm-called

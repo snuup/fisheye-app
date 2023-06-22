@@ -9,6 +9,10 @@ c.setfocus("Amanda Mckenzie")
 let data = getPathsHierarchy()
 let root = d3.hierarchy(data)
 
+// color scheme for names
+let names = root.descendants().map(n => n.data.id).distinctBy()
+let nameColors = d3.scaleOrdinal().domain(names).range(d3.schemeSet1)
+
 const width = 1000
 
 // Compute the tree height; this approach will allow the height of the
@@ -29,8 +33,8 @@ layout(root);
 let x0 = Infinity;
 let x1 = -x0;
 root.each(d => {
-  if (d.x > x1) x1 = d.x;
-  if (d.x < x0) x0 = d.x;
+    if (d.x > x1) x1 = d.x;
+    if (d.x < x0) x0 = d.x;
 });
 
 // Compute the adjusted height of the tree.
@@ -39,7 +43,7 @@ const height = x1 - x0 + dx * 2;
 
 /////
 
-mount({ m, data, root, layout })
+mount({ m, data, root, layout, names, nameColors })
 
 const svg = d3.select(document.body)
     .append("svg")
@@ -70,8 +74,9 @@ const node = svg.append("g")
     .attr("transform", d => `translate(${d.y},${d.x})`);
 
 node.append("circle")
-    .attr("fill", d => d.children ? "#555" : "#999")
-    .attr("r", 2.5);
+    .attr("fill", d => nameColors(d.data.id))
+    //.attr("fill", d => d.children ? "green" : "olive")
+    .attr("r", 5);
 
 node.append("text")
     .attr("dy", "0.31em")

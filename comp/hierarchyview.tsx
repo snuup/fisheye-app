@@ -23,7 +23,7 @@ export const HierarchyView = () => {
 const HierarchyGraphView = () => {
     function rund3(e) {
         console.log('rund3 in hierarchyhview')
-        let h = getPathHierarchy()
+        let h = getPathsHierarchy()
         console.log(h);
 
         return
@@ -59,7 +59,7 @@ function drag(simulation) {
         .on('end', dragended)
 }
 
-export function getPathHierarchy() {
+export function getPathsHierarchy() {
     let fn = m.graphfocusnode!
     let root = {
         name: 'root',
@@ -72,7 +72,7 @@ export function getPathHierarchy() {
     return root
 }
 
-export function createpathhierarchy(p: Path) {
+function createpathhierarchy(p: Path) {
     let nodes = p.links
         .flatMap(dl => dl.ends)
         .distinctBy()
@@ -90,4 +90,4 @@ export function createpathhierarchy(p: Path) {
     return head
 }
 
-mount({ getPathHierarchy, createpathhierarchy })
+mount({ getPathHierarchy: getPathsHierarchy, createpathhierarchy })

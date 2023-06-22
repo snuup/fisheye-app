@@ -1,7 +1,7 @@
 body {
-    display: grid;
+    /* display: grid;
     place-items: center;
-    grid-template-rows: 100vh;
+    grid-template-rows: 100vh; */
 }
 
 .ownership,
@@ -26,4 +26,8 @@ body {
 .partner {
     fill: rgb(161, 106, 85);
     color: rgb(161, 106, 85);
+}
+
+svg {
+    background: lightblue;
 }

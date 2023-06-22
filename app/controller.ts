@@ -43,32 +43,31 @@ export class Controller {
 
         switch (m.url[0]) {
             case "graph":
-                m.graphfocus = m.url[1]
-                if (m.graphfocus) {
-                    m.graphfocusnode = m.graph.getnode(m.graphfocus)
-                    let ls = m.graphfocusnode.investigatePaths.flat().flatMap(p => p.links)
-                    window.ls = ls
-
-                    // all nodes within paths
-                    let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
-                    let links = ls.flatMap(dl => dl.link).distinctBy()
-
-                    // just the paths:
-                    // let paths = m.graphfocusnode.investigatePaths.flatMap(p => [p.source, p.target])
-                    // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
-                    // let links = ls.flatMap(dl => dl.link).distinctBy()
-
-                    m.subgraph = new Graph(nodes, links)
-                }
-                else {
-                    m.graphfocusnode = undefined
-                }
-
-
+                this.setfocus(m.url[1])
                 break
         }
 
         updateview('#main', false, true)
+    }
+
+    setfocus(name) {
+        if (!name) return
+
+        m.graphfocus = name
+        m.graphfocusnode = m.graph.getnode(m.graphfocus)
+        let ls = m.graphfocusnode.investigatePaths.flat().flatMap(p => p.links)
+        window.ls = ls
+
+        // all nodes within paths
+        let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
+        let links = ls.flatMap(dl => dl.link).distinctBy()
+
+        // just the paths:
+        // let paths = m.graphfocusnode.investigatePaths.flatMap(p => [p.source, p.target])
+        // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
+        // let links = ls.flatMap(dl => dl.link).distinctBy()
+
+        m.subgraph = new Graph(nodes, links)
     }
 
     // inc1(ev: PointerEvent) {
@@ -83,4 +82,3 @@ export class Controller {
     //     updateview('#sum')
     // }
 }
-

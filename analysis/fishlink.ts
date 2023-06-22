@@ -27,4 +27,8 @@ export class FishLink {
     toString() {
         return `${this.sid} -> ${this.tid}`
     }
+
+    get text() {
+        return `${this.sid} -(${this.type} / ${this.weight})> ${this.tid}`
+    }
 }

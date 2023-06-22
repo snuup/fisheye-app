@@ -13,7 +13,7 @@ const width = 1000
 
 // Compute the tree height; this approach will allow the height of the
 // SVG to scale according to the breadth (width) of the tree layout.
-const dx = 10;
+const dx = 9;
 const dy = width / (root.height + 1);
 
 // Create a tree layout.
@@ -50,7 +50,8 @@ const svg = d3.select(document.body)
 
 const link = svg.append("g")
     .attr("fill", "none")
-    .attr("stroke", "#555")
+    //.attr("stroke", "#555")
+    .attr("class", "link")
     .attr("stroke-opacity", 0.4)
     .attr("stroke-width", 1.5)
     .selectAll()
@@ -76,6 +77,6 @@ node.append("text")
     .attr("dy", "0.31em")
     .attr("x", d => d.children ? -6 : 6)
     .attr("text-anchor", d => d.children ? "end" : "start")
-    .text(d => d.data.name)
+    .text(d => d.data.id)
     .clone(true).lower()
     .attr("stroke", "white");

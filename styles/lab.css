@@ -29,5 +29,9 @@ body {
 }
 
 svg {
-    background: lightblue;
+    /* background: lightblue; */
+}
+
+.link{
+    stroke: #777;
 }

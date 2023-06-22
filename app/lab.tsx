@@ -10,10 +10,34 @@ let data = getPathsHierarchy()
 let root = d3.hierarchy(data)
 
 const width = 1000
-const height = 500
 
-let layout = d3.cluster().size([width, height -20]).nodeSize([5, 150])
-layout(root)
+// Compute the tree height; this approach will allow the height of the
+// SVG to scale according to the breadth (width) of the tree layout.
+const dx = 10;
+const dy = width / (root.height + 1);
+
+// Create a tree layout.
+const layout = d3.cluster().nodeSize([dx, dy]);
+
+// Sort the tree and apply the layout.
+root.sort((a, b) => d3.ascending(a.data.name, b.data.name));
+layout(root);
+
+// Compute the extent of the tree. Note that x and y are swapped here
+// because in the tree layout, x is the breadth, but when displayed, the
+// tree extends right rather than down.
+let x0 = Infinity;
+let x1 = -x0;
+root.each(d => {
+  if (d.x > x1) x1 = d.x;
+  if (d.x < x0) x0 = d.x;
+});
+
+// Compute the adjusted height of the tree.
+const height = x1 - x0 + dx * 2;
+
+
+/////
 
 mount({ m, data, root, layout })
 
@@ -21,7 +45,7 @@ const svg = d3.select(document.body)
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    //.attr("viewBox", [-dy / 3, x0 - dx, width, height])
+    .attr("viewBox", [-dy / 3, x0 - dx, width, height])
     .attr("style", "height: auto; font: 10px sans-serif;");
 
 const link = svg.append("g")

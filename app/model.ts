@@ -5,7 +5,7 @@ import { Url } from "./routes"
 
 export const mraw = {
 
-    url: ['graph'] as Url,
+    url: ['/'] as Url,
 
     investigatees: [] as FishNode[],
     entity: "",

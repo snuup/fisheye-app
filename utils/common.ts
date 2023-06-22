@@ -81,7 +81,7 @@ mergePrototype(class extends Object {
         return Object.entries(this)
     }
     mapKeys(fmap) {
-        return Object.fromEntries(this.entries.map(([k,v]) => [fmap(k), v]))
+        return Object.fromEntries(this.entries.map(([k, v]) => [fmap(k), v]))
     }
 }, Object)
 
@@ -140,6 +140,13 @@ mergePrototype(class extends HTMLElement {
     }
 
 }, HTMLElement)
+
+mergePrototype(class extends Map {
+    ensure(key, valuefactory) {
+        if (!this.has(key)) this.set(key, valuefactory())
+        return this.get(key)
+    }
+}, Map)
 
 // -> jmx
 export function initevents() {

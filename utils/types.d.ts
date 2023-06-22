@@ -28,6 +28,10 @@ interface Array<T> {
     toReversed(): T[]
 }
 
+interface Map<K, V>{
+    ensure(key: K, valuefactory: () => V): V
+}
+
 interface Object {
     get entries(): [string, any][]
     mapKeys(fmap: (string) => string): any

@@ -4,4 +4,14 @@ investigatees = sources (which are also nodes, but perfect red)
 
 
 // iterate towards goal
-pump
+
+pull:
+
+
+forces:
+g: every node is drawn down by gravity
+pull: for every node compute [f1, f2, f3, f4] which is the multiplicator
+
+
+
+variants: line length = 0, guess that is ok, but could set some line length.

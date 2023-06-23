@@ -1,6 +1,7 @@
 import { m } from '../app/model'
 import { When, jsx } from '../jmx-lib/core'
 import * as d3 from '../lib/d3'
+import { mount } from '../utils/common'
 import { nodeColorScale } from '../utils/visuals'
 import { NodeView } from './node-view'
 
@@ -23,8 +24,6 @@ const lineGenerator = d3.line()
 
 const NodeLinkView = () => {
     function rund3(e) {
-        console.log('rund3 in graphview')
-        return
 
         let svg = e.querySelector('svg')
             ? d3.select(e).select('svg')
@@ -75,6 +74,8 @@ const NodeLinkView = () => {
         //         }
         //     }
         // })
+
+        mount({ simulation })
 
         // const link = svg
         //     .selectAll('path.link')

@@ -21,6 +21,7 @@ let App = () => (
             <Link url={['stats']} />
             <Link url={['matrix']} />
             <Link url={['graph']} />
+            <Link url={['tree']} />
         </header>
 
         <Navigation />
@@ -33,6 +34,9 @@ let App = () => (
                 <MatrixView />
             </When>
             <When cond={m.url[0] == 'graph'}>
+                <GraphView />
+            </When>
+            <When cond={m.url[0] == 'tree'}>
                 <HierarchyView />
             </When>
         </article>

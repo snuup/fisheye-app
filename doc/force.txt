@@ -1,0 +1,17 @@
+https://observablehq.com/@surreal6/bubbles
+
+  function boxingForce() {
+
+
+      for (let node of nodes) {
+          let r = Math.ceil(node.r) * 2;
+          if(node.x < -w2) node.x = -w2
+          //node.x = Math.max(-w2+r, Math.min(w2-r, node.x));
+          node.y = Math.max(-h2+r, Math.min(h2-r, node.y));
+      }
+  }
+
+
+- bubbles
+
+https://github.com/vasturiano/d3-force-registry

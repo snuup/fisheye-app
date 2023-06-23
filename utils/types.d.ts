@@ -16,19 +16,23 @@ interface HTMLElement {
 }
 
 interface Array<T> {
-    countBy(selector: (x: T) => string): { [key:string]: number }
-    groupBy(selector: (x: T) => string): { [key:string]: T[] }
+    countBy(selector: (x: T) => string): { [key: string]: number }
+    groupBy(selector: (x: T) => string): { [key: string]: T[] }
     sortBy(selector: (x: T) => U): T[]
     distinctBy(selector?): T[]
     get combinations(): T[]
-    sumBy(selector: (x:T) => number): number
+    sumBy(selector: (x: T) => number): number
     sortnumeric(selector): Array<T>
     get first(): T
     get last(): T
     toReversed(): T[]
 }
 
-interface Map<K, V>{
+interface Number {
+    clamp(min?: number, max?: number)
+}
+
+interface Map<K, V> {
     ensure(key: K, valuefactory: () => V): V
 }
 
@@ -53,7 +57,7 @@ interface Window {
 
 type MC1Id = number | string
 
-interface MC1Link{
+interface MC1Link {
     //id: number | string
     type: string
     weight: number
@@ -62,7 +66,7 @@ interface MC1Link{
     target: MC1Id
 }
 
-interface MC1Node{
+interface MC1Node {
     type?: string
     country?: string
     id: MC1Id

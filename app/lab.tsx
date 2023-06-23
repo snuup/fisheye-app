@@ -1,87 +1,98 @@
+import { FishLink } from '../analysis/fishlink'
+import { FishNode } from '../analysis/fishnode'
 import { getPathsHierarchy } from '../comp/hierarchyview'
+import { mc1 } from '../data/data.min'
 import * as d3 from '../lib/d3'
 import { mount } from '../utils/common'
 import { Controller } from './controller'
 import { m } from './model'
 
-let c = new Controller()
-c.setfocus("Amanda Mckenzie")
-let data = getPathsHierarchy()
-let root = d3.hierarchy(data)
+//let c = new Controller()
+//c.setfocus("Amanda Mckenzie")
+//let data = getPathsHierarchy()
+let nodes = mc1.nodes as any[] //.map(FishNode.create)
+let links = mc1.links as any[] //.map(FishLink.create)
 
-// color scheme for names
-let names = root.descendants().map(n => n.data.id).distinctBy()
-let nameColors = d3.scaleOrdinal().domain(names).range(d3.schemeSet1)
+const width = 200
+const height = 400
+const w2 = width / 2
+const h2 = height / 2
+const padding = 40
 
-const width = 1000
+const radius = 15
+const maxy = height - radius
+const minx = radius
+const maxx = width - radius
 
-// Compute the tree height; this approach will allow the height of the
-// SVG to scale according to the breadth (width) of the tree layout.
-const dx = 9;
-const dy = width / (root.height + 1);
+nodes.forEach(
+    n => ((n as any).x = Math.random() * (width - 2 * padding) + padding)
+)
+nodes.forEach(
+    n => ((n as any).y = Math.random() * (height - 2 * padding) + padding)
+)
 
-// Create a tree layout.
-const layout = d3.cluster().nodeSize([dx, dy]);
+console.log(nodes.map(n => n.x))
 
-// Sort the tree and apply the layout.
-root.sort((a, b) => d3.ascending(a.data.name, b.data.name));
-layout(root);
+console.log(structuredClone(nodes))
 
-// Compute the extent of the tree. Note that x and y are swapped here
-// because in the tree layout, x is the breadth, but when displayed, the
-// tree extends right rather than down.
-let x0 = Infinity;
-let x1 = -x0;
-root.each(d => {
-    if (d.x > x1) x1 = d.x;
-    if (d.x < x0) x0 = d.x;
-});
+const svg = d3
+    .select(document.body)
+    .append('svg')
+    .attr('viewBox', [0, 0, width, height])
+    .style('width', width)
+    .style('height', height)
 
-// Compute the adjusted height of the tree.
-const height = x1 - x0 + dx * 2;
+let node = svg
+    .selectAll('circle')
+    .data(nodes)
+    .join('circle')
+    //.data(undefined, d => console.log(d))
+    //.data(d => d.x = Math.random() * width)
+    .attr('r', radius)
+    .attr('cy', '50')
+    .text(d => d.nid)
 
+const simulation = d3
+    .forceSimulation()
+    .nodes(nodes)
+    //.force('charge', d3.forceManyBody())
+    //.force('center', d3.forceCenter(width / 2, height / 2))
+    // .force('link', d3.forceLink(links).id(n => n.id))
+    .force('collide', d3.forceCollide().radius(radius).strength(0.21))
+    .force('gravity', d3.forceY(height - radius).strength(0.1))
+    .force('box', boxingForce)
+    //    .stop()
+    .on('tick', ontick)
 
-/////
+function ontick() {
+    console.log('ontick')
+    // link.attr('x1', d => d.source.x)
+    //     .attr('y1', d => d.source.y)
+    //     .attr('x2', d => d.target.x)
+    //     .attr('y2', d => d.target.y)
+    node.attr('cx', d => d.x).attr('cy', d => d.y)
+}
 
-mount({ m, data, root, layout, names, nameColors })
+ontick()
 
-const svg = d3.select(document.body)
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("viewBox", [-dy / 3, x0 - dx, width, height])
-    .attr("style", "height: auto; font: 10px sans-serif;");
+function tick() {
+    simulation.tick()
+    ontick()
+}
 
-const link = svg.append("g")
-    .attr("fill", "none")
-    //.attr("stroke", "#555")
-    .attr("class", "link")
-    .attr("stroke-opacity", 0.4)
-    .attr("stroke-width", 1.5)
-    .selectAll()
-    .data(root.links())
-    .join("path")
-    .attr("d", d3.linkHorizontal()
-        .x(d => d.y)
-        .y(d => d.x));
+const bbox = [100, 200]
 
-const node = svg.append("g")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-width", 3)
-    .selectAll()
-    .data(root.descendants())
-    .join("g")
-    .attr("transform", d => `translate(${d.y},${d.x})`);
+function boxingForce(alpha) {
+    //    console.log('boxing')
+    for (let node of nodes) {
+        let x = node.x,
+            y = node.y
 
-node.append("circle")
-    .attr("fill", d => nameColors(d.data.id))
-    //.attr("fill", d => d.children ? "green" : "olive")
-    .attr("r", 5);
+        node.x = node.x.clamp(minx, maxx)
+        node.y = node.y.clamp(undefined, maxy)
+    }
+}
 
-node.append("text")
-    .attr("dy", "0.31em")
-    .attr("x", d => d.children ? -6 : 6)
-    .attr("text-anchor", d => d.children ? "end" : "start")
-    .text(d => d.data.id)
-    .clone(true).lower()
-    .attr("stroke", "white");
+// window.setInterval(tick, 100)
+
+mount({ svg, node, mc1, nodes, links, ontick, simulation, tick })

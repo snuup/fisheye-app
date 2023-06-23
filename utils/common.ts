@@ -91,6 +91,14 @@ mergePrototype(class extends String {
     }
 }, String)
 
+mergePrototype(class{
+    clamp(min?: number, max?: number) {
+        if (min !== undefined && (this as unknown as number) <= min) return min
+        if (max !== undefined && this as unknown as number >= max) return max
+        return this
+    }
+}, Number)
+
 
 
 export function identity(x) { return x }

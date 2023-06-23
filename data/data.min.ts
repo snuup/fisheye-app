@@ -22,22 +22,7 @@ export const mc1 = {
     {  "id": "Malabar Sea Catch Sp" }
   ],
   "links": [
-    {
-      "type": "ownership",
-      "weight": 0.90013963,
-      
-      "source": "Spanish Shrimp  Carriers",
-      "target": 12744,
-      "key": 0
-    },
-    {
-      "type": "partnership",
-      "weight": 0.8458973,
-      
-      "source": "Spanish Shrimp  Carriers",
-      "target": 21323516,
-      "key": 0
-    },
+
    
   ]
 }

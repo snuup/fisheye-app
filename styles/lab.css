@@ -29,7 +29,8 @@ body {
 }
 
 svg {
-    /* background: lightblue; */
+    background: lightblue;
+    margin: 2em;
 }
 
 .link{

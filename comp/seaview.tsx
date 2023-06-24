@@ -40,6 +40,26 @@ function rund3(e: HTMLElement) {
         .style('width', xlength)
         .style('height', zlength)
 
+    let links = m.subgraph.links
+
+    const link = svg1
+        .selectAll('.link')
+        .data(links)
+        .join(
+            enter =>
+                enter
+                    .append('line')
+                    .attr('class', 'link')
+                    .attr('class', d => d.type)
+                    .attr('stroke-width', 2)
+                    .attr('fill', 'none'),
+            //.attr('opacity', d => d.weight)
+            //.on("click", e => c.selectlink(e.target.__data__)),
+            update => update,
+
+            exit => exit.remove()
+        )
+
     let nodes = m.subgraph.nodes
     nodes.forEach(n => {
         let isinv = m.investigatees.includes(n)
@@ -64,26 +84,6 @@ function rund3(e: HTMLElement) {
         .join('circle')
         .attr('r', radius)
         .classed("inv", d => (m.investigatees.includes(d)))
-
-    let links = m.subgraph.links
-
-    const link = svg1
-        .selectAll('.link')
-        .data(links)
-        .join(
-            enter =>
-                enter
-                    .append('line')
-                    .attr('class', 'link')
-                    .attr('class', d => d.type)
-                    .attr('stroke-width', 2)
-                    .attr('fill', 'none'),
-            //.attr('opacity', d => d.weight)
-            //.on("click", e => c.selectlink(e.target.__data__)),
-            update => update,
-
-            exit => exit.remove()
-        )
 
     const simulation = d3d
         .forceSimulation(nodes, 3)
@@ -113,6 +113,15 @@ function rund3(e: HTMLElement) {
         for (let n of m.investigatees) {
             n.z = 0
         }
+        let [a, b, c, d] = m.investigatees
+        a.x = 5
+        b.x = 90
+        c.x = 8
+        d.x = 92
+        a.y = 10
+        b.y = 10
+        c.y = 90
+        d.y = 90
     }
 
     function updateview() {

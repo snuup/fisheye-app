@@ -14,9 +14,9 @@ const xscaler = d3.scaleLinear([0, 100], [radius, xlength - radius])
 const yscaler = d3.scaleLinear([0, 100], [radius, ylength - radius])
 const zscaler = d3.scaleLinear(
     [0, 50, 100],
-    [radius, zlength * 0.75, zlength - radius]
+    [radius * .3, zlength * 1, zlength - radius]
 )
-const opacityscaler = d3.scaleLinear([0, 100], [1, 0.2])
+const opacityscaler = d3.scaleLinear([0, 100], [1, 0.35])
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 function rand100() {

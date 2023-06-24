@@ -23,12 +23,14 @@ let simulation: any = null
 const lineGenerator = d3.line()
 
 const NodeLinkView = () => {
-    function rund3(e) {
-
+    function rund3(e: HTMLElement) {
         let svg = e.querySelector('svg')
             ? d3.select(e).select('svg')
             : d3.select(e).append('svg')
-        let svgdom = e.querySelector('svg')
+        svg = d3.select(e).select('svg') // for type reasons
+        let svgdom = e.querySelector('svg')!
+
+        console.log(svg, svgdom)
 
         let w = svgdom.clientWidth
         let h = svgdom.clientHeight
@@ -96,21 +98,23 @@ const NodeLinkView = () => {
         //     )
 
         const node = svg
-            .selectAll('text')
-            .data(g.nodes, n => (n as any).id)
+            .selectAll('g')
+            .data(g.nodes, (n: any) => n.id)
             .join(
                 enter => {
+                    console.log("enter");
+
                     let n = enter.append('g').call(drag(simulation))
 
                     n.append('circle')
                         .attr('r', 15)
-                        .attr('fill', d =>
-                            m.investigatees.includes(d.id)
+                        .attr('fill', (d) =>
+                            m.investigatees.includes(d)
                                 ? 'red'
                                 : nodeColorScale(d.type)
                         )
                         .attr('fill-opacity', d =>
-                            m.investigatees.includes(d.id) ? 1 : 0.4
+                            m.investigatees.includes(d) ? 1 : 0.4
                         )
                         .attr('stroke-width', 4)
                         .attr('stroke', d =>

@@ -47,7 +47,7 @@ export function NodeDonut({ n }: { n: FishNode }) {
         const piedata = d3
             .pie()
             .sort(null) // do *not* sort by value
-            .value(d => d.total)(data)
+            .value((d: any) => d.total)(data as any)
 
         const arc = d => {
             const midRadius = scaleRadius(d.data.ins / d.value)
@@ -75,10 +75,10 @@ export function NodeDonut({ n }: { n: FishNode }) {
             .selectAll('g')
             .data(piedata)
             .join('g')
-            .attr('class', d => d.data.type)
+            .attr('class', (d: any) => d.data.type)
 
             .selectAll('path')
-            .data(d => {
+            .data((d: any) => {
                 //console.log('d', d)
                 return [
                     d.data.outs && { ...d, outs: true },

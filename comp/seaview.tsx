@@ -95,7 +95,7 @@ function rund3(e: HTMLElement) {
         .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.03))
         .force('z', d3d.forceZ(100).strength(0.05))
-        //.force('up-force', forceup)
+        .force('up-force', forceup)
         .force('box', boxingForce)
         .force('inv', invForce)
         .on('tick', updateview)

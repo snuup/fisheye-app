@@ -15,7 +15,7 @@ export class FishLink {
     target: string | any // nid, reassigned by d3
 
     get strength(): number {
-        return strengthScaler(this.minz)
+        return strengthScaler(this.minz * this.weight)
     }
 
     get maxz() {

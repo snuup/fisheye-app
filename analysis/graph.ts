@@ -20,6 +20,8 @@ export class Graph {
         this.enrichnodes()
     }
 
+    static Empty = new Graph()
+
     getnode(nid): FishNode {
         return this.nodemap.get(nid)!
     }

@@ -19,7 +19,9 @@ export const mraw = {
     //linkselection: [], // ?? as string[]
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,
-    subgraph: new Graph(),
+    subgraph: Graph.Empty,
+
+    seagraph: Graph.Empty,
 
     tops: [] as FishNode[],
     top: null as FishNode | null,

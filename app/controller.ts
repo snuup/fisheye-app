@@ -23,6 +23,15 @@ export class Controller {
         let mb = new PathMatrixBuilder(m.graph)
         m.tops = mb.initscores(m.investigatees.map(m.graph.getnode))
         m.top = m.tops[0]
+
+        m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
+    }
+
+    getsubgraph(nodes: FishNode[]) {
+        nodes.flatMap(n => n.outlinks)
+        let links1 = nodes.flatMap(n => n.outlinks).filter(l => l)
+        let nodes1 = links1.map(l => l.tid).map(m.graph.getnode)
+        return new Graph(nodes.concat(nodes1), links1)
     }
 
     setroute() {

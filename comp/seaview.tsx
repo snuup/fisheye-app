@@ -44,7 +44,7 @@ function rund3(e: HTMLElement) {
         .style('width', xlength)
         .style('height', zlength)
 
-    let links = m.subgraph.links
+    let links = m.seagraph.links
 
     const link = svg1
         .selectAll('.link')
@@ -64,7 +64,7 @@ function rund3(e: HTMLElement) {
             exit => exit.remove()
         )
 
-    let nodes = m.subgraph.nodes
+    let nodes = m.seagraph.nodes
     nodes.forEach(n => {
         let isinv = m.investigatees.includes(n.id)
         n.x = rand100()

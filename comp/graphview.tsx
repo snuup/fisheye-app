@@ -79,23 +79,23 @@ const NodeLinkView = () => {
 
         mount({ simulation })
 
-        // const link = svg
-        //     .selectAll('path.link')
-        //     .data(g.links)
-        //     .join(
-        //         enter =>
-        //             enter
-        //                 .append('path')
-        //                 .attr('class', 'link')
-        //                 .attr('class', d => d.type)
-        //                 .attr('stroke-width', 2)
-        //                 .attr('fill', 'none'),
-        //         //.attr('opacity', d => d.weight)
-        //         //.on("click", e => c.selectlink(e.target.__data__)),
-        //         update => update,
+        const link = svg
+            .selectAll('path.link')
+            .data(g.links)
+            .join(
+                enter =>
+                    enter
+                        .append('path')
+                        .attr('class', 'link')
+                        .attr('class', d => d.type)
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none'),
+                //.attr('opacity', d => d.weight)
+                //.on("click", e => c.selectlink(e.target.__data__)),
+                update => update,
 
-        //         exit => exit.remove()
-        //     )
+                exit => exit.remove()
+            )
 
         const node = svg
             .selectAll('g')

@@ -65,9 +65,29 @@ function rund3(e: HTMLElement) {
         .attr('r', radius)
         .classed("inv", d => (m.investigatees.includes(d)))
 
+    let links = m.subgraph.links
+
+    const link = svg1
+        .selectAll('.link')
+        .data(links)
+        .join(
+            enter =>
+                enter
+                    .append('line')
+                    .attr('class', 'link')
+                    .attr('class', d => d.type)
+                    .attr('stroke-width', 2)
+                    .attr('fill', 'none'),
+            //.attr('opacity', d => d.weight)
+            //.on("click", e => c.selectlink(e.target.__data__)),
+            update => update,
+
+            exit => exit.remove()
+        )
+
     const simulation = d3d
         .forceSimulation(nodes, 3)
-        // .force('link', d3.forceLink(links).id(n => n.id))
+        .force('link', d3.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.05))
         .force('z', d3d.forceZ(100).strength(0.02))
         //.force('up-force', forceup)
@@ -97,10 +117,10 @@ function rund3(e: HTMLElement) {
 
     function updateview() {
         console.log('ontick')
-        // link.attr('x1', d => d.source.x)
-        //     .attr('y1', d => d.source.y)
-        //     .attr('x2', d => d.target.x)
-        //     .attr('y2', d => d.target.y)
+        link.attr('x1', d => xscaler(d.source.x))
+            .attr('y1', d => yscaler(d.source.y))
+            .attr('x2', d => xscaler(d.target.x))
+            .attr('y2', d => yscaler(d.target.y))
         nodesxy
             .attr('cx', d => xscaler(d.x))
             .attr('cy', d => yscaler(d.y)) // .attr("opacity",)

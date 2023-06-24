@@ -16,7 +16,7 @@ function find(nodeById, nodeId) {
 export default function (links) {
   var id = index,
     strength = defaultStrength,
-    strengths,
+    //strengths,
     distance = constant(30),
     distances,
     nodes,
@@ -40,7 +40,7 @@ export default function (links) {
         if (nDim > 1) { y = target.y + target.vy - source.y - source.vy || jiggle(random); }
         if (nDim > 2) { z = target.z + target.vz - source.z - source.vz || jiggle(random); }
         l = Math.sqrt(x * x + y * y + z * z);
-        l = (l - distances[i]) / l * alpha * strengths[i];
+        l = (l - distances[i]) / l * alpha * links[i].strength;
         x *= l, y *= l, z *= l;
 
         target.vx -= x * (b = bias[i]);
@@ -77,22 +77,22 @@ export default function (links) {
       link = links[i], bias[i] = count[link.source.index] / (count[link.source.index] + count[link.target.index]);
     }
 
-    force.strengths = strengths = new Array(m), initializeStrength();
+    //force.strengths = strengths = new Array(m), initializeStrength();
 
-    console.log("assign", force.strengths)
+    //console.log("assign", force.strengths)
 
     distances = new Array(m), initializeDistance();
   }
 
-  function initializeStrength() {
-    if (!nodes) return;
+  // function initializeStrength() {
+  //   if (!nodes) return;
 
-    console.log("initializeStrength");
+  //   console.log("initializeStrength");
 
-    for (var i = 0, n = links.length; i < n; ++i) {
-      strengths[i] = +strength(links[i], i, links);
-    }
-  }
+  //   for (var i = 0, n = links.length; i < n; ++i) {
+  //     strengths[i] = +strength(links[i], i, links);
+  //   }
+  // }
 
   function initializeDistance() {
     if (!nodes) return;
@@ -121,9 +121,9 @@ export default function (links) {
     return arguments.length ? (iterations = +_, force) : iterations;
   };
 
-  force.strength = function (_) {
-    return arguments.length ? (strength = typeof _ === "function" ? _ : constant(+_), initializeStrength(), force) : strength;
-  };
+  // force.strength = function (_) {
+  //   return arguments.length ? (strength = typeof _ === "function" ? _ : constant(+_), initializeStrength(), force) : strength;
+  // };
 
   force.distance = function (_) {
     return arguments.length ? (distance = typeof _ === "function" ? _ : constant(+_), initializeDistance(), force) : distance;

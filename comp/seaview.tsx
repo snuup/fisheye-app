@@ -80,6 +80,7 @@ function rund3(e: HTMLElement) {
         .join('circle')
         .attr('r', radius)
         .classed("inv", d => (m.investigatees.includes(d)))
+        .classed("focused", d => (m.graphfocusnode === d))
 
     nodesxy.append('title').text(d => d.id)
 
@@ -89,14 +90,13 @@ function rund3(e: HTMLElement) {
         .join('circle')
         .attr('r', radius)
         .classed("inv", d => (m.investigatees.includes(d)))
+        .classed("focused", d => (m.graphfocusnode === d))
+
+    nodesxz.append('title').text(d => d.id)
 
     simulation = d3d
         .forceSimulation(nodes, 3)
-        .force('link', d3d.forceLink(links).id((n: FishNode) => n.id).strength((l, i) => {
-            console.log(l.source.z, l.target.z) // make link stronger the higher the nodes are
-            l.li = i
-            return 0.01
-        }))
+        .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.05))
         .force('z', d3d.forceZ(100).strength(0.05))
         .force('up-force', forceup)

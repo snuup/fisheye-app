@@ -12,5 +12,10 @@ svg.xz {
 }
 
 circle.inv {
-    fill: red
+    fill: rgb(253, 0, 0)
 }
+
+circle.focused {
+    fill: rgb(185, 19, 116)
+}
+

@@ -1,0 +1,12 @@
+svg {
+    margin: 1em;
+    display: block;
+}
+
+svg.xy {
+    background-color: rgb(137, 156, 146);
+}
+
+svg.xz {
+    background-color: rgb(176, 201, 202);
+}

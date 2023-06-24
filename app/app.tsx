@@ -11,6 +11,7 @@ import { Navigation } from "../comp/nav"
 import { NodeDonut } from "../comp/node-donut"
 import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
+import { SeaView } from "../comp/seaview"
 
 let c = new Controller()
 
@@ -34,7 +35,7 @@ let App = () => (
                 <MatrixView />
             </When>
             <When cond={m.url[0] == 'graph'}>
-                <GraphView />
+                <SeaView />
             </When>
             <When cond={m.url[0] == 'tree'}>
                 <HierarchyView />

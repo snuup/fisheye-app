@@ -83,6 +83,11 @@ mergePrototype(class extends Object {
     mapKeys(fmap) {
         return Object.fromEntries(this.entries.map(([k, v]) => [fmap(k), v]))
     }
+    fullclone() {
+        let oo = structuredClone(this)
+        Object.setPrototypeOf(oo, Object.getPrototypeOf(this))
+        return oo
+    }
 }, Object)
 
 mergePrototype(class extends String {
@@ -91,7 +96,7 @@ mergePrototype(class extends String {
     }
 }, String)
 
-mergePrototype(class{
+mergePrototype(class {
     clamp(min?: number, max?: number) {
         if (min !== undefined && (this as unknown as number) <= min) return min
         if (max !== undefined && this as unknown as number >= max) return max

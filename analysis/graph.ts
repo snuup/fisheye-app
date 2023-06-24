@@ -14,8 +14,8 @@ export class Graph {
     get nodemap() { return this.nodemap_ ?? (this.nodemap_ = new Map(this.nodes.map(n => [n.nid, n]))) }
 
     constructor(nodes?: FishNode[], links?: FishLink[]) {
-        this.nodes = nodes ?? []
-        this.links = links ?? []
+        this.nodes = nodes?.map(o => o.fullclone()) ?? []
+        this.links = links?.map(o => o.fullclone()) ?? []
         rebind(this)
         this.enrichnodes()
     }

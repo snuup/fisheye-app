@@ -70,6 +70,26 @@ export class Controller {
         m.subgraph = new Graph(nodes, links)
     }
 
+    setinvestigatees() {
+        m.graphfocus = null
+        m.graphfocusnode = null
+        m.investigatees
+
+        // window.ls = ls
+
+        // // all nodes within paths
+        // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
+        // let links = ls.flatMap(dl => dl.link).distinctBy()
+
+        // // just the paths:
+        // // let paths = m.graphfocusnode.investigatePaths.flatMap(p => [p.source, p.target])
+        // // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
+        // // let links = ls.flatMap(dl => dl.link).distinctBy()
+
+        // m.subgraph = new Graph(nodes, links)
+
+    }
+
     // inc1(ev: PointerEvent) {
     //     m.counter1++
     //     updateview(ev.target as Node)

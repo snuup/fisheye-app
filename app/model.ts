@@ -12,8 +12,8 @@ export const mraw = {
     graph: new Graph(),
     selection: [], // ids as string[]
     //linkselection: [], // ?? as string[]
-    graphfocus: "" as string | undefined,
-    graphfocusnode: undefined as FishNode | undefined,
+    graphfocus: "" as string | null,
+    graphfocusnode: null as FishNode | null,
     subgraph: new Graph(),
 
     tops: [] as FishNode[],

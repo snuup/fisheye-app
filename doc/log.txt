@@ -1,5 +1,7 @@
 24.4.
-- link forces
++ link forces
+- start with subgraph of 4 invs
+
 
 20.6.
 . create hierarchy from subgraph

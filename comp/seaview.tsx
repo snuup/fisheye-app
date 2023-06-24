@@ -1,7 +1,8 @@
 import * as d3d from 'd3-force-3d'
 import * as d3 from 'd3'
-import { mc1 } from '../data/data'
 import { jsx } from '../jmx-lib/core'
+import { m } from '../app/model'
+import { FishNode } from '../analysis/fishnode'
 
 const xlength = 600
 const ylength = 400
@@ -22,7 +23,7 @@ function rand100() {
     return randscale(Math.random())
 }
 
-interface Node {
+interface FishNode {
     id
     x
     y
@@ -48,15 +49,21 @@ function rund3(e: HTMLElement) {
         .style('width', xlength)
         .style('height', zlength)
 
-    let nodes: Node[] = mc1.nodes
-        .slice(0, 500)
-        .map(n => ({ id: n.id, x: rand100(), y: rand100(), z: 0 }))
+    let nodes = m.subgraph.nodes.map(n => ({
+        id: n.id,
+        x: rand100(),
+        y: rand100(),
+        z: 0,
+    }))
 
     let nodesxy = svg1
         .selectAll('circle')
         .data(nodes)
         .join('circle')
         .attr('r', radius)
+        //.attr('class', d => (m.investigatees.includes(d) ? 'inv' : null))
+
+    nodesxy.append('title').text(d => d.id)
 
     let nodesxz = svg2
         .selectAll('circle')
@@ -69,15 +76,15 @@ function rund3(e: HTMLElement) {
         // .force('link', d3.forceLink(links).id(n => n.id))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.05))
         .force('z', d3d.forceZ(100).strength(0.02))
-        .force('up-force', forceup)
+        //.force('up-force', forceup)
         .force('box', boxingForce)
         .on('tick', updateview)
 
-    function forceup(alpha) {
-        for (let n of nodes.filter(n => n.up)) {
-            n.vz += (0 - n.z) * n.up * 0.2 * alpha
-        }
-    }
+    // function forceup(alpha) {
+    //     for (let n of nodes.filter(n => n.up)) {
+    //         n.vz += (0 - n.z) * n.up * 0.2 * alpha
+    //     }
+    // }
 
     function boxingForce(alpha) {
         for (let node of nodes) {

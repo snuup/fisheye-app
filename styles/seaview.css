@@ -10,3 +10,7 @@ svg.xy {
 svg.xz {
     background-color: rgb(176, 201, 202);
 }
+
+circle.inv {
+    fill: red
+}

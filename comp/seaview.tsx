@@ -16,20 +16,11 @@ const zscaler = d3.scaleLinear(
     [0, 50, 100],
     [radius, zlength * 0.75, zlength - radius]
 )
-const opacityscaler = d3.scaleLinear([0, 100], [1, 0])
+const opacityscaler = d3.scaleLinear([0, 100], [1, 0.2])
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 function rand100() {
     return randscale(Math.random())
-}
-
-interface FishNode {
-    id
-    x
-    y
-    z
-    up?
-    vz?
 }
 
 function rund3(e: HTMLElement) {
@@ -49,19 +40,21 @@ function rund3(e: HTMLElement) {
         .style('width', xlength)
         .style('height', zlength)
 
-    let nodes = m.subgraph.nodes.map(n => ({
-        id: n.id,
-        x: rand100(),
-        y: rand100(),
-        z: 0,
-    }))
+    let nodes = m.subgraph.nodes
+    nodes.forEach(n => {
+        let isinv = m.investigatees.includes(n)
+        n.x = rand100()
+        n.y = rand100()
+        n.z = isinv ? 1 : 0
+        n.isinv = isinv
+    })
 
     let nodesxy = svg1
         .selectAll('circle')
         .data(nodes)
         .join('circle')
         .attr('r', radius)
-        //.attr('class', d => (m.investigatees.includes(d) ? 'inv' : null))
+        .classed("inv", d => (m.investigatees.includes(d)))
 
     nodesxy.append('title').text(d => d.id)
 
@@ -70,6 +63,7 @@ function rund3(e: HTMLElement) {
         .data(nodes)
         .join('circle')
         .attr('r', radius)
+        .classed("inv", d => (m.investigatees.includes(d)))
 
     const simulation = d3d
         .forceSimulation(nodes, 3)
@@ -78,6 +72,7 @@ function rund3(e: HTMLElement) {
         .force('z', d3d.forceZ(100).strength(0.02))
         //.force('up-force', forceup)
         .force('box', boxingForce)
+        .force('inv', invForce)
         .on('tick', updateview)
 
     // function forceup(alpha) {
@@ -91,6 +86,12 @@ function rund3(e: HTMLElement) {
             node.x = node.x.clamp(0, 100)
             node.y = node.y.clamp(0, 100)
             node.z = node.z.clamp(0, 100)
+        }
+    }
+
+    function invForce(alpha) {
+        for (let n of m.investigatees) {
+            n.z = 0
         }
     }
 

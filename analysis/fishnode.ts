@@ -13,6 +13,8 @@ export class FishNode {
 
     x: number
     y: number
+    z: number
+    isinv?: boolean
 
     constructor(original) {
         this.original = original

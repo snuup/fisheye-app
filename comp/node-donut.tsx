@@ -1,4 +1,4 @@
-import * as d3 from '../lib/d3'
+import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
 import { FishNode } from '../analysis/fishnode'
 import { identity, mount } from '../utils/common'

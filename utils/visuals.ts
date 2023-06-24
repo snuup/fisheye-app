@@ -1,5 +1,5 @@
 import { assertPipelinePrimaryTopicReference } from '@babel/types'
-import * as d3 from '../lib/d3'
+import * as d3 from 'd3'
 
 
 const getcolor = d3.scaleOrdinal(d3.schemeCategory10)

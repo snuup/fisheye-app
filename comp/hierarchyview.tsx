@@ -1,7 +1,7 @@
 import { Path } from '../analysis/path'
 import { m } from '../app/model'
 import { When, jsx } from '../jmx-lib/core'
-import * as d3 from '../lib/d3'
+import * as d3 from 'd3'
 import { mount } from '../utils/common'
 import { nodeColorScale } from '../utils/visuals'
 import { NodeView } from './node-view'

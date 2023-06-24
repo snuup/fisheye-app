@@ -1,7 +1,7 @@
 import { jsx, jsxf } from "../jmx-lib/core"
 import { cc, mount, nicelinktypename, nicenodetypename } from '../utils/common'
 import { m } from '../app/model'
-import * as d3 from '../lib/d3'
+import * as d3 from 'd3'
 import { FishNode } from '../analysis/fishnode'
 import { NodeDonut } from './node-donut'
 import { NameValue } from "./namevalue"

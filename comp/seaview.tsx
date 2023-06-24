@@ -1,8 +1,9 @@
-import * as d3d from 'd3-force-3d'
+import * as d3d from '../force/index'
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { FishNode } from '../analysis/fishnode'
+import { mount } from '../utils/common'
 
 const xlength = 600
 const ylength = 400
@@ -12,16 +13,19 @@ const radius = 8
 
 const xscaler = d3.scaleLinear([0, 100], [radius, xlength - radius])
 const yscaler = d3.scaleLinear([0, 100], [radius, ylength - radius])
-const zscaler = d3.scaleLinear(
-    [0, 50, 100],
-    [radius * .3, zlength * 1, zlength - radius]
-)
-const opacityscaler = d3.scaleLinear([0, 100], [1, 0.35])
+const zscaler = d3.scaleLinear([0, 100], [0, zlength])
+// const zscaler = d3.scaleLinear(
+//     [0, 50, 100],
+//     [radius * .3, zlength * 1, zlength - radius]
+// )
+const opacityscaler = d3.scaleLinear([0, 100], [1, 0])
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 function rand100() {
     return randscale(Math.random())
 }
+
+let simulation
 
 function rund3(e: HTMLElement) {
     const svg1 = d3
@@ -67,6 +71,7 @@ function rund3(e: HTMLElement) {
         n.y = rand100()
         n.z = isinv ? 1 : 0
         n.isinv = isinv
+        n.up = 0
     })
 
     let nodesxy = svg1
@@ -85,27 +90,31 @@ function rund3(e: HTMLElement) {
         .attr('r', radius)
         .classed("inv", d => (m.investigatees.includes(d)))
 
-    const simulation = d3d
+    simulation = d3d
         .forceSimulation(nodes, 3)
-        .force('link', d3.forceLink(links).id((n: FishNode) => n.id))
+        .force('link', d3d.forceLink(links).id((n: FishNode) => n.id).strength((l, i) => {
+            console.log(l.source.z, l.target.z) // make link stronger the higher the nodes are
+            l.li = i
+            return 0.01
+        }))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.05))
-        .force('z', d3d.forceZ(100).strength(0.02))
-        //.force('up-force', forceup)
+        .force('z', d3d.forceZ(100).strength(0.05))
+        .force('up-force', forceup)
         .force('box', boxingForce)
         .force('inv', invForce)
         .on('tick', updateview)
 
-    // function forceup(alpha) {
-    //     for (let n of nodes.filter(n => n.up)) {
-    //         n.vz += (0 - n.z) * n.up * 0.2 * alpha
-    //     }
-    // }
+    function forceup(alpha) {
+        for (let n of nodes.filter(n => n.up)) {
+            n.vz += (0 - n.z) * n.up! * 0.2 * alpha
+        }
+    }
 
     function boxingForce(alpha) {
-        for (let node of nodes) {
-            node.x = node.x.clamp(0, 100)
-            node.y = node.y.clamp(0, 100)
-            node.z = node.z.clamp(0, 100)
+        for (let n of nodes) {
+            n.x = n.x.clamp(0, 100)
+            n.y = n.y.clamp(0, 100)
+            n.z = n.z.clamp(0, 100)
         }
     }
 
@@ -132,7 +141,7 @@ function rund3(e: HTMLElement) {
             .attr('y2', d => yscaler(d.target.y))
         nodesxy
             .attr('cx', d => xscaler(d.x))
-            .attr('cy', d => yscaler(d.y)) // .attr("opacity",)
+            .attr('cy', d => yscaler(d.y))
             //.attr('r', d => rscaler(d.z))
             .style('opacity', d => opacityscaler(d.z))
 
@@ -141,15 +150,17 @@ function rund3(e: HTMLElement) {
             .attr('cy', d => zscaler(d.z))
             .style('opacity', d => 1 - opacityscaler(d.y))
     }
+
+    mount({ simulation })
 }
 
 export const SeaView = () => {
     return <div class='seaview' patch={rund3} />
 }
 
-// function reheat() {
-//     simulation.alpha(.5)
-//     simulation.restart()
-// }
+function reheat() {
+    simulation.alpha(.5)
+    simulation.restart()
+}
 
-// mount({ d3, nodes, simulation, updateview, reheat })
+mount({ opacityscaler, zscaler, reheat })

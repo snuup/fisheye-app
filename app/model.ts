@@ -7,7 +7,12 @@ export const mraw = {
 
     url: ['/'] as Url,
 
-    investigatees: [] as FishNode[],
+    investigatees: [
+        "Mar de la Vida OJSC",
+        "n979893388",
+        "Oceanfront Oasis Inc Carriers",
+        "n8327"
+    ],
     entity: "",
     graph: new Graph(),
     selection: [], // ids as string[]

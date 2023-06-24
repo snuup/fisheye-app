@@ -109,16 +109,16 @@ const NodeLinkView = () => {
                     n.append('circle')
                         .attr('r', 15)
                         .attr('fill', (d) =>
-                            m.investigatees.includes(d)
+                            m.investigatees.includes(d.id)
                                 ? 'red'
                                 : nodeColorScale(d.type)
                         )
                         .attr('fill-opacity', d =>
-                            m.investigatees.includes(d) ? 1 : 0.4
+                            m.investigatees.includes(d.id) ? 1 : 0.4
                         )
                         .attr('stroke-width', 4)
                         .attr('stroke', d =>
-                            m.investigatees.includes(d) ? '#a33' : 'transparent'
+                            m.investigatees.includes(d.id) ? '#a33' : 'transparent'
                         )
 
                     n.append('text')

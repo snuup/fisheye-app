@@ -46,7 +46,7 @@ export const GraphStats = () => {
 }
 
 const NodeName = ({ nid }: { nid: string }) => {
-    let red = m.investigatees.find(n => n.id === nid)
+    let red = m.investigatees.find(n => n === nid)
     return <span class={cc('nodename', { red })}>{nid}</span>
 }
 

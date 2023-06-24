@@ -20,20 +20,8 @@ export class Controller {
     prepareData() {
         m.graph = new Graph(mc1.nodes.map(FishNode.create), mc1.links.map(FishLink.create))
 
-        m.investigatees =
-            [
-                "Mar de la Vida OJSC",
-                "n979893388",
-                "Oceanfront Oasis Inc Carriers",
-                "n8327"
-            ]
-                .map(m.graph.getnode)
-
-        // dev
-        window.n = m.investigatees[1]
-
         let mb = new PathMatrixBuilder(m.graph)
-        m.tops = mb.initscores(m.investigatees)
+        m.tops = mb.initscores(m.investigatees.map(m.graph.getnode))
         m.top = m.tops[0]
     }
 

@@ -28,7 +28,7 @@ const PathMatrix = () => {
             .attr('class', 'nid')
 
         rows.selectAll('p')
-            .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv.id]]))
+            .data(d => m.investigatees.map(inv => [inv, d.pathsByInv[inv]]))
             .join('td')
             .text(([inv, paths]) => {
                 return `${paths?.first.length ?? 0}` // ${inv.id}

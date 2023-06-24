@@ -66,7 +66,7 @@ function rund3(e: HTMLElement) {
 
     let nodes = m.subgraph.nodes
     nodes.forEach(n => {
-        let isinv = m.investigatees.includes(n)
+        let isinv = m.investigatees.includes(n.id)
         n.x = rand100()
         n.y = rand100()
         n.z = isinv ? 1 : 0
@@ -79,8 +79,8 @@ function rund3(e: HTMLElement) {
         .data(nodes)
         .join('circle')
         .attr('r', radius)
-        .classed("inv", d => (m.investigatees.includes(d)))
-        .classed("focused", d => (m.graphfocusnode === d))
+        .classed('inv', d => m.investigatees.includes(d.id))
+        .classed('focused', d => m.graphfocusnode === d)
 
     nodesxy.append('title').text(d => d.id)
 
@@ -89,14 +89,17 @@ function rund3(e: HTMLElement) {
         .data(nodes)
         .join('circle')
         .attr('r', radius)
-        .classed("inv", d => (m.investigatees.includes(d)))
-        .classed("focused", d => (m.graphfocusnode === d))
+        .classed('inv', d => m.investigatees.includes(d.id))
+        .classed('focused', d => m.graphfocusnode === d)
 
     nodesxz.append('title').text(d => d.id)
 
     simulation = d3d
         .forceSimulation(nodes, 3)
-        .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
+        .force(
+            'link',
+            d3d.forceLink(links).id((n: FishNode) => n.id)
+        )
         .force('collide', d3d.forceCollide().radius(radius).strength(0.05))
         .force('z', d3d.forceZ(100).strength(0.05))
         .force('up-force', forceup)
@@ -118,11 +121,8 @@ function rund3(e: HTMLElement) {
         }
     }
 
-    function invForce(alpha) {
-        for (let n of m.investigatees) {
-            n.z = 0
-        }
-        let [a, b, c, d] = m.investigatees
+    function invForce() {
+        let [a, b, c, d] = m.investigatees.map(m.subgraph.getnode)
         a.x = 5
         b.x = 90
         c.x = 8
@@ -131,6 +131,10 @@ function rund3(e: HTMLElement) {
         b.y = 10
         c.y = 90
         d.y = 90
+        a.z = 0
+        b.z = 0
+        c.z = 0
+        d.z = 0
     }
 
     function updateview() {
@@ -159,7 +163,7 @@ export const SeaView = () => {
 }
 
 function reheat() {
-    simulation.alpha(.5)
+    simulation.alpha(0.5)
     simulation.restart()
 }
 

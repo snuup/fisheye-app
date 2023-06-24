@@ -31,7 +31,7 @@ export class Controller {
         nodes.flatMap(n => n.outlinks)
         let links1 = nodes.flatMap(n => n.outlinks).filter(l => l)
         let nodes1 = links1.map(l => l.tid).map(m.graph.getnode)
-        return new Graph(nodes.concat(nodes1), links1)
+        return new Graph(nodes.concat(nodes1).distinctBy(), links1)
     }
 
     setroute() {

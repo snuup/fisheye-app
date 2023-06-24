@@ -53,9 +53,12 @@ mergePrototype(class extends Array {
         let m = new Map(this.map(x => [selector(x), x]))
         return [...m.values()]
     }
-    sumBy(selector) {
+    sumBy(selector?) {
         selector = selector ?? identity
         return this.reduce((acc, b) => acc + selector(b), 0)
+    }
+    get average() {
+        return this.sumBy() / this.length
     }
     sortnumeric(selector) {
         selector = selector ?? identity

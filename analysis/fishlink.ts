@@ -15,11 +15,19 @@ export class FishLink {
     target: string | any // nid, reassigned by d3
 
     get strength(): number {
-        return strengthScaler(this.maxz)
+        return strengthScaler(this.minz)
     }
 
     get maxz() {
         return Math.max(this.source.z, this.target.z)
+    }
+
+    get minz() {
+        return Math.min(this.source.z, this.target.z)
+    }
+
+    get avgz() {
+        return [this.source.z, this.target.z].average
     }
 
     constructor(original) {

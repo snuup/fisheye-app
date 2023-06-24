@@ -22,6 +22,7 @@ interface Array<T> {
     distinctBy(selector?): T[]
     get combinations(): T[]
     sumBy(selector: (x: T) => number): number
+    get average(): number
     sortnumeric(selector): Array<T>
     get first(): T
     get last(): T

@@ -14,11 +14,7 @@ const radius = 8
 const xscaler = d3.scaleLinear([0, 100], [radius, xlength - radius])
 const yscaler = d3.scaleLinear([0, 100], [radius, ylength - radius])
 const zscaler = d3.scaleLinear([0, 100], [0, zlength])
-// const zscaler = d3.scaleLinear(
-//     [0, 50, 100],
-//     [radius * .3, zlength * 1, zlength - radius]
-// )
-const opacityscaler = d3.scaleLinear([0, 100], [1, 0.2])
+const opacityscaler = d3.scaleLinear([0, 80, 100], [1, 0.1, 0])
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 function rand100() {
@@ -98,7 +94,7 @@ function rund3(e: HTMLElement) {
         .forceSimulation(nodes, 3)
         .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.03))
-        .force('z', d3d.forceZ(100).strength(0.20))
+        .force('z', d3d.forceZ(100).strength(0.05))
         //.force('up-force', forceup)
         .force('box', boxingForce)
         .force('inv', invForce)
@@ -121,12 +117,12 @@ function rund3(e: HTMLElement) {
     function invForce() {
         let [a, b, c, d] = m.investigatees.map(m.seagraph.getnode)
         a.x = 5
-        b.x = 90
-        c.x = 8
-        d.x = 92
+        b.x = 80
+        c.x = 95
+        d.x = 50
         a.y = 10
         b.y = 10
-        c.y = 90
+        c.y = 35
         d.y = 90
         a.z = 0
         b.z = 0

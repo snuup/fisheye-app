@@ -18,7 +18,7 @@ const zscaler = d3.scaleLinear([0, 100], [0, zlength])
 //     [0, 50, 100],
 //     [radius * .3, zlength * 1, zlength - radius]
 // )
-const opacityscaler = d3.scaleLinear([0, 100], [1, 0])
+const opacityscaler = d3.scaleLinear([0, 100], [1, 0.2])
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 function rand100() {
@@ -96,13 +96,10 @@ function rund3(e: HTMLElement) {
 
     simulation = d3d
         .forceSimulation(nodes, 3)
-        .force(
-            'link',
-            d3d.forceLink(links).id((n: FishNode) => n.id)
-        )
-        .force('collide', d3d.forceCollide().radius(radius).strength(0.05))
-        .force('z', d3d.forceZ(100).strength(0.05))
-        .force('up-force', forceup)
+        .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
+        .force('collide', d3d.forceCollide().radius(radius).strength(0.03))
+        .force('z', d3d.forceZ(100).strength(0.20))
+        //.force('up-force', forceup)
         .force('box', boxingForce)
         .force('inv', invForce)
         .on('tick', updateview)
@@ -122,7 +119,7 @@ function rund3(e: HTMLElement) {
     }
 
     function invForce() {
-        let [a, b, c, d] = m.investigatees.map(m.subgraph.getnode)
+        let [a, b, c, d] = m.investigatees.map(m.seagraph.getnode)
         a.x = 5
         b.x = 90
         c.x = 8
@@ -143,10 +140,11 @@ function rund3(e: HTMLElement) {
             .attr('y1', d => yscaler(d.source.y))
             .attr('x2', d => xscaler(d.target.x))
             .attr('y2', d => yscaler(d.target.y))
-        nodesxy
+            .style('opacity', d => opacityscaler(d.maxz))
+
+            nodesxy
             .attr('cx', d => xscaler(d.x))
             .attr('cy', d => yscaler(d.y))
-            //.attr('r', d => rscaler(d.z))
             .style('opacity', d => opacityscaler(d.z))
 
         nodesxz

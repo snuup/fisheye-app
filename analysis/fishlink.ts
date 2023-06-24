@@ -1,7 +1,7 @@
 import * as d3 from "d3"
 import { cleanid } from "./common"
 
-let strengthScaler = d3.scaleLinear([0, 100], [0, 0.5])
+let strengthScaler = d3.scaleLinear([0, 100], [0, 0.05])
 
 export class FishLink {
 
@@ -15,8 +15,11 @@ export class FishLink {
     target: string | any // nid, reassigned by d3
 
     get strength(): number {
-        let z = Math.max(this.source.z, this.target.z)
-        return strengthScaler(z)
+        return strengthScaler(this.maxz)
+    }
+
+    get maxz() {
+        return Math.max(this.source.z, this.target.z)
     }
 
     constructor(original) {

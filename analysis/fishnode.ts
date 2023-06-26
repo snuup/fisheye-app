@@ -7,15 +7,15 @@ export class FishNode {
     original: MC1Node
 
     nid: string
-    outlinks: FishLink[]
-    inlinks: FishLink[]
+    outlinks: FishLink[] = []
+    inlinks: FishLink[] = []
     paths: Path[]
 
     x: number
     y: number
     z: number
     isinv?: boolean
-    up?: number
+    up = 0
     vz: number
 
     constructor(original) {
@@ -26,6 +26,14 @@ export class FishNode {
 
     static create(original) { return new FishNode(original) }
 
+    static clone(o: FishNode) {
+        let n = new FishNode(o.original)
+        Object.assign(n, o)
+        n.outlinks = o.outlinks.map(FishLink.clone)
+        n.inlinks = o.inlinks.map(FishLink.clone)
+        return n
+    }
+
     get id() { return this.nid }
     get id10() { return this.nid.truncate(10) }
     get type() { return this.original.type }
@@ -34,6 +42,7 @@ export class FishNode {
     get indegree() { return this.inlinks?.length ?? 0 }
     get degree() { return this.outdegree + this.indegree }
     get alllinks() { return this.inlinks.concat(this.outlinks) }
+    get upfixed2() { return this.up.toFixed(2) }
 
     toString() { return `FN(${this.nid})` }
 
@@ -67,11 +76,11 @@ export class FishNode {
         }
     }
 
-    get investigatePaths() : Path[][] {
+    get investigatePaths(): Path[][] {
         return Object.values(this.pathsByInv)
     }
 
-    get investigatePaths1() : Path[] {
+    get investigatePaths1(): Path[] {
         return this.investigatePaths.map(ps => ps.first)
     }
 
@@ -80,7 +89,7 @@ export class FishNode {
     }
 
     // higher is better
-    get numberOfPathsBetterEqual2(){
+    get numberOfPathsBetterEqual2() {
         return this.investigatePaths1.filter(p => p.length <= 2).length
     }
 }

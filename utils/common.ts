@@ -86,11 +86,11 @@ mergePrototype(class extends Object {
     mapKeys(fmap) {
         return Object.fromEntries(this.entries.map(([k, v]) => [fmap(k), v]))
     }
-    fullclone() {
-        let oo = structuredClone(this)
-        Object.setPrototypeOf(oo, Object.getPrototypeOf(this))
-        return oo
-    }
+    // fullclone() {
+    //     let oo = structuredClone(this)
+    //     Object.setPrototypeOf(oo, Object.getPrototypeOf(this))
+    //     return oo
+    // }
 }, Object)
 
 mergePrototype(class extends String {

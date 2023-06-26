@@ -14,8 +14,8 @@ export class Graph {
     get nodemap() { return this.nodemap_ ?? (this.nodemap_ = new Map(this.nodes.map(n => [n.nid, n]))) }
 
     constructor(nodes?: FishNode[], links?: FishLink[]) {
-        this.nodes = nodes?.map(o => o.fullclone()) ?? []
-        this.links = links?.map(o => o.fullclone()) ?? []
+        this.nodes = nodes?.map(FishNode.clone) ?? []
+        this.links = links?.map(FishLink.clone) ?? []
         rebind(this)
         this.enrichnodes()
     }
@@ -24,6 +24,12 @@ export class Graph {
 
     getnode(nid): FishNode {
         return this.nodemap.get(nid)!
+    }
+
+    addnode(n: FishNode) {
+        if (this.nodemap.has(n.id)) debugger
+        this.nodes.push(n)
+        this.nodemap.set(n.id, n)
     }
 
     searchnode(nidstart: string): FishNode | undefined {
@@ -80,5 +86,9 @@ export class Graph {
             .groupBy(l => l.tid)
             .entries
             .forEach(([nid, links]) => this.getnode(nid).inlinks = links)
+    }
+
+    get groupUps() {
+        return this.nodes.groupBy(n => n.upfixed2)
     }
 }

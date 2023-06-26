@@ -92,6 +92,7 @@ function rund3(e: HTMLElement) {
 
     simulation = d3d
         .forceSimulation(nodes, 3)
+        .stop()
         .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3d.forceCollide().radius(radius).strength(0.03))
         .force('z', d3d.forceZ(100).strength(0.05))

@@ -87,6 +87,56 @@ export class Controller {
 
     }
 
+    floodsea(levels = 3) {
+        let g = m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
+        g.nodes.forEach(n => n.up = 0)
+        let fronteer = m.investigatees.map(g.getnode)
+        fronteer.forEach(n => n.up = 0.1)
+        let visited = [] as FishNode[]
+
+        function getnode(nid) {
+            let n = g.getnode(nid)
+            if (!n) {
+                n = FishNode.clone(m.graph.getnode(nid))
+                g.addnode(n)
+            }
+            return n
+        }
+
+        function floodfronteer(level) {
+            console.log("floodfronteer", level)
+
+            let nextfronteer: FishNode[] = []
+
+            fronteer.forEach(n => {
+                if (visited.includes(n)) return
+                visited.push(n)
+
+                n.outlinks.forEach(l => {
+
+                    // let x
+                    // if (typeof l.target === "string") x = getnode(l.target)
+                    // if (x == undefined) debugger
+
+                    if (typeof l.target === undefined) debugger
+                    if (typeof l.target === "string") l.target = getnode(l.target)
+
+                    l.target.up += n.up! * l.weight
+                    if (isNaN(l.target.up)) debugger
+                    //console.log("", l.target.up, n.up, l.weight)
+                })
+                nextfronteer.push(...n.outlinks?.map(l => l.target) ?? [])
+                nextfronteer = nextfronteer.distinctBy()
+
+                fronteer = nextfronteer
+//                console.log("fronteer", fronteer)
+            })
+        }
+        for (let i = 1; i <= levels; i++) {
+            floodfronteer(i)
+        }
+    }
+
     // inc1(ev: PointerEvent) {
     //     m.counter1++
     //     updateview(ev.target as Node)

@@ -36,6 +36,12 @@ export class FishLink {
         this.tid = this.target = cleanid(original.target)
     }
 
+    static clone(o: FishLink) {
+        let l = new FishLink(o.original)
+        Object.assign(l, o)
+        return l
+    }
+
     static create(original) { return new FishLink(original) }
 
     get key() { return this.sid + "|" + this.tid }

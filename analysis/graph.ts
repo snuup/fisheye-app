@@ -86,6 +86,12 @@ export class Graph {
             .groupBy(l => l.tid)
             .entries
             .forEach(([nid, links]) => this.getnode(nid).inlinks = links)
+
+        this.links
+            .forEach(l => {
+                l.source = this.getnode(l.sid)
+                l.target = this.getnode(l.tid)
+            })
     }
 
     get groupUps() {

@@ -20,6 +20,8 @@ export class Controller {
     prepareData() {
         m.graph = new Graph(mc1.nodes.map(FishNode.create), mc1.links.map(FishLink.create))
 
+        m.graph.links.filter(l => l.type == "ownership").groupBy(l => l.source.type + " " + l.target.type)
+
         let mb = new PathMatrixBuilder(m.graph)
         m.tops = mb.initscores(m.investigatees.map(m.graph.getnode))
         m.top = m.tops[0]

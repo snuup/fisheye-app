@@ -1,3 +1,22 @@
+27.6.
+
+4 invs
+focus partnership
+
+mar de la vida
+
+scopen: link type
+        in - out
+
+plan:
+. more summary stats:
+  - all types of links:
+- matrix view expand (weights, link types in cell)
+- treeview - filtering, lin colors, ev separate path lengths
+
+
+
+
 24.4.
 + link forces
 - start with subgraph of 4 invs

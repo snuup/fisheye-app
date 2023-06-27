@@ -129,7 +129,11 @@ export class Controller {
                 nextfronteer = nextfronteer.distinctBy()
 
                 fronteer = nextfronteer
-//                console.log("fronteer", fronteer)
+
+                let illegals = fronteer.filter(n => n.id.includes("llegal"))
+                console.log(illegals.map(n => n.id).join(" + "))
+
+                // console.log("fronteer", fronteer)
             })
         }
         for (let i = 1; i <= levels; i++) {

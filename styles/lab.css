@@ -53,8 +53,17 @@ span {
 table {
     border-collapse: collapse;
 }
+
 td, th {
     border: solid 1px #333;
     padding: 2px;
     cursor: pointer;
+}
+
+table.out {
+    margin: 1em 0;
+}
+
+table.out td {
+    padding: 4px;
 }

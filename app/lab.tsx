@@ -54,6 +54,8 @@ let out =
         .select(document.body)
         .append('table')
         .attr("class", "out")
+        .on('click', () => setout([]))
+
 
 let setout = (links: any[]) => {
     console.log(links)
@@ -63,14 +65,9 @@ let setout = (links: any[]) => {
         .join('tr')
 
     rows.selectAll('td')
-    .data(d => [d.sid, d.tid])
-    .join('td')
-    .text(d => d)
-
-    // rows.append("td").text(d => d.sid)
-    // rows.append("td").text(d => d.tid)
-    // rows.append("td").text(d => d.source.type)
-    // rows.append("td").text(d => d.target.type)
+        .data(d => [d.sid, d.tid, linktypetext(d.source.type), linktypetext(d.target.type)])
+        .join('td')
+        .text(d => d)
 }
 
 rows
@@ -79,6 +76,5 @@ rows
     .join('td')
     .text(([st, tt]) => matrix[st][tt]?.length)
     .on('click', (_, [st, tt]) => setout(matrix[st][tt]))
-//.on('click', (_, [st, tt]) => console.log(matrix[st][tt]))
 
 mount({ matrix, sourcetypes, targettypes })

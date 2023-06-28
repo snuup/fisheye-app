@@ -60,12 +60,12 @@ let setout = (links: any[]) => {
     out.selectAll('div')
         .data(links)
         .join('div')
-        .text(l => l.sid + " -> " + l.tid)
+        .text(l => l.sid + " -> " + l.tid + " | " + l.source.type + "/" + l.target.type)
 }
 
 rows
     .selectAll('td')
-    .data(st => targettypes.map(tt => [st, tt]))
+    .data(st => alltypes.map(tt => [st, tt]))
     .join('td')
     .text(([st, tt]) => matrix[st][tt]?.length)
     .on('click', (_, [st, tt]) => setout(matrix[st][tt]))

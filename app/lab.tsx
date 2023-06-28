@@ -27,13 +27,12 @@ let alltypes = sourcetypes.concat(targettypes).distinctBy().sort()
 
 const linktypetext = d => (d?.toString() ?? "undefined").slice(0, 5)
 
-let table =
-    d3
-        .select(document.body)
-        .append('table')
+let table = d3.select(document.body).append('table')
+let thead = table.append("thead")
+let tbody = table.append("tbody")
 
 // header row
-table
+thead
     .append('tr')
     .selectAll('th')
     .data([".", ...alltypes])
@@ -41,7 +40,7 @@ table
     .text(linktypetext)
 
 let rows =
-    table
+    tbody
         .selectAll('tr')
         .data(alltypes)
         .join('tr')
@@ -55,14 +54,13 @@ let out =
         .select(document.body)
         .append('div.output')
 
-let setout = (links: any[]) =>
-{
+let setout = (links: any[]) => {
     console.log(links)
 
     out.selectAll('div')
-    .data(links)
-    .join('div')
-    .text(l => l.sid + " -> " + l.tid)
+        .data(links)
+        .join('div')
+        .text(l => l.sid + " -> " + l.tid)
 }
 
 rows
@@ -71,6 +69,6 @@ rows
     .join('td')
     .text(([st, tt]) => matrix[st][tt]?.length)
     .on('click', (_, [st, tt]) => setout(matrix[st][tt]))
-    //.on('click', (_, [st, tt]) => console.log(matrix[st][tt]))
+//.on('click', (_, [st, tt]) => console.log(matrix[st][tt]))
 
 mount({ matrix, sourcetypes, targettypes })

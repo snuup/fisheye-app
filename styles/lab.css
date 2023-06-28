@@ -54,7 +54,8 @@ table {
     border-collapse: collapse;
 }
 
-td, th {
+td,
+th {
     border: solid 1px #333;
     padding: 2px;
     cursor: pointer;
@@ -66,4 +67,17 @@ table.out {
 
 table.out td {
     padding: 4px;
+}
+
+.linkstats b {
+    margin-bottom: 4px;
+    display: block;
+}
+
+th {
+    font-weight: normal;
+}
+
+.linkstats {
+    margin: 1em;
 }

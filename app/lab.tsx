@@ -12,8 +12,8 @@ let linksbytype = m.graph.links.groupBy(l => l.type)
 
 const App = (<body>
     {linksbytype.entries.map(([type, links]) => {
-        return <div>
-            <div>{type}</div>
+        return <div class="linkstats">
+            <b>{type}</b>
             <LinkStats links={links} />
         </div>
     })}

@@ -71,5 +71,5 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
 
     }
 
-    return <table patch={rund3} ></table>
+    return <table patch={rund3} ><span>hase</span></table>
 }

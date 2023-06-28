@@ -2,6 +2,8 @@ body {
     /* display: grid;
     place-items: center;
     grid-template-rows: 100vh; */
+    font-family: verdana;
+    margin: 1em;
 }
 
 .ownership,
@@ -33,6 +35,26 @@ svg {
     margin: 2em;
 }
 
-.link{
+.link {
     stroke: #777;
+}
+
+div {
+    margin: 4px;
+    background: lightblue;
+}
+
+span {
+    display: inline-block;
+    margin: 2px;
+    background-color: lightcoral;
+}
+
+table {
+    border-collapse: collapse;
+}
+td {
+    border: solid 1px #333;
+    padding: 2px;
+    cursor: pointer;
 }

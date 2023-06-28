@@ -86,6 +86,9 @@ mergePrototype(class extends Object {
     mapKeys(fmap) {
         return Object.fromEntries(this.entries.map(([k, v]) => [fmap(k), v]))
     }
+    mapValues(fmap) {
+        return Object.fromEntries(this.entries.map(([k, v]) => [k, fmap(v)]))
+    }
     // fullclone() {
     //     let oo = structuredClone(this)
     //     Object.setPrototypeOf(oo, Object.getPrototypeOf(this))

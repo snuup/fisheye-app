@@ -52,15 +52,25 @@ rows
 let out =
     d3
         .select(document.body)
-        .append('div.output')
+        .append('table')
+        .attr("class", "out")
 
 let setout = (links: any[]) => {
     console.log(links)
 
-    out.selectAll('div')
+    let rows = out.selectAll('tr')
         .data(links)
-        .join('div')
-        .text(l => l.sid + " -> " + l.tid + " | " + l.source.type + "/" + l.target.type)
+        .join('tr')
+
+    rows.selectAll('td')
+    .data(d => [d.sid, d.tid])
+    .join('td')
+    .text(d => d)
+
+    // rows.append("td").text(d => d.sid)
+    // rows.append("td").text(d => d.tid)
+    // rows.append("td").text(d => d.source.type)
+    // rows.append("td").text(d => d.target.type)
 }
 
 rows

@@ -19,7 +19,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
         let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => l.target.type))
         let alltypes = sourcetypes.concat(targettypes).distinctBy().sort()
         const linktypetext = d => (d?.toString() ?? "undefined")
-        const linktypetextcut = d => linktypetext(d).slice(0, 50)
+        const linktypetextcut = d => linktypetext(d).slice(0, 10)
 
         let table = d3.select(tableDom)
         let thead = table.append("thead")
@@ -42,7 +42,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
         rows
             .append('th')
-            .text(linktypetext)
+            .text(linktypetextcut)
             .attr("class", linktypetext)
 
         // let out = d3.select(tableout).on('click', () => setout([]))

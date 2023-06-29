@@ -38,7 +38,7 @@ export class Controller {
 
     setroute() {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
-        console.log("setroute", m.url)
+        //console.log("setroute", m.url)
 
         switch (m.url[0]) {
             case "graph":

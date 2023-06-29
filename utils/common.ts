@@ -70,6 +70,12 @@ mergePrototype(class extends Array {
     get last() {
         return this[this.length - 1]
     }
+    cross<T>(other?: Array<T>) : Array<[T, T]> {
+        let result : Array<[T, T]> = []
+        let o = other ?? this
+        this.forEach(x => o.forEach(y => result.push([x, y])))
+        return result
+    }
 }, Array)
 
 function* arraycombinations(arr) {

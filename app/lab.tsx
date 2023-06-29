@@ -5,20 +5,20 @@ import { m } from './model'
 import { jsx, patch } from '../jmx-lib/core'
 import { FishLink } from '../analysis/fishlink'
 import { LinkStats } from '../comp/linkstats'
+import { ChordForType } from '../comp/chord'
 
-// let c = new Controller()
+let c = new Controller()
 
-// let links = m.graph.links // .filter(l => l.sid == m.investigatees[0] || l.tid == m.investigatees[0])
+let links = m.graph.links // .filter(l => l.sid == m.investigatees[0] || l.tid == m.investigatees[0])
+let linksbytype = links.groupBy(l => l.type)
+let linkso = linksbytype["ownership"]
 
-// let linksbytype = links.groupBy(l => l.type)
+const App = (
+    <body>
+        <ChordForType links={linkso} />
+    </body>
+)
 
-// const App = (<body>
-//     {linksbytype.entries.map(([type, links]) => {
-//         return <div class="linkstats">
-//             <b>{type}</b>
-//             <LinkStats links={links} />
-//         </div>
-//     })}
-// </body>)
+patch(document.body, App)
 
-// patch(document.body, App)
+mount({ linkso })

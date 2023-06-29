@@ -109,13 +109,13 @@ export class PathMatrixBuilder {
     }
 
     flood(investigatee: FishNode) {
-        console.log("flood", investigatee.id)
+        //console.log("flood", investigatee.id)
         this.bfs(investigatee, [], new Set<string>())
     }
 
     // flood(mar)
     initscores(investigatees: FishNode[]) {
-        console.log("initscores - call this once only!!")
+        //console.log("initscores - call this once only!!")
         investigatees.forEach(this.flood)
 
         return this.g.nodes

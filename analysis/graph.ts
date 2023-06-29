@@ -75,7 +75,7 @@ export class Graph {
 
     enrichnodes() {
 
-        console.log("enrichnodes", this.nodes.length, this.links.length)
+        //console.log("enrichnodes", this.nodes.length, this.links.length)
 
         this.links
             .groupBy(l => l.sid)

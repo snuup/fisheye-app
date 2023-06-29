@@ -25,36 +25,45 @@
 
 .company {
     color: #5c74a6;
+    fill: #5c74a6;
 }
 
 .event {
     color: #ff8600;
+    fill: #ff8600;
 }
 
 .location {
     color: #4f8051;
+    fill: #4f8051;
 }
 
 .movement {
-    /* color: rgb(97, 179, 115); */
+    color: rgb(97, 179, 115);
+    fill: rgb(97, 179, 115);
 }
 
 .organization {
     color: rgb(148, 104, 168);
+    fill: rgb(148, 104, 168);
 }
 
 .political_organization {
     color: #785586;
+    fill: #785586;
 }
 
 .person {
     color: rgb(119, 81, 81);
+    fill: rgb(119, 81, 81);
 }
 
 .vessel {
     color: rgb(30, 77, 148);
+    fill: rgb(30, 77, 148);
 }
 
 .undefined {
     color: rgb(80, 80, 80);
+    fill: rgb(80, 80, 80);
 }

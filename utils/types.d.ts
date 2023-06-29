@@ -27,7 +27,7 @@ interface Array<T> {
     get first(): T
     get last(): T
     toReversed(): T[]
-    cross(other: Array<T>) : Array<[T, T]>
+    cross(other?: Array<T>) : Array<[T, T]>
 }
 
 interface Number {

@@ -1,8 +1,18 @@
 import * as d3 from "d3"
 import { FishLink } from "../analysis/fishlink"
 import { jsx } from "../jmx-lib/core"
+import { Matrix } from "./linkstats"
+import { mount } from "../utils/common"
 
 export const ChordForType = ({ links }: { links: FishLink[] }) => {
+
+    let sourcetypes = links.map(l => l.target.type).distinctBy()
+    let targettypes = links.map(l => l.target.type).distinctBy()
+    let linksbysource = links.groupBy(l => l.source.type)
+    let matrixo: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => l.target.type))
+    let alltypes = sourcetypes.concat(targettypes).distinctBy().sort() as string[]
+    let matrix = alltypes.map(s => alltypes.map(t => matrixo[s][t]?.length ?? 0))
+    mount({ matrix })
 
     function rund3(e: HTMLElement) {
         {
@@ -15,14 +25,6 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
                 .attr("height", 440)
                 .append("g")
                 .attr("transform", "translate(220,220)")
-
-            // create input data: a square matrix that provides flow between entities
-            var matrix = [
-                [90, 5, 5, 5],
-                [10, 5, 5, 5],
-                [10, 5, 5, 5],
-                [10, 5, 5, 5]
-            ];
 
             // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
             var res = d3.chord()
@@ -39,7 +41,8 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
                 .enter()
                 .append("g")
                 .append("path")
-                .style("fill", "grey")
+                //.style("fill", "grey")
+                .attr("class", d => alltypes[d.index])
                 .style("stroke", "black")
                 .attr("d", d3.arc().innerRadius(200).outerRadius(210) as unknown as string)
 
@@ -53,7 +56,7 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
                 .append("path")
                 .attr("d", d3.ribbon().radius(200) as unknown as string)
                 .style("fill", "#69b3aa")
-                .style("stroke", "black");
+                .style("stroke", "#555");
         }
     }
 

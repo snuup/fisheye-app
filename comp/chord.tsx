@@ -29,7 +29,7 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
             // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
             var res = d3.chord()
                 .padAngle(0.05)     // padding between entities (black arc)
-                .sortSubgroups(d3.descending)
+                //.sortSubgroups(d3.descending)
                 (matrix)
 
             // add the groups on the inner part of the circle
@@ -41,7 +41,6 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
                 .enter()
                 .append("g")
                 .append("path")
-                //.style("fill", "grey")
                 .attr("class", d => alltypes[d.index])
                 .style("stroke", "black")
                 .attr("d", d3.arc().innerRadius(200).outerRadius(210) as unknown as string)

@@ -18,5 +18,13 @@ export default {
                 assetFileNames: `[name].[ext]`
             }
         }
-    }
+    },
+    // optimizeDeps: {
+    //     exclude: ['colors.css'],
+    // },
+    // server: {
+    //     watch: {
+    //         ignored: ['**/*.*'],
+    //     },
+    // },
 }

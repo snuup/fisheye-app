@@ -1,6 +1,7 @@
 import { jsx } from "../jmx-lib/core"
 import * as d3 from "d3"
 import { FishLink } from "../analysis/fishlink"
+import { ChordForType } from "./chord"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -17,7 +18,8 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
         let linksbysource = links.groupBy(l => l.source.type)
         let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => l.target.type))
         let alltypes = sourcetypes.concat(targettypes).distinctBy().sort()
-        const linktypetext = d => (d?.toString() ?? "undefined").slice(0, 5)
+        const linktypetext = d => (d?.toString() ?? "undefined")
+        const linktypetextcut = d => linktypetext(d).slice(0, 50)
 
         let table = d3.select(tableDom)
         let thead = table.append("thead")
@@ -29,7 +31,8 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
             .selectAll('th')
             .data([".", ...alltypes])
             .join('th')
-            .text(linktypetext)
+            .text(linktypetextcut)
+            .attr("class", linktypetext)
 
         let rows =
             tbody
@@ -40,6 +43,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
         rows
             .append('th')
             .text(linktypetext)
+            .attr("class", linktypetext)
 
         // let out = d3.select(tableout).on('click', () => setout([]))
 
@@ -81,12 +85,15 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
     console.log("linkstats", links)
     return (
         <div class="linkstats">
-            <b>hop</b>
+            <h2>link stats</h2>
             {
                 links.groupBy(l => l.type).entries.map(([type, links]) => (
                     <div >
                         <h3 class={type}>{type}</h3>
-                        <LinkStatsForType links={links} />
+                        <div class="flexy">
+                            <LinkStatsForType links={links} />
+                            <ChordForType links={links} />
+                        </div>
                     </div>
                 ))
             }

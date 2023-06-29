@@ -1,7 +1,7 @@
 import { patch, jsx, When, updateview } from "../jmx-lib/core"
 import { mc1 } from '../data/data'
 import '../utils/common'
-import { NodeStats } from '../comp/stats'
+import { NodeStats } from '../comp/nodestats'
 import { m } from './model'
 import { Controller } from './controller'
 import { Link } from './routes'

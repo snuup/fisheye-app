@@ -22,10 +22,14 @@
 .linkstats td,
 .linkstats th {
   border: solid 1px #ccc;
-  padding: 2px;
+  padding: 2px 4px;
   text-align: right;
 }
 
 .linkstats table {
   border-collapse: collapse;
+}
+
+.linkstats table.out {
+  margin-top: 1em;
 }

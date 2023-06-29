@@ -1,7 +1,11 @@
-<<<<<<< HEAD
+
+29.6.
+- colors
+- chord diagrams
+
+
 25.6.
 - add nodes that are flooded
-=======
 27.6.
 
 4 invs
@@ -20,7 +24,6 @@ plan:
 
 
 
->>>>>>> stats
 
 24.4.
 + link forces

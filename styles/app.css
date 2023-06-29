@@ -45,30 +45,7 @@ button {
     outline: solid 1px turquoise;
 }
 
-.ownership,
-.owner {
-    fill: rgb(57, 65, 62);
-    color: rgb(57, 65, 62);
-    stroke: rgb(57, 65, 62);
-}
-.membership,
-.member {
-    fill: rgb(127, 170, 211);
-    color: rgb(127, 170, 211);
-    stroke: rgb(127, 170, 211);
-}
-.family_relationship,
-.family {
-    fill: rgb(187, 125, 173);
-    color: rgb(187, 125, 173);
-    stroke: rgb(187, 125, 173);
-}
-.partnership,
-.partner {
-    fill: rgb(161, 106, 85);
-    color: rgb(161, 106, 85);
-    stroke: rgb(161, 106, 85);
-}
+
 .ownership,
 .membership,
 .family_relationship,
@@ -117,4 +94,9 @@ h2 {
     display: inline-grid;
     grid-template-columns: auto auto;
     gap: 0.25em 1em;
+}
+
+.flexy{
+    display: flex;
+    flex-wrap: wrap;
 }

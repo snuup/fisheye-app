@@ -41,20 +41,18 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             .append('th')
             .text(linktypetext)
 
-        let out =
-            d3
-                .select(document.body)
-                .append('table')
-                .attr("class", "out")
-                .on('click', () => setout([]))
-
+        // let out = d3.select(tableout).on('click', () => setout([]))
 
         let setout = (links: any[]) => {
-            console.log(links)
 
-            let rows = out.selectAll('tr')
-                .data(links)
-                .join('tr')
+            console.log("clücks", links)
+
+            let rows =
+                d3.select(tableout)
+                    .on('click', () => setout([]))
+                    .selectAll('tr')
+                    .data(links)
+                    .join('tr')
 
             rows.selectAll('td')
                 .data(d => [d.sid, d.tid, linktypetext(d.source.type), linktypetext(d.target.type)])
@@ -68,8 +66,13 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             .join('td')
             .text(([st, tt]) => matrix[st][tt]?.length)
             .on('click', (_, [st, tt]) => setout(matrix[st][tt]))
-
     }
 
-    return <table patch={rund3} ><span>hase</span></table>
+    let tableout
+
+    return (
+        <div>
+            <table patch={rund3} />
+            <table class="out" mounted={e => tableout = e} />
+        </div>)
 }

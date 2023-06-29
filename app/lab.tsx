@@ -4,11 +4,13 @@ import { Controller } from './controller'
 import { m } from './model'
 import { jsx, patch } from '../jmx-lib/core'
 import { FishLink } from '../analysis/fishlink'
-import { LinkStats } from './linkstats'
+import { LinkStats } from '../comp/linkstats'
 
 let c = new Controller()
 
-let linksbytype = m.graph.links.groupBy(l => l.type)
+let links = m.graph.links // .filter(l => l.sid == m.investigatees[0] || l.tid == m.investigatees[0])
+
+let linksbytype = links.groupBy(l => l.type)
 
 const App = (<body>
     {linksbytype.entries.map(([type, links]) => {

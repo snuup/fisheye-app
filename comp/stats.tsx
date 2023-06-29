@@ -8,7 +8,7 @@ import { NameValue } from "./namevalue"
 
 mount({ d3 })
 
-export const GraphStats = () => {
+export const NodeStats = () => {
     let g = m.graph
     return (
         <div class="stats">

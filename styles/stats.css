@@ -1,16 +1,31 @@
 .stats {
-    display: grid;
-    /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     align-items: stretch; */
-    gap: 1em;
+  gap: 1em;
 }
 
 .topdegrees {
-    width: 100%;
+  width: 100%;
 }
 
-.stats-top{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+.stats-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.linkstats > div {
+  margin: 2em 0;
+}
+
+.linkstats td,
+.linkstats th {
+  border: solid 1px #ccc;
+  padding: 2px;
+  text-align: right;
+}
+
+.linkstats table {
+  border-collapse: collapse;
 }

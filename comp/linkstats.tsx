@@ -1,6 +1,6 @@
+import { jsx } from "../jmx-lib/core"
 import * as d3 from "d3"
 import { FishLink } from "../analysis/fishlink"
-import { jsx } from "../jmx-lib/core"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -78,11 +78,17 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 }
 
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
-    let linksbytype = links.groupBy(l => l.type)
-    return linksbytype.entries.map(([type, links]) => {
-        return <div class="linkstats">
-            <b>{type}</b>
-            <LinkStatsForType links={links} />
-        </div>
-    })
+    console.log("linkstats", links)
+    return (
+        <div class="linkstats">
+            <b>hop</b>
+            {
+                links.groupBy(l => l.type).entries.map(([type, links]) => (
+                    <div >
+                        <h3 class={type}>{type}</h3>
+                        <LinkStatsForType links={links} />
+                    </div>
+                ))
+            }
+        </div>)
 }

@@ -12,6 +12,7 @@ import { NodeDonut } from "../comp/node-donut"
 import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
 import { SeaView } from "../comp/seaview"
+import { LinkStats } from "../comp/linkstats"
 
 let c = new Controller()
 
@@ -39,6 +40,9 @@ let App = () => (
             </When>
             <When cond={m.url[0] == 'tree'}>
                 <HierarchyView />
+            </When>
+            <When cond={m.url[0] == 'links'}>
+                <LinkStats links={m.graph.links} />
             </When>
         </article>
 

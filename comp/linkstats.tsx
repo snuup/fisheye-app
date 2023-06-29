@@ -8,7 +8,7 @@ export type Matrix<T> = {
     }
 }
 
-export const LinkStats = ({ links }: { links: FishLink[] }) => {
+const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
     function rund3(tableDom: HTMLTableElement) {
 
@@ -75,4 +75,14 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             <table patch={rund3} />
             <table class="out" mounted={e => tableout = e} />
         </div>)
+}
+
+export const LinkStats = ({ links }: { links: FishLink[] }) => {
+    let linksbytype = links.groupBy(l => l.type)
+    return linksbytype.entries.map(([type, links]) => {
+        return <div class="linkstats">
+            <b>{type}</b>
+            <LinkStatsForType links={links} />
+        </div>
+    })
 }

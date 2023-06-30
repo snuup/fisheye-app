@@ -61,8 +61,8 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
             const layout = d3s.sankey<FlowNode, any>()
                 .nodeId(d => d.flowid)
                 .nodeWidth(15)
-                .nodePadding(20)
-                .extent([[1, 10], [width, height + 20]])
+                .nodePadding(5)
+                .extent([[0, 10], [width-10, height + 20]])
 
             let { nodes, links } = layout({
                 nodes: flownodes,
@@ -75,7 +75,6 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("viewBox", [0, 0, width, height])
 
             svg.append("g")
-                .attr("stroke", "#000")
                 .selectAll("rect")
                 .data(nodes)
                 .join("rect")
@@ -97,7 +96,8 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
 
             link.append("path")
                 .attr("d", d3s.sankeyLinkHorizontal())
-                .attr("stroke", 'black')
+                //.attr("stroke", l => "orange")
+                .attr("class", l => l.source.id)
                 .attr("stroke-width", d => Math.max(1, d.width))
 
             link.append("title")
@@ -109,10 +109,10 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .selectAll("text")
                 .data(nodes)
                 .join("text")
-                .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
-                .attr("y", d => (d.y1 + d.y0) / 2)
+                .attr("x", d => d.x0! < width / 2 ? d.x1! + 6 : d.x0! - 6)
+                .attr("y", d => (d.y1! + d.y0!) / 2)
                 .attr("dy", "0.35em")
-                .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+                .attr("text-anchor", d => d.x0! < width / 2 ? "start" : "end")
                 .text(d => d.id)
         }
     }

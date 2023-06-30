@@ -1,69 +1,79 @@
 .ownership,
 .owner {
-    fill: rgb(57, 65, 62);
-    color: rgb(57, 65, 62);
-    stroke: rgb(57, 65, 62);
+  fill: #39413e;
+  color: #39413e;
+  stroke: #39413e;
 }
+
 .membership,
 .member {
-    fill: rgb(127, 170, 211);
-    color: rgb(127, 170, 211);
-    stroke: rgb(127, 170, 211);
+  fill: #7faad3;
+  color: #7faad3;
+  stroke: #7faad3;
 }
+
 .family_relationship,
 .family {
-    fill: rgb(187, 125, 173);
-    color: rgb(187, 125, 173);
-    stroke: rgb(187, 125, 173);
+  fill: #bb7dad;
+  color: #bb7dad;
+  stroke: #bb7dad;
 }
+
 .partnership,
 .partner {
-    fill: rgb(161, 106, 85);
-    color: rgb(161, 106, 85);
-    stroke: rgb(161, 106, 85);
+  fill: #a16a55;
+  color: #a16a55;
+  stroke: #a16a55;
 }
 
 .company {
-    color: #5c74a6;
-    fill: #5c74a6;
+  color: #5c74a6;
+  fill: #5c74a6;
 }
 
 .event {
-    color: #ff8600;
-    fill: #ff8600;
+  color: #ff8600;
+  fill: #ff8600;
 }
 
 .location {
-    color: #4f8051;
-    fill: #4f8051;
+  color: #4f8051;
+  fill: #4f8051;
 }
 
 .movement {
-    color: rgb(97, 179, 115);
-    fill: rgb(97, 179, 115);
+  color: #61b373;
+  fill: #61b373;
 }
 
 .organization {
-    color: rgb(148, 104, 168);
-    fill: rgb(148, 104, 168);
+  color: #9468a8;
+  fill: #9468a8;
 }
 
 .political_organization {
-    color: #785586;
-    fill: #785586;
+  color: #785586;
+  fill: #785586;
 }
 
 .person {
-    color: rgb(119, 81, 81);
-    fill: rgb(119, 81, 81);
+  color: #775151;
+  fill: #775151;
 }
 
 .vessel {
-    color: rgb(30, 77, 148);
-    fill: rgb(30, 77, 148);
+  color: #1e4d94;
+  fill: #1e4d94;
 }
 
 .undefined {
-    color: rgb(80, 80, 80);
-    fill: rgb(80, 80, 80);
+  color: #505050;
+  fill: #505050;
+  stroke: #505050;
+}
+
+.undefined2 {
+  color: "red";
+  fill: "red";
+  stroke: "red";
 }

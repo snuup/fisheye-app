@@ -22,9 +22,12 @@ interface FlowNode {
 }
 
 class FlowLink {
-    constructor(public _source, public _target, public value) { }
-    get source() {return "s" + this._source }
-    get target() {return "t" + this._target }
+    source: string
+    target: string
+    constructor(public _source, public _target, public value) {
+        this.source = "s" + this._source
+        this.target = "t" + this._target
+    }
 }
 
 export const SankeyForType = ({ links }: { links: FishLink[] }) => {
@@ -42,15 +45,11 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
 
     let flownodes: FlowNode[] = alltypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
 
-    let flowlinks: any[] = []
+    let flowlinks: FlowLink[] = []
     for (let source in linksbysource) {
         let linksbytarget = linksbysource[source].groupBy(l => l.target.type)
         for (let target in linksbytarget) {
-            flowlinks.push({
-                source: "s" + source,
-                target: "t" + target,
-                value: linksbytarget[target]?.length ?? 0
-            })
+            flowlinks.push(new FlowLink(source, target, linksbytarget[target]?.length ?? 0))
         }
     }
 

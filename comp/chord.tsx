@@ -27,14 +27,14 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
                 .attr("transform", "translate(220,220)")
 
             // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
-            var res = d3.chord()
+            var layout = d3.chord()
                 .padAngle(0.05)     // padding between entities (black arc)
                 //.sortSubgroups(d3.descending)
                 (matrix)
 
             // add the groups on the inner part of the circle
             svg
-                .datum(res)
+                .datum(layout)
                 .append("g")
                 .selectAll("g")
                 .data(function (d) { return d.groups; })
@@ -47,7 +47,7 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
 
             // Add the links between groups
             svg
-                .datum(res)
+                .datum(layout)
                 .append("g")
                 .selectAll("path")
                 .data(function (d) { return d; })

@@ -8,6 +8,7 @@ export class Graph {
 
     nodes: FishNode[]
     links: FishLink[]
+    enriched = false
 
     // enriched
     nodemap_: Map<string, FishNode>
@@ -92,9 +93,49 @@ export class Graph {
                 l.source = this.getnode(l.sid)
                 l.target = this.getnode(l.tid)
             })
+
+        this.enriched = true
     }
 
     get groupUps() {
         return this.nodes.groupBy(n => n.upfixed2)
     }
+
+    findpaths(start: FishNode, target: FishNode) {
+
+        if (!this.enriched) throw "path must be enriched"
+
+        let visited: FishNode[] = []
+        let goalpaths: Path2[] = []
+
+        function bfs(fronteer: Path2[]) {
+
+            let nextfronteer: Path2[] = []
+
+            for (let p of fronteer) {
+                //console.log("bfs", p.map(n => n.id).join(" -> "))
+                let n = p.last
+
+                if (visited.includes(n)) continue;
+                visited.push(n)
+
+                let pp = [...p, n]
+                if (n == target) goalpaths.push(pp)
+
+                nextfronteer.push(...n.allneighbors?.map(nn => [...p, nn]) ?? [])
+                nextfronteer = nextfronteer.distinctBy()
+            }
+
+            return nextfronteer
+        }
+
+        let fronteer: Path2[] = [[start]]
+        while (fronteer.length) {
+            fronteer = bfs(fronteer)
+        }
+
+        return goalpaths
+    }
 }
+
+type Path2 = FishNode[]

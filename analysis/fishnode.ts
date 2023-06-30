@@ -1,3 +1,4 @@
+import { mount } from "../utils/common"
 import { cleanid } from "./common"
 import { FishLink } from "./fishlink"
 import { Path } from "./path"
@@ -41,7 +42,7 @@ export class FishNode {
     get outdegree() { return this.outlinks?.length ?? 0 }
     get indegree() { return this.inlinks?.length ?? 0 }
     get degree() { return this.outdegree + this.indegree }
-    get alllinks() { return this.inlinks.concat(this.outlinks) }
+    get allneighbors(): FishNode[] { return this.outlinks.map(l => l.target as FishNode).concat(this.inlinks.map(l => l.source as FishNode)) }
     get upfixed2() { return this.up.toFixed(2) }
 
     toString() { return `FN(${this.nid})` }
@@ -93,3 +94,5 @@ export class FishNode {
         return this.investigatePaths1.filter(p => p.length <= 2).length
     }
 }
+
+mount({ FishNode })

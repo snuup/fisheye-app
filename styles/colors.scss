@@ -1,80 +1,58 @@
-.ownership,
-.owner {
-    fill: rgb(57, 65, 62);
-    color: rgb(57, 65, 62);
-    stroke: rgb(57, 65, 62);
-}
-.membership,
-.member {
-    fill: rgb(127, 170, 211);
-    color: rgb(127, 170, 211);
-    stroke: rgb(127, 170, 211);
-}
-.family_relationship,
-.family {
-    fill: rgb(187, 125, 173);
-    color: rgb(187, 125, 173);
-    stroke: rgb(187, 125, 173);
-}
-.partnership,
-.partner {
-    fill: rgb(161, 106, 85);
-    color: rgb(161, 106, 85);
-    stroke: rgb(161, 106, 85);
-}
-
-.company {
-    color: #5c74a6;
-    fill: #5c74a6;
-}
-
-.event {
-    color: #ff8600;
-    fill: #ff8600;
-}
-
-.location {
-    color: #4f8051;
-    fill: #4f8051;
-}
-
-.movement {
-    color: rgb(97, 179, 115);
-    fill: rgb(97, 179, 115);
-}
-
-.organization {
-    color: rgb(148, 104, 168);
-    fill: rgb(148, 104, 168);
-}
-
-.political_organization {
-    color: #785586;
-    fill: #785586;
-}
-
-.person {
-    color: rgb(119, 81, 81);
-    fill: rgb(119, 81, 81);
-}
-
-.vessel {
-    color: rgb(30, 77, 148);
-    fill: rgb(30, 77, 148);
-}
-
-.undefined {
-    color: rgb(80, 80, 80);
-    fill: rgb(80, 80, 80);
-    stroke: rgb(80, 80, 80);
-}
-
 @mixin tricolori($c) {
     color: $c;
     fill: $c;
     stroke: $c;
 }
 
-.undefined2 {
-    @include tricolori("red");
+.ownership,
+.owner {
+    @include tricolori(rgb(57, 65, 62));
+}
+.membership,
+.member {
+    @include tricolori(rgb(127, 170, 211));
+}
+.family_relationship,
+.family {
+    @include tricolori(color);
+}
+.partnership,
+.partner {
+    @include tricolori(rgb(161, 106, 85));
+}
+
+.company {
+    @include tricolori(#5c74a6);
+}
+
+.event {
+    @include tricolori(#ff8600)
+}
+
+.location {
+    @include tricolori(#4f8051)
+}
+
+.movement {
+    @include tricolori(rgb(97, 179, 115))
+}
+
+.organization {
+    @include tricolori(rgb(148, 104, 168))
+}
+
+.political_organization {
+    @include tricolori(#785586)
+}
+
+.person {
+    @include tricolori(rgb(119, 81, 81))
+}
+
+.vessel {
+    @include tricolori(rgb(30, 77, 148))
+}
+
+.undefined {
+    @include tricolori(rgb(80, 80, 80))
 }

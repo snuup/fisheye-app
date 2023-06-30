@@ -1,79 +1,81 @@
 .ownership,
 .owner {
-  fill: #39413e;
   color: #39413e;
+  fill: #39413e;
   stroke: #39413e;
 }
 
 .membership,
 .member {
-  fill: #7faad3;
   color: #7faad3;
+  fill: #7faad3;
   stroke: #7faad3;
 }
 
 .family_relationship,
 .family {
-  fill: #bb7dad;
-  color: #bb7dad;
-  stroke: #bb7dad;
+  color: color;
+  fill: color;
+  stroke: color;
 }
 
 .partnership,
 .partner {
-  fill: #a16a55;
   color: #a16a55;
+  fill: #a16a55;
   stroke: #a16a55;
 }
 
 .company {
   color: #5c74a6;
   fill: #5c74a6;
+  stroke: #5c74a6;
 }
 
 .event {
   color: #ff8600;
-  fill: #ff8600;
+  /* fill: #ff8600; */
+  stroke: #ff8600;
 }
 
 .location {
   color: #4f8051;
   fill: #4f8051;
+  stroke: #4f8051;
 }
 
 .movement {
   color: #61b373;
   fill: #61b373;
+  stroke: #61b373;
 }
 
 .organization {
   color: #9468a8;
   fill: #9468a8;
+  stroke: #9468a8;
 }
 
 .political_organization {
   color: #785586;
   fill: #785586;
+  stroke: #785586;
 }
 
 .person {
   color: #775151;
   fill: #775151;
+  stroke: #775151;
 }
 
 .vessel {
   color: #1e4d94;
   fill: #1e4d94;
+  stroke: #1e4d94;
 }
 
 .undefined {
   color: #505050;
   fill: #505050;
   stroke: #505050;
-}
-
-.undefined2 {
-  color: "red";
-  fill: "red";
-  stroke: "red";
 }

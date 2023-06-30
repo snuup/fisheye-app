@@ -17,7 +17,7 @@ interface HTMLElement {
 
 interface Array<T> {
     countBy(selector: (x: T) => string): { [key: string]: number }
-    groupBy(selector: (x: T) => string): { [key: string]: T[] }
+    groupBy(selector: (x: T) => string | undefined): { [key: string | undefined]: T[] }
     sortBy(selector: (x: T) => U): T[]
     distinctBy(selector?): T[]
     get combinations(): T[]

@@ -1,6 +1,7 @@
 import * as d3 from "d3"
 import { cleanid } from "./common"
 import { FishNode } from "./fishnode"
+import { mount } from "../utils/common"
 
 let strengthScaler = d3.scaleLinear([0, 100], [0, 0.05])
 
@@ -12,8 +13,8 @@ export class FishLink {
     sid: string
     tid: string
 
-    source: string | FishNode // nid, reassigned by d3
-    target: string | FishNode // nid, reassigned by d3
+    source: FishNode // nid, reassigned by d3
+    target: FishNode // nid, reassigned by d3
 
     get strength(): number {
         return strengthScaler(this.minz * this.weight)
@@ -58,3 +59,5 @@ export class FishLink {
         return `${this.sid} -(${this.type} / ${this.weight})> ${this.tid}`
     }
 }
+
+mount({ FishLink })

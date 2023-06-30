@@ -8,7 +8,7 @@ export const ChordForType = ({ links }: { links: FishLink[] }) => {
 
     let sourcetypes = links.map(l => l.target.type).distinctBy()
     let targettypes = links.map(l => l.target.type).distinctBy()
-    let linksbysource = links.groupBy(l => l.source.type)
+    let linksbysource = links.groupBy(l => l.source.type ?? "")
     let matrixo: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => l.target.type))
     let alltypes = sourcetypes.concat(targettypes).distinctBy().sort() as string[]
     let matrix = alltypes.map(s => alltypes.map(t => matrixo[s][t]?.length ?? 0))

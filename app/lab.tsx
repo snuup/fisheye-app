@@ -1,11 +1,8 @@
-import * as d3 from 'd3'
 import { mount } from '../utils/common'
 import { Controller } from './controller'
 import { m } from './model'
 import { jsx, patch } from '../jmx-lib/core'
-import { FishLink } from '../analysis/fishlink'
-import { LinkStats } from '../comp/linkstats'
-import { ChordForType } from '../comp/chord'
+import { SankeyForType } from '../comp/sankey'
 
 let c = new Controller()
 
@@ -15,7 +12,7 @@ let linkso = linksbytype["ownership"]
 
 const App = (
     <body>
-        <ChordForType links={linkso} />
+        <SankeyForType links={linkso} />
     </body>
 )
 

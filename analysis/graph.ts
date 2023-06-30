@@ -113,7 +113,6 @@ export class Graph {
             let nextfronteer: Path2[] = []
 
             for (let p of fronteer) {
-                //console.log("bfs", p.map(n => n.id).join(" -> "))
                 let n = p.last
 
                 if (visited.includes(n)) continue;
@@ -134,7 +133,9 @@ export class Graph {
             fronteer = bfs(fronteer)
         }
 
-        return goalpaths
+        console.log("visited", visited.length, "nodes")
+
+        return { goalpaths, visited }
     }
 }
 

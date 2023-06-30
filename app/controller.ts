@@ -20,8 +20,6 @@ export class Controller {
     prepareData() {
         m.graph = new Graph(mc1.nodes.map(FishNode.create), mc1.links.map(FishLink.create))
 
-        m.graph.links.filter(l => l.type == "ownership").groupBy(l => l.source.type + " " + l.target.type)
-
         let mb = new PathMatrixBuilder(m.graph)
         m.tops = mb.initscores(m.investigatees.map(m.graph.getnode))
         m.top = m.tops[0]
@@ -110,38 +108,42 @@ export class Controller {
 
             let nextfronteer: FishNode[] = []
 
-            fronteer.forEach(n => {
-                if (visited.includes(n)) return
-                visited.push(n)
+            console.log("tbd")
 
-                n.outlinks.forEach(l => {
+            //     fronteer.forEach(n => {
+            //         if (visited.includes(n)) return
+            //         visited.push(n)
 
-                    // let x
-                    // if (typeof l.target === "string") x = getnode(l.target)
-                    // if (x == undefined) debugger
+            //         n.outlinks.forEach(l => {
 
-                    if (typeof l.target === undefined) debugger
-                    if (typeof l.target === "string") l.target = getnode(l.target)
+            //             // let x
+            //             // if (typeof l.target === "string") x = getnode(l.target)
+            //             // if (x == undefined) debugger
 
-                    l.target.up += n.up! * l.weight
-                    if (isNaN(l.target.up)) debugger
-                    //console.log("", l.target.up, n.up, l.weight)
-                })
-                nextfronteer.push(...n.outlinks?.map(l => l.target) ?? [])
-                nextfronteer = nextfronteer.distinctBy()
+            //             if (typeof l.target === undefined) debugger
+            //             if (typeof l.target === "string") l.target = getnode(l.target)
 
-                fronteer = nextfronteer
+            //             l.target.up += n.up! * l.weight
+            //             if (isNaN(l.target.up)) debugger
+            //             //console.log("", l.target.up, n.up, l.weight)
+            //         })
+            //         nextfronteer.push(...n.outlinks?.map(l => l.target) ?? [])
+            //         nextfronteer = nextfronteer.distinctBy()
 
-                let illegals = fronteer.filter(n => n.id.includes("llegal"))
-                console.log(illegals.map(n => n.id).join(" + "))
+            //         fronteer = nextfronteer
 
-                // console.log("fronteer", fronteer)
-            })
-        }
-        for (let i = 1; i <= levels; i++) {
-            floodfronteer(i)
+            //         let illegals = fronteer.filter(n => n.id.includes("llegal"))
+            //         console.log(illegals.map(n => n.id).join(" + "))
+
+            //         // console.log("fronteer", fronteer)
+            //     })
+            // }
+            // for (let i = 1; i <= levels; i++) {
+            //     floodfronteer(i)
         }
     }
+
+
 
     // inc1(ev: PointerEvent) {
     //     m.counter1++

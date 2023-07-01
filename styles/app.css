@@ -89,11 +89,7 @@ h2 {
     font-weight: bold;
 }
 
-.gridtable {
-    display: inline-grid;
-    grid-template-columns: auto auto;
-    gap: 0.25em 1em;
-}
+
 
 .flexy{
     display: flex;

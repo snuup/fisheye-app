@@ -11,7 +11,7 @@
 
     display: grid;
     grid-template-columns: auto auto;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 1fr auto;
     grid-template-areas:
         'name logo'
         'gridtable gridtable';
@@ -28,10 +28,29 @@
     h3 {
         grid-area: name;
     }
+
+    & > * {
+        padding: 2px;
+    }
+
+    border: solid 1px #ccc;
 }
 
 nav {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 8px;
+}
+
+.gridtable {
+    display: grid;
+    align-items: stretch;
+
+    grid-template-columns: auto auto;
+    grid-template-rows: min-content;
+    gap: 0.25em 1em;
+}
+
+hase {
+    color: red;
 }

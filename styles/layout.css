@@ -5,11 +5,13 @@ body {
         'nav main'
         'footer footer';
     width: 100vw;
-    /* height: 100vh; */
+    height: 100vh;
+    padding: 0;
+    margin: 0;
     grid-template-columns: 230px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-gap: 10px;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 header {

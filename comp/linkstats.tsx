@@ -4,6 +4,7 @@ import { FishLink } from "../analysis/fishlink"
 import { ChordForType } from "./chord"
 import { SankeyForType } from "./sankey"
 import { mount } from "../utils/common"
+import { LinkHistogram } from "./linkweighthisto"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -65,7 +66,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
             rows.append('td').attr("class", d => linktypetext(d.source.type)).text(d => d.sid)
             rows.append('td').attr("class", d => linktypetext(d.target.type)).text(d => d.tid)
-            rows.append('td').text(d => d.weight)
+            rows.append('td').text(d => d.weight.toFixed(4))
         }
 
         rows
@@ -90,7 +91,8 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
     return (
         <div class="linkstats">
             <h2>link stats</h2>
-            {
+            <LinkHistogram links={links} />
+            {/* {
                 links.groupBy(l => l.type).entries.map(([type, links]) => (
                     <div >
                         <h3 class={type}>{type}</h3>
@@ -100,6 +102,6 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                         </div>
                     </div>
                 ))
-            }
+            } */}
         </div>)
 }

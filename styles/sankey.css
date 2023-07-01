@@ -5,3 +5,7 @@
 .sankey-label {
     stroke: none;
 }
+
+.sankey {
+    min-width: 400px;
+}

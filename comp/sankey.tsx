@@ -103,7 +103,6 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("d", d3s.sankeyLinkHorizontal())
                 .attr("fill", "none")
                 .attr("class", l => l.source.id + " sankey-path")
-                //.attr("class", "sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
 
             link.append("title")

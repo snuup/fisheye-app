@@ -2,6 +2,7 @@ import { jsx } from "../jmx-lib/core"
 import * as d3 from "d3"
 import { FishLink } from "../analysis/fishlink"
 import { ChordForType } from "./chord"
+import { SankeyForType } from "./sankey"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -92,7 +93,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                         <h3 class={type}>{type}</h3>
                         <div class="flexy">
                             <LinkStatsForType links={links} />
-                            <ChordForType links={links} />
+                            <SankeyForType links={links} />
                         </div>
                     </div>
                 ))

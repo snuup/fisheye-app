@@ -12,11 +12,8 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                 .value(d => d.weight)
                 (links)
 
-            console.log(bins)
-            mount({ bins })
-
-            const width = 960
-            const height = 500
+            const width = e.clientWidth
+            const height = e.clientHeight || 200
             const marginTop = 20
             const marginRight = 20
             const marginBottom = 30
@@ -41,8 +38,8 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
             const svg = d3
                 .select(e)
                 .append("svg")
-                .attr("width", width)
-                .attr("height", height)
+                //.attr("width", width)
+                //.attr("height", height)
                 .attr("viewBox", [0, 0, width, height])
                 .attr("style", "max-width: 100%; height: auto;")
 

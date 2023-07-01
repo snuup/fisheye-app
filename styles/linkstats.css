@@ -5,3 +5,7 @@
 .link-stats-table td:hover {
   background-color: white;
 }
+
+.link-weights {
+  max-width: 960px;
+}

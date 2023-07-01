@@ -92,7 +92,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
         <div class="linkstats">
             <h2>link stats</h2>
             <LinkHistogram links={links} />
-            {/* {
+            {
                 links.groupBy(l => l.type).entries.map(([type, links]) => (
                     <div >
                         <h3 class={type}>{type}</h3>
@@ -102,6 +102,6 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                         </div>
                     </div>
                 ))
-            } */}
+            }
         </div>)
 }

@@ -1,3 +1,7 @@
 .sankey-path {
     fill: none;
 }
+
+.sankey-label {
+    stroke: none;
+}

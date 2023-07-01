@@ -30,11 +30,11 @@
 }
 
 .location {
-    @include tricolori(#4f8051)
+    @include tricolori(#829750)
 }
 
 .movement {
-    @include tricolori(rgb(97, 179, 115))
+    @include tricolori(rgb(163, 158, 89))
 }
 
 .organization {
@@ -46,7 +46,7 @@
 }
 
 .person {
-    @include tricolori(rgb(119, 81, 81))
+    @include tricolori(rgb(165, 75, 75))
 }
 
 .vessel {
@@ -54,5 +54,5 @@
 }
 
 .undefined {
-    @include tricolori(rgb(80, 80, 80))
+    @include tricolori(rgb(114, 114, 114))
 }

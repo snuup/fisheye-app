@@ -90,6 +90,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .append("title")
                 .text(d => d.id)
 
+
             const link = svg.append("g")
                 .attr("fill", "none")
                 .attr("stroke-opacity", 0.5)
@@ -119,6 +120,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("dy", "0.35em")
                 .attr("text-anchor", d => d.x0! < width / 2 ? "start" : "end")
                 .text(d => d.id)
+                .attr("class", d => d.id + " sankey-label")
         }
     }
 

@@ -34,20 +34,20 @@
 
 .event {
   color: #ff8600;
-  /* fill: #ff8600; */
-  /* stroke: #ff8600; */
+  fill: #ff8600;
+  stroke: #ff8600;
 }
 
 .location {
-  color: #4f8051;
-  fill: #4f8051;
-  stroke: #4f8051;
+  color: #829750;
+  fill: #829750;
+  stroke: #829750;
 }
 
 .movement {
-  color: #61b373;
-  fill: #61b373;
-  stroke: #61b373;
+  color: #a39e59;
+  fill: #a39e59;
+  stroke: #a39e59;
 }
 
 .organization {
@@ -63,9 +63,9 @@
 }
 
 .person {
-  color: #775151;
-  fill: #775151;
-  stroke: #775151;
+  color: #a54b4b;
+  fill: #a54b4b;
+  stroke: #a54b4b;
 }
 
 .vessel {
@@ -75,7 +75,7 @@
 }
 
 .undefined {
-  color: #505050;
-  fill: #505050;
-  stroke: #505050;
+  color: #727272;
+  fill: #727272;
+  stroke: #727272;
 }

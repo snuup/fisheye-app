@@ -38,8 +38,10 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
         sourcetypes
             .concat(targettypes)
             .distinctBy()
-            .map(s => s ?? "undefined")
-            .sort() as string[]
+            .sort()
+            .map(s => s ?? "undefined") as string[]
+
+    console.log(alltypes)
 
     let linksbysource = links.groupBy(l => l.source.type)
 
@@ -60,9 +62,10 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
         {
             const layout = d3s.sankey<FlowNode, any>()
                 .nodeId(d => d.flowid)
+                .nodeSort(null)
                 .nodeWidth(15)
                 .nodePadding(5)
-                .extent([[0, 10], [width-10, height + 20]])
+                .extent([[0, 10], [width-10, height - 10]])
 
             let { nodes, links } = layout({
                 nodes: flownodes,
@@ -73,6 +76,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .select(e)
                 .append("svg")
                 .attr("viewBox", [0, 0, width, height])
+                .attr("class", "sankey")
 
             svg.append("g")
                 .selectAll("rect")
@@ -97,7 +101,8 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
             link.append("path")
                 .attr("d", d3s.sankeyLinkHorizontal())
                 .attr("fill", "none")
-                .attr("class", l => l.source.id)
+                .attr("class", l => l.source.id + " sankey-path")
+                //.attr("class", "sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
 
             link.append("title")

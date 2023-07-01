@@ -64,6 +64,9 @@ mergePrototype(class extends Array {
         selector = selector ?? identity
         return this.sort((a, b) => selector(a) - selector(b))
     }
+    sortWithUndefinedLast() {
+        return this.sortBy(s => s == "undefined" ? "zzzzz" : s)
+    }
     get first() {
         return this[0]
     }

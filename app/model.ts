@@ -23,6 +23,8 @@ export const mraw = {
 
     seagraph: Graph.Empty,
 
+    netgraph: Graph.Empty,
+
     tops: [] as FishNode[],
     top: null as FishNode | null,
 

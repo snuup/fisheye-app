@@ -11,6 +11,7 @@ import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
 import { SeaView } from "../comp/seaview"
 import { LinkStats } from "../comp/linkstats"
+import { Network } from "../comp/network"
 
 let c = new Controller()
 
@@ -38,7 +39,8 @@ let App = () => (
                 <MatrixView />
             </When>
             <When cond={m.url[0] == 'graph'}>
-                <SeaView />
+                {/* <SeaView /> */}
+                <Network />
             </When>
             <When cond={m.url[0] == 'tree'}>
                 <HierarchyView />

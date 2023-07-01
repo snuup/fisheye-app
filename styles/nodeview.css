@@ -8,6 +8,7 @@
   grid-template-areas: 'name logo' 'gridtable gridtable';
   gap: 8px;
   border: solid 1px #ccc;
+  cursor: pointer;
 }
 
 .nodeview h3 {
@@ -30,6 +31,10 @@
 
 .nodeview > * {
   padding: 2px;
+}
+
+.nodeview:hover {
+  background: #fff;
 }
 
 nav {

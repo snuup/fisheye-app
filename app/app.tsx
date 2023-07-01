@@ -13,8 +13,6 @@ import { SeaView } from "../comp/seaview"
 import { LinkStats } from "../comp/linkstats"
 import { Network } from "../comp/network"
 
-let c = new Controller()
-
 let App = () => (
     <body>
         <header>
@@ -56,4 +54,4 @@ let App = () => (
 
 patch(document.body, <App />)
 
-mount({ m, c, mc1, updateview })
+mount({ m, mc1, updateview })

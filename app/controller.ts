@@ -156,4 +156,15 @@ export class Controller {
     //     updateview(ev.target as Node)
     //     updateview('#sum')
     // }
+
+    // network
+
+    togglenetnode(n: FishNode) {
+        console.log("yo eh: ", n.id)
+        m.netgraph // ... create new graph class ? add node, compute path matrix
+    }
 }
+
+export let c = new Controller()
+
+mount({ c })

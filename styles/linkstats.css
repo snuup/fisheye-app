@@ -1,0 +1,7 @@
+.link-stats-table td {
+  cursor: pointer;
+}
+
+.link-stats-table td:hover {
+  background-color: white;
+}

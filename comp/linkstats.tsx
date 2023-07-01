@@ -3,6 +3,7 @@ import * as d3 from "d3"
 import { FishLink } from "../analysis/fishlink"
 import { ChordForType } from "./chord"
 import { SankeyForType } from "./sankey"
+import { mount } from "../utils/common"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -18,9 +19,11 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
         let targettypes = links.map(l => l.target.type).distinctBy()
         let linksbysource = links.groupBy(l => l.source.type)
         let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => l.target.type))
-        let alltypes = sourcetypes.concat(targettypes).distinctBy().sort()
+        let alltypes = sourcetypes.concat(targettypes).distinctBy().sort() as string[]
         const linktypetext = d => (d?.toString() ?? "undefined")
         const linktypetextcut = d => linktypetext(d).slice(0, 10)
+
+        mount({ matrix })
 
         let table = d3.select(tableDom)
         let thead = table.append("thead")
@@ -60,9 +63,11 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
                     .join('tr')
 
             rows.selectAll('td')
-                .data(d => [d.sid, d.tid, linktypetext(d.source.type), linktypetext(d.target.type)])
+                //.data(d => [d.sid, d.tid, linktypetext(d.source.type), linktypetext(d.target.type)])
+                .data(d => [d.source, d.target])
                 .join('td')
-                .text(d => d)
+                .attr("class", d => d.type)
+                .text(d => d.id)
         }
 
         rows
@@ -77,7 +82,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
     return (
         <div>
-            <table patch={rund3} />
+            <table class="link-stats-table" patch={rund3} />
             <table class="out" mounted={e => tableout = e} />
         </div>)
 }

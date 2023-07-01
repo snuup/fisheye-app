@@ -7,5 +7,6 @@
 }
 
 .sankey {
-    min-width: 400px;
+    min-width: 600px;
+    /* outline: solid 1px navy */
 }

@@ -65,7 +65,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .nodeSort(null)
                 .nodeWidth(15)
                 .nodePadding(5)
-                .extent([[0, 10], [width-10, height - 10]])
+                .extent([[0, 0], [width, height]])
 
             let { nodes, links } = layout({
                 nodes: flownodes,
@@ -76,7 +76,6 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .select(e)
                 .append("svg")
                 .attr("viewBox", [0, 0, width, height])
-                .attr("class", "sankey")
 
             svg.append("g")
                 .selectAll("rect")
@@ -123,5 +122,5 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
         }
     }
 
-    return <div patch={rund3} />
+    return <div class="sankey" patch={rund3} />
 }

@@ -99,4 +99,9 @@ h2 {
 .flexy{
     display: flex;
     flex-wrap: wrap;
+    gap: 1em;
+}
+.hase{
+    color: maroon;
+    background: red;
 }

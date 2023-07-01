@@ -14,7 +14,7 @@
 }
 .family_relationship,
 .family {
-    @include tricolori(color);
+    @include tricolori(rgb(187, 125, 173));
 }
 .partnership,
 .partner {
@@ -26,33 +26,33 @@
 }
 
 .event {
-    @include tricolori(#ff8600)
+    @include tricolori(#ff8600);
 }
 
 .location {
-    @include tricolori(#829750)
+    @include tricolori(#829750);
 }
 
 .movement {
-    @include tricolori(rgb(163, 158, 89))
+    @include tricolori(rgb(163, 158, 89));
 }
 
 .organization {
-    @include tricolori(rgb(148, 104, 168))
+    @include tricolori(rgb(148, 104, 168));
 }
 
 .political_organization {
-    @include tricolori(#785586)
+    @include tricolori(#785586);
 }
 
 .person {
-    @include tricolori(rgb(165, 75, 75))
+    @include tricolori(rgb(165, 75, 75));
 }
 
 .vessel {
-    @include tricolori(rgb(30, 77, 148))
+    @include tricolori(rgb(30, 77, 148));
 }
 
 .undefined {
-    @include tricolori(rgb(114, 114, 114))
+    @include tricolori(rgb(114, 114, 114));
 }

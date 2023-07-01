@@ -1,5 +1,5 @@
 body {
-    /* display: grid; */
+    display: grid;
     grid-template-areas:
         'header header'
         'nav main'

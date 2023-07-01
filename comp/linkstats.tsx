@@ -54,20 +54,18 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
         let setout = (links: any[]) => {
 
             console.log("clücks", links)
+            tableout.replaceChildren()
 
             let rows =
                 d3.select(tableout)
                     .on('click', () => setout([]))
                     .selectAll('tr')
-                    .data(links)
+                    .data(links.sortBy(l => -l.weight))
                     .join('tr')
 
-            rows.selectAll('td')
-                //.data(d => [d.sid, d.tid, linktypetext(d.source.type), linktypetext(d.target.type)])
-                .data(d => [d.source, d.target])
-                .join('td')
-                .attr("class", d => d.type)
-                .text(d => d.id)
+            rows.append('td').attr("class", d => linktypetext(d.source.type)).text(d => d.sid)
+            rows.append('td').attr("class", d => linktypetext(d.target.type)).text(d => d.tid)
+            rows.append('td').text(d => d.weight)
         }
 
         rows

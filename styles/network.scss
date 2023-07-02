@@ -1,3 +1,15 @@
-.network {
+article.network {
+    display: grid;
+    gap: 1em;
+}
+
+.net-graph {
     background: lightseagreen;
+}
+
+.path-matrix {
+    background: lightcoral;
+    svg {
+        background: lightpink;
+    }
 }

@@ -137,8 +137,44 @@ export class Graph {
                 if (visited.has(n.id)) continue
                 visited.add(n.id)
 
-                //let pp = [...p, n]
                 if (n == target) goalpaths.push(p)
+
+                n.allneighbors?.map(nn => [...p, nn])?.forEach(p => nextfronteer.add(p))
+            }
+
+            return nextfronteer
+        }
+
+        let fronteer: Set<Path2> = new Set([[start]])
+        while (fronteer.size) {
+            fronteer = bfs(fronteer)
+        }
+
+        console.log("visited", visited.size, "nodes")
+
+        return { goalpaths, visited }
+    }
+
+    findpathsmulti(start: FishNode, targets: FishNode[]) {
+
+        let stargets = new Set<FishNode>(targets)
+
+        if (!this.enriched) throw "path must be enriched"
+
+        let visited = new Set<string>()
+        let goalpaths: Path2[] = []
+
+        function bfs(fronteer: Set<Path2>) {
+
+            let nextfronteer = new Set<Path2>()
+
+            for (let p of fronteer) {
+                let n = p.last
+
+                if (visited.has(n.id)) continue
+                visited.add(n.id)
+
+                if (stargets.has(n)) goalpaths.push(p)
 
                 n.allneighbors?.map(nn => [...p, nn])?.forEach(p => nextfronteer.add(p))
             }

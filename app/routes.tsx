@@ -4,7 +4,7 @@ export type Url =
     ["/"] |
     ["nodestats"] |
     ["matrix"] |
-    ["graph", string?] |
+    ["network", string?] |
     ["linkstats", string?] |
     ["tree", string?]
 

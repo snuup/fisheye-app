@@ -39,7 +39,7 @@ export class Controller {
         //console.log("setroute", m.url)
 
         switch (m.url[0]) {
-            case "graph":
+            case "network":
                 this.setfocus(m.url[1])
                 break
         }

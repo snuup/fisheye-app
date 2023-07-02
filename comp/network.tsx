@@ -1,7 +1,6 @@
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { FishNode } from '../analysis/fishnode'
 import { mount } from '../utils/common'
 
 const radius = 8
@@ -65,18 +64,6 @@ function rund3(e: SVGElement) {
         .classed('inv', d => m.investigatees.includes(d.id))
         .classed('focused', d => m.graphfocusnode === d)
 
-    // nodesxy.append('title').text(d => d.id)
-
-    // let nodesxz = svg2
-    //     .selectAll('circle')
-    //     .data(nodes)
-    //     .join('circle')
-    //     .attr('r', radius)
-    //     .classed('inv', d => m.investigatees.includes(d.id))
-    //     .classed('focused', d => m.graphfocusnode === d)
-
-    // nodesxz.append('title').text(d => d.id)
-
     simulation = d3
         .forceSimulation(nodes)
         .stop()
@@ -94,37 +81,6 @@ function rund3(e: SVGElement) {
     }
 
     mount({ simulation })
-
-
-    // function forceup(alpha) {
-    //     for (let n of nodes.filter(n => n.up)) {
-    //         n.vz += (0 - n.z) * n.up! * 0.2 * alpha
-    //     }
-    // }
-
-    // function boxingForce(alpha) {
-    //     for (let n of nodes) {
-    //         n.x = n.x.clamp(0, 100)
-    //         n.y = n.y.clamp(0, 100)
-    //         n.z = n.z.clamp(0, 100)
-    //     }
-    // }
-
-    // function invForce() {
-    //     let [a, b, c, d] = m.investigatees.map(m.netgraph.getnode)
-    //     a.x = 5
-    //     b.x = 80
-    //     c.x = 95
-    //     d.x = 50
-    //     a.y = 10
-    //     b.y = 10
-    //     c.y = 35
-    //     d.y = 90
-    //     a.z = 0
-    //     b.z = 0
-    //     c.z = 0
-    //     d.z = 0
-    // }
 
     function updateview() {
         console.log('ontick')
@@ -151,9 +107,11 @@ function rund3(e: SVGElement) {
 }
 
 export const Network = () => {
-    return <div class='network'  >
-        <svg patch={rund3}></svg>
-    </div>
+    return (
+        <div class='net-graph'  >
+            <svg patch={rund3}></svg>
+        </div>
+    )
 }
 
 // function reheat() {

@@ -4,6 +4,7 @@ import { m } from '../app/model'
 import { FishNode } from '../analysis/fishnode'
 import { mount } from '../utils/common'
 
+const radius = 8
 const width = 600
 const height = 400
 
@@ -17,12 +18,13 @@ function rand100() {
 
 let simulation
 
-function rund3(e: HTMLElement) {
+function rund3(e: SVGElement) {
+
+    console.log("patch network!")
 
     const svg1 = d3
         .select(e)
-        .append('svg')
-        .attr('class', 'xy')
+        //.attr('class', 'xy')
         .attr('viewBox', [0, 0, width, height])
         .style('width', width)
         .style('height', height)
@@ -57,13 +59,13 @@ function rund3(e: HTMLElement) {
         n.up = 0
     })
 
-    // let nodesxy = svg1
-    //     .selectAll('circle')
-    //     .data(nodes)
-    //     .join('circle')
-    //     .attr('r', radius)
-    //     .classed('inv', d => m.investigatees.includes(d.id))
-    //     .classed('focused', d => m.graphfocusnode === d)
+    let nodesxy = svg1
+        .selectAll('circle')
+        .data(nodes)
+        .join('circle')
+        .attr('r', radius)
+        .classed('inv', d => m.investigatees.includes(d.id))
+        .classed('focused', d => m.graphfocusnode === d)
 
     // nodesxy.append('title').text(d => d.id)
 
@@ -141,7 +143,9 @@ function rund3(e: HTMLElement) {
 }
 
 export const Network = () => {
-    return <div class='network' patch={rund3} />
+    return <div class='network'  >
+        <svg patch={rund3}></svg>
+    </div>
 }
 
 // function reheat() {

@@ -37,12 +37,12 @@
     }
 
     &:hover {
-        background: #fff;
+        background: #f8f8f8;
     }
     cursor: pointer;
 
     &.selected {
-        background: lightblue;
+        background: white;
     }
 }
 

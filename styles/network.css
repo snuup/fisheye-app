@@ -14,3 +14,12 @@ article.network {
 .path-matrix svg {
   background: lightpink;
 }
+
+.path-matrix circle {
+  fill: orangered;
+}
+
+.path-matrix text {
+  text-anchor: middle;
+  dominant-baseline: central;
+}

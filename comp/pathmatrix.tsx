@@ -23,26 +23,19 @@ function rund3(e: SVGElement) {
         .style('height', svgsize)
         .attr('class', 'path-matrix')
 
-    svg
+    let cells = svg
         .selectAll('g')
         .data(indexes)
         .join('g')
-        .attr("width", cellsize)
-        .attr("height", cellsize)
-        //.attr("transform", `translate(${[cellsize / 2 + , cellsize / 2]})`)
-        .attr("transform", ([x, y]) => `translate(${[cellsize / 2 + x * cellsize, cellsize / 2 + y * cellsize]})`)
+        .attr("transform", ([x, y]) => `translate(${[x * cellsize, ++y * cellsize]})`)
+
+    cells
         .append('circle')
         .attr("r", cellsize / 2)
 
-    // let rows = svg
-    //     .selectAll('g')
-    //     .data(indexes)
-    //     .join('g')
-    //     .attr("width", cellsize)
-    //     .attr("height", cellsize)
-    //     .attr("transform", ([x, y]) => `translate(${[x * cellsize, y * cellsize]})`)
-    //     .append('text')
-    //     .text(d => d.toString())
+    cells
+        .append('text')
+        .text(d => d.toString())
 }
 
 export const PathMatrix = () => {

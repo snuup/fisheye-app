@@ -11,9 +11,12 @@ article.network {
     background: lightcoral;
     svg {
         background: lightpink;
-
-        g {
-
-        }
+    }
+    circle {
+        fill: orangered;
+    }
+    text {
+        text-anchor: middle;
+        dominant-baseline: central;
     }
 }

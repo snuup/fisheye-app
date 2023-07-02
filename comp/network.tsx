@@ -79,7 +79,7 @@ function rund3(e: SVGElement) {
 
     simulation = d3
         .forceSimulation(nodes)
-        //.stop()
+        .stop()
         //.force('link', d3.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3.forceCollide().radius(30))
         .force('center', d3.forceCenter(50, 50).strength(0.1))

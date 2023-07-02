@@ -124,35 +124,34 @@ export class Graph {
 
         if (!this.enriched) throw "path must be enriched"
 
-        let visited: FishNode[] = []
+        let visited = new Set<string>()
         let goalpaths: Path2[] = []
 
-        function bfs(fronteer: Path2[]) {
+        function bfs(fronteer: Set<Path2>) {
 
-            let nextfronteer: Path2[] = []
+            let nextfronteer = new Set<Path2>()
 
             for (let p of fronteer) {
                 let n = p.last
 
-                if (visited.includes(n)) continue
-                visited.push(n)
+                if (visited.has(n.id)) continue
+                visited.add(n.id)
 
                 //let pp = [...p, n]
                 if (n == target) goalpaths.push(p)
 
-                nextfronteer.push(...n.allneighbors?.map(nn => [...p, nn]) ?? [])
-                nextfronteer = nextfronteer.distinctBy()
+                n.allneighbors?.map(nn => [...p, nn])?.forEach(p => nextfronteer.add(p))
             }
 
             return nextfronteer
         }
 
-        let fronteer: Path2[] = [[start]]
-        while (fronteer.length) {
+        let fronteer: Set<Path2> = new Set([[start]])
+        while (fronteer.size) {
             fronteer = bfs(fronteer)
         }
 
-        console.log("visited", visited.length, "nodes")
+        console.log("visited", visited.size, "nodes")
 
         return { goalpaths, visited }
     }

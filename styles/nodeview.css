@@ -7,7 +7,9 @@
   grid-template-rows: 1fr auto;
   grid-template-areas: 'name logo' 'gridtable gridtable';
   gap: 8px;
-  border: solid 1px #ccc;
+  padding: .5em;
+  _background: #fafafa;
+  _border-left: solid 4px #777;
   cursor: pointer;
 }
 
@@ -29,12 +31,12 @@
   grid-area: name;
 }
 
-.nodeview > * {
-  padding: 2px;
-}
-
 .nodeview:hover {
   background: #fff;
+}
+
+.nodeview.selected {
+  background: lightblue;
 }
 
 nav {

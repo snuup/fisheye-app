@@ -18,6 +18,7 @@ export class FishNode {
     isinv?: boolean
     up = 0
     vz: number
+    selected?: boolean
 
     constructor(original) {
         this.original = original

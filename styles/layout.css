@@ -8,7 +8,7 @@ body {
     height: 100vh;
     padding: 0;
     margin: 0;
-    grid-template-columns: 230px 1fr;
+    grid-template-columns: 260px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-gap: 10px;
 }
@@ -28,6 +28,7 @@ nav {
     grid-area: main;
     /* background-color: lightsalmon; */
     overflow-y: auto;
+    padding: 1em
 }
 
 footer {
@@ -37,7 +38,7 @@ footer {
 
 #main,
 nav {
-    padding: 1em;
+    /* padding: 1em; */
     /* padding-bottom: 5em */
 }
 

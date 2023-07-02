@@ -129,16 +129,16 @@ export function clearprops(e, excepts) {
 }
 
 function setevents(e: HTMLElement, props) {
-    // console.log("setevents", props)
+    // console.log("setevents", props, e, e.events)
 
     // remove
     if (e.events) {
         Object.keys(e.events)
             .filter((name) => props[name] != e.events[name])
             .forEach((name) => {
-                //console.log("remove", name)
+       //         console.log("remove", name)
+                e.removeEventListener(name.slice(2), e.events[name])
                 delete e.events[name]
-                return e.removeEventListener(name, e.events[name])
             })
     }
     // add
@@ -146,7 +146,8 @@ function setevents(e: HTMLElement, props) {
         .filter((name) => isevent(name) && (!e.events || !e.events[name])) // test if not registered yet
         .forEach((name) => {
             let handler = props[name]
-            //console.log("add", name)
+            if(e.events?.[name] == handler) debugger
+         //   console.log("add", name)
             e.addEventListener(name.slice(2), handler)
             e.events = e.events || {}
             e.events[name] = handler

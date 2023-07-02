@@ -159,9 +159,11 @@ export class Controller {
 
     // network
 
-    togglenetnode(n: FishNode) {
-        console.log("yo eh: ", n.id)
-        m.netgraph // ... create new graph class ? add node, compute path matrix
+    togglenetnode(ev, n: FishNode) {
+        //if(ev.bubbles) return
+        console.log("c.togglenetnode", ev.currentTarget, ev, n)
+        m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
+        updateview(ev.currentTarget)
     }
 }
 

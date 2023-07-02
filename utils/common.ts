@@ -73,12 +73,16 @@ mergePrototype(class extends Array {
     get last() {
         return this[this.length - 1]
     }
-    cross<T>(other?: Array<T>) : Array<[T, T]> {
-        let result : Array<[T, T]> = []
+    cross<T>(other?: Array<T>): Array<[T, T]> {
+        let result: Array<[T, T]> = []
         let o = other ?? this
         this.forEach(x => o.forEach(y => result.push([x, y])))
         return result
     }
+    remove(x: any) {
+        const i = this.indexOf(x)
+        if (i > -1) this.splice(i, 1)
+      }
 }, Array)
 
 function* arraycombinations(arr) {

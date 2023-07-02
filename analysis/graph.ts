@@ -28,9 +28,24 @@ export class Graph {
     }
 
     addnode(n: FishNode) {
-        if (this.nodemap.has(n.id)) debugger
         this.nodes.push(n)
         this.nodemap.set(n.id, n)
+    }
+
+    removenode(n: FishNode) {
+        this.nodes.remove(n)
+        this.nodemap.delete(n.id)
+    }
+
+    togglenode(n: FishNode) {
+        if (this.hasnode(n)) {
+            this.removenode(n)
+            n.selected = false
+        }
+        else {
+            this.addnode(n)
+            n.selected = true
+        }
     }
 
     searchnode(nidstart: string): FishNode | undefined {
@@ -53,6 +68,10 @@ export class Graph {
 
     haslink(e: FishLink): boolean {
         return this.links.includes(e)
+    }
+
+    hasnode(n: FishNode): boolean {
+        return this.nodemap.has(n.id)
     }
 
     appendlink(l: FishLink) {
@@ -115,7 +134,7 @@ export class Graph {
             for (let p of fronteer) {
                 let n = p.last
 
-                if (visited.includes(n)) continue;
+                if (visited.includes(n)) continue
                 visited.push(n)
 
                 let pp = [...p, n]

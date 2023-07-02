@@ -16,6 +16,9 @@
         'name logo'
         'gridtable gridtable';
     gap: 8px;
+    padding: .5em;
+    _background: #fafafa;
+    _border-left: solid 4px #777;
 
     .gridtable {
         grid-area: gridtable;
@@ -30,14 +33,17 @@
     }
 
     & > * {
-        padding: 2px;
+        // padding: 2px;
     }
 
-    border: solid 1px #ccc;
-    &:hover{
+    &:hover {
         background: #fff;
     }
     cursor: pointer;
+
+    &.selected {
+        background: lightblue;
+    }
 }
 
 nav {

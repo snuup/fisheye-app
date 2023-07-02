@@ -14,7 +14,7 @@ const yscaler = d3.scaleLinear([0, 100], [0, height])
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
 
-let simulation
+let simulation: any = null
 
 function rund3(e: SVGElement) {
 
@@ -77,16 +77,24 @@ function rund3(e: SVGElement) {
 
     // nodesxz.append('title').text(d => d.id)
 
-    // simulation = d3d
-    //     .forceSimulation(nodes, 3)
-    //     .stop()
-    //     .force('link', d3d.forceLink(links).id((n: FishNode) => n.id))
-    //     .force('collide', d3d.forceCollide().radius(radius).strength(0.03))
-    //     .force('z', d3d.forceZ(100).strength(0.05))
-    //     .force('up-force', forceup)
-    //     .force('box', boxingForce)
-    //     .force('inv', invForce)
-    //     .on('tick', updateview)
+    simulation = d3
+        .forceSimulation(nodes)
+        //.stop()
+        //.force('link', d3.forceLink(links).id((n: FishNode) => n.id))
+        .force('collide', d3.forceCollide().radius(30))
+        .force('center', d3.forceCenter(50, 50).strength(0.1))
+        .force('box', boxingForce)
+        .on('tick', updateview)
+
+    function boxingForce(alpha) {
+        for (let n of nodes) {
+            n.x = n.x.clamp(2, 98)
+            n.y = n.y.clamp(2, 98)
+        }
+    }
+
+    mount({ simulation })
+
 
     // function forceup(alpha) {
     //     for (let n of nodes.filter(n => n.up)) {
@@ -120,6 +128,11 @@ function rund3(e: SVGElement) {
 
     function updateview() {
         console.log('ontick')
+        for (let n of nodes) {
+            n.x = n.x.clamp(2, 98)
+            n.y = n.y.clamp(2, 98)
+        }
+        // console.log(m.netgraph.nodes.map(n => n.y))
         link.attr('x1', d => xscaler(d.source.x))
             .attr('y1', d => yscaler(d.source.y))
             .attr('x2', d => xscaler(d.target.x))
@@ -134,7 +147,7 @@ function rund3(e: SVGElement) {
 
     updateview() // show random placements
 
-    // mount({ simulation })
+    mount({ simulation, updateview })
 }
 
 export const Network = () => {
@@ -148,5 +161,11 @@ export const Network = () => {
 //     simulation.restart()
 // }
 
-mount({ ng: m.netgraph, xscaler, yscaler })
+function printnodesxy() {
+    for (let n of m.netgraph.nodes) {
+        console.log(n.id, n.x, n.y)
+    }
+}
+
+mount({ ng: m.netgraph, xscaler, yscaler, printnodesxy })
 

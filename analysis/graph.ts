@@ -137,8 +137,8 @@ export class Graph {
                 if (visited.includes(n)) continue
                 visited.push(n)
 
-                let pp = [...p, n]
-                if (n == target) goalpaths.push(pp)
+                //let pp = [...p, n]
+                if (n == target) goalpaths.push(p)
 
                 nextfronteer.push(...n.allneighbors?.map(nn => [...p, nn]) ?? [])
                 nextfronteer = nextfronteer.distinctBy()

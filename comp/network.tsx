@@ -12,9 +12,7 @@ const xscaler = d3.scaleLinear([0, 100], [0, width])
 const yscaler = d3.scaleLinear([0, 100], [0, height])
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
-function rand100() {
-    return randscale(Math.random())
-}
+const rand100 = () => randscale(Math.random())
 
 let simulation
 
@@ -52,8 +50,8 @@ function rund3(e: SVGElement) {
     let nodes = m.netgraph.nodes
     nodes.forEach(n => {
         let isinv = m.investigatees.includes(n.id)
-        n.x = rand100()
-        n.y = rand100()
+        n.x ??= rand100()
+        n.y ??= rand100()
         n.z = isinv ? 1 : 0
         n.isinv = isinv
         n.up = 0
@@ -150,5 +148,5 @@ export const Network = () => {
 //     simulation.restart()
 // }
 
-mount({ ng: m.netgraph })
+mount({ ng: m.netgraph, xscaler, yscaler })
 

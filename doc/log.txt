@@ -1,3 +1,6 @@
+2.7.
+- path matrix
+
 1.7.
 - select nodes for netgraph
   - list in nav, selectable -> update network on (un)check

@@ -120,24 +120,21 @@ function rund3(e: SVGElement) {
     //     d.z = 0
     // }
 
-    // function updateview() {
-    //     console.log('ontick')
-    //     link.attr('x1', d => xscaler(d.source.x))
-    //         .attr('y1', d => yscaler(d.source.y))
-    //         .attr('x2', d => xscaler(d.target.x))
-    //         .attr('y2', d => yscaler(d.target.y))
-    //         .style('opacity', d => opacityscaler(d.maxz))
+    function updateview() {
+        console.log('ontick')
+        link.attr('x1', d => xscaler(d.source.x))
+            .attr('y1', d => yscaler(d.source.y))
+            .attr('x2', d => xscaler(d.target.x))
+            .attr('y2', d => yscaler(d.target.y))
+        //.style('opacity', d => opacityscaler(d.maxz))
 
-    //         nodesxy
-    //         .attr('cx', d => xscaler(d.x))
-    //         .attr('cy', d => yscaler(d.y))
-    //         .style('opacity', d => opacityscaler(d.z))
+        nodesxy
+            .attr('cx', d => xscaler(d.x))
+            .attr('cy', d => yscaler(d.y))
+        //.style('opacity', d => opacityscaler(d.z))
+    }
 
-    //     nodesxz
-    //         .attr('cx', d => xscaler(d.x))
-    //         .attr('cy', d => zscaler(d.z))
-    //         .style('opacity', d => 1 - opacityscaler(d.y))
-    // }
+    updateview() // show random placements
 
     // mount({ simulation })
 }
@@ -153,4 +150,5 @@ export const Network = () => {
 //     simulation.restart()
 // }
 
-// mount({ opacityscaler, zscaler, reheat })
+mount({ ng: m.netgraph })
+

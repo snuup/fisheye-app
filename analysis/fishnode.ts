@@ -20,7 +20,7 @@ export class FishNode {
     vz: number
     selected?: boolean
 
-    constructor(original) {
+    private constructor(original) {
         this.original = original
         this.nid = cleanid(original.id)
         this.paths = []

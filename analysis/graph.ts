@@ -157,6 +157,8 @@ export class Graph {
 
     findpathsmulti(start: FishNode, targets: FishNode[]) {
 
+        console.log("findpathsmulti", start, targets)
+
         let stargets = new Set<FishNode>(targets)
 
         if (!this.enriched) throw "path must be enriched"
@@ -187,7 +189,7 @@ export class Graph {
             fronteer = bfs(fronteer)
         }
 
-        console.log("visited", visited.size, "nodes")
+        console.log("visited", visited.size, "nodes", "found paths", goalpaths)
 
         return { goalpaths, visited }
     }

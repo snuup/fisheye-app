@@ -26,8 +26,8 @@ export class Controller {
 
         m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
 
-        let invs = m.investigatees.map(m.graph.getnode)
-        m.netgraph = new Graph(invs)
+        //let invs = m.investigatees.map(m.graph.getnode)
+        //m.netgraph = new Graph(invs)
     }
 
     getsubgraph(nodes: FishNode[]) {

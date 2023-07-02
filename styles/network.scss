@@ -8,14 +8,15 @@ article.network {
 }
 
 .path-matrix {
-    background: lightcoral;
+    // background: lightcoral;
     svg {
-        background: lightpink;
+        // background: lightpink;
     }
     circle {
-        fill: orangered;
+        fill: #333;
     }
     text {
+        fill: white;
         text-anchor: middle;
         dominant-baseline: central;
     }

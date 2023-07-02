@@ -7,19 +7,12 @@ article.network {
   background: lightseagreen;
 }
 
-.path-matrix {
-  background: lightcoral;
-}
-
-.path-matrix svg {
-  background: lightpink;
-}
-
 .path-matrix circle {
-  fill: orangered;
+  fill: #333;
 }
 
 .path-matrix text {
+  fill: white;
   text-anchor: middle;
   dominant-baseline: central;
 }

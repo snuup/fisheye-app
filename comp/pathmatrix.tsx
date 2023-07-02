@@ -47,8 +47,9 @@ function rund3(e: SVGElement) {
         .data(indexes)
         .join('g')
         .attr("transform", ([x, y]) => `translate(${[x * cellsize, ++y * cellsize]})`)
-        .datum(getpath)
+        .datum(d => getpath(d))
         .attr("opacity", p => opacityScaler(p?.length ?? 100))
+        .on("click", (_, d) => console.log(d))
 
     cells
         .append('circle')
@@ -57,7 +58,10 @@ function rund3(e: SVGElement) {
     cells
         .append('text')
         .text(p => p?.length ?? 100)
-        // .attr("opacity", p => opacityScaler(p.length))
+
+    cells
+        .append('title')
+        .text(p => p!.map(n => n.id).join(" > "))
 }
 
 export const PathMatrix = () => {

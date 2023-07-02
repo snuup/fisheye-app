@@ -7,6 +7,10 @@ article.network {
   background: lightseagreen;
 }
 
+.path-matrix g {
+  cursor: pointer;
+}
+
 .path-matrix circle {
   fill: #333;
 }

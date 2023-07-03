@@ -42,7 +42,7 @@ function rund3(e: SVGElement) {
 
     let svg = d3
         .select(e)
-        .style('width', svgsize)
+        .style('width', svgsize + 300) // add 300 for labels
         .style('height', svgsize)
         .attr('class', 'path-matrix')
 
@@ -54,6 +54,17 @@ function rund3(e: SVGElement) {
         .datum(d => getpaths(d as [number, number]))
         .attr("opacity", p => opacityScaler(p.length))
         .on("click", (_, paths) => c.addpath2netgraph(paths))
+
+    let texts = svg
+        .selectAll('text')
+        .data(nodes.slice(0, -1))
+        .join('text')
+        .attr("transform", (_,i) => `translate(${[(nodes.length + 1) * cellsize, (i+1) * cellsize]})`)
+        .text(d => d.id)
+        .attr("class", "label")
+        //.datum(d => getpaths(d as [number, number]))
+        //.attr("opacity", p => opacityScaler(p.length))
+        //.on("click", (_, paths) => c.addpath2netgraph(paths))
 
     cells
         .append('circle')

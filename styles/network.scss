@@ -26,4 +26,8 @@ article.network {
         text-anchor: middle;
         dominant-baseline: central;
     }
+    text.label{
+        fill: #333;
+        text-anchor: start;
+    }
 }

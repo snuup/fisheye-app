@@ -24,3 +24,8 @@ article.network {
   text-anchor: middle;
   dominant-baseline: central;
 }
+
+.path-matrix text.label {
+  fill: #333;
+  text-anchor: start;
+}

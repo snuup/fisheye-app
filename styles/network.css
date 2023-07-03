@@ -11,6 +11,14 @@ article.network {
   outline: solid 1px lightgreen;
 }
 
+.net-graph text {
+  text-anchor: middle;
+}
+
+.net-graph g.inv text {
+  fill: red;
+}
+
 .path-matrix g {
   cursor: pointer;
 }

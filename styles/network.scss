@@ -8,6 +8,12 @@ article.network {
     svg {
         outline: solid 1px lightgreen;
     }
+    text{
+        text-anchor: middle;
+    }
+    g.inv text{
+        fill: red;
+    }
 }
 
 .path-matrix {

@@ -13,13 +13,15 @@ const yscaler = d3.scaleLinear([0, 100], [0, height])
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
 
+mount({ rand100 })
+
 let simulation: any = null
 
 function rund3(e: SVGElement) {
 
     console.log("patch network!")
 
-    const svg1 = d3
+    const svg = d3
         .select(e)
         //.attr('class', 'xy')
         .attr('viewBox', [0, 0, width, height])
@@ -28,7 +30,7 @@ function rund3(e: SVGElement) {
 
     let links = m.netgraph.links
 
-    const link = svg1
+    const link = svg
         .selectAll('.link')
         .data(links)
         .join(
@@ -46,35 +48,46 @@ function rund3(e: SVGElement) {
             exit => exit.remove()
         )
 
-    let nodes = m.netgraph.nodes
-    nodes.forEach(n => {
+    let nodesdata = m.netgraph.nodes
+    nodesdata.forEach(n => {
         let isinv = m.investigatees.includes(n.id)
         n.x ??= rand100()
         n.y ??= rand100()
-        n.z = isinv ? 1 : 0
+        console.log("xy = ", n.x, n.y)
         n.isinv = isinv
         n.up = 0
     })
 
-    let nodesxy = svg1
-        .selectAll('circle')
-        .data(nodes)
-        .join('circle')
+    let nodes = svg
+        .selectAll('g')
+        .data(nodesdata)
+        .join('g')
+        .classed('inv', d => m.investigatees.includes(d.id))
+        .classed('focused', d => m.graphfocusnode === d)
+
+    nodes
+        .append('circle')
         .attr('r', radius)
         .classed('inv', d => m.investigatees.includes(d.id))
         .classed('focused', d => m.graphfocusnode === d)
 
+    nodes
+        .append('text')
+        .text(d => d.id)
+        //.classed('inv', d => m.investigatees.includes(d.id))
+        //.classed('focused', d => m.graphfocusnode === d)
+
     simulation = d3
-        .forceSimulation(nodes)
-        .stop()
+        .forceSimulation(nodesdata)
+        //.stop()
         //.force('link', d3.forceLink(links).id((n: FishNode) => n.id))
         .force('collide', d3.forceCollide().radius(30))
-        .force('center', d3.forceCenter(50, 50).strength(0.1))
+        .force('center', d3.forceCenter(50, 50).strength(0.1)) // x and y range = [0..100]
         .force('box', boxingForce)
         .on('tick', updateview)
 
     function boxingForce(alpha) {
-        for (let n of nodes) {
+        for (let n of nodesdata) {
             n.x = n.x.clamp(2, 98)
             n.y = n.y.clamp(2, 98)
         }
@@ -84,7 +97,7 @@ function rund3(e: SVGElement) {
 
     function updateview() {
         console.log('ontick')
-        for (let n of nodes) {
+        for (let n of nodesdata) {
             n.x = n.x.clamp(2, 98)
             n.y = n.y.clamp(2, 98)
         }
@@ -95,9 +108,10 @@ function rund3(e: SVGElement) {
             .attr('y2', d => yscaler(d.target.y))
         //.style('opacity', d => opacityscaler(d.maxz))
 
-        nodesxy
-            .attr('cx', d => xscaler(d.x))
-            .attr('cy', d => yscaler(d.y))
+        nodes
+            .attr('transform', (d: any) => `translate(${xscaler(d.x)},${yscaler(d.y)})`)
+        //.attr('cx', d => xscaler(d.x))
+        //.attr('cy', d => yscaler(d.y))
         //.style('opacity', d => opacityscaler(d.z))
     }
 

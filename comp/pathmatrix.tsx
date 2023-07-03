@@ -15,6 +15,7 @@ const opacityScaler = d3.scaleLinear([0, 1, 2, 4, 10], [.2, 1, 1, 0.2, 0])
 function rund3(e: SVGElement) {
 
     console.log("patch path-matrix!")
+    //return
 
     let g = m.netgraph
     let nodes = g.nodes
@@ -62,9 +63,6 @@ function rund3(e: SVGElement) {
         .attr("transform", (_,i) => `translate(${[(nodes.length + 1) * cellsize, (i+1) * cellsize]})`)
         .text(d => d.id)
         .attr("class", "label")
-        //.datum(d => getpaths(d as [number, number]))
-        //.attr("opacity", p => opacityScaler(p.length))
-        //.on("click", (_, paths) => c.addpath2netgraph(paths))
 
     cells
         .append('circle')

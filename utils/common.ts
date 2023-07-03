@@ -85,6 +85,10 @@ mergePrototype(class extends Array {
       }
 }, Array)
 
+mergePrototype(class extends Set {
+    get head() { let [h] = this; return h }
+}, Set)
+
 function* arraycombinations(arr) {
     let [h, ...t] = arr
     if (!h) return // termination

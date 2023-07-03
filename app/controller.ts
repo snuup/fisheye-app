@@ -4,7 +4,7 @@ import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph, Path2 } from "../analysis/graph"
+import { Graph, NodePath } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
@@ -168,9 +168,9 @@ export class Controller {
         updateview(".network")
     }
 
-    addpath2netgraph(p: Path2) {
-        let links = d3.pairs(p).map(([n1, n2]) => n1.getneighborlink(n2))
-        console.log("linko", links)
+    addpath2netgraph(p: NodePath[]) {
+        //let links = d3.pairs(p).map(([n1, n2]) => n1.getneighborlink(n2))
+        console.log("linko")
     }
 }
 

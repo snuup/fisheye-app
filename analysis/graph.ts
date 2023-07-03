@@ -120,40 +120,6 @@ export class Graph {
         return this.nodes.groupBy(n => n.upfixed2)
     }
 
-    findpaths(start: FishNode, target: FishNode) {
-
-        if (!this.enriched) throw "path must be enriched"
-
-        let visited = new Set<string>()
-        let goalpaths: Path2[] = []
-
-        function bfs(fronteer: Set<Path2>) {
-
-            let nextfronteer = new Set<Path2>()
-
-            for (let p of fronteer) {
-                let n = p.last
-
-                if (visited.has(n.id)) continue
-                visited.add(n.id)
-
-                if (n == target) goalpaths.push(p)
-
-                n.allneighbors?.map(nn => [...p, nn])?.forEach(p => nextfronteer.add(p))
-            }
-
-            return nextfronteer
-        }
-
-        let fronteer: Set<Path2> = new Set([[start]])
-        while (fronteer.size) {
-            fronteer = bfs(fronteer)
-        }
-
-        console.log("visited", visited.size, "nodes")
-
-        return { goalpaths, visited }
-    }
 
     findpathsmulti(start: FishNode, targets: FishNode[]) {
 
@@ -164,12 +130,12 @@ export class Graph {
         if (!this.enriched) throw "path must be enriched"
 
         let visited = new Set<string>()
-        let goalpaths: Path2[] = []
+        let goalpaths: NodePath[] = []
 
-        function bfs(fronteer: Set<Path2>) {
+        function bfs(fronteer: Set<NodePath>) {
 
-            let nextfronteer = new Set<Path2>()
-            let reachedtargets : FishNode[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
+            let nextfronteer = new Set<NodePath>()
+            let reachedtargets: FishNode[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
 
             for (let p of fronteer) {
                 let n = p.last
@@ -182,17 +148,17 @@ export class Graph {
 
                 n.allneighbors
                     ?.filter(n => !visited.has(n.id))
-                    ?.map(nn => [...p, nn])
+                    ?.map(n => p.with(n))
                     ?.forEach(p => nextfronteer.add(p))
             }
 
-            //console.log("nextfronteer", [...nextfronteer].map(p => p.map(n => n.id).join(" - ")))
             reachedtargets.forEach(n => stargets.delete(n))
 
-            return nextfronteer
+            let godeeper = fronteer.head.length < 3
+            return (godeeper && stargets.size) ? nextfronteer : new Set<NodePath>()
         }
 
-        let fronteer: Set<Path2> = targets.length ? new Set([[start]]) : new Set()
+        let fronteer: Set<NodePath> = new Set(targets.length ? [new NodePath([start])] : [])
         while (fronteer.size) {
             fronteer = bfs(fronteer)
         }
@@ -208,4 +174,17 @@ function printpath(p: FishNode[]) {
 }
 mount({ printpath })
 
-export type Path2 = FishNode[]
+export class NodePath {
+
+    constructor(public nodes: FishNode[]) { }
+    static Empty = new NodePath([])
+
+    add(n) { this.nodes.push(n) }
+    with(n: FishNode): NodePath { return new NodePath([...this.nodes, n]) }
+    get first() { return this.nodes.first }
+    get last() { return this.nodes.last }
+    get length() { return this.nodes.length-1 }
+    get asText() { return this.nodes.map(n => n.id).join(" > ") }
+}
+
+//export type Path2 = FishNode[]

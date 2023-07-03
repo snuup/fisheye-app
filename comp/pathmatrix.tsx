@@ -5,6 +5,7 @@ import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { mount } from '../utils/common'
 import { c } from '../app/controller'
+import { NodePath } from '../analysis/graph'
 
 const cellsize = 30
 
@@ -23,18 +24,20 @@ function rund3(e: SVGElement) {
     //console.log(indexes)
 
     // compute matrix
-    const computepaths = (i) => {
+    function computepaths(i) : NodePath[] {
         let { goalpaths } = g.findpathsmulti(nodes[i], nodes.slice(i + 1))
+        console.log("computepaths", goalpaths)
         return goalpaths
     }
+
     let allpaths = d3.range(n).flatMap(computepaths)
     console.log("allpaths", allpaths)
     mount({ allpaths })
 
-    const getpath = ([i1, i2]) => {
+    function getpaths([i1, i2]): NodePath[] {
         let n1 = nodes[i1]
         let n2 = nodes[i2]
-        return allpaths.find(p => p.last == n1 && p.first == n2) ?? [] // ?.length?.toString() ?? "?"
+        return allpaths.filter(p => p.last == n1 && p.first == n2)
     }
 
     let svg = d3
@@ -48,9 +51,9 @@ function rund3(e: SVGElement) {
         .data(indexes)
         .join('g')
         .attr("transform", ([x, y]) => `translate(${[x * cellsize, ++y * cellsize]})`)
-        .datum(d => getpath(d as [number, number]))
+        .datum(d => getpaths(d as [number, number]))
         .attr("opacity", p => opacityScaler(p.length))
-        .on("click", (_, p) => c.addpath2netgraph(p))
+        .on("click", (_, paths) => c.addpath2netgraph(paths))
 
     cells
         .append('circle')
@@ -58,11 +61,11 @@ function rund3(e: SVGElement) {
 
     cells
         .append('text')
-        .text(p => p.length - 1)
+        .text(ps => ps.first?.length ?? "*")
 
     cells
         .append('title')
-        .text(p => p.map(n => n.id).join(" > "))
+        .text(ps => `${ps.first?.asText ?? "-"} (${ps.length || "-"})`)
 }
 
 export const PathMatrix = () => {
@@ -74,4 +77,3 @@ export const PathMatrix = () => {
 }
 
 // mount({  })
-

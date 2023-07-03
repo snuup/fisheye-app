@@ -32,6 +32,10 @@ interface Array<T> {
     remove(x:T)
 }
 
+interface Set<T> {
+    get head(): T
+}
+
 interface Number {
     clamp(min?: number, max?: number)
 }

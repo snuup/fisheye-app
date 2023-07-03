@@ -1,3 +1,7 @@
+3.7.
+- networkx
+- fx path algorithm, to show all simpel paths
+
 2.7.
 - path matrix
 

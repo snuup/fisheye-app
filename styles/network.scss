@@ -5,6 +5,9 @@ article.network {
 
 .net-graph {
     background: lightseagreen;
+    svg {
+        outline: solid 1px lightgreen;
+    }
 }
 
 .path-matrix {

@@ -1,13 +1,14 @@
+import * as d3 from "d3"
 import { initrouter } from "../jmx-lib/router"
 import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph } from "../analysis/graph"
+import { Graph, Path2 } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
-import { Path, PathMatrixBuilder } from "../analysis/path"
+import { PathMatrixBuilder } from "../analysis/path"
 
 export class Controller {
 
@@ -147,7 +148,6 @@ export class Controller {
     }
 
 
-
     // inc1(ev: PointerEvent) {
     //     m.counter1++
     //     updateview(ev.target as Node)
@@ -166,6 +166,11 @@ export class Controller {
         m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
         updateview(ev.currentTarget)
         updateview(".network")
+    }
+
+    addpath2netgraph(p: Path2) {
+        let links = d3.pairs(p).map(([n1, n2]) => n1.getneighborlink(n2))
+        console.log("linko", links)
     }
 }
 

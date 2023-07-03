@@ -169,22 +169,30 @@ export class Graph {
         function bfs(fronteer: Set<Path2>) {
 
             let nextfronteer = new Set<Path2>()
+            let reachedtargets : FishNode[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
 
             for (let p of fronteer) {
                 let n = p.last
-
-                if (visited.has(n.id)) continue
                 visited.add(n.id)
 
-                if (stargets.has(n)) goalpaths.push(p)
+                if (stargets.has(n)) {
+                    goalpaths.push(p)
+                    reachedtargets.push(n)
+                }
 
-                n.allneighbors?.map(nn => [...p, nn])?.forEach(p => nextfronteer.add(p))
+                n.allneighbors
+                    ?.filter(n => !visited.has(n.id))
+                    ?.map(nn => [...p, nn])
+                    ?.forEach(p => nextfronteer.add(p))
             }
+
+            //console.log("nextfronteer", [...nextfronteer].map(p => p.map(n => n.id).join(" - ")))
+            reachedtargets.forEach(n => stargets.delete(n))
 
             return nextfronteer
         }
 
-        let fronteer: Set<Path2> = new Set([[start]])
+        let fronteer: Set<Path2> = targets.length ? new Set([[start]]) : new Set()
         while (fronteer.size) {
             fronteer = bfs(fronteer)
         }
@@ -195,4 +203,9 @@ export class Graph {
     }
 }
 
-type Path2 = FishNode[]
+function printpath(p: FishNode[]) {
+    return p.map(n => n.id).join(" - ")
+}
+mount({ printpath })
+
+export type Path2 = FishNode[]

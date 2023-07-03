@@ -7,6 +7,10 @@ article.network {
   background: lightseagreen;
 }
 
+.net-graph svg {
+  outline: solid 1px lightgreen;
+}
+
 .path-matrix g {
   cursor: pointer;
 }

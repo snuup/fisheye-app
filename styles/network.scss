@@ -8,11 +8,20 @@ article.network {
     svg {
         outline: solid 1px lightgreen;
     }
-    text{
+    text {
         text-anchor: middle;
     }
-    g.inv text{
+    g.inv text {
         fill: red;
+    }
+    g {
+        cursor: pointer;
+        &:hover {
+            opacity: 0.9;
+        }
+        &.sel {
+            fill: yellowgreen;
+        }
     }
 }
 
@@ -32,7 +41,7 @@ article.network {
         text-anchor: middle;
         dominant-baseline: central;
     }
-    text.label{
+    text.label {
         fill: #333;
         text-anchor: start;
     }

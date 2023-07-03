@@ -1,66 +1,44 @@
-// paint first row
-
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { mount } from '../utils/common'
 import { c } from '../app/controller'
 import { NodePath } from '../analysis/graph'
+import { FishNode } from '../analysis/fishnode'
 
 const cellsize = 30
 
 // 2 nodes means 1 hop, so 2 means path length 1
-const opacityScaler = d3.scaleLinear([0, 1, 2, 4, 10], [.2, 1, 1, 0.2, 0])
+const opacityScaler = d3.scaleLinear([0, 1, 2, 4, 10], [.2, 1, 1, 0.2, 0.1])
 
 function rund3(e: SVGElement) {
 
     console.log("patch path-matrix!")
-    //return
 
     let g = m.netgraph
     let nodes = g.nodes
-    let n = nodes.length
+    let n = m.netgraph.nodes.length
     let svgsize = cellsize * n
-    let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
-    //console.log(indexes)
-
-    // compute matrix
-    function computepaths(i) : NodePath[] {
-        let { goalpaths } = g.findpathsmulti(nodes[i], nodes.slice(i + 1))
-        console.log("computepaths", goalpaths)
-        return goalpaths
-    }
-
-    let allpaths = d3.range(n).flatMap(computepaths)
-    console.log("allpaths", allpaths)
-    mount({ allpaths })
-
-    function getpaths([i1, i2]): NodePath[] {
-        let n1 = nodes[i1]
-        let n2 = nodes[i2]
-        return allpaths.filter(p => p.last == n1 && p.first == n2)
-    }
 
     let svg = d3
         .select(e)
         .style('width', svgsize + 300) // add 300 for labels
         .style('height', svgsize)
-        .attr('class', 'path-matrix')
 
     let cells = svg
         .selectAll('g')
-        .data(indexes)
+        .data(m.pathmatrix)
         .join('g')
-        .attr("transform", ([x, y]) => `translate(${[x * cellsize, ++y * cellsize]})`)
-        .datum(d => getpaths(d as [number, number]))
-        .attr("opacity", p => opacityScaler(p.length))
-        .on("click", (_, paths) => c.addpath2netgraph(paths))
+        .attr("transform", ps => `translate(${[ps.i * cellsize, (ps.j + 1) * cellsize]})`)
+        .attr("opacity", ps => opacityScaler(ps.pathlength))
+        .on("click", (_, ps) => c.togglepath(ps))
+        .classed("sel", ps => ps.active)
 
     let texts = svg
         .selectAll('text')
-        .data(nodes.slice(0, -1))
+        .data(m.netgraph.nodes.slice(0, -1))
         .join('text')
-        .attr("transform", (_,i) => `translate(${[(nodes.length + 1) * cellsize, (i+1) * cellsize]})`)
+        .attr("transform", (_, i) => `translate(${[nodes.length * cellsize, (i + 1) * cellsize]})`)
         .text(d => d.id)
         .attr("class", "label")
 
@@ -70,11 +48,11 @@ function rund3(e: SVGElement) {
 
     cells
         .append('text')
-        .text(ps => ps.first?.length ?? "*")
+        .text(ps => ps.pathlength ?? "*")
 
     cells
         .append('title')
-        .text(ps => `${ps.first?.asText ?? "-"} (${ps.length || "-"})`)
+        .text(ps => `${ps.firstpathtext} (${ps.pathlength || "-"})`)
 }
 
 export const PathMatrix = () => {
@@ -83,6 +61,18 @@ export const PathMatrix = () => {
             <svg patch={rund3}></svg>
         </div>
     )
+}
+
+export class NodePaths {
+
+    active = false
+
+    constructor(public ps: NodePath[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
+
+    get pathlength() { return this.ps.length ? this.ps.first.length : 10 }
+    get pathlengthtext() { return this.ps.length ? this.ps.first.length.toString() : "*" }
+    get firstpathtext() { return this.ps.first?.asText ?? `no path ${this.n1.id} -> ${this.n2.id}` }
+    get count() { return this.ps.length }
 }
 
 // mount({  })

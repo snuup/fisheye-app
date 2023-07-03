@@ -1,6 +1,15 @@
 3.7.
-- networkx
-- fx path algorithm, to show all simpel paths
++ networkx
++ fx path algorithm, to show all simple paths
+. add links on click on path matrix
+
+
+
+design for link add:
+  ref counted links
+  displaylinks = links with refount
+  toggle-matrix
+
 
 2.7.
 - path matrix

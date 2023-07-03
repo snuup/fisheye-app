@@ -19,6 +19,18 @@ article.network {
   fill: red;
 }
 
+.net-graph g {
+  cursor: pointer;
+}
+
+.net-graph g:hover {
+  opacity: 0.9;
+}
+
+.net-graph g.sel {
+  fill: yellowgreen;
+}
+
 .path-matrix g {
   cursor: pointer;
 }

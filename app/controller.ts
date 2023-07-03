@@ -9,6 +9,7 @@ import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
 import { PathMatrixBuilder } from "../analysis/path"
+import { NodePaths } from "../comp/pathmatrix"
 
 export class Controller {
 
@@ -164,13 +165,44 @@ export class Controller {
 
     togglenetnode(ev, n: FishNode) {
         m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
+        this.computepathmatrix()
         updateview(ev.currentTarget)
         updateview(".network")
     }
 
-    addpath2netgraph(p: NodePath[]) {
+    togglepath(ps: NodePaths) {
         //let links = d3.pairs(p).map(([n1, n2]) => n1.getneighborlink(n2))
-        console.log("linko")
+        ps.active = !ps.active
+        console.log("paths", ps)
+        updateview(".path-matrix")
+    }
+
+    computepathmatrix() {
+
+        console.log("computepathmatrix")
+
+        let g = m.netgraph
+        let nodes = g.nodes
+        let n = nodes.length
+        let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
+
+        function computepaths(i): NodePath[] {
+            let { goalpaths } = g.findpathsmulti(nodes[i], nodes.slice(i + 1))
+            return goalpaths
+        }
+
+        let allpaths = d3.range(n).flatMap(computepaths)
+        console.log("allpaths", allpaths)
+        mount({ allpaths })
+
+        function getpaths(i: number, j: number): NodePaths {
+            let n1 = nodes[i]
+            let n2 = nodes[j]
+            let ps = allpaths.filter(p => p.last == n1 && p.first == n2)
+            return new NodePaths(ps, i, j, n1, n2)
+        }
+
+        m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
     }
 }
 

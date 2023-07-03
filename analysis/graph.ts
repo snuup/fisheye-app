@@ -172,6 +172,7 @@ export class Graph {
 function printpath(p: FishNode[]) {
     return p.map(n => n.id).join(" - ")
 }
+
 mount({ printpath })
 
 export class NodePath {
@@ -186,5 +187,3 @@ export class NodePath {
     get length() { return this.nodes.length-1 }
     get asText() { return this.nodes.map(n => n.id).join(" > ") }
 }
-
-//export type Path2 = FishNode[]

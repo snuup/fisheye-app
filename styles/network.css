@@ -35,12 +35,23 @@ article.network {
   cursor: pointer;
 }
 
+.path-matrix g.sel circle {
+  fill: #222;
+  stroke: none;
+}
+
+.path-matrix g.sel text {
+  fill: white;
+}
+
 .path-matrix circle {
-  fill: #333;
+  fill: transparent;
+  stroke: #333;
 }
 
 .path-matrix text {
-  fill: white;
+  fill: #333;
+  font-weight: bold;
   text-anchor: middle;
   dominant-baseline: central;
 }

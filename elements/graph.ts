@@ -7,7 +7,7 @@ export class Graph implements IGraph {
 
     nodes: FishNode[]
     links: FishLink[]
-    enriched = false
+    //enriched = false
 
     nodemap: Map<string, FishNode>
     linkmap: Map<string, DirectedLink[]>
@@ -22,7 +22,7 @@ export class Graph implements IGraph {
             lm.getorcreate(l.source, () => []).push(new DirectedLink(l, false))
             lm.getorcreate(l.target, () => []).push(new DirectedLink(l, true))
         }
-        this.linkmap = new Map()
+        this.linkmap = lm
     }
 
     static Empty = new Graph([], [])
@@ -87,7 +87,7 @@ export class Graph implements IGraph {
     // }
 
     getneighborlinks(nid: string): DirectedLink[] {
-        return this.linkmap[nid] // maybe add ?? [] // .map(dl => dl.target) // can be null, right ??
+        return this.linkmap.get(nid) ?? [] // .map(dl => dl.target) // can be null, right ??
     }
 
     findpathsmulti(start: string, targets: string[]) {

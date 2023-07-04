@@ -10,6 +10,7 @@ import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
 import { PathMatrixBuilder } from "../analysis/path"
 import { NodePaths } from "../comp/pathmatrix"
+import { SuperLink } from "../analysis/superlink"
 
 export class Controller {
 
@@ -143,12 +144,21 @@ export class Controller {
     togglepaths(nps: NodePaths) {
         let active = m.selectedpaths.toggle(nps.key)
         console.log("paths", nps)
+        mount({ nps })
+        let links = nps.ps.flatMap(p => p.links)
+        console.log(links)
+        mount({ links })
         if (active) {
-            let links = nps.ps.flatMap(p => p.links)
-            console.log(links)
+            for (let l of links) {
+                let sl = m.superlinks.getorcreate(l.ukey, () => new SuperLink())
+                sl.add(l)
+            }
         }
         else {
-            console.warn("tbd")
+            for (let l of links) {
+                let sl = m.superlinks.get(l.ukey)!
+                sl.del(l)
+            }
         }
         updateview(".path-matrix")
     }

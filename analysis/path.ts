@@ -15,7 +15,7 @@ export class DirectedLink {
 
     get key() { return this.link.key + "|" + this.rev.toString() }
     get original() { return this.link.original }
-    get nodes() { return this.link.nodes }
+    get nodes() { return this.link.nodeids }
 
     get sid() { return this.rev ? this.link.tid : this.link.sid }
     get tid() { return this.rev ? this.link.sid : this.link.tid }

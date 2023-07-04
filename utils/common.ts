@@ -188,7 +188,7 @@ mergePrototype(class extends HTMLElement {
 }, HTMLElement)
 
 mergePrototype(class extends Map {
-    ensure(key, valuefactory) {
+    getorcreate(key, valuefactory) {
         if (!this.has(key)) this.set(key, valuefactory())
         return this.get(key)
     }

@@ -51,7 +51,7 @@ export class FishNode {
     // accessors
 
     getneighborlink(n: FishNode) {
-        return this.outlinks.find(l => l.target === n) ?? this.inlinks.find(l => l.source === n)
+        return this.outlinks.find(l => l.target === n) ?? this.inlinks.find(l => l.source === n)!
     }
 
     // analysis

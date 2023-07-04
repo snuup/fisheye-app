@@ -42,7 +42,7 @@ interface Number {
 }
 
 interface Map<K, V> {
-    ensure(key: K, valuefactory: () => V): V
+    getorcreate(key: K, valuefactory: () => V): V
 }
 
 interface Object {

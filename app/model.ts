@@ -1,6 +1,6 @@
-import { FishLink } from "../analysis/fishlink"
 import { FishNode } from "../analysis/fishnode"
-import { Graph, GraphView, NodePath } from "../analysis/graph"
+import { Graph, GraphView } from "../analysis/graph"
+import { SuperLink } from "../analysis/superlink"
 import { NodePaths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
@@ -31,7 +31,7 @@ export const mraw = {
     top: null as FishNode | null,
 
     pathmatrix: [] as NodePaths[],
-    pathlinks: [] as FishLink[],
+    superlinks: new Map<string, SuperLink>(),
 
     getsubgraphchildren(n: FishNode): FishNode[] {
         return n.outlinks.map(l => m.graph.getnode(l.tid))

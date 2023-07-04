@@ -49,9 +49,11 @@ export class FishLink {
     static create(original) { return new FishLink(original) }
 
     get key() { return this.sid + "|" + this.tid }
+    get ukey() { return this.nodeids.sort().join("|") }
     get type() { return this.original.type }
     get weight() { return this.original.weight }
-    get nodes() { return [this.sid, this.tid] }
+    get nodes() { return [this.source, this.target] }
+    get nodeids() { return [this.sid, this.tid] }
 
     toString() {
         return `${this.sid} -> ${this.tid}`

@@ -3,6 +3,7 @@ import * as d3s from 'd3-sankey'
 import { FishLink } from "../elements/fishlink"
 import { jsx } from "../jmx-lib/core"
 import { mount } from "../utils/common"
+import { m } from "../app/model"
 
 class SourceNode implements FlowNode {
     id: string
@@ -32,24 +33,20 @@ class FlowLink {
 
 export const SankeyForType = ({ links }: { links: FishLink[] }) => {
 
-    let sourcetypes = links.map(l => l.target.type).distinctBy()
-    let targettypes = links.map(l => l.target.type).distinctBy()
-    let alltypes =
-        sourcetypes
-            .concat(targettypes)
-            .distinctBy()
-            .sort()
-            .map(s => s ?? "undefined") as string[]
+    let gn = m.graph.getnode
+    let sourcetypes = links.map(l => gn(l.source).type).distinctBy()
+    let targettypes = links.map(l => gn(l.target).type).distinctBy()
+    let alltypes = sourcetypes.concat(targettypes).distinctBy().sort().map(s => s ?? "undefined") as string[]
 
     console.log(alltypes)
 
-    let linksbysource = links.groupBy(l => l.source.type)
+    let linksbysource = links.groupBy(l => gn(l.source).type)
 
     let flownodes: FlowNode[] = alltypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
 
     let flowlinks: FlowLink[] = []
     for (let source in linksbysource) {
-        let linksbytarget = linksbysource[source].groupBy(l => l.target.type)
+        let linksbytarget = linksbysource[source].groupBy(l =>  gn(l.target).type)
         for (let target in linksbytarget) {
             flowlinks.push(new FlowLink(source, target, linksbytarget[target]?.length ?? 0))
         }

@@ -5,6 +5,7 @@ import { ChordForType } from "./chord"
 import { SankeyForType } from "./sankey"
 import { mount } from "../utils/common"
 import { LinkHistogram } from "./linkweighthisto"
+import { m } from "../app/model"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -16,11 +17,14 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
     function rund3(tableDom: HTMLTableElement) {
 
-        let sourcetypes = links.map(l => l.target.type).distinctBy()
-        let targettypes = links.map(l => l.target.type).distinctBy()
-        let linksbysource = links.groupBy(l => l.source.type)
-        let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => l.target.type))
+        let g = m.graph
+        let sourcetypes = links.map(l => g.getnode(l.source).type).distinctBy()
+        let targettypes = links.map(l => g.getnode(l.target).type).distinctBy()
         let alltypes = sourcetypes.concat(targettypes).distinctBy().sort() as string[]
+
+        let linksbysource = links.groupBy(l => g.getnode(l.source).type)
+        let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => g.getnode(l.target).type))
+
         const linktypetext = d => (d?.toString() ?? "undefined")
         const linktypetextcut = d => linktypetext(d).slice(0, 10)
 
@@ -64,8 +68,8 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
                     .data(links.sortBy(l => -l.weight))
                     .join('tr')
 
-            rows.append('td').attr("class", d => linktypetext(d.source.type)).text(d => d.sid)
-            rows.append('td').attr("class", d => linktypetext(d.target.type)).text(d => d.tid)
+            rows.append('td').attr("class", d => linktypetext(d.source.type)).text(d => d.source)
+            rows.append('td').attr("class", d => linktypetext(d.target.type)).text(d => d.target)
             rows.append('td').text(d => d.weight.toFixed(4))
         }
 

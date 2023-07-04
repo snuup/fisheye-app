@@ -110,6 +110,12 @@ mergePrototype(class extends Object {
     get entries() {
         return Object.entries(this)
     }
+    get values() {
+        return Object.values(this)
+    }
+    get keys() {
+        return Object.keys(this)
+    }
     mapKeys(fmap) {
         return Object.fromEntries(this.entries.map(([k, v]) => [fmap(k), v]))
     }

@@ -148,18 +148,20 @@ export class Controller {
         let links = nps.ps.flatMap(p => p.links)
         console.log(links)
         mount({ links })
-        if (active) {
-            for (let l of links) {
-                let sl = m.superlinks.getorcreate(l.ukey, () => new SuperLink())
-                sl.add(l)
-            }
-        }
-        else {
-            for (let l of links) {
-                let sl = m.superlinks.get(l.ukey)!
-                sl.del(l)
-            }
-        }
+        // if (active) {
+        //     for (let l of links) {
+        //         let sl = m.superlinks.getorcreate(l.ukey, () => new SuperLink())
+        //         sl.add(l)
+        //     }
+        // }
+        // else {
+        //     for (let l of links) {
+        //         let sl = m.superlinks.get(l.ukey)!
+        //         sl.del(l)
+        //     }
+        // }
+        console.warn("tbd");
+
         updateview(".path-matrix")
     }
 

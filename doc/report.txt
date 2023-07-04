@@ -1,3 +1,14 @@
-the graph is disconnected, holding components of size
+/the graph is disconnected, holding components of size
 [3151, 36, 15, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+
+/graph links
+11069 directed
+11069 undirected
+10577 directed unique
+10178 undirected unique
+
+-> it is not overly common that 2 nodes are
+891/11069
+0.0805 = 8%
+-> todo: distribution of multilinks

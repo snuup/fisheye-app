@@ -1,5 +1,6 @@
 import { FishNode } from "../analysis/fishnode"
 import { Graph, GraphView } from "../analysis/graph"
+import { SuperGraph } from "../analysis/supergraph"
 import { SuperLink } from "../analysis/superlink"
 import { NodePaths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
@@ -17,6 +18,8 @@ export const mraw = {
     ],
     entity: "",
     graph: new Graph(),
+
+    supergraph: SuperGraph.Empty,
 
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,

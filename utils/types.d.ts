@@ -47,6 +47,8 @@ interface Map<K, V> {
 
 interface Object {
     get entries(): [string, any][]
+    get keys(): string[]
+    get values(): any[]
     mapKeys(fmap: (string) => string): any
     mapValues(fmap: (any) => any): any
     //fullclone(): any

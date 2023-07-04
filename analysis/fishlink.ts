@@ -54,6 +54,7 @@ export class FishLink {
     get weight() { return this.original.weight }
     get nodes() { return [this.source, this.target] }
     get nodeids() { return [this.sid, this.tid] }
+    get unodeids() { return [this.sid, this.tid].sort() }
 
     toString() {
         return `${this.sid} -> ${this.tid}`

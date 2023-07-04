@@ -11,6 +11,7 @@ import { Url } from "./routes"
 import { PathMatrixBuilder } from "../analysis/path"
 import { NodePaths } from "../comp/pathmatrix"
 import { SuperLink } from "../analysis/superlink"
+import { SuperGraph } from "../analysis/supergraph"
 
 export class Controller {
 
@@ -22,6 +23,10 @@ export class Controller {
 
     prepareData() {
         m.graph = new Graph(mc1.nodes.map(FishNode.create), mc1.links.map(FishLink.create))
+
+        //problem: supergraph uses nodes and attaches, no, so what ?
+        //uncomment next line and see error:
+        m.supergraph = new SuperGraph(m.graph.nodes, m.graph.links)
 
         let mb = new PathMatrixBuilder(m.graph)
         m.tops = mb.initscores(m.investigatees.map(m.graph.getnode))

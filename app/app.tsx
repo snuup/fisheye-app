@@ -47,8 +47,6 @@ let App = () => {
 
             <footer>footer</footer>
 
-            {/* <NodeDonut n={m.graph.getnode("SeaSpray Wave SRL Solutions")} /> */}
-
         </body>
     )
 }

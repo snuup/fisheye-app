@@ -1,3 +1,4 @@
+import { FishNode } from "../elements/fishnode"
 import { mount } from "../utils/common"
 
 export const cleanid = (id) => typeof id === "number" ? "n" + id : id

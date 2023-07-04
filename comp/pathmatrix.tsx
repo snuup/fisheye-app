@@ -3,8 +3,9 @@ import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { mount } from '../utils/common'
 import { c } from '../app/controller'
-import { NodePath } from '../analysis/graph'
-import { FishNode } from '../analysis/fishnode'
+import { NodePath } from '../elements/graph'
+import { FishNode } from '../elements/fishnode'
+import { Path } from '../elements/path'
 
 const cellsize = 30
 
@@ -63,9 +64,21 @@ export const PathMatrix = () => {
     )
 }
 
-export class NodePaths {
+// export class NodePaths {
 
-    constructor(public ps: NodePath[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
+//     constructor(public ps: NodePath[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
+
+//     get key() { return this.n1.id + "-" + this.n2.id }
+
+//     get pathlength() { return this.ps.length ? this.ps.first.length : 10 }
+//     get pathlengthtext() { return this.ps.length ? this.ps.first.length.toString() : "*" }
+//     get firstpathtext() { return this.ps.first?.asText ?? `no path ${this.n1.id} -> ${this.n2.id}` }
+//     get count() { return this.ps.length }
+// }
+
+export class Paths {
+
+    constructor(public ps: Path[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
 
     get key() { return this.n1.id + "-" + this.n2.id }
 

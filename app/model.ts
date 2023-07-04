@@ -1,8 +1,8 @@
-import { FishNode } from "../analysis/fishnode"
-import { Graph, GraphView } from "../analysis/graph"
-import { SuperGraph } from "../analysis/supergraph"
-import { SuperLink } from "../analysis/superlink"
-import { NodePaths } from "../comp/pathmatrix"
+import { FishNode } from "../elements/fishnode"
+import { Graph, GraphView } from "../elements/graph"
+//import { SuperGraph } from "../elements/supergraph"
+import { SuperLink } from "../elements/superlink"
+import { Paths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
 
@@ -17,9 +17,9 @@ export const mraw = {
         "n8327"
     ],
     entity: "",
-    graph: new Graph(),
+    graph: Graph.Empty,
 
-    supergraph: SuperGraph.Empty,
+    //supergraph: SuperGraph.Empty,
 
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,
@@ -33,12 +33,11 @@ export const mraw = {
     tops: [] as FishNode[],
     top: null as FishNode | null,
 
-    pathmatrix: [] as NodePaths[],
+    pathmatrix: [] as Paths[],
     superlinks: new Map<string, SuperLink>(),
 
-    getsubgraphchildren(n: FishNode): FishNode[] {
-        return n.outlinks.map(l => m.graph.getnode(l.tid))
-    }
+    // ui
+    selection: [] as any[]
 }
 
 type Model = typeof mraw

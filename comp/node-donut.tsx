@@ -1,7 +1,8 @@
 import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
-import { FishNode } from '../analysis/fishnode'
+import { FishNode } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
+import { m } from '../app/model'
 
 const linkTypeSortOrder = {
     partnership: 0,
@@ -19,13 +20,13 @@ interface NodeLinkData {
     total: number
 }
 
-//export function NodeDonut({ n }: { n: NodeLinkData[] | FishNode }) {
 export function NodeDonut({ n }: { n: FishNode }) {
 
+    let g = m.graph
     let data: NodeLinkData[]
     if (n instanceof FishNode) {
-        let outcounts = n.outlinks?.countBy(l => l.type)
-        let incounts = n.inlinks?.countBy(l => l.type)
+        let outcounts = g.getoutlinks(n.id).countBy(l => l.type)
+        let incounts = g.getinlinks(n.id).countBy(l => l.type)
         data = linktypes.map(type => {
             let outs = outcounts?.[type] ?? 0
             let ins = incounts?.[type] ?? 0

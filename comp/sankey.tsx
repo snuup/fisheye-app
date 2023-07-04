@@ -1,6 +1,6 @@
 import * as d3 from "d3"
 import * as d3s from 'd3-sankey'
-import { FishLink } from "../analysis/fishlink"
+import { FishLink } from "../elements/fishlink"
 import { jsx } from "../jmx-lib/core"
 import { mount } from "../utils/common"
 

@@ -2,7 +2,7 @@ import * as d3d from '../force/index'
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { FishNode } from '../analysis/fishnode'
+import { FishNode } from '../elements/fishnode'
 import { mount } from '../utils/common'
 
 const xlength = 600

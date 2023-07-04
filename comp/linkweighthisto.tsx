@@ -1,6 +1,6 @@
 import { jsx } from "../jmx-lib/core"
 import * as d3 from "d3"
-import { FishLink } from "../analysis/fishlink"
+import { FishLink } from "../elements/fishlink"
 import { mount } from "../utils/common"
 
 export const LinkHistogram = ({ links }: { links: FishLink[] }) => {

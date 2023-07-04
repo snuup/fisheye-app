@@ -1,4 +1,4 @@
-import { Path } from '../analysis/path'
+import { Path } from '../elements/path'
 import { m } from '../app/model'
 import { When, jsx } from '../jmx-lib/core'
 import * as d3 from 'd3'

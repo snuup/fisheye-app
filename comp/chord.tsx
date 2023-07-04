@@ -1,5 +1,5 @@
 import * as d3 from "d3"
-import { FishLink } from "../analysis/fishlink"
+import { FishLink } from "../elements/fishlink"
 import { jsx } from "../jmx-lib/core"
 import { Matrix } from "./linkstats"
 import { mount } from "../utils/common"

@@ -1,6 +1,6 @@
 import { jsx } from "../jmx-lib/core"
 import * as d3 from "d3"
-import { FishLink } from "../analysis/fishlink"
+import { FishLink } from "../elements/fishlink"
 import { ChordForType } from "./chord"
 import { SankeyForType } from "./sankey"
 import { mount } from "../utils/common"

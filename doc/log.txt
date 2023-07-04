@@ -1,3 +1,6 @@
+4.7.
+- fishnode: set degrees
+
 3.7.
 + networkx
 + fx path algorithm, to show all simple paths

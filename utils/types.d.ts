@@ -84,3 +84,20 @@ interface MC1Node {
     country?: string
     id: MC1Id
 }
+
+interface INode {
+    id: string
+}
+
+interface ILink {
+    source: string
+    target: string
+    type: string
+}
+
+interface IGraph {
+    nodes: INode[]
+    links: ILink[]
+    getoutlinks(nid: string): ILink[]
+    getinlinks(nid: string): ILink[]
+}

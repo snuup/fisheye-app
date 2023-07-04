@@ -1,6 +1,6 @@
 import { FishLink } from "../analysis/fishlink"
 import { FishNode } from "../analysis/fishnode"
-import { Graph, NodePath } from "../analysis/graph"
+import { Graph, GraphView, NodePath } from "../analysis/graph"
 import { NodePaths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
@@ -17,15 +17,15 @@ export const mraw = {
     ],
     entity: "",
     graph: new Graph(),
-    selection: [], // ids as string[]
-    //linkselection: [], // ?? as string[]
+
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,
-    subgraph: Graph.Empty,
+    subgraph: Graph.Empty, // old force view (is in draft)
 
     seagraph: Graph.Empty,
 
-    netgraph: Graph.Empty,
+    netgraph: GraphView.Empty,
+    selectedpaths: [] as string[],
 
     tops: [] as FishNode[],
     top: null as FishNode | null,

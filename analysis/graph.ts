@@ -4,7 +4,6 @@ import { FishLink } from "./fishlink"
 import { FishNode } from "./fishnode"
 import { DirectedLink, Path } from "./path"
 
-
 export class Graph {
 
     nodes: FishNode[]
@@ -38,6 +37,10 @@ export class Graph {
         this.nodemap.delete(n.id)
     }
 
+    hasnode(n: FishNode): boolean {
+        return this.nodemap.has(n.id)
+    }
+
     togglenode(n: FishNode) {
         if (this.hasnode(n)) {
             this.removenode(n)
@@ -54,25 +57,8 @@ export class Graph {
         return this.nodes.find(n => n.id.toLowerCase().startsWith(nidstart))
     }
 
-    // hasnode(n: FishNode | string): boolean {
-    //     if (n instanceof String) return this.nodes.find(n => n.id === n)
-    //     return this.nodes.includes(n)
-    // }
-
-    // appendnode(n: FishNode) {
-    //     if (!this.hasnode(n)) this.nodes.push(n)
-    // }
-
-    // appendnodes(ns: FishNode[]) {
-    //     ns.forEach(this.appendnode)
-    // }
-
     haslink(e: FishLink): boolean {
         return this.links.includes(e)
-    }
-
-    hasnode(n: FishNode): boolean {
-        return this.nodemap.has(n.id)
     }
 
     appendlink(l: FishLink) {
@@ -170,6 +156,28 @@ export class Graph {
     }
 }
 
+export class GraphView {
+    nodes: FishNode[] = []
+    links: FishLink[] = []
+
+    constructor(rootgraph: Graph) { }
+    static Empty = new GraphView(Graph.Empty)
+
+    addnode(n: FishNode) { this.nodes.push(n) }
+    removenode(n: FishNode) { this.nodes.remove(n) }
+    hasnode(n: FishNode): boolean { return this.nodes.includes(n) }
+    togglenode(n: FishNode) {
+        if (this.hasnode(n)) {
+            this.removenode(n)
+            n.selected = false
+        }
+        else {
+            this.addnode(n)
+            n.selected = true
+        }
+    }
+}
+
 function printpath(p: FishNode[]) {
     return p.map(n => n.id).join(" - ")
 }
@@ -187,6 +195,6 @@ export class NodePath {
     with(n: FishNode): NodePath { return new NodePath([...this.nodes, n]) }
     get first() { return this.nodes.first }
     get last() { return this.nodes.last }
-    get length() { return this.nodes.length-1 }
+    get length() { return this.nodes.length - 1 }
     get asText() { return this.nodes.map(n => n.id).join(" > ") }
 }

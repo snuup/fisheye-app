@@ -82,7 +82,17 @@ mergePrototype(class extends Array {
     remove(x: any) {
         const i = this.indexOf(x)
         if (i > -1) this.splice(i, 1)
-      }
+    }
+    toggle(x): boolean {
+        if (this.includes(x)) {
+            this.remove(x)
+            return false
+        }
+        else {
+            this.push(x)
+            return true
+        }
+    }
 }, Array)
 
 mergePrototype(class extends Set {

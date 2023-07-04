@@ -4,7 +4,7 @@ import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph, NodePath } from "../analysis/graph"
+import { Graph, GraphView, NodePath } from "../analysis/graph"
 import { FishNode } from "../analysis/fishnode"
 import { FishLink } from "../analysis/fishlink"
 import { Url } from "./routes"
@@ -27,6 +27,7 @@ export class Controller {
         m.top = m.tops[0]
 
         m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
+        m.netgraph = new GraphView(m.graph)
 
         //let invs = m.investigatees.map(m.graph.getnode)
         //m.netgraph = new Graph(invs)
@@ -131,14 +132,18 @@ export class Controller {
     togglenetnode(ev, n: FishNode) {
         m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
         this.computepathmatrix()
+
+        let currentkeys = m.pathmatrix.map(ps => ps.key)
+        m.selectedpaths.forEach(k => { if (!currentkeys.includes(k)) m.selectedpaths.remove(k) })
+
         updateview(ev.currentTarget)
         updateview(".network")
     }
 
-    togglepath(nps: NodePaths) {
-        nps.active = !nps.active
+    togglepaths(nps: NodePaths) {
+        let active = m.selectedpaths.toggle(nps.key)
         console.log("paths", nps)
-        if (nps.active) {
+        if (active) {
             let links = nps.ps.flatMap(p => p.links)
             console.log(links)
         }
@@ -158,7 +163,7 @@ export class Controller {
         let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
 
         function computepaths(i): NodePath[] {
-            let { goalpaths } = g.findpathsmulti(nodes[i], nodes.slice(i + 1))
+            let { goalpaths } = m.graph.findpathsmulti(nodes[i], nodes.slice(i + 1))
             return goalpaths
         }
 
@@ -180,7 +185,6 @@ export class Controller {
 export let c = new Controller()
 
 mount({ c })
-
 
 // make a copy of node for force
 // make a link of node for force

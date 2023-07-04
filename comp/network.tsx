@@ -19,7 +19,7 @@ let simulation: any = null
 
 function rund3(e: SVGElement) {
 
-    console.log("patch network!")
+    console.log("patch network!", m.netgraph)
 
     const svg = d3
         .select(e)

@@ -30,6 +30,7 @@ interface Array<T> {
     toReversed(): T[]
     cross(other?: Array<T>) : Array<[T, T]>
     remove(x:T)
+    toggle(x): boolean
 }
 
 interface Set<T> {

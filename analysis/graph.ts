@@ -1,3 +1,4 @@
+import * as d3 from 'd3'
 import { mount, rebind } from "../utils/common"
 import { FishLink } from "./fishlink"
 import { FishNode } from "./fishnode"
@@ -179,6 +180,8 @@ export class NodePath {
 
     constructor(public nodes: FishNode[]) { }
     static Empty = new NodePath([])
+
+    get links() { return d3.pairs(this.nodes).map(([n1, n2]) => n1.getneighborlink(n2)) }
 
     add(n) { this.nodes.push(n) }
     with(n: FishNode): NodePath { return new NodePath([...this.nodes, n]) }

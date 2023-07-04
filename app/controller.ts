@@ -72,26 +72,6 @@ export class Controller {
         m.subgraph = new Graph(nodes, links)
     }
 
-    setinvestigatees() {
-        m.graphfocus = null
-        m.graphfocusnode = null
-        m.investigatees
-
-        // window.ls = ls
-
-        // // all nodes within paths
-        // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
-        // let links = ls.flatMap(dl => dl.link).distinctBy()
-
-        // // just the paths:
-        // // let paths = m.graphfocusnode.investigatePaths.flatMap(p => [p.source, p.target])
-        // // let nodes = ls.flatMap(dl => dl.ends).distinctBy().map(m.graph.getnode)
-        // // let links = ls.flatMap(dl => dl.link).distinctBy()
-
-        // m.subgraph = new Graph(nodes, links)
-
-    }
-
     floodsea(levels = 3) {
         let g = m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
         g.nodes.forEach(n => n.up = 0)
@@ -148,21 +128,6 @@ export class Controller {
         }
     }
 
-
-    // inc1(ev: PointerEvent) {
-    //     m.counter1++
-    //     updateview(ev.target as Node)
-    //     updateview('#sum')
-    // }
-
-    // inc2(ev: PointerEvent) {
-    //     m.counter2++
-    //     updateview(ev.target as Node)
-    //     updateview('#sum')
-    // }
-
-    // network
-
     togglenetnode(ev, n: FishNode) {
         m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
         this.computepathmatrix()
@@ -170,10 +135,16 @@ export class Controller {
         updateview(".network")
     }
 
-    togglepath(ps: NodePaths) {
-        //let links = d3.pairs(p).map(([n1, n2]) => n1.getneighborlink(n2))
-        ps.active = !ps.active
-        console.log("paths", ps)
+    togglepath(nps: NodePaths) {
+        nps.active = !nps.active
+        console.log("paths", nps)
+        if (nps.active) {
+            let links = nps.ps.flatMap(p => p.links)
+            console.log(links)
+        }
+        else {
+            console.warn("tbd")
+        }
         updateview(".path-matrix")
     }
 
@@ -209,3 +180,7 @@ export class Controller {
 export let c = new Controller()
 
 mount({ c })
+
+
+// make a copy of node for force
+// make a link of node for force

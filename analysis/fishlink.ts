@@ -16,6 +16,8 @@ export class FishLink {
     source: FishNode // nid, reassigned by d3
     target: FishNode // nid, reassigned by d3
 
+    refcount: 0
+
     get strength(): number {
         return strengthScaler(this.minz * this.weight)
     }

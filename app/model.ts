@@ -1,3 +1,4 @@
+import { FishLink } from "../analysis/fishlink"
 import { FishNode } from "../analysis/fishnode"
 import { Graph, NodePath } from "../analysis/graph"
 import { NodePaths } from "../comp/pathmatrix"
@@ -30,6 +31,7 @@ export const mraw = {
     top: null as FishNode | null,
 
     pathmatrix: [] as NodePaths[],
+    pathlinks: [] as FishLink[],
 
     getsubgraphchildren(n: FishNode): FishNode[] {
         return n.outlinks.map(l => m.graph.getnode(l.tid))

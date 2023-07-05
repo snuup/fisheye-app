@@ -13,6 +13,7 @@ import { Paths } from "../comp/pathmatrix"
 import { SuperLink } from "../elements/superlink"
 import { cleanid } from "../analysis/common"
 //import { SuperGraph } from "../elements/supergraph"
+//import * as nx from '../jsnetx'
 
 export class Controller {
 
@@ -32,6 +33,10 @@ export class Controller {
             n.outdegree = counts.false ?? 0
             n.indegree = counts.true ?? 0
         })
+
+        //let z = classes
+
+//        console.log(G)
 
         //let sg = m.supergraph = new Graph(nodes, links)
         //links.groupBy(l => )
@@ -172,8 +177,8 @@ export class Controller {
         let n = nodes.length
         let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
 
-        function computepaths(i): Path[] {
-            let { goalpaths } = GraphAlgos.findpathsmulti(m.graph.getneighborlinksu, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
+        function computepaths(i): Path<ILink>[] {
+            let { goalpaths } = GraphAlgos.findpathsmulti(m.graph.getlinks, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
             return goalpaths
         }
 

@@ -3,7 +3,6 @@ import { mount, rebind } from "../utils/common"
 import { FishLink } from "./fishlink"
 import { FishNode } from "./fishnode"
 import { SuperLink } from './superlink'
-import { NodePath } from './graph'
 
 // export class SuperGraph {
 

@@ -1,9 +1,7 @@
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { mount } from '../utils/common'
 import { c } from '../app/controller'
-import { NodePath } from '../elements/graph'
 import { FishNode } from '../elements/fishnode'
 import { Path } from '../elements/path'
 

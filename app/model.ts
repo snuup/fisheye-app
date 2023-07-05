@@ -1,5 +1,5 @@
 import { FishNode } from "../elements/fishnode"
-import { Graph, GraphView } from "../elements/graph"
+import { Graph } from "../elements/graph"
 //import { SuperGraph } from "../elements/supergraph"
 import { SuperLink } from "../elements/superlink"
 import { Paths } from "../comp/pathmatrix"
@@ -27,7 +27,7 @@ export const mraw = {
 
     seagraph: Graph.Empty,
 
-    netgraph: GraphView.Empty,
+    netgraph: Graph.Empty,
     selectedpaths: [] as string[],
 
     tops: [] as FishNode[],

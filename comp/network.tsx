@@ -78,9 +78,10 @@ function rund3(e: SVGElement) {
     simulation = d3
         .forceSimulation(nodesm)
         //.stop()
+        .force('many', d3.forceManyBody())
         .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(20).strength(1))
         .force('collide', d3.forceCollide().radius(5).strength(1))
-        //.force('center', d3.forceCenter(50, 50).strength(.001)) // x and y range = [0..100]
+        .force('center', d3.forceCenter(50, 50).strength(.01)) // x and y range = [0..100]
         .force('box', boxingForce)
         .on('tick', updateview)
 
@@ -115,7 +116,7 @@ function rund3(e: SVGElement) {
 
     updateview() // show random placements
 
-    mount({ simulation, updateview })
+    //mount({ simulation, updateview })
 }
 
 export const Network = () => {

@@ -1,3 +1,19 @@
+5.7.
+- include all crime nodes
+- drag in force
+- nice names, more important: mark bad nodes, so intermediate are gray and targets are red
+- allow color setting of nodes
+- include node-donut in force
+- already connected are marked in path matrix
+- precompute distance of all crime-nodes to investigatees and sort them
+- colorize: crime-nodes / investigatees / inter
+- path matrix: exclude inter
+- precompute path matrix
+- bug: path matrix does not update view
+- colorize node types !!!
+
+wow: circle with distances for each on hover
+
 4.7.
 - fishnode: set degrees
 

@@ -93,6 +93,7 @@ export class Graph implements IGraph {
     findpathsmulti(start: string, targets: string[]) {
 
         console.log("findpathsmulti", start, targets)
+        if(!Array.isArray(targets)) throw "targets must be an array!"
 
         let stargets = new Set(targets)
 

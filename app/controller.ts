@@ -4,7 +4,7 @@ import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph, GraphView, NodePath } from "../elements/graph"
+import { Graph } from "../elements/graph"
 import { FishNode } from "../elements/fishnode"
 import { FishLink } from "../elements/fishlink"
 import { Url } from "./routes"
@@ -196,7 +196,7 @@ export class Controller {
         function getpaths(i: number, j: number): Paths {
             let n1 = nodes[i]
             let n2 = nodes[j]
-            let ps = allpaths.filter(p => p.start == n1.id && p.end == n2.id)
+            let ps = allpaths.filter(p => p.start == n2.id && p.end == n1.id)
             return new Paths(ps, i, j, n1, n2)
         }
 

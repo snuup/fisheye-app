@@ -101,4 +101,7 @@ interface ILink {
     target: string
     type: string
     weight: number
+
+    //key: string
+    text: string
 }

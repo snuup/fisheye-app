@@ -3,58 +3,58 @@ import { FishLink, DirectedLink } from "./fishlink"
 import { FishNode } from "./fishnode"
 import { Graph } from "./graph"
 
-export class Path {
+export class Path<L extends ILink> {
 
-    links: DirectedLink[]
+    links: DirectedLink<L>[]
 
-    constructor(chain: DirectedLink[]) {
+    constructor(chain: DirectedLink<L>[]) {
         this.links = chain
     }
 
-    get key() {
-        return this.links.map(fl => fl.key).join("|")
-    }
+    // get key() {
+    //     return this.links.map(fl => fl.key).join("|")
+    // }
 
     get length() {
         return this.links.length
     }
 
-    get properties() {
-        return {
-            "prop-header": "mark",
-            chain: `${this.links.length}:\n` + this.links.map(l => `${l.original.type}`).join("\n")
-        }
-    }
+    // get properties() {
+    //     return {
+    //         "prop-header": "mark",
+    //         chain: `${this.links.length}:\n` + this.links.map(l => `${l.original.type}`).join("\n")
+    //     }
+    // }
 
     get start() { return this.links[0].source }
     get end() { return this.links.last.target }
     get ends() { return [this.start, this.end] }
 
     get text() { return this.start + " - " + this.end + ` (${this.links.length})` }
-    get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.longtext1).join(" ") + " " + this.end }
+    get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.text).join(" ") + " " + this.end }
     get asText() { return this.longtext }
 
-    with(l: DirectedLink): Path { return new Path([...this.links, l]) }
+    with(l: DirectedLink<L>): Path<L> { return new Path([...this.links, l]) }
 }
 
 export class PathMatrixBuilder {
 
-    g: Graph
-    dlinkmap: Map<string, DirectedLink[]>
+    // g: Graph
+    // dlinkmap: Map<string, DirectedLink[]>
 
-    constructor(g: Graph) {
+    // constructor(g: Graph) {
 
-        this.g = g
-        rebind(this)
+    //     this.g = g
+    //     rebind(this)
 
-        this.dlinkmap = new Map(
-            g.links
-                .flatMap(l => [new DirectedLink(l, false), new DirectedLink(l, true)])
-                .groupBy(l => l.source)
-                .entries)
-    }
+    //     this.dlinkmap = new Map(
+    //         g.links
+    //             .flatMap(l => [new DirectedLink(l, false), new DirectedLink(l, true)])
+    //             .groupBy(l => l.source)
+    //             .entries)
+    // }
 
-    getlinks(nid: string) { return this.dlinkmap.get(nid) ?? [] }
+    // getlinks(nid: string) { return this.dlinkmap.get(nid) ?? [] }
 
     // bfs(n: FishNode, linkchain: DirectedLink[], visited: Set<string>) {
 

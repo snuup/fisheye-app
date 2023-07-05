@@ -1,7 +1,5 @@
 import { mount } from "../utils/common"
 import { cleanid } from "../analysis/common"
-import { FishLink } from "./fishlink"
-import { Path } from "./path"
 
 export class FishNode implements INode {
 

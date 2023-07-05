@@ -15,4 +15,9 @@ export class SuperLink implements ILink {
         this.source = source
         this.target = target
     }
+
+    get text(){
+        let l = this.links.first
+        return `${l.source} -(${this.links.length})> ${l.target}`
+    }
 }

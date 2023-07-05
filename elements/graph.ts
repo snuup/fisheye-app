@@ -62,7 +62,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
 export class GraphAlgos {
 
-    static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => Link[], start: string, targets: string[]) {
+    static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => DirectedLink<Link>[], start: string, targets: string[]) {
 
         console.log("findpathsmulti", start, targets)
         if (!Array.isArray(targets)) throw "targets must be an array!"
@@ -70,11 +70,11 @@ export class GraphAlgos {
         let stargets = new Set(targets)
 
         let visited = new Set<string>()
-        let goalpaths: Path[] = []
+        let goalpaths: Path<ILink>[] = []
 
-        const bfs = (fronteer: Path[]) => {
+        const bfs = (fronteer: Path<ILink>[]) => {
 
-            let nextfronteer: Path[] = []
+            let nextfronteer: Path<ILink>[] = []
             let reachedtargets: string[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
 
             for (let p of fronteer) {
@@ -98,7 +98,7 @@ export class GraphAlgos {
             return (godeeper && stargets.size) ? nextfronteer : []
         }
 
-        let fronteer: Path[] = getneighborlinks(start).map(l => new Path([l]))
+        let fronteer: Path<ILink>[] = getneighborlinks(start).map(l => new Path([l]))
         while (fronteer.length) {
             fronteer = bfs(fronteer)
         }
@@ -107,5 +107,4 @@ export class GraphAlgos {
 
         return { goalpaths, visited }
     }
-
 }

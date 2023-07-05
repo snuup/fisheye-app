@@ -3,7 +3,7 @@ import { DirectedLink } from "./fishlink"
 import { FishNode } from "./fishnode"
 import { Path } from "./path"
 
-export class Graph<LinkType extends ILinkType> implements IGraph<LinkType> {
+export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
     nodes: FishNode[]
     links: LinkType[]

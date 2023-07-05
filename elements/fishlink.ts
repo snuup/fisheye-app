@@ -5,16 +5,11 @@ import { mount } from "../utils/common"
 
 //let strengthScaler = d3.scaleLinear([0, 100], [0, 0.05])
 
-export class FishLink implements ILink{
+export class FishLink implements ILink {
 
     original: MC1Link
     source: string
     target: string
-
-    //source: FishNode // nid, reassigned by d3
-    //target: FishNode // nid, reassigned by d3
-
-    //refcount: 0
 
     // get strength(): number {
     //     return strengthScaler(this.minz * this.weight)
@@ -66,7 +61,7 @@ export class FishLink implements ILink{
     }
 }
 
-export class DirectedLink<LinkType extends ILinkType> {
+export class DirectedLink<LinkType extends ILink> {
 
     constructor(public link: LinkType, public rev: boolean) {
         this.link = link

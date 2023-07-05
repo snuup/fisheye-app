@@ -3,26 +3,16 @@ import { FishNode } from "./fishnode"
 
 // refcount = number of links in this SuperLink
 
-export class SuperLink {
+export class SuperLink implements ILink {
 
-    sid: string
-    tid: string
-    source: FishNode
-    target: FishNode
+    source: string
+    target: string
+    type: string
+    weight: number
 
     constructor(public links: FishLink[]) {
-        let [sid, tid] = links.first.unodeids
-        this.sid = sid
-        this.tid = tid
+        let [source, target] = links.first.unodeids
+        this.source = source
+        this.target = target
     }
 }
-
-// export class SuperLink {
-
-//     links = new Set<FishLink>()
-
-//     constructor() { }
-
-//     add(l:FishLink) { this.links.add(l) }
-//     del(l:FishLink) { this.links.delete(l) }
-// }

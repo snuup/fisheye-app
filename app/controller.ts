@@ -26,8 +26,13 @@ export class Controller {
 
         let nodes = mc1.nodes.map(FishNode.createFromOriginal)
         let links = mc1.links.map(FishLink.createFromOriginal)
-        m.graph = new Graph(nodes, links)
-        m.graph.setnodedegrees()
+        let g = m.graph = new Graph(nodes, links)
+        g.nodes.forEach(n => {
+            n.outdegree = g.getoutlinks(n.id).length
+            n.indegree = g.getinlinks(n.id).length
+        })
+
+        let sg = m.supergraph = new Graph(nodes, links)
 
         //problem: supergraph uses nodes and attaches, no, so what ?
         //uncomment next line and see error:

@@ -19,8 +19,7 @@ export const mraw = {
     ],
     entity: "",
     graph: Graph.Empty as Graph<FishLink>,
-
-    //supergraph: SuperGraph.Empty,
+    supergraph: Graph.Empty as Graph<SuperLink>,
 
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,

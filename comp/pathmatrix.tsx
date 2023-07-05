@@ -15,9 +15,8 @@ function rund3(e: SVGElement) {
 
     console.log("patch path-matrix!")
 
-    let g = m.netgraph
-    let nodes = g.nodes
-    let n = g.nodes.length
+    let nodes = m.pinnednodes
+    let n = nodes.length
     let svgsize = cellsize * n
 
     let svg = d3
@@ -32,7 +31,7 @@ function rund3(e: SVGElement) {
         .attr("transform", ps => `translate(${[ps.i * cellsize, (ps.j + 1) * cellsize]})`)
         .attr("opacity", ps => opacityScaler(ps.pathlength))
         .on("pointerdown", (_, ps) => c.togglepaths(ps))
-        .classed("sel", ps => m.selectedpaths.includes(ps.key))
+        .classed("sel", ps => m.pinnedpaths.includes(ps.key))
 
     let texts = svg
         .selectAll('text')
@@ -63,21 +62,14 @@ export const PathMatrix = () => {
     )
 }
 
-// export class NodePaths {
-
-//     constructor(public ps: NodePath[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
-
-//     get key() { return this.n1.id + "-" + this.n2.id }
-
-//     get pathlength() { return this.ps.length ? this.ps.first.length : 10 }
-//     get pathlengthtext() { return this.ps.length ? this.ps.first.length.toString() : "*" }
-//     get firstpathtext() { return this.ps.first?.asText ?? `no path ${this.n1.id} -> ${this.n2.id}` }
-//     get count() { return this.ps.length }
-// }
-
 export class Paths {
 
-    constructor(public ps: Path<SuperLink>[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
+    constructor(
+        public ps: Path<SuperLink>[],
+        public i: number,
+        public j: number,
+        public n1: FishNode,
+        public n2: FishNode) {}
 
     get key() { return this.n1.id + "-" + this.n2.id }
 
@@ -86,5 +78,3 @@ export class Paths {
     get firstpathtext() { return this.ps.first?.asText ?? `no path ${this.n1.id} -> ${this.n2.id}` }
     get count() { return this.ps.length }
 }
-
-// mount({  })

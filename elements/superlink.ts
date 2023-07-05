@@ -16,7 +16,11 @@ export class SuperLink implements ILink {
         this.target = target
     }
 
-    get text(){
+    get nodeids() {
+        return [this.source, this.target]
+    }
+
+    get text() {
         let l = this.links.first
         return `${l.source} -(${this.links.length})> ${l.target}`
     }

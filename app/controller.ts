@@ -121,49 +121,29 @@ export class Controller {
 
     togglenetnode(ev, n: FishNode) {
         m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
+        m.pinnednodes.push(n)
         this.computepathmatrix()
 
         let currentkeys = m.pathmatrix.map(ps => ps.key)
-        m.selectedpaths.forEach(k => { if (!currentkeys.includes(k)) m.selectedpaths.remove(k) })
+        m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
 
         updateview(ev.currentTarget)
         updateview(".network")
     }
 
     togglepaths(nps: Paths) {
-
-        let active = m.selectedpaths.toggle(nps.key)
-
-        console.log("paths", nps)
-        mount({ nps })
-
-        let links = nps.ps.flatMap(p => p.links).map(dl => dl.link)
-        console.log(links)
-        mount({ links })
-
-        let g = m.netgraph
-
-        if (active) {
-            for (let l of links) {
-                //let sl = m.superlinks.getorcreate(l.ukey, () => new SuperLink())
-                //sl.add(l)
-                console.log("add", l)
-                g.appendlink(l)
-            }
-            let pathnodes = new Set(links.flatMap(l => [l.source, l.target]).map(nid => m.graph.getnode(nid)))
-            pathnodes.forEach(n => g.addnode(n))
-        }
-        else {
-            for (let l of links) {
-                //let sl = m.superlinks.get(l.ukey)!
-                //sl.del(l)
-                console.log("del", l)
-            }
-        }
-        console.warn("tbd")
-
+        m.pinnedpaths.toggle(nps.key)
+        this.updatenetgraph()
         updateview('.path-matrix')
         updateview('.net-graph')
+    }
+
+    updatenetgraph() {
+        let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
+        let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinctBy()
+        let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinctBy()
+        m.netgraph.nodes = nodes
+        m.netgraph.links = links
     }
 
     computepathmatrix() {

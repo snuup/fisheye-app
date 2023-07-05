@@ -1,6 +1,5 @@
 import { FishNode } from "../elements/fishnode"
 import { Graph } from "../elements/graph"
-//import { SuperGraph } from "../elements/supergraph"
 import { SuperLink } from "../elements/superlink"
 import { Paths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
@@ -22,8 +21,9 @@ export const mraw = {
     supergraph: Graph.Empty as Graph<SuperLink>,
 
     netgraph: Graph.Empty as Graph<SuperLink>,
-    selectedpaths: [] as string[],
 
+    pinnednodes: [] as FishNode[],
+    pinnedpaths: [] as string[],
 
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,

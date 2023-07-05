@@ -6,10 +6,6 @@ import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
 
 const radius = 8
-//const width = 600
-//const height = 400
-
-
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
@@ -18,14 +14,14 @@ mount({ rand100 })
 
 let simulation: any = null
 
-type FishNodeForce = { n: FishNode, x: number, y: number, isinv: boolean, id: string }
+type FishNodeForce = FishNode & { x: number, y: number, isinv: boolean }
 type FishLinkForce = { l: SuperLink, source: string | any, target: string | any } // link-force will assign nodes to source and target
 
 function rund3(e: SVGElement) {
 
     let div = e.parentElement
-    let width = div?.clientWidth
-    let height = div?.clientHeight
+    let width = div?.clientWidth!
+    let height = div?.clientHeight!
     const xscaler = d3.scaleLinear([0, 100], [0, width])
     const yscaler = d3.scaleLinear([0, 100], [0, height])
 
@@ -33,9 +29,9 @@ function rund3(e: SVGElement) {
 
     const svg = d3
         .select(e)
-        //.attr('viewBox', [0, 0, width, height])
-        //.style('width', width)
-        //.style('height', height)
+    //.attr('viewBox', [0, 0, width, height])
+    // .style('width', width)
+    // .style('height', height)
 
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
     let linksm = m.netgraph.links.map(l => ({ l, source: l.source, target: l.target })) as FishLinkForce[]
@@ -69,6 +65,7 @@ function rund3(e: SVGElement) {
         .data(nodesm)
         .join('g')
         .classed('inv', fn => m.investigatees.includes(fn.id))
+        .attr("class", fn => fn.type ?? "undefined")
 
     nodesv
         .append('circle')
@@ -78,7 +75,6 @@ function rund3(e: SVGElement) {
     nodesv
         .append('text')
         .text(fn => fn.id)
-    //.classed('inv', d => m.investigatees.includes(d.id))
 
     simulation = d3
         .forceSimulation(nodesm)
@@ -89,6 +85,8 @@ function rund3(e: SVGElement) {
         .force('center', d3.forceCenter(50, 50).strength(.2))
         .force('box', boxingForce)
         .on('tick', updateview)
+
+    svg.selectAll('g').call(drag(simulation))
 
     function boxingForce(alpha) {
         for (let n of nodesm) {
@@ -121,7 +119,32 @@ function rund3(e: SVGElement) {
 
     updateview() // show random placements
 
-    //mount({ simulation, updateview })
+    function drag(simulation) {
+        function dragstarted(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart()
+            // event.subject.fx = xscaler.invert(event.sourceEvent.offsetX)
+            // event.subject.fy = xscaler.invert(event.sourceEvent.offsetY)
+        }
+
+        function dragged(event) {
+            event.subject.fx = xscaler.invert(event.sourceEvent.offsetX)
+            event.subject.fy = yscaler.invert(event.sourceEvent.offsetY)
+        }
+
+        function dragended(event) {
+            if (!event.active) simulation.alphaTarget(0)
+            if (event.sourceEvent.shiftKey) {
+                event.subject.fx = null
+                event.subject.fy = null
+            }
+        }
+
+        return d3
+            .drag()
+            .on('start', dragstarted)
+            .on('drag', dragged)
+            .on('end', dragended)
+    }
 }
 
 export const Network = () => {

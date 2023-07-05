@@ -4,14 +4,16 @@ article.network {
 }
 
 .net-graph {
-    background: lightseagreen;
+    // background: lightseagreen;
     svg {
-        outline: solid 1px lightgreen;
+        // outline: solid 1px lightgreen;
         width: 100%;
         height: 100%;
     }
     text {
         text-anchor: middle;
+        stroke: none;
+        fill: #333;
     }
     g.inv text {
         fill: red;

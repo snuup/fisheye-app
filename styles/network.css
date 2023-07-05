@@ -31,6 +31,10 @@ article.network {
   fill: yellowgreen;
 }
 
+.net-graph line {
+  stroke: #333;
+}
+
 .path-matrix g {
   cursor: pointer;
 }

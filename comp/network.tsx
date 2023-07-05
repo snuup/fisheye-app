@@ -19,7 +19,7 @@ mount({ rand100 })
 
 let simulation: any = null
 
-type FishNodeForce = { n: FishNode, x: number, y: number, isinv: boolean }
+type FishNodeForce = { n: FishNode, x: number, y: number, isinv: boolean, id: string }
 type FishLinkForce = { l: SuperLink, source: string | any, target: string | any } // link-force will assign nodes to source and target
 
 function rund3(e: SVGElement) {
@@ -28,25 +28,23 @@ function rund3(e: SVGElement) {
 
     const svg = d3
         .select(e)
-        //.attr('class', 'xy')
         .attr('viewBox', [0, 0, width, height])
         .style('width', width)
         .style('height', height)
 
-    let nodesm = m.netgraph.nodes.map(n => ({ n })) as FishNodeForce[]
+    let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
     let linksm = m.netgraph.links.map(l => ({ l, source: l.source, target: l.target })) as FishLinkForce[]
+    mount({ linksm, nodesm })
 
     const link = svg
-        .selectAll('.link')
+        .selectAll('line')
         .data(linksm)
         .join(
             enter =>
                 enter
                     .append('line')
-                    .attr('class', 'link')
                     .attr('class', fl => fl.l.type)
-                    .attr('stroke-width', 2)
-                    .attr('fill', 'none'),
+                    .attr('stroke-width', 2),
             //.attr('opacity', d => d.weight)
             //.on("click", e => c.selectlink(e.target.__data__)),
             update => update,
@@ -55,7 +53,7 @@ function rund3(e: SVGElement) {
         )
 
     nodesm.forEach(fn => {
-        let isinv = m.investigatees.includes(fn.n.id)
+        let isinv = m.investigatees.includes(fn.id)
         fn.x ??= rand100()
         fn.y ??= rand100()
         fn.isinv = isinv
@@ -65,24 +63,24 @@ function rund3(e: SVGElement) {
         .selectAll('g')
         .data(nodesm)
         .join('g')
-        .classed('inv', fn => m.investigatees.includes(fn.n.id))
+        .classed('inv', fn => m.investigatees.includes(fn.id))
 
     nodesv
         .append('circle')
         .attr('r', radius)
-        .classed('inv', fn => m.investigatees.includes(fn.n.id))
+        .classed('inv', fn => m.investigatees.includes(fn.id))
 
     nodesv
         .append('text')
-        .text(fn => fn.n.id)
+        .text(fn => fn.id)
     //.classed('inv', d => m.investigatees.includes(d.id))
 
     simulation = d3
         .forceSimulation(nodesm)
         //.stop()
-        .force('link', d3.forceLink(linksm).id((fn: FishNodeForce) => fn.n.id))
-        .force('collide', d3.forceCollide().radius(30))
-        .force('center', d3.forceCenter(50, 50).strength(0.1)) // x and y range = [0..100]
+        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(20).strength(1))
+        .force('collide', d3.forceCollide().radius(5).strength(1))
+        //.force('center', d3.forceCenter(50, 50).strength(.001)) // x and y range = [0..100]
         .force('box', boxingForce)
         .on('tick', updateview)
 

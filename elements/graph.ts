@@ -1,18 +1,17 @@
 import { mount, rebind } from "../utils/common"
-import { FishLink, DirectedLink } from "./fishlink"
+import { DirectedLink } from "./fishlink"
 import { FishNode } from "./fishnode"
 import { Path } from "./path"
 
-export class Graph implements IGraph {
+export class Graph<LinkType extends ILinkType> implements IGraph<LinkType> {
 
     nodes: FishNode[]
-    links: FishLink[]
-    //enriched = false
+    links: LinkType[]
 
     nodemap: Map<string, FishNode>
-    linkmap: Map<string, DirectedLink[]>
+    linkmap: Map<string, DirectedLink<LinkType>[]>
 
-    constructor(nodes: FishNode[], links: FishLink[]) {
+    constructor(nodes: FishNode[], links: LinkType[]) {
         rebind(this)
         this.nodes = nodes
         this.links = links
@@ -59,9 +58,9 @@ export class Graph implements IGraph {
         return this.nodes.find(n => n.id.toLowerCase().startsWith(nidstart))
     }
 
-    haslink(e: FishLink): boolean { return this.links.includes(e) }
-    appendlink(l: FishLink) { if (!this.haslink(l)) this.links.push(l) }
-    appendlinks(ls: FishLink[]) { ls.forEach(this.appendlink) }
+    haslink(l: LinkType): boolean { return this.links.includes(l) }
+    appendlink(l: LinkType) { if (!this.haslink(l)) this.links.push(l) }
+    appendlinks(ls: LinkType[]) { ls.forEach(this.appendlink) }
     getoutlinks(nid: string) {
         console.log("getoutlinks")
         return this.links.filter(l => l.source == nid)
@@ -86,7 +85,7 @@ export class Graph implements IGraph {
     //     return this.nodes.groupBy(n => n.upfixed2)
     // }
 
-    getneighborlinks(nid: string): DirectedLink[] {
+    getneighborlinks(nid: string): DirectedLink<LinkType>[] {
         return this.linkmap.get(nid) ?? [] // .map(dl => dl.target) // can be null, right ??
     }
 

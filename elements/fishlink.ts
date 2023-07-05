@@ -66,24 +66,24 @@ export class FishLink implements ILink{
     }
 }
 
-export class DirectedLink {
+export class DirectedLink<LinkType extends ILinkType> {
 
-    constructor(public link: FishLink, public rev: boolean) {
+    constructor(public link: LinkType, public rev: boolean) {
         this.link = link
         this.rev = rev
     }
 
-    get key() { return this.link.key + "|" + this.rev.toString() }
-    get original() { return this.link.original }
-    get nodes() { return this.link.nodeids }
+    //get key() { return this.link.key + "|" + this.rev.toString() }
+    //get original() { return this.link.original }
+    //get nodes() { return this.link.nodeids }
 
     get source() { return this.rev ? this.link.target : this.link.source }
     get target() { return this.rev ? this.link.source : this.link.target }
     get ends() { return [this.source, this.target] }
 
     get text() { return this.source + " - " + this.target }
-    get longtext() { return this.source + ` (${this.original.type}/${this.original.weight}) ` + this.target }
-    get longtext1() { return this.source + ` (${this.original.type}/${this.original.weight}) ` }
+    //get longtext() { return this.source + ` (${this.original.type}/${this.original.weight}) ` + this.target }
+    //get longtext1() { return this.source + ` (${this.original.type}/${this.original.weight}) ` }
 }
 
 mount({ FishLink })

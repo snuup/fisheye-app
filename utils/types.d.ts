@@ -95,9 +95,16 @@ interface ILink {
     type: string
 }
 
-interface IGraph {
+interface IGraph<LinkType extends ILinkType> {
     nodes: INode[]
-    links: ILink[]
-    getoutlinks(nid: string): ILink[]
-    getinlinks(nid: string): ILink[]
+    links: LinkType[]
+    getoutlinks(nid: string): LinkType[]
+    getinlinks(nid: string): LinkType[]
+}
+
+interface ILinkType {
+    source: string
+    target: string
+    type: string
+    weight: number
 }

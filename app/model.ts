@@ -5,6 +5,7 @@ import { SuperLink } from "../elements/superlink"
 import { Paths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
+import { FishLink } from "../elements/fishlink"
 
 export const mraw = {
 
@@ -17,7 +18,7 @@ export const mraw = {
         "n8327"
     ],
     entity: "",
-    graph: Graph.Empty,
+    graph: Graph.Empty as Graph<FishLink>,
 
     //supergraph: SuperGraph.Empty,
 
@@ -27,7 +28,7 @@ export const mraw = {
 
     seagraph: Graph.Empty,
 
-    netgraph: Graph.Empty,
+    netgraph: Graph.Empty as Graph<FishLink>,
     selectedpaths: [] as string[],
 
     tops: [] as FishNode[],

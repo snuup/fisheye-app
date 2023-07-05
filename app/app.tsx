@@ -19,8 +19,8 @@ let App = () => {
                 <h2>Mini Challenge 1</h2>
                 <Link url={['nodestats']} />
                 <Link url={['linkstats']} />
-                <Link url={['matrix']} />
                 <Link url={['network']} />
+                <Link url={['matrix']} />
                 <Link url={['tree']} />
             </header>
 

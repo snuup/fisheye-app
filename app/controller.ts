@@ -4,7 +4,7 @@ import { updateview } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph } from "../elements/graph"
+import { Graph, GraphAlgos } from "../elements/graph"
 import { FishNode } from "../elements/fishnode"
 import { FishLink } from "../elements/fishlink"
 import { Url } from "./routes"
@@ -24,15 +24,16 @@ export class Controller {
 
     prepareData() {
 
-        let nodes = mc1.nodes.map(FishNode.createFromOriginal)
-        let links = mc1.links.map(FishLink.createFromOriginal)
+        let nodes : FishNode[] = mc1.nodes.map(FishNode.createFromOriginal)
+        let links : FishLink[] = mc1.links.map(FishLink.createFromOriginal)
         let g = m.graph = new Graph(nodes, links)
         g.nodes.forEach(n => {
             n.outdegree = g.getoutlinks(n.id).length
             n.indegree = g.getinlinks(n.id).length
         })
 
-        let sg = m.supergraph = new Graph(nodes, links)
+        //let sg = m.supergraph = new Graph(nodes, links)
+        //links.groupBy(l => )
 
         //problem: supergraph uses nodes and attaches, no, so what ?
         //uncomment next line and see error:
@@ -171,7 +172,7 @@ export class Controller {
         let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
 
         function computepaths(i): Path[] {
-            let { goalpaths } = m.graph.findpathsmulti(nodes[i].id, nodes.slice(i + 1).map(n => n.id))
+            let { goalpaths } = GraphAlgos.findpathsmulti(m.graph.getneighborlinksu, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
             return goalpaths
         }
 

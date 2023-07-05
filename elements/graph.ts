@@ -62,7 +62,6 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     appendlink(l: LinkType) { if (!this.haslink(l)) this.links.push(l) }
     appendlinks(ls: LinkType[]) { ls.forEach(this.appendlink) }
     getoutlinks(nid: string) {
-        console.log("getoutlinks")
         return this.links.filter(l => l.source == nid)
     }
     getinlinks(nid: string) { return this.links.filter(l => l.target == nid) }
@@ -87,6 +86,10 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
     getneighborlinks(nid: string): DirectedLink<LinkType>[] {
         return this.linkmap.get(nid) ?? [] // .map(dl => dl.target) // can be null, right ??
+    }
+
+    getneighborlinksu(nid: string): LinkType[] {
+        return this.linkmap.get(nid)?.map(dl => dl.link) ?? [] // .map(dl => dl.target) // can be null, right ??
     }
 
     findpathsmulti(start: string, targets: string[]) {
@@ -134,4 +137,54 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
         return { goalpaths, visited }
     }
+}
+
+export class GraphAlgos {
+
+    static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => Link[], start: string, targets: string[]) {
+
+        console.log("findpathsmulti", start, targets)
+        if(!Array.isArray(targets)) throw "targets must be an array!"
+
+        let stargets = new Set(targets)
+
+        let visited = new Set<string>()
+        let goalpaths: Path[] = []
+
+        const bfs = (fronteer: Path[]) => {
+
+            let nextfronteer: Path[] = []
+            let reachedtargets: string[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
+
+            for (let p of fronteer) {
+                let n = p.end
+                visited.add(n)
+
+                if (stargets.has(n)) {
+                    goalpaths.push(p)
+                    reachedtargets.push(n)
+                }
+
+                getneighborlinks(n)
+                    .filter(l => !visited.has(l.target))
+                    .map(l => p.with(l))
+                    .forEach(p => nextfronteer.push(p))
+            }
+
+            reachedtargets.forEach(n => stargets.delete(n))
+
+            let godeeper = fronteer.first.length < 3
+            return (godeeper && stargets.size) ? nextfronteer : []
+        }
+
+        let fronteer: Path[] = getneighborlinks(start).map(l => new Path([l]))
+        while (fronteer.length) {
+            fronteer = bfs(fronteer)
+        }
+
+        console.log("visited", visited.size, "nodes", "found paths", goalpaths)
+
+        return { goalpaths, visited }
+    }
+
 }

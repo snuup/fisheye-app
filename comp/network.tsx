@@ -3,7 +3,7 @@ import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { mount } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
-import { FishLink } from '../elements/fishlink'
+import { SuperLink } from '../elements/superlink'
 
 const radius = 8
 const width = 600
@@ -20,7 +20,7 @@ mount({ rand100 })
 let simulation: any = null
 
 type FishNodeForce = { n: FishNode, x: number, y: number, isinv: boolean }
-type FishLinkForce = { l: FishLink, source: string | any, target: string | any } // link-force will assign nodes to source and target
+type FishLinkForce = { l: SuperLink, source: string | any, target: string | any } // link-force will assign nodes to source and target
 
 function rund3(e: SVGElement) {
 

@@ -4,6 +4,7 @@ import { m } from '../app/model'
 import { c } from '../app/controller'
 import { FishNode } from '../elements/fishnode'
 import { Path } from '../elements/path'
+import { SuperLink } from '../elements/superlink'
 
 const cellsize = 30
 
@@ -76,7 +77,7 @@ export const PathMatrix = () => {
 
 export class Paths {
 
-    constructor(public ps: Path[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
+    constructor(public ps: Path<SuperLink>[], public i: number, public j: number, public n1: FishNode, public n2: FishNode) { }
 
     get key() { return this.n1.id + "-" + this.n2.id }
 

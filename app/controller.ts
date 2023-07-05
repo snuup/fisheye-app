@@ -25,8 +25,8 @@ export class Controller {
 
     prepareData() {
 
-        let nodes : FishNode[] = mc1.nodes.map(FishNode.createFromOriginal)
-        let links : FishLink[] = mc1.links.map(FishLink.createFromOriginal)
+        let nodes: FishNode[] = mc1.nodes.map(FishNode.createFromOriginal)
+        let links: FishLink[] = mc1.links.map(FishLink.createFromOriginal)
         let g = m.graph = new Graph(nodes, links)
         g.nodes.forEach(n => {
             let counts = g.getlinks(n.id).countBy(dl => dl.rev.toString())
@@ -34,26 +34,12 @@ export class Controller {
             n.indegree = counts.true ?? 0
         })
 
-        //let z = classes
+        mount({ links })
 
-//        console.log(G)
+        let superlinks = links.groupBy(l => l.ukey).entries.map(([_, ls]) => new SuperLink(ls))
+        m.supergraph = new Graph(nodes, superlinks)
 
-        //let sg = m.supergraph = new Graph(nodes, links)
-        //links.groupBy(l => )
 
-        //problem: supergraph uses nodes and attaches, no, so what ?
-        //uncomment next line and see error:
-//        m.supergraph = new SuperGraph(m.graph.nodes, m.graph.links)
-
-        // let mb = new PathMatrixBuilder(m.graph)
-        // m.tops = mb.initscores(m.investigatees.map(m.graph.getnode))
-        // m.top = m.tops[0]
-
-        // m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
-        // m.netgraph = new GraphView(m.graph)
-
-        //let invs = m.investigatees.map(m.graph.getnode)
-        //m.netgraph = new Graph(invs)
     }
 
     // getsubgraph(nodes: FishNode[]) {
@@ -65,7 +51,7 @@ export class Controller {
 
     setroute() {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
-        //console.log("setroute", m.url)
+        console.log("setroute", m.url)
 
         switch (m.url[0]) {
             // case "network":
@@ -145,27 +131,39 @@ export class Controller {
     }
 
     togglepaths(nps: Paths) {
+
         let active = m.selectedpaths.toggle(nps.key)
+
         console.log("paths", nps)
         mount({ nps })
-        //let links = nps.ps.flatMap(p => p.links)
-        //console.log(links)
-        //mount({ links })
-        // if (active) {
-        //     for (let l of links) {
-        //         let sl = m.superlinks.getorcreate(l.ukey, () => new SuperLink())
-        //         sl.add(l)
-        //     }
-        // }
-        // else {
-        //     for (let l of links) {
-        //         let sl = m.superlinks.get(l.ukey)!
-        //         sl.del(l)
-        //     }
-        // }
-        console.warn("tbd");
 
-        updateview(".path-matrix")
+        let links = nps.ps.flatMap(p => p.links).map(dl => dl.link)
+        console.log(links)
+        mount({ links })
+
+        let g = m.netgraph
+
+        if (active) {
+            for (let l of links) {
+                //let sl = m.superlinks.getorcreate(l.ukey, () => new SuperLink())
+                //sl.add(l)
+                console.log("add", l)
+                g.appendlink(l)
+            }
+            let pathnodes = new Set(links.flatMap(l => [l.source, l.target]).map(nid => m.graph.getnode(nid)))
+            pathnodes.forEach(n => g.addnode(n))
+        }
+        else {
+            for (let l of links) {
+                //let sl = m.superlinks.get(l.ukey)!
+                //sl.del(l)
+                console.log("del", l)
+            }
+        }
+        console.warn("tbd")
+
+        updateview('.path-matrix')
+        updateview('.net-graph')
     }
 
     computepathmatrix() {
@@ -177,8 +175,8 @@ export class Controller {
         let n = nodes.length
         let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
 
-        function computepaths(i): Path<ILink>[] {
-            let { goalpaths } = GraphAlgos.findpathsmulti(m.graph.getlinks, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
+        function computepaths(i): Path<SuperLink>[] {
+            let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
             return goalpaths
         }
 

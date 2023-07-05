@@ -21,20 +21,20 @@ export const mraw = {
     graph: Graph.Empty as Graph<FishLink>,
     supergraph: Graph.Empty as Graph<SuperLink>,
 
+    netgraph: Graph.Empty as Graph<SuperLink>,
+    selectedpaths: [] as string[],
+
+
     graphfocus: "" as string | null,
     graphfocusnode: null as FishNode | null,
     subgraph: Graph.Empty, // old force view (is in draft)
-
     seagraph: Graph.Empty,
-
-    netgraph: Graph.Empty as Graph<FishLink>,
-    selectedpaths: [] as string[],
 
     tops: [] as FishNode[],
     top: null as FishNode | null,
 
     pathmatrix: [] as Paths[],
-    superlinks: new Map<string, SuperLink>(),
+    //superlinks: new Map<string, SuperLink>(),
 
     // ui
     selection: [] as any[]

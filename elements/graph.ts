@@ -30,6 +30,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     hasnode(n: FishNode): boolean { return this.nodemap.has(n.id) }
 
     addnode(n: FishNode) {
+        if (this.nodemap.has(n.id)) return
         this.nodes.push(n)
         this.nodemap.set(n.id, n)
     }
@@ -57,7 +58,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
     gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
     getlinks(nid: string): DirectedLink<LinkType>[] { return this.linkmap.get(nid) ?? [] }
-    getneighborlinksu(nid: string): LinkType[] { return this.linkmap.get(nid)?.map(dl => dl.link) ?? []  }
+    getneighborlinksu(nid: string): LinkType[] { return this.linkmap.get(nid)?.map(dl => dl.link) ?? [] }
 }
 
 export class GraphAlgos {
@@ -70,11 +71,11 @@ export class GraphAlgos {
         let stargets = new Set(targets)
 
         let visited = new Set<string>()
-        let goalpaths: Path<ILink>[] = []
+        let goalpaths: Path<Link>[] = []
 
-        const bfs = (fronteer: Path<ILink>[]) => {
+        const bfs = (fronteer: Path<Link>[]) => {
 
-            let nextfronteer: Path<ILink>[] = []
+            let nextfronteer: Path<Link>[] = []
             let reachedtargets: string[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
 
             for (let p of fronteer) {
@@ -98,7 +99,7 @@ export class GraphAlgos {
             return (godeeper && stargets.size) ? nextfronteer : []
         }
 
-        let fronteer: Path<ILink>[] = getneighborlinks(start).map(l => new Path([l]))
+        let fronteer: Path<Link>[] = getneighborlinks(start).map(l => new Path([l]))
         while (fronteer.length) {
             fronteer = bfs(fronteer)
         }

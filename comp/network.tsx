@@ -2,6 +2,8 @@ import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { mount } from '../utils/common'
+import { FishNode } from '../elements/fishnode'
+import { FishLink } from '../elements/fishlink'
 
 const radius = 8
 const width = 600
@@ -17,6 +19,9 @@ mount({ rand100 })
 
 let simulation: any = null
 
+type FishNodeForce = { n: FishNode, x: number, y: number, isinv: boolean }
+type FishLinkForce = { l: FishLink, source: string | any, target: string | any } // link-force will assign nodes to source and target
+
 function rund3(e: SVGElement) {
 
     console.log("patch network!", m.netgraph)
@@ -28,17 +33,18 @@ function rund3(e: SVGElement) {
         .style('width', width)
         .style('height', height)
 
-    let links = m.netgraph.links
+    let nodesm = m.netgraph.nodes.map(n => ({ n })) as FishNodeForce[]
+    let linksm = m.netgraph.links.map(l => ({ l, source: l.source, target: l.target })) as FishLinkForce[]
 
     const link = svg
         .selectAll('.link')
-        .data(links)
+        .data(linksm)
         .join(
             enter =>
                 enter
                     .append('line')
                     .attr('class', 'link')
-                    .attr('class', d => d.type)
+                    .attr('class', fl => fl.l.type)
                     .attr('stroke-width', 2)
                     .attr('fill', 'none'),
             //.attr('opacity', d => d.weight)
@@ -48,46 +54,40 @@ function rund3(e: SVGElement) {
             exit => exit.remove()
         )
 
-    let nodesdata = m.netgraph.nodes
-    nodesdata.forEach(n => {
-        let isinv = m.investigatees.includes(n.id)
-        n.x ??= rand100()
-        n.y ??= rand100()
-        console.log("xy = ", n.x, n.y)
-        n.isinv = isinv
-        n.up = 0
+    nodesm.forEach(fn => {
+        let isinv = m.investigatees.includes(fn.n.id)
+        fn.x ??= rand100()
+        fn.y ??= rand100()
+        fn.isinv = isinv
     })
 
-    let nodes = svg
+    let nodesv = svg
         .selectAll('g')
-        .data(nodesdata)
+        .data(nodesm)
         .join('g')
-        .classed('inv', d => m.investigatees.includes(d.id))
-        .classed('focused', d => m.graphfocusnode === d)
+        .classed('inv', fn => m.investigatees.includes(fn.n.id))
 
-    nodes
+    nodesv
         .append('circle')
         .attr('r', radius)
-        .classed('inv', d => m.investigatees.includes(d.id))
-        .classed('focused', d => m.graphfocusnode === d)
+        .classed('inv', fn => m.investigatees.includes(fn.n.id))
 
-    nodes
+    nodesv
         .append('text')
-        .text(d => d.id)
-        //.classed('inv', d => m.investigatees.includes(d.id))
-        //.classed('focused', d => m.graphfocusnode === d)
+        .text(fn => fn.n.id)
+    //.classed('inv', d => m.investigatees.includes(d.id))
 
     simulation = d3
-        .forceSimulation(nodesdata)
+        .forceSimulation(nodesm)
         //.stop()
-        //.force('link', d3.forceLink(links).id((n: FishNode) => n.id))
+        .force('link', d3.forceLink(linksm).id((fn: FishNodeForce) => fn.n.id))
         .force('collide', d3.forceCollide().radius(30))
         .force('center', d3.forceCenter(50, 50).strength(0.1)) // x and y range = [0..100]
         .force('box', boxingForce)
         .on('tick', updateview)
 
     function boxingForce(alpha) {
-        for (let n of nodesdata) {
+        for (let n of nodesm) {
             n.x = n.x.clamp(2, 98)
             n.y = n.y.clamp(2, 98)
         }
@@ -97,7 +97,7 @@ function rund3(e: SVGElement) {
 
     function updateview() {
         console.log('ontick')
-        for (let n of nodesdata) {
+        for (let n of nodesm) {
             n.x = n.x.clamp(2, 98)
             n.y = n.y.clamp(2, 98)
         }
@@ -108,7 +108,7 @@ function rund3(e: SVGElement) {
             .attr('y2', d => yscaler(d.target.y))
         //.style('opacity', d => opacityscaler(d.maxz))
 
-        nodes
+        nodesv
             .attr('transform', (d: any) => `translate(${xscaler(d.x)},${yscaler(d.y)})`)
         //.attr('cx', d => xscaler(d.x))
         //.attr('cy', d => yscaler(d.y))
@@ -133,11 +133,11 @@ export const Network = () => {
 //     simulation.restart()
 // }
 
-function printnodesxy() {
-    for (let n of m.netgraph.nodes) {
-        console.log(n.id, n.x, n.y)
-    }
-}
+// function printnodesxy() {
+//     for (let n of m.netgraph.nodes) {
+//         console.log(n.id, n.x, n.y)
+//     }
+// }
 
-mount({ ng: m.netgraph, xscaler, yscaler, printnodesxy })
+mount({ ng: m.netgraph, xscaler, yscaler })
 

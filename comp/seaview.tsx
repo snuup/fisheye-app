@@ -76,7 +76,6 @@ function rund3(e: HTMLElement) {
         .join('circle')
         .attr('r', radius)
         .classed('inv', d => m.investigatees.includes(d.id))
-        .classed('focused', d => m.graphfocusnode === d)
 
     nodesxy.append('title').text(d => d.id)
 
@@ -86,7 +85,6 @@ function rund3(e: HTMLElement) {
         .join('circle')
         .attr('r', radius)
         .classed('inv', d => m.investigatees.includes(d.id))
-        .classed('focused', d => m.graphfocusnode === d)
 
     nodesxz.append('title').text(d => d.id)
 

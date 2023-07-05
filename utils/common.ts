@@ -83,15 +83,20 @@ mergePrototype(class extends Array {
         const i = this.indexOf(x)
         if (i > -1) this.splice(i, 1)
     }
-    toggle(x): boolean {
-        if (this.includes(x)) {
-            this.remove(x)
-            return false
-        }
-        else {
+    toggle(x, addOrRemove?: boolean): boolean {
+        addOrRemove ??= !this.includes(x)
+        if (addOrRemove) {
             this.push(x)
             return true
         }
+        else {
+            this.remove(x)
+            return false
+        }
+    }
+    ensure(x: any) {
+        if (this.includes(x)) return
+        this.push(x)
     }
 }, Array)
 

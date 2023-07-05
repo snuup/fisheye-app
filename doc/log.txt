@@ -12,6 +12,8 @@
 - bug: path matrix does not update view
 - colorize node types !!!
 
+- restore *pinned nodes and *selected paths
+
 wow: circle with distances for each on hover
 
 4.7.

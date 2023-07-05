@@ -39,7 +39,9 @@ export class Controller {
         let superlinks = links.groupBy(l => l.ukey).entries.map(([_, ls]) => new SuperLink(ls))
         m.supergraph = new Graph(nodes, superlinks)
 
-
+        this.restore()
+        this.computepathmatrix()
+        this.updatenetgraph()
     }
 
     // getsubgraph(nodes: FishNode[]) {
@@ -120,8 +122,8 @@ export class Controller {
     // }
 
     togglenetnode(ev, n: FishNode) {
-        m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
-        m.pinnednodes.push(n)
+        let added = m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
+        m.pinnednodes.toggle(n, added)
         this.computepathmatrix()
 
         let currentkeys = m.pathmatrix.map(ps => ps.key)
@@ -150,8 +152,7 @@ export class Controller {
 
         console.log("computepathmatrix")
 
-        let g = m.netgraph
-        let nodes = g.nodes
+        let nodes = m.pinnednodes
         let n = nodes.length
         let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
 
@@ -172,6 +173,21 @@ export class Controller {
         }
 
         m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
+    }
+
+    store() {
+        localStorage.setItem("session", JSON.stringify({
+            pinnednodes: m.pinnednodes.map(n => n.id),
+            pinnedpaths: m.pinnedpaths
+        }))
+    }
+
+    restore() {
+        let json = localStorage.getItem("session")
+        if (!json) return
+        let o = JSON.parse(json)
+        m.pinnednodes = o.pinnednodes.map(nid => m.graph.getnode(nid))
+        m.pinnedpaths = o.pinnedpaths
     }
 }
 

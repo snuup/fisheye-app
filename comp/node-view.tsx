@@ -8,7 +8,7 @@ import { m } from '../app/model'
 
 export const NodeView = ({ n }: { n: FishNode }) => {
     return (
-        <div class={cc('nodeview', { selected: m.netgraph.nodes.includes(n) })} onclick={(ev) => c.togglenetnode(ev, n)}>
+        <div class={cc('nodeview', { selected: m.pinnednodes.includes(n) })} onclick={(ev) => c.togglenetnode(ev, n)}>
             <NodeDonut n={n} />
             <h3>{n.id}</h3>
             <div class='gridtable'>

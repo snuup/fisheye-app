@@ -25,8 +25,64 @@ let suspicious_words = [
     'drug'
 ]
 
+let words2 = `
+    Attorneys
+    Bitcoin
+    Bribes
+    coastguard
+    Cocaine
+    Contraband
+    Crime
+    criminally
+    Defendants
+    devil
+    Disastrous
+    Exploitation
+    Explosives
+    Firearms
+    Folly
+    Guard
+    Guilty
+    Heroin
+    Hoover
+    Hunt
+    Hunter
+    illegal
+    Illegal
+    Illegal
+    Islands
+    Liability
+    Lobster
+    mining
+    Narcotics
+    perpetrator
+    poached
+    Refugee
+    Robbery
+    Smuggling
+    Snapper
+    snitch
+    Sparks
+    Spy
+    Supreme
+    Survivorsâ
+    Sword
+    transshipment
+    Trials
+    unregulated
+    victim
+    Viking
+    Warships
+    wheeler
+    Wheeler
+    wheelers
+    zombie
+    `
+
+let ws = words2.split("\n").map(s => s.trim()).filter(s => s !== "")
+
 export function issuspicious(id: string) {
-    return suspicious_words.find(s => id.includes(s))
+    return ws.find(s => id.includes(s))
 }
 
-mount({ issuspicious })
+mount({ issuspicious, words2 })

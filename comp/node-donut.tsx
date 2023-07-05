@@ -25,11 +25,12 @@ export function NodeDonut({ n }: { n: FishNode }) {
     let g = m.graph
     let data: NodeLinkData[]
     if (n instanceof FishNode) {
-        let outcounts = g.getoutlinks(n.id).countBy(l => l.type)
-        let incounts = g.getinlinks(n.id).countBy(l => l.type)
+        let counts = g.getlinks(n.id).groupBy(dl => dl.link.type)
         data = linktypes.map(type => {
-            let outs = outcounts?.[type] ?? 0
-            let ins = incounts?.[type] ?? 0
+            let all = counts?.[type] ?? []
+            let bydirection = all.groupBy(dl => dl.rev.toString())
+            let outs = bydirection?.false?.length ?? 0
+            let ins = bydirection?.true?.length ?? 0
             return { type, outs, ins, total: outs + ins }
         })
     }

@@ -16,7 +16,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
         this.nodes = nodes
         this.links = links
         this.nodemap = new Map(this.nodes.map(n => [n.id, n]))
-        let lm  = new Map()
+        let lm = new Map()
         for (let l of links) {
             lm.getorcreate(l.source, () => []).push(new DirectedLink(l, false))
             lm.getorcreate(l.target, () => []).push(new DirectedLink(l, true))
@@ -27,6 +27,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     static Empty = new Graph([], [])
 
     getnode(nid): FishNode { return this.nodemap.get(nid)! }
+    hasnode(n: FishNode): boolean { return this.nodemap.has(n.id) }
 
     addnode(n: FishNode) {
         this.nodes.push(n)
@@ -38,20 +39,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
         this.nodemap.delete(n.id)
     }
 
-    hasnode(n: FishNode): boolean {
-        return this.nodemap.has(n.id)
-    }
-
-    togglenode(n: FishNode) {
-        if (this.hasnode(n)) {
-            this.removenode(n)
-            //n.selected = false
-        }
-        else {
-            this.addnode(n)
-            //n.selected = true
-        }
-    }
+    togglenode(n: FishNode) { this.hasnode(n) ? this.removenode(n) : this.addnode(n) }
 
     searchnode(nidstart: string): FishNode | undefined {
         nidstart = nidstart.toLowerCase()
@@ -61,82 +49,15 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     haslink(l: LinkType): boolean { return this.links.includes(l) }
     appendlink(l: LinkType) { if (!this.haslink(l)) this.links.push(l) }
     appendlinks(ls: LinkType[]) { ls.forEach(this.appendlink) }
-    getoutlinks(nid: string) {
-        return this.links.filter(l => l.source == nid)
-    }
+    getoutlinks(nid: string) { return this.links.filter(l => l.source == nid) }
     getinlinks(nid: string) { return this.links.filter(l => l.target == nid) }
 
     get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
     get linkcountsByType() { return this.links.countBy(n => n.type) }
 
-    gettopdegrees(count = 25) {
-        return this.nodes.sortBy(n => -n.degree).slice(0, count)
-    }
-
-    setnodedegrees() {
-        this.nodes.forEach(n => {
-            n.outdegree = this.getoutlinks(n.id).length
-            n.indegree = this.getinlinks(n.id).length
-        })
-    }
-
-    // get groupUps() {
-    //     return this.nodes.groupBy(n => n.upfixed2)
-    // }
-
-    getneighborlinks(nid: string): DirectedLink<LinkType>[] {
-        return this.linkmap.get(nid) ?? [] // .map(dl => dl.target) // can be null, right ??
-    }
-
-    getneighborlinksu(nid: string): LinkType[] {
-        return this.linkmap.get(nid)?.map(dl => dl.link) ?? [] // .map(dl => dl.target) // can be null, right ??
-    }
-
-    findpathsmulti(start: string, targets: string[]) {
-
-        console.log("findpathsmulti", start, targets)
-        if(!Array.isArray(targets)) throw "targets must be an array!"
-
-        let stargets = new Set(targets)
-
-        let visited = new Set<string>()
-        let goalpaths: Path[] = []
-
-        const bfs = (fronteer: Path[]) => {
-
-            let nextfronteer: Path[] = []
-            let reachedtargets: string[] = [] // compute shortest paths only, so remove nodes found at this level from stargets below
-
-            for (let p of fronteer) {
-                let n = p.end
-                visited.add(n)
-
-                if (stargets.has(n)) {
-                    goalpaths.push(p)
-                    reachedtargets.push(n)
-                }
-
-                this.getneighborlinks(n)
-                    .filter(l => !visited.has(l.target))
-                    .map(l => p.with(l))
-                    .forEach(p => nextfronteer.push(p))
-            }
-
-            reachedtargets.forEach(n => stargets.delete(n))
-
-            let godeeper = fronteer.first.length < 3
-            return (godeeper && stargets.size) ? nextfronteer : []
-        }
-
-        let fronteer: Path[] = this.getneighborlinks(start).map(l => new Path([l]))
-        while (fronteer.length) {
-            fronteer = bfs(fronteer)
-        }
-
-        console.log("visited", visited.size, "nodes", "found paths", goalpaths)
-
-        return { goalpaths, visited }
-    }
+    gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
+    getlinks(nid: string): DirectedLink<LinkType>[] { return this.linkmap.get(nid) ?? [] }
+    getneighborlinksu(nid: string): LinkType[] { return this.linkmap.get(nid)?.map(dl => dl.link) ?? []  }
 }
 
 export class GraphAlgos {
@@ -144,7 +65,7 @@ export class GraphAlgos {
     static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => Link[], start: string, targets: string[]) {
 
         console.log("findpathsmulti", start, targets)
-        if(!Array.isArray(targets)) throw "targets must be an array!"
+        if (!Array.isArray(targets)) throw "targets must be an array!"
 
         let stargets = new Set(targets)
 

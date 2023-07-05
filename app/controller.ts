@@ -28,8 +28,9 @@ export class Controller {
         let links : FishLink[] = mc1.links.map(FishLink.createFromOriginal)
         let g = m.graph = new Graph(nodes, links)
         g.nodes.forEach(n => {
-            n.outdegree = g.getoutlinks(n.id).length
-            n.indegree = g.getinlinks(n.id).length
+            let counts = g.getlinks(n.id).countBy(dl => dl.rev.toString())
+            n.outdegree = counts.false ?? 0
+            n.indegree = counts.true ?? 0
         })
 
         //let sg = m.supergraph = new Graph(nodes, links)

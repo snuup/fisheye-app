@@ -22,7 +22,7 @@ function rund3(e: SVGElement) {
     let svg = d3
         .select(e)
         .style('width', svgsize + 300) // add 300 for labels
-        .style('height', svgsize + 300)
+        .style('height', svgsize + 50)
 
     let cells = svg
         .selectAll('g')

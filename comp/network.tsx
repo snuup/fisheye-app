@@ -6,11 +6,10 @@ import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
 
 const radius = 8
-const width = 600
-const height = 400
+//const width = 600
+//const height = 400
 
-const xscaler = d3.scaleLinear([0, 100], [0, width])
-const yscaler = d3.scaleLinear([0, 100], [0, height])
+
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
@@ -24,13 +23,19 @@ type FishLinkForce = { l: SuperLink, source: string | any, target: string | any 
 
 function rund3(e: SVGElement) {
 
-    console.log("patch network!", m.netgraph)
+    let div = e.parentElement
+    let width = div?.clientWidth
+    let height = div?.clientHeight
+    const xscaler = d3.scaleLinear([0, 100], [0, width])
+    const yscaler = d3.scaleLinear([0, 100], [0, height])
+
+    console.log("patch network!", m.netgraph, div?.clientWidth, div?.clientHeight)
 
     const svg = d3
         .select(e)
-        .attr('viewBox', [0, 0, width, height])
-        .style('width', width)
-        .style('height', height)
+        //.attr('viewBox', [0, 0, width, height])
+        //.style('width', width)
+        //.style('height', height)
 
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
     let linksm = m.netgraph.links.map(l => ({ l, source: l.source, target: l.target })) as FishLinkForce[]
@@ -78,10 +83,10 @@ function rund3(e: SVGElement) {
     simulation = d3
         .forceSimulation(nodesm)
         //.stop()
-        .force('many', d3.forceManyBody())
-        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(20).strength(1))
+        .force('many', d3.forceManyBody().strength(.001))
+        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(10).strength(.05))
         .force('collide', d3.forceCollide().radius(5).strength(1))
-        .force('center', d3.forceCenter(50, 50).strength(.001)) // x and y range = [0..100]
+        .force('center', d3.forceCenter(50, 50).strength(.2))
         .force('box', boxingForce)
         .on('tick', updateview)
 
@@ -101,10 +106,10 @@ function rund3(e: SVGElement) {
             n.y = n.y.clamp(2, 98)
         }
         // console.log(m.netgraph.nodes.map(n => n.y))
-        link.attr('x1', d => xscaler(d.source.x))
-            .attr('y1', d => yscaler(d.source.y))
-            .attr('x2', d => xscaler(d.target.x))
-            .attr('y2', d => yscaler(d.target.y))
+        link.attr('x1', d => xscaler(d.source.x) as number)
+            .attr('y1', d => yscaler(d.source.y) as number)
+            .attr('x2', d => xscaler(d.target.x) as number)
+            .attr('y2', d => yscaler(d.target.y) as number)
         //.style('opacity', d => opacityscaler(d.maxz))
 
         nodesv
@@ -138,5 +143,5 @@ export const Network = () => {
 //     }
 // }
 
-mount({ ng: m.netgraph, xscaler, yscaler })
+mount({ ng: m.netgraph })
 

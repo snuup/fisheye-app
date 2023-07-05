@@ -9,6 +9,8 @@ article.network {
 
 .net-graph svg {
   outline: solid 1px lightgreen;
+  width: 100%;
+  height: 100%;
 }
 
 .net-graph text {
@@ -35,32 +37,37 @@ article.network {
   stroke: #333;
 }
 
-.path-matrix g {
+div.path-matrix {
+  position: absolute;
+  bottom: 0;
+}
+
+div.path-matrix g {
   cursor: pointer;
 }
 
-.path-matrix g.sel circle {
+div.path-matrix g.sel circle {
   fill: #222;
   stroke: none;
 }
 
-.path-matrix g.sel text {
+div.path-matrix g.sel text {
   fill: white;
 }
 
-.path-matrix circle {
+div.path-matrix circle {
   fill: transparent;
   stroke: #333;
 }
 
-.path-matrix text {
+div.path-matrix text {
   fill: #333;
   font-weight: bold;
   text-anchor: middle;
   dominant-baseline: central;
 }
 
-.path-matrix text.label {
+div.path-matrix text.label {
   fill: #333;
   text-anchor: start;
 }

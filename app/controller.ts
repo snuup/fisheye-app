@@ -11,9 +11,7 @@ import { Url } from "./routes"
 import { Path, PathMatrixBuilder } from "../elements/path"
 import { Paths } from "../comp/pathmatrix"
 import { SuperLink } from "../elements/superlink"
-import { cleanid } from "../analysis/common"
-//import { SuperGraph } from "../elements/supergraph"
-//import * as nx from '../jsnetx'
+
 
 export class Controller {
 
@@ -122,15 +120,18 @@ export class Controller {
     // }
 
     togglenetnode(ev, n: FishNode) {
-        let added = m.netgraph.togglenode(n) // ... create new graph class ? add node, compute path matrix
-        m.pinnednodes.toggle(n, added)
+        let add = m.pinnednodes.toggle(n)
+        //m.netgraph.togglenode(n, add) // ... create new graph class ? add node, compute path matrix
+
         this.computepathmatrix()
+        this.updatenetgraph()
 
         let currentkeys = m.pathmatrix.map(ps => ps.key)
         m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
 
         updateview(ev.currentTarget)
         updateview(".network")
+        this.store()
     }
 
     togglepaths(nps: Paths) {
@@ -138,6 +139,7 @@ export class Controller {
         this.updatenetgraph()
         updateview('.path-matrix')
         updateview('.net-graph')
+        this.store()
     }
 
     updatenetgraph() {

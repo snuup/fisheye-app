@@ -40,13 +40,14 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
         this.nodemap.delete(n.id)
     }
 
-    togglenode(n: FishNode) {
-        if (this.hasnode(n)) {
-            this.removenode(n)
-            return false
-        } else {
+    togglenode(n: FishNode, add?) {
+        add ??= this.hasnode(n)
+        if (add) {
             this.addnode(n)
             return true
+        } else {
+            this.removenode(n)
+            return false
         }
     }
 

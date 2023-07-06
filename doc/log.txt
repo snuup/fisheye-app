@@ -1,7 +1,7 @@
 6.7.
 // most essential improvements
 + link strength
-- node visuals into
++ node visuals into
 - path matrix into node
 
 5.7.

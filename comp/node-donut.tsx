@@ -68,7 +68,6 @@ export function d3nodedonut(sel, n: FishNode, undirected = true) {
         .text(d => {
             return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
         })
-        //.on('mouseover', (_, d) => console.log(d.data.type))
 
     return g
 }

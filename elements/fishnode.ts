@@ -24,7 +24,9 @@ export class FishNode implements INode {
     outdegree: number
     indegree: number
     isinv?: boolean
-    donut: NodeLinkData[]
+
+    get donut(): NodeLinkData[] { return this.original.donut }
+    set donut(d) { }
 
     private constructor(original: MC1Node) {
         this.original = original

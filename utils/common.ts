@@ -1,11 +1,12 @@
 import { log } from "console"
 
+export const svgns = "http://www.w3.org/2000/svg";
+
 export function mount(x) {
     Object.assign(globalThis, x)
 }
 
 export function mergePrototype(mixin, ...targets) {
-    console.log("mergePrototype")
     const props = Object.getOwnPropertyDescriptors(mixin.prototype)
     delete (props as any).constructor // do not copy the constructor
     targets.forEach((t) => {

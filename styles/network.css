@@ -35,8 +35,13 @@ article.network {
 }
 
 div.path-matrix {
+  display: none;
   position: absolute;
   bottom: 0;
+}
+
+body.showpathmatrix div.path-matrix {
+  display: initial;
 }
 
 div.path-matrix g {

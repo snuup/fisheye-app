@@ -84,6 +84,7 @@ interface MC1Node {
     type?: string
     country?: string
     id: MC1Id
+    donut: NodeLinkData[]
 }
 
 interface INode {

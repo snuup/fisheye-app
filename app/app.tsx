@@ -14,7 +14,7 @@ import { NetworkView } from "../comp/networkview"
 
 let App = () => {
     return (
-        <body>
+        <body class="showpathmatrix">
             <header>
                 <h2>Mini Challenge 1</h2>
                 <Link url={['nodestats']} />
@@ -22,6 +22,7 @@ let App = () => {
                 <Link url={['network']} />
                 <Link url={['matrix']} />
                 <Link url={['tree']} />
+                <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")} checked />
             </header>
 
             <Navigation />

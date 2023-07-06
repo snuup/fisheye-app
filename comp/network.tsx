@@ -1,9 +1,11 @@
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { mount } from '../utils/common'
+import { mount, svgns } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
+import { d3nodedonut } from './node-donut'
+import { log } from 'console'
 
 const radius = 8
 
@@ -65,6 +67,21 @@ function rund3(e: SVGElement) {
         .append('circle')
         .attr('r', radius)
         .classed('inv', fn => m.investigatees.includes(fn.id))
+
+    nodesv
+
+    nodesv
+        .selectAll(function (n: FishNode) {
+            console.log("select-f", n, ...arguments)
+            d3nodedonut(this, n)
+        })
+
+    //   .append(function(n: FishNode) {
+    //         //let e = document.createAttributeNS(svgns, "g")
+    //         //d3nodedonut(this, n)
+    //         console.log(this, n, ...arguments)
+    //         return "text"
+    //     })
 
     nodesv
         .append('text')
@@ -144,6 +161,7 @@ function rund3(e: SVGElement) {
         let json = localStorage.getItem("netgraph")
         if (!json) return
         let ns = JSON.parse(json)
+        ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
         let nodemap = new Map(ns.map(n => [n.id, n]))
         m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
     }

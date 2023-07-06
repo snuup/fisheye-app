@@ -4,87 +4,68 @@ import { FishNode, NodeLinkData, linktypes } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
 import { m } from '../app/model'
 
-export function NodeDonut({ n }: { n: FishNode }) {
+export function d3nodedonut(element, n: FishNode) {
 
-    let g = m.graph
-    let data: NodeLinkData[]
-    if (n instanceof FishNode) {
-        let counts = g.getlinks(n.id).groupBy(dl => dl.link.type)
-        data = linktypes.map(type => {
-            let all = counts?.[type] ?? []
-            let bydirection = all.groupBy(dl => dl.rev.toString())
-            let outs = bydirection?.false?.length ?? 0
-            let ins = bydirection?.true?.length ?? 0
-            return { type, outs, ins, total: outs + ins }
-        })
-    }
-    else {
-        data = n
-    }
-
-    const sum = data.sumBy(d => d.total)
+    const sum = n.donut.sumBy(d => d.total)
     let widthScale = d3.scaleSqrt([0, 300], [5, 22])
     const innerRadius = 10
     const outerRadius = innerRadius + widthScale(sum)
     const scaleRadius = d3.scaleLinear().range([innerRadius, outerRadius])
 
-    function rund3(element) {
+    const piedata = d3
+        .pie()
+        .sort(null) // do *not* sort by value
+        .value((d: any) => d.total)(n.donut as any)
 
-        const piedata = d3
-            .pie()
-            .sort(null) // do *not* sort by value
-            .value((d: any) => d.total)(data as any)
+    const arc = d => {
+        const midRadius = scaleRadius(d.data.ins / d.value)
+        let [inner, outer] = d.ins ? [innerRadius, midRadius] : [midRadius, outerRadius]
 
-        const arc = d => {
-            const midRadius = scaleRadius(d.data.ins / d.value)
-            let [inner, outer] = d.ins ? [innerRadius, midRadius] : [midRadius, outerRadius]
-
-            return d3.arc()
-                .innerRadius(inner)
-                .outerRadius(outer)
-                //.padAngle(.05)
-                //.cornerRadius(2)
-                (d)
-        }
-
-        const g =
-
-            d3.select(element)
-                .attr('width', outerRadius * 2)
-                .attr('height', outerRadius * 2)
-                .append('g')
-                .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
-
-        addIcon(g, outerRadius, n.type)
-
-        g
-            .selectAll('g')
-            .data(piedata)
-            .join('g')
-            .attr('class', (d: any) => d.data.type)
-
-            .selectAll('path')
-            .data((d: any) => {
-                //console.log('d', d)
-                return [
-                    d.data.outs && { ...d, outs: true },
-                    d.data.ins && { ...d, ins: true },
-                ].filter(identity)
-            })
-            .join('path')
-            .attr('d', arc)
-            .attr('class', d => (d.ins ? 'ins' : 'outs'))
-            .style('stroke', '#eee')
-            .style('stroke-width', '2px')
-            .append('title')
-            .text(d => {
-                return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
-            })
-        //.attr('class', d => d.data.type)
-
-        //.on('mouseover', (_, d) => console.log(d.data.type))
+        return d3.arc()
+            .innerRadius(inner)
+            .outerRadius(outer)
+            //.padAngle(.05)
+            //.cornerRadius(2)
+            (d)
     }
-    return <svg patch={rund3}></svg>
+
+    const g =
+
+        d3.select(element)
+            .attr('width', outerRadius * 2)
+            .attr('height', outerRadius * 2)
+            .append('g')
+            .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
+
+    addIcon(g, outerRadius, n.type)
+
+    g
+        .selectAll('g')
+        .data(piedata)
+        .join('g')
+        .attr('class', (d: any) => d.data.type)
+
+        .selectAll('path')
+        .data((d: any) => {
+            return [
+                d.data.outs && { ...d, outs: true },
+                d.data.ins && { ...d, ins: true },
+            ].filter(identity)
+        })
+        .join('path')
+        .attr('d', arc)
+        .attr('class', d => (d.ins ? 'ins' : 'outs'))
+        .style('stroke', '#eee')
+        .style('stroke-width', '2px')
+        .append('title')
+        .text(d => {
+            return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
+        })
+        //.on('mouseover', (_, d) => console.log(d.data.type))
+}
+
+export function NodeDonut({ n }: { n: FishNode }) {
+    return <svg patch={e => d3nodedonut(e, n)}></svg>
 }
 
 function addIcon(g, outerRadius, name) {

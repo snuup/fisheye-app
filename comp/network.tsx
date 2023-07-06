@@ -9,6 +9,7 @@ const radius = 8
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
+const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1, 4, 6, 8, 10, 1000])
 
 mount({ rand100 })
 
@@ -41,18 +42,10 @@ function rund3(e: SVGElement) {
     const link = svg
         .selectAll('line')
         .data(linksm)
-        .join(
-            enter =>
-                enter
-                    .append('line')
-                    .attr('class', fl => fl.l.type)
-                    .attr('stroke-width', 2),
-            //.attr('opacity', d => d.weight)
-            //.on("click", e => c.selectlink(e.target.__data__)),
-            update => update,
-
-            exit => exit.remove()
-        )
+        .join('line')
+        .attr('class', fl => fl.l.type)
+        .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
+        .on('mousedown', (ev, { l }) => console.log(ev.target.getAttribute("stroke-width"), l.links))
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -104,18 +97,13 @@ function rund3(e: SVGElement) {
             n.x = n.x.clamp(2, 98)
             n.y = n.y.clamp(2, 98)
         }
-        // console.log(m.netgraph.nodes.map(n => n.y))
         link.attr('x1', d => xscaler(d.source.x) as number)
             .attr('y1', d => yscaler(d.source.y) as number)
             .attr('x2', d => xscaler(d.target.x) as number)
             .attr('y2', d => yscaler(d.target.y) as number)
-        //.style('opacity', d => opacityscaler(d.maxz))
 
         nodesv
             .attr('transform', (d: any) => `translate(${xscaler(d.x)},${yscaler(d.y)})`)
-        //.attr('cx', d => xscaler(d.x))
-        //.attr('cy', d => yscaler(d.y))
-        //.style('opacity', d => opacityscaler(d.z))
     }
 
     updateview() // show random placements
@@ -154,7 +142,7 @@ function rund3(e: SVGElement) {
 
     function restore() {
         let json = localStorage.getItem("netgraph")
-        if(!json) return
+        if (!json) return
         let ns = JSON.parse(json)
         let nodemap = new Map(ns.map(n => [n.id, n]))
         m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
@@ -168,17 +156,6 @@ export const Network = () => {
         </div>
     )
 }
-
-// function reheat() {
-//     simulation.alpha(0.5)
-//     simulation.restart()
-// }
-
-// function printnodesxy() {
-//     for (let n of m.netgraph.nodes) {
-//         console.log(n.id, n.x, n.y)
-//     }
-// }
 
 mount({ ng: m.netgraph })
 

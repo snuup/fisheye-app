@@ -152,7 +152,7 @@ export class Controller {
 
     computepathmatrix() {
 
-        console.log("computepathmatrix")
+        //console.log("computepathmatrix")
 
         let nodes = m.pinnednodes
         let n = nodes.length
@@ -164,7 +164,7 @@ export class Controller {
         }
 
         let allpaths = d3.range(n).flatMap(computepaths)
-        console.log("allpaths", allpaths)
+        //console.log("allpaths", allpaths)
         mount({ allpaths })
 
         function getpaths(i: number, j: number): Paths {

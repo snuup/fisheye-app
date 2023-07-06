@@ -74,7 +74,7 @@ export class GraphAlgos {
 
     static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => DirectedLink<Link>[], start: string, targets: string[]) {
 
-        console.log("findpathsmulti", start, targets)
+        //console.log("findpathsmulti", start, targets)
         if (!Array.isArray(targets)) throw "targets must be an array!"
 
         let stargets = new Set(targets)
@@ -113,7 +113,7 @@ export class GraphAlgos {
             fronteer = bfs(fronteer)
         }
 
-        console.log("visited", visited.size, "nodes", "found paths", goalpaths)
+        //console.log("visited", visited.size, "nodes", "found paths", goalpaths)
 
         return { goalpaths, visited }
     }

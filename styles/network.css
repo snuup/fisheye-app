@@ -34,6 +34,10 @@ article.network {
   stroke: #333;
 }
 
+.net-graph g.donut {
+  transform: initial;
+}
+
 div.path-matrix {
   display: none;
   position: absolute;

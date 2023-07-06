@@ -35,6 +35,7 @@ export function d3nodedonut(element, n: FishNode) {
             .attr('width', outerRadius * 2)
             .attr('height', outerRadius * 2)
             .append('g')
+            .attr("class", "donut")
             .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 
     addIcon(g, outerRadius, n.type)

@@ -30,18 +30,20 @@ article.network {
     line {
         stroke: #333;
     }
+    g.donut {
+        transform: initial;
+    }
 }
 
 div.path-matrix {
-
     display: none;
 
     body.showpathmatrix & {
-        display: initial
+        display: initial;
     }
 
-   position: absolute;
-   bottom: 0;
+    position: absolute;
+    bottom: 0;
     // background: lightcoral;
     svg {
         // background: lightpink;

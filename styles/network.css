@@ -70,7 +70,7 @@ div.path-matrix g.sel text {
 }
 
 div.path-matrix circle {
-  fill: transparent;
+  fill: white;
   stroke: #333;
 }
 

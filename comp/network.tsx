@@ -36,6 +36,7 @@ function rund3(e: SVGElement) {
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
     let linksm = m.netgraph.links.map(l => ({ l, source: l.source, target: l.target })) as FishLinkForce[]
     mount({ linksm, nodesm })
+    restore()
 
     const link = svg
         .selectAll('line')
@@ -78,13 +79,13 @@ function rund3(e: SVGElement) {
 
     simulation = d3
         .forceSimulation(nodesm)
-        //.stop()
         .force('many', d3.forceManyBody().strength(.001))
-        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(10).strength(.05))
+        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.2))
         .force('collide', d3.forceCollide().radius(5).strength(1))
-        .force('center', d3.forceCenter(50, 50).strength(.2))
+        .force('center', d3.forceCenter(50, 50).strength(.002))
         .force('box', boxingForce)
         .on('tick', updateview)
+        .on('end', store)
 
     svg.selectAll('g').call(drag(simulation))
 
@@ -137,6 +138,7 @@ function rund3(e: SVGElement) {
                 event.subject.fx = null
                 event.subject.fy = null
             }
+            store()
         }
 
         return d3
@@ -144,6 +146,18 @@ function rund3(e: SVGElement) {
             .on('start', dragstarted)
             .on('drag', dragged)
             .on('end', dragended)
+    }
+
+    function store() {
+        localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
+    }
+
+    function restore() {
+        let json = localStorage.getItem("netgraph")
+        if(!json) return
+        let ns = JSON.parse(json)
+        let nodemap = new Map(ns.map(n => [n.id, n]))
+        m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
     }
 }
 

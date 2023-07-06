@@ -51,7 +51,6 @@ let words2 = `
     Illegal
     Illegal
     Islands
-    Liability
     Lobster
     mining
     Narcotics

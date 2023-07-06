@@ -1,9 +1,11 @@
+import { log } from "console"
 
 export function mount(x) {
     Object.assign(globalThis, x)
 }
 
 export function mergePrototype(mixin, ...targets) {
+    console.log("mergePrototype")
     const props = Object.getOwnPropertyDescriptors(mixin.prototype)
     delete (props as any).constructor // do not copy the constructor
     targets.forEach((t) => {
@@ -100,6 +102,13 @@ mergePrototype(class extends Array {
     }
 }, Array)
 
+mergePrototype(class extends Map {
+    getorcreate(key, valuefactory) {
+        if (!this.has(key)) this.set(key, valuefactory())
+        return this.get(key)
+    }
+}, Map)
+
 mergePrototype(class extends Set {
     get head() { let [h] = this; return h }
 }, Set)
@@ -160,50 +169,47 @@ export function cc(...names): string {
 //       getParentByPredicate(predicate: (e: HTMLElement) => boolean): HTMLElement
 //   }
 // }
-mergePrototype(class extends HTMLElement {
-    set width(v) {
-        this.style.width = `${v}px`
-    }
-    get width() {
-        return parseInt(this.style.width)
-    }
-    getParentByPredicate(predicate: (e: HTMLElement) => boolean) {
-        if (predicate(this)) return this
-        return this.parentElement?.getParentByPredicate(predicate)
-    }
-    has(name: string) {
-        return name in this || this.hasAttribute(name)
-    }
-    get(name: string) {
-        return name in this ? this[name] : this.getAttribute(name)
-    }
-    hasClass(className: string): boolean { return this.classList.contains(className) }
-    toggleClass(className: string) { return this.classList.toggle(className) }
-    hide() { this.style.visibility = "hidden" }
-    show() { this.style.visibility = "visible" }
-    addClass(className: string, condition = true): HTMLElement {
-        if (className && condition) this.classList.add(className)
-        return this
-    }
-    remClass(className: string): HTMLElement {
-        if (className) this.classList.remove(className)
-        return this
-    }
-    setClass(className: string, active: boolean): HTMLElement {
-        return active ? this.addClass(className) : this.remClass(className)
-    }
-    getNumAttr(name: string): number {
-        return parseInt(this.getAttribute(name) ?? "0")
-    }
 
-}, HTMLElement)
+if (globalThis.document) {
 
-mergePrototype(class extends Map {
-    getorcreate(key, valuefactory) {
-        if (!this.has(key)) this.set(key, valuefactory())
-        return this.get(key)
-    }
-}, Map)
+    mergePrototype(class extends HTMLElement {
+        set width(v) {
+            this.style.width = `${v}px`
+        }
+        get width() {
+            return parseInt(this.style.width)
+        }
+        getParentByPredicate(predicate: (e: HTMLElement) => boolean) {
+            if (predicate(this)) return this
+            return this.parentElement?.getParentByPredicate(predicate)
+        }
+        has(name: string) {
+            return name in this || this.hasAttribute(name)
+        }
+        get(name: string) {
+            return name in this ? this[name] : this.getAttribute(name)
+        }
+        hasClass(className: string): boolean { return this.classList.contains(className) }
+        toggleClass(className: string) { return this.classList.toggle(className) }
+        hide() { this.style.visibility = "hidden" }
+        show() { this.style.visibility = "visible" }
+        addClass(className: string, condition = true): HTMLElement {
+            if (className && condition) this.classList.add(className)
+            return this
+        }
+        remClass(className: string): HTMLElement {
+            if (className) this.classList.remove(className)
+            return this
+        }
+        setClass(className: string, active: boolean): HTMLElement {
+            return active ? this.addClass(className) : this.remClass(className)
+        }
+        getNumAttr(name: string): number {
+            return parseInt(this.getAttribute(name) ?? "0")
+        }
+
+    }, HTMLElement)
+}
 
 // -> jmx
 export function initevents() {

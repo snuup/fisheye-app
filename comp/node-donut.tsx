@@ -1,24 +1,8 @@
 import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
-import { FishNode } from '../elements/fishnode'
+import { FishNode, NodeLinkData, linktypes } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
 import { m } from '../app/model'
-
-const linkTypeSortOrder = {
-    partnership: 0,
-    family_relationship: 1,
-    membership: 2,
-    ownership: 3,
-}
-
-const linktypes = Object.keys(linkTypeSortOrder)
-
-interface NodeLinkData {
-    type: string,
-    outs: number,
-    ins: number,
-    total: number
-}
 
 export function NodeDonut({ n }: { n: FishNode }) {
 

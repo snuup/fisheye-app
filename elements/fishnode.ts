@@ -1,6 +1,22 @@
 import { mount } from "../utils/common"
 import { cleanid } from "../analysis/common"
 
+const linkTypeSortOrder = {
+    partnership: 0,
+    family_relationship: 1,
+    membership: 2,
+    ownership: 3,
+}
+
+export const linktypes = Object.keys(linkTypeSortOrder)
+
+export interface NodeLinkData {
+    type: string,
+    outs: number,
+    ins: number,
+    total: number
+}
+
 export class FishNode implements INode {
 
     original: MC1Node
@@ -8,17 +24,7 @@ export class FishNode implements INode {
     outdegree: number
     indegree: number
     isinv?: boolean
-
-    // outlinks: FishLink[] = []
-    // inlinks: FishLink[] = []
-    //paths: Path[]
-
-    // x: number
-    // y: number
-    // z: number
-    // up = 0
-    // vz: number
-    // selected?: boolean
+    donut: NodeLinkData[]
 
     private constructor(original: MC1Node) {
         this.original = original

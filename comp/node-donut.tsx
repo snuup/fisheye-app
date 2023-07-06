@@ -1,12 +1,18 @@
 import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
-import { FishNode, NodeLinkData, linktypes } from '../elements/fishnode'
+import { FishNode, NodeLinkData } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
-import { m } from '../app/model'
 
-export function d3nodedonut(sel, n: FishNode) {
+export function d3nodedonut(sel, n: FishNode, undirected = true) {
 
-    const sum = n.donut.sumBy(d => d.total)
+    let donut = n.donut
+    function undirect(n: NodeLinkData) {
+        n.ins = 0
+        n.outs = n.total
+    }
+    if(undirected) donut.forEach(undirect)
+
+    const sum = donut.sumBy(d => d.total)
     let widthScale = d3.scaleSqrt([0, 300], [5, 22])
     const innerRadius = 10
     const outerRadius = innerRadius + widthScale(sum)
@@ -15,7 +21,7 @@ export function d3nodedonut(sel, n: FishNode) {
     const piedata = d3
         .pie()
         .sort(null) // do *not* sort by value
-        .value((d: any) => d.total)(n.donut as any)
+        .value((d: any) => d.total)(donut as any)
 
     const arc = d => {
         const midRadius = scaleRadius(d.data.ins / d.value)
@@ -68,7 +74,7 @@ export function d3nodedonut(sel, n: FishNode) {
 }
 
 export function NodeDonut({ n }: { n: FishNode }) {
-    return <svg patch={e => d3nodedonut(d3.select(e), n)}></svg>
+    return <svg patch={e => d3nodedonut(d3.select(e), n, false)}></svg>
 }
 
 function addIcon(g, outerRadius, name) {

@@ -9,6 +9,7 @@ svg.net-donut {
 
 .net-graph {
     // background: lightseagreen;
+    user-select: none;
     & > svg {
         // outline: solid 1px lightgreen;
         width: 100%;

@@ -7,6 +7,10 @@ svg.net-donut {
   overflow: visible;
 }
 
+.net-graph {
+  user-select: none;
+}
+
 .net-graph > svg {
   width: 100%;
   height: 100%;

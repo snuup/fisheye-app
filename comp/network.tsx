@@ -64,17 +64,24 @@ function rund3(e: SVGElement) {
         .attr("class", fn => fn.type ?? "undefined")
 
     nodesv
-        .append('circle')
-        .attr('r', radius)
-        .classed('inv', fn => m.investigatees.includes(fn.id))
+        .append('svg')
+        .attr("class", "net-donut")
+        .select(((n, i, nodes) => {
+            d3nodedonut(d3.select(nodes[i]), n)
+        }) as any)
 
     nodesv
 
-    nodesv
-        .selectAll(function (n: FishNode) {
-            console.log("select-f", n, ...arguments)
-            d3nodedonut(this, n)
-        })
+    // nodesv
+    //     .selectAll(function (n: FishNode, _, e) {
+    //         console.log("select-f", n, ...arguments)
+    //         let svg =
+    //             d3.select(e)
+    //               .append("svg")
+    //               .attr("class", "net-donut")
+    //          //.append()
+    //         //d3nodedonut(svg, n)
+    //     })
 
     //   .append(function(n: FishNode) {
     //         //let e = document.createAttributeNS(svgns, "g")

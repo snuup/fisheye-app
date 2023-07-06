@@ -3,7 +3,11 @@ article.network {
   gap: 1em;
 }
 
-.net-graph svg {
+svg.net-donut {
+  overflow: visible;
+}
+
+.net-graph > svg {
   width: 100%;
   height: 100%;
 }

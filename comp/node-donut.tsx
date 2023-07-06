@@ -4,7 +4,7 @@ import { FishNode, NodeLinkData, linktypes } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
 import { m } from '../app/model'
 
-export function d3nodedonut(element, n: FishNode) {
+export function d3nodedonut(sel, n: FishNode) {
 
     const sum = n.donut.sumBy(d => d.total)
     let widthScale = d3.scaleSqrt([0, 300], [5, 22])
@@ -31,7 +31,7 @@ export function d3nodedonut(element, n: FishNode) {
 
     const g =
 
-        d3.select(element)
+        sel
             .attr('width', outerRadius * 2)
             .attr('height', outerRadius * 2)
             .append('g')
@@ -63,10 +63,12 @@ export function d3nodedonut(element, n: FishNode) {
             return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
         })
         //.on('mouseover', (_, d) => console.log(d.data.type))
+
+    return g
 }
 
 export function NodeDonut({ n }: { n: FishNode }) {
-    return <svg patch={e => d3nodedonut(e, n)}></svg>
+    return <svg patch={e => d3nodedonut(d3.select(e), n)}></svg>
 }
 
 function addIcon(g, outerRadius, name) {

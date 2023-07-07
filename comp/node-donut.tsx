@@ -69,13 +69,18 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
         })
 
-    if (addtext){
-        g
-        .append('g')
-        .attr('class', 'text-container')
-        .append('text')
-        .text(n.id)
-        .attr('transform', `translate(0,${outerRadius})`)
+    if (addtext) {
+        let tcs =
+            g.append('foreignObject').append(() => document.createElement("div")).text(n.id)
+
+        //         .attr('class', 'text-container')
+        // tcs
+        //     .append('rect')
+
+        // tcs
+        //     .append('text')
+        //     .text(n.id)
+        //     .attr('transform', `translate(0,${outerRadius})`)
     }
 
 

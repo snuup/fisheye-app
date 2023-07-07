@@ -43,6 +43,14 @@ svg.net-donut {
             dominant-baseline: hanging;
         }
     }
+    foreignObject {
+        overflow: visible;
+    }
+    div {
+        background: orangered;
+        width: 100px;
+        height: 100px;
+    }
 }
 
 div.path-matrix {

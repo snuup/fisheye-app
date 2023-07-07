@@ -50,6 +50,16 @@ svg.net-donut {
   dominant-baseline: hanging;
 }
 
+.net-graph foreignObject {
+  overflow: visible;
+}
+
+.net-graph div {
+  background: orangered;
+  width: 100px;
+  height: 100px;
+}
+
 div.path-matrix {
   display: none;
   position: absolute;

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
+import { log } from "console"
 import { rebind, setAttributeSmooth } from "../util/common"
 import { setape } from "./props"
 
@@ -270,7 +271,7 @@ export function patch(e: Node, h: HNode, patchElementOnly = false) {
 
 // uses attached comps to patch elements
 export function updateview(selector: string | Node = "body", patchElementOnly?: false, replace = false) {
-//    console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
+    //    console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
     const ns = (typeof selector == "string") ? document.querySelectorAll(selector) : [selector]
     let n: Node | null
     for (n of ns) {
@@ -280,6 +281,24 @@ export function updateview(selector: string | Node = "body", patchElementOnly?: 
         if (replace) (n as HTMLElement).replaceChildren()
         patch(n, n.comp.factory, patchElementOnly)
     }
+}
+
+function getcompnode(n: Node): Node {
+    if (!n || n.comp) return n
+    return getcompnode(n.parentElement as Node)
+}
+
+export function updateviewmany(...selectors: (string | Node)[]) {
+    //    console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
+    let x : any[] = selectors.flatMap(s => ((typeof s == "string") ? [...document.querySelectorAll(s)] : [s]) as Node[])
+    console.log(x)
+    x = x.map(getcompnode)
+    console.log(x)
+    x = x.filter(n => !!n)
+    console.log(x)
+    x = x.distinctBy()
+    console.log(x)
+    x.forEach(n => patch(n, n.comp.factory))
 }
 
 // lib

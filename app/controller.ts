@@ -1,6 +1,6 @@
 import * as d3 from "d3"
 import { initrouter } from "../jmx-lib/router"
-import { updateview } from "../jmx-lib/core"
+import { updateview, updateviewmany } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
@@ -129,16 +129,31 @@ export class Controller {
         let currentkeys = m.pathmatrix.map(ps => ps.key)
         m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
 
-        updateview(ev.currentTarget)
+        //updateviewmany(ev.currentTarget, ".net-graph > svg", ".path-matrix")
         updateview(".network")
         this.store()
     }
+
+
+    // removepinnednode(n: FishNode) {
+    //     let add = m.pinnednodes.toggle(n)
+    //     //m.netgraph.togglenode(n, add) // ... create new graph class ? add node, compute path matrix
+
+    //     this.computepathmatrix()
+    //     this.updatenetgraph()
+
+    //     let currentkeys = m.pathmatrix.map(ps => ps.key)
+    //     m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
+
+    //     updateviewmany(ev.currentTarget, ".net-graph > svg")
+    //     this.store()
+    // }
 
     togglepaths(nps: Paths) {
         m.pinnedpaths.toggle(nps.key)
         this.updatenetgraph()
         updateview('.path-matrix')
-        updateview('.net-graph')
+        updateview('.net-graph > svg')
         this.store()
     }
 

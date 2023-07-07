@@ -6,6 +6,7 @@ import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
 import { d3nodedonut } from './node-donut'
 import { log } from 'console'
+import { c } from '../app/controller'
 
 const radius = 8
 
@@ -63,6 +64,7 @@ function rund3(e: SVGElement) {
         .classed('inv', fn => m.investigatees.includes(fn.id))
         .attr("class", fn => fn.type ?? "undefined")
         .attr('class', 'dragy')
+        .on('mousedown', onnodeclick)
 
     nodesv
         .append('svg')
@@ -113,8 +115,16 @@ function rund3(e: SVGElement) {
 
     updateview() // show random placements
 
+    function onnodeclick(ev: MouseEvent, n: FishNode) {
+        if(ev.ctrlKey){
+            c.togglenetnode(ev, n)
+        }
+    }
+
     function drag(simulation) {
         function dragstarted(event) {
+            if(event.sourceEvent.ctrlKey) return
+
             if (!event.active) simulation.alphaTarget(0.3).restart()
             // event.subject.fx = xscaler.invert(event.sourceEvent.offsetX)
             // event.subject.fy = xscaler.invert(event.sourceEvent.offsetY)
@@ -126,6 +136,7 @@ function rund3(e: SVGElement) {
         }
 
         function dragended(event) {
+            if(event.sourceEvent.ctrlKey) return
             if (!event.active) simulation.alphaTarget(0)
             if (event.sourceEvent.shiftKey) {
                 event.subject.fx = null

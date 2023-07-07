@@ -91,7 +91,9 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .text(n.id)
     }
 
-    g.append(() => flag()).select('g').attr('transform', `translate(100,${outerRadius})`)
+    g.append(() => flag())
+
+    g.select('.flag').attr('transform', `scale(.05) translate(100,100)`)
 
     return g
 }

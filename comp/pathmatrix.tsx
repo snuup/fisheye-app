@@ -35,7 +35,7 @@ function rund3(e: SVGElement) {
 
     let texts = svg
         .selectAll('text')
-        .data(nodes.slice(0, -1))
+        .data(nodes)
         .join('text')
         .attr("transform", (_, i) => `translate(${[n * cellsize, (i + 1) * cellsize]})`)
         .text(d => d.id)

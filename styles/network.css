@@ -23,7 +23,7 @@ svg.net-donut {
 }
 
 .net-graph g.inv text {
-  fill: red;
+  fill: #bb0c0c;
 }
 
 .net-graph g {

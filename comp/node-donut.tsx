@@ -48,6 +48,7 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .attr('height', outerRadius * 2)
             .append('g')
             .attr("class", "donut")
+            .classed('inv', m.investigatees.includes(n.id))
             .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 
     g.append('circle').attr("r", outerRadius).attr("class", "bgcircle")

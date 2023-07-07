@@ -7,6 +7,7 @@ import { SuperLink } from '../elements/superlink'
 import { d3nodedonut } from './node-donut'
 import { log } from 'console'
 import { c } from '../app/controller'
+import { bgFilterDef } from '../app/app'
 
 const radius = 8
 
@@ -165,6 +166,8 @@ function rund3(e: SVGElement) {
         let nodemap = new Map(ns.map(n => [n.id, n]))
         m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
     }
+
+    svg.node()?.append(bgFilterDef!)
 }
 
 export const Network = () => {

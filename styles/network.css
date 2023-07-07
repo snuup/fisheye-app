@@ -30,10 +30,6 @@ svg.net-donut {
   cursor: pointer;
 }
 
-.net-graph g:hover {
-  opacity: 0.9;
-}
-
 .net-graph g.sel {
   fill: yellowgreen;
 }
@@ -48,11 +44,15 @@ svg.net-donut {
 
 .net-graph g.donut text {
   dominant-baseline: hanging;
+  font-weight: bold;
 }
 
-.net-graph g.donut text.doublee {
-  stroke: orange;
-  stroke-width: 100;
+.net-graph g.donut .bgcircle {
+  fill: #eee;
+}
+
+.net-graph g.donut:hover .bgcircle {
+  fill: #fff;
 }
 
 div.path-matrix {

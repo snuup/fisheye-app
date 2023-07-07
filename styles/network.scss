@@ -26,9 +26,7 @@ svg.net-donut {
     }
     g {
         cursor: pointer;
-        &:hover {
-            opacity: 0.9;
-        }
+
         &.sel {
             fill: yellowgreen;
         }
@@ -41,9 +39,15 @@ svg.net-donut {
 
         text {
             dominant-baseline: hanging;
-            &.doublee{
-                stroke: orange;
-                stroke-width: 100;
+            font-weight: bold;
+        }
+        .bgcircle {
+            fill: #eee;
+        }
+
+        &:hover {
+            .bgcircle {
+                fill: #fff;
             }
         }
     }

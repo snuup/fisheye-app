@@ -44,6 +44,8 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .attr("class", "donut")
             .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 
+    g.append('circle').attr("r", outerRadius).attr("class", "bgcircle")
+
     addIcon(g, outerRadius, n.type)
 
     g
@@ -74,16 +76,14 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             g
                 .append('g')
                 .attr('class', 'text-container')
-                .attr('transform', `translate(0,${outerRadius})`)
+                .attr('transform', `translate(0,${outerRadius + 5})`)
         t
             .append('text')
             .text(n.id)
-            .attr("class", "doublee")
+            .attr("filter", "url(#solid)")
         t
             .append('text')
             .text(n.id)
-
-
     }
 
 

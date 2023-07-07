@@ -33,13 +33,21 @@ function rund3(e: SVGElement) {
         .on("pointerdown", (_, ps) => c.togglepaths(ps))
         .classed("sel", ps => m.pinnedpaths.includes(ps.key))
 
-    let texts = svg
-        .selectAll('text')
+    let htexts = svg
+        .selectAll('text.h-label')
         .data(nodes)
         .join('text')
         .attr("transform", (_, i) => `translate(${[n * cellsize, (i + 1) * cellsize]})`)
         .text(d => d.id)
-        .attr("class", "label")
+        .attr("class", "h-label")
+
+    let vtexts = svg
+        .selectAll('text.v-label')
+        .data(nodes)
+        .join('text')
+        .attr("transform", (_, i) => `translate(${[i * cellsize, 0]}), rotate(-90)`)
+        .text(d => d.id)
+        .attr("class", "v-label")
 
     cells
         .append('circle')
@@ -69,7 +77,7 @@ export class Paths {
         public i: number,
         public j: number,
         public n1: FishNode,
-        public n2: FishNode) {}
+        public n2: FishNode) { }
 
     get key() { return this.n1.id + "-" + this.n2.id }
 

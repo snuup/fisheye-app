@@ -56,6 +56,10 @@ body.showpathmatrix div.path-matrix {
   display: initial;
 }
 
+div.path-matrix svg {
+  overflow: visible;
+}
+
 div.path-matrix g {
   cursor: pointer;
 }
@@ -81,7 +85,11 @@ div.path-matrix text {
   dominant-baseline: central;
 }
 
-div.path-matrix text.label {
+div.path-matrix text.h-label {
   fill: #333;
+  text-anchor: start;
+}
+
+div.path-matrix text.v-label {
   text-anchor: start;
 }

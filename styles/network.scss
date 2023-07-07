@@ -52,6 +52,7 @@ div.path-matrix {
     // background: lightcoral;
     svg {
         // background: lightpink;
+        overflow: visible;
     }
     g {
         cursor: pointer;
@@ -75,8 +76,11 @@ div.path-matrix {
         text-anchor: middle;
         dominant-baseline: central;
     }
-    text.label {
+    text.h-label {
         fill: #333;
+        text-anchor: start;
+    }
+    text.v-label {
         text-anchor: start;
     }
 }

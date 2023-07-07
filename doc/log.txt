@@ -1,3 +1,8 @@
+7.7.
+- how all vessels related -> lists with path lengths
+- mark the invs
+- put all navs into the model
+
 6.7.
 // most essential improvements
 + link strength

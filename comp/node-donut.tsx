@@ -5,6 +5,7 @@ import { identity, mount } from '../utils/common'
 import { log } from 'console'
 import '../assets/flags'
 import { flag } from '../assets/flags'
+import { m } from '../app/model'
 
 
 
@@ -91,9 +92,12 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .text(n.id)
     }
 
-    g.append(() => flag())
-
-    g.select('.flag').attr('transform', `scale(.05) translate(100,100)`)
+    g
+        .append('g')
+        .attr('transform', `translate(${outerRadius},${-outerRadius * .8})`)
+        .append(d => n.country ? flag(m.countryColorScaler(n.country)) : document.createElement('i'))
+        .append('title')
+        .text(n.country)
 
     return g
 }

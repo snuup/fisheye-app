@@ -1,3 +1,4 @@
+import * as d3 from 'd3'
 import { FishNode } from "../elements/fishnode"
 import { Graph } from "../elements/graph"
 import { SuperLink } from "../elements/superlink"
@@ -39,7 +40,9 @@ export const mraw = {
     // ui
     selection: [] as any[],
 
-    suspects: [] as FishNode[]
+    suspects: [] as FishNode[],
+
+    countryColorScaler: d3.scaleOrdinal(d3.schemeAccent)
 }
 
 type Model = typeof mraw

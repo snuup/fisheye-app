@@ -45,6 +45,10 @@ export class Controller {
         this.restore()
         this.computepathmatrix()
         this.updatenetgraph()
+
+        // init country color scaler
+        //let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")
+        m.countryColorScaler = d3.scaleOrdinal(d3.schemeAccent) // d3.scaleOrdinal().domain(allcountries)
     }
 
     // getsubgraph(nodes: FishNode[]) {

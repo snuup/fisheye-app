@@ -70,17 +70,20 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
         })
 
     if (addtext) {
-        let tcs =
-            g.append('foreignObject').append(() => document.createElement("div")).text(n.id)
+        let t =
+            g
+                .append('g')
+                .attr('class', 'text-container')
+                .attr('transform', `translate(0,${outerRadius})`)
+        t
+            .append('text')
+            .text(n.id)
+            .attr("class", "doublee")
+        t
+            .append('text')
+            .text(n.id)
 
-        //         .attr('class', 'text-container')
-        // tcs
-        //     .append('rect')
 
-        // tcs
-        //     .append('text')
-        //     .text(n.id)
-        //     .attr('transform', `translate(0,${outerRadius})`)
     }
 
 

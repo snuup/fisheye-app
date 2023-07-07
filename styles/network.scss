@@ -41,15 +41,11 @@ svg.net-donut {
 
         text {
             dominant-baseline: hanging;
+            &.doublee{
+                stroke: orange;
+                stroke-width: 100;
+            }
         }
-    }
-    foreignObject {
-        overflow: visible;
-    }
-    div {
-        background: orangered;
-        width: 100px;
-        height: 100px;
     }
 }
 

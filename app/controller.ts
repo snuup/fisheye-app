@@ -11,6 +11,7 @@ import { Url } from "./routes"
 import { Path, PathMatrixBuilder } from "../elements/path"
 import { Paths } from "../comp/pathmatrix"
 import { SuperLink } from "../elements/superlink"
+import { issuspicious } from "../analysis/common"
 
 
 export class Controller {
@@ -36,6 +37,10 @@ export class Controller {
 
         let superlinks = links.groupBy(l => l.ukey).entries.map(([_, ls]) => new SuperLink(ls))
         m.supergraph = new Graph(nodes, superlinks)
+
+        let invs = m.investigatees.map(m.graph.getnode)
+        let susps = m.graph.nodes.filter(n => issuspicious(n.id) )
+        m.suspects = invs.concat(susps)
 
         this.restore()
         this.computepathmatrix()

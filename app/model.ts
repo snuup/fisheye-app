@@ -37,7 +37,9 @@ export const mraw = {
     //superlinks: new Map<string, SuperLink>(),
 
     // ui
-    selection: [] as any[]
+    selection: [] as any[],
+
+    suspects: [] as FishNode[]
 }
 
 type Model = typeof mraw

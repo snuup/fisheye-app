@@ -2,6 +2,7 @@
 - how all vessels related -> lists with path lengths
 - mark the invs
 - put all navs into the model
+- lavinia data, names
 
 6.7.
 // most essential improvements

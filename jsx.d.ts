@@ -72,9 +72,13 @@ declare global {
                 vid?: number
             },
             svg: any,
+            g: any,
             defs: any,
             marker: any,
-            path: any
+            path: any,
+            filter: any,
+            feFlood: any,
+            feComposite: any
 
         // button: ButtonHTMLAttributes & {
         //     fargs?: any

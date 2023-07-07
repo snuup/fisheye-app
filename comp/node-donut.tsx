@@ -2,6 +2,10 @@ import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
 import { FishNode, NodeLinkData } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
+import { log } from 'console'
+import '../assets/flags'
+
+
 
 export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
 

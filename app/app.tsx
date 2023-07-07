@@ -52,9 +52,6 @@ let App = () => {
     )
 }
 
-export const bgFilterDef = document.getElementById('fdef')
-mount({ fff: bgFilterDef })
-
 patch(document.body, <App />)
 
 mount({ m, mc1, updateview })

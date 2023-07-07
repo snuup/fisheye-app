@@ -1,16 +1,12 @@
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { mount, svgns } from '../utils/common'
+import { mount } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
 import { d3nodedonut } from './node-donut'
-import { log } from 'console'
 import { c } from '../app/controller'
-import { bgFilterDef } from '../app/app'
 import { defsFilter } from '../assets/flags'
-
-const radius = 8
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())

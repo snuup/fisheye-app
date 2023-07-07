@@ -129,8 +129,8 @@ export class Controller {
         let currentkeys = m.pathmatrix.map(ps => ps.key)
         m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
 
-        //updateviewmany(ev.currentTarget, ".net-graph > svg", ".path-matrix")
-        updateview(".network")
+        updateviewmany(ev.currentTarget, ".network") // ".net-graph > svg", ".path-matrix")
+        //updateview(".network")
         this.store()
     }
 

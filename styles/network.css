@@ -46,6 +46,10 @@ svg.net-donut {
   transform: initial;
 }
 
+.net-graph g.donut text {
+  dominant-baseline: hanging;
+}
+
 div.path-matrix {
   display: none;
   position: absolute;

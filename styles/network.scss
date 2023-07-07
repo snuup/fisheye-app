@@ -19,6 +19,7 @@ svg.net-donut {
         text-anchor: middle;
         stroke: none;
         fill: #333;
+        //transform: translateY(31px);
     }
     g.inv text {
         fill: red;
@@ -37,6 +38,10 @@ svg.net-donut {
     }
     g.donut {
         transform: initial;
+
+        text {
+            dominant-baseline: hanging;
+        }
     }
 }
 

@@ -70,12 +70,12 @@ function rund3(e: SVGElement) {
         .append('svg')
         .attr("class", "net-donut")
         .select(((n, i, nodes) => {
-            d3nodedonut(d3.select(nodes[i]), n)
+            d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
-    nodesv
-        .append('text')
-        .text(fn => fn.id)
+    // nodesv
+    //     .append('text')
+    //     .text(fn => fn.id)
 
     simulation = d3
         .forceSimulation(nodesm)

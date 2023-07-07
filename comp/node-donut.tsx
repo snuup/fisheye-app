@@ -3,14 +3,14 @@ import { jsx } from "../jmx-lib/core"
 import { FishNode, NodeLinkData } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
 
-export function d3nodedonut(sel, n: FishNode, undirected = true) {
+export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
 
     let donut = n.donut
     function undirect(n: NodeLinkData) {
         n.ins = 0
         n.outs = n.total
     }
-    if(undirected) donut.forEach(undirect)
+    if (undirected) donut.forEach(undirect)
 
     const sum = donut.sumBy(d => d.total)
     let widthScale = d3.scaleSqrt([0, 300], [5, 22])
@@ -69,11 +69,21 @@ export function d3nodedonut(sel, n: FishNode, undirected = true) {
             return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
         })
 
+    if (addtext){
+        g
+        .append('g')
+        .attr('class', 'text-container')
+        .append('text')
+        .text(n.id)
+        .attr('transform', `translate(0,${outerRadius})`)
+    }
+
+
     return g
 }
 
 export function NodeDonut({ n }: { n: FishNode }) {
-    return <svg patch={e => d3nodedonut(d3.select(e), n, false)}></svg>
+    return <svg patch={e => d3nodedonut(d3.select(e), n, false, false)}></svg>
 }
 
 function addIcon(g, outerRadius, name) {

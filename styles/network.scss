@@ -41,9 +41,6 @@ svg.net-donut {
             dominant-baseline: hanging;
             font-weight: bold;
         }
-        .bgcircle {
-            fill: #eee;
-        }
 
         &:hover {
             .bgcircle {
@@ -51,6 +48,21 @@ svg.net-donut {
             }
         }
     }
+
+    g.donut.suspect:not(.inv) {
+        .bgcircle {
+            fill: red;
+        }
+        &:hover {
+            .bgcircle {
+                fill: red;
+            }
+        }
+    }
+}
+
+.bgcircle {
+    fill: #eee;
 }
 
 div.path-matrix {

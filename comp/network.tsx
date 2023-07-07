@@ -10,7 +10,7 @@ import { defsFilter } from '../assets/flags'
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
-const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1, 4, 6, 8, 10, 1000])
+const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1, 4, 6, 8, 10, 100])
 
 mount({ rand100 })
 
@@ -70,10 +70,6 @@ function rund3(e: SVGElement) {
         .select(((n, i, nodes) => {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
-
-    // nodesv
-    //     .append('text')
-    //     .text(fn => fn.id)
 
     simulation = d3
         .forceSimulation(nodesm)

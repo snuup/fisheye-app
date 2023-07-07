@@ -47,12 +47,20 @@ svg.net-donut {
   font-weight: bold;
 }
 
-.net-graph g.donut .bgcircle {
-  fill: #eee;
-}
-
 .net-graph g.donut:hover .bgcircle {
   fill: #fff;
+}
+
+.net-graph g.donut.suspect:not(.inv) .bgcircle {
+  fill: red;
+}
+
+.net-graph g.donut.suspect:not(.inv):hover .bgcircle {
+  fill: red;
+}
+
+.bgcircle {
+  fill: #eee;
 }
 
 div.path-matrix {

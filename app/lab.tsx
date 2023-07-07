@@ -1,9 +1,5 @@
+import * as d3 from 'd3'
 import { mount } from '../utils/common'
-import { Controller } from './controller'
-import { m } from './model'
-import { jsx, patch } from '../jmx-lib/core'
-import { SankeyForType } from '../comp/sankey'
-import { mc1 } from '../data/data'
 
 // let c = new Controller()
 
@@ -21,7 +17,16 @@ import { mc1 } from '../data/data'
 
 // mount({ linkso })
 
-let fm = new Map(mc1.nodes.map(n => [n.id, n.fixed_id]))
-let newlinks = mc1.links.map(l => ({ ...l, source: fm.get(l.source), target: fm.get(l.target) }))
+let p = d3.path()
+p.moveTo(10, 5)
+p.lineTo(20, 255)
+p.moveTo(100, 50)
+p.lineTo(20, 255)
+p.rect(20, 20, 100, 50)
 
-mount({ fm, newlinks })
+d3
+    .select(document.body)
+    .append('svg')
+    .append('path')
+    .attr('d', p.toString())
+    .attr('stroke', '#333')

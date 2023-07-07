@@ -11,6 +11,8 @@ import { m } from '../app/model'
 
 export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
 
+    let shortname = n.id.slice(0,10)
+
     let donut = n.donut
     function undirect(n: NodeLinkData) {
         n.ins = 0
@@ -49,6 +51,7 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .append('g')
             .attr("class", "donut")
             .classed('inv', m.investigatees.includes(n.id))
+            .classed('suspect', m.suspects.includes(n))
             .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 
     g.append('circle').attr("r", outerRadius).attr("class", "bgcircle")
@@ -86,11 +89,11 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
                 .attr('transform', `translate(0,${outerRadius + 5})`)
         t
             .append('text')
-            .text(n.id)
+            .text(shortname)
             .attr("filter", "url(#solid)")
         t
             .append('text')
-            .text(n.id)
+            .text(shortname)
     }
 
     g
@@ -136,6 +139,10 @@ const icons = {
     'political-organization': {
         viewBox: "0 0 512 512",
         d: "M240.1 4.2c9.8-5.6 21.9-5.6 31.8 0l171.8 98.1L448 104l0 .9 47.9 27.4c12.6 7.2 18.8 22 15.1 36s-16.4 23.8-30.9 23.8H32c-14.5 0-27.2-9.8-30.9-23.8s2.5-28.8 15.1-36L64 104.9V104l4.4-1.6L240.1 4.2zM64 224h64V416h40V224h64V416h48V224h64V416h40V224h64V420.3c.6 .3 1.2 .7 1.8 1.1l48 32c11.7 7.8 17 22.4 12.9 35.9S494.1 512 480 512H32c-14.1 0-26.5-9.2-30.6-22.7s1.1-28.1 12.9-35.9l48-32c.6-.4 1.2-.7 1.8-1.1V224z"
+    },
+    vessel: {
+        viewBox: "0 0 576 512",
+        d: "M256 16c0-7 4.5-13.2 11.2-15.3s13.9 .4 17.9 6.1l224 320c3.4 4.9 3.8 11.3 1.1 16.6s-8.2 8.6-14.2 8.6H272c-8.8 0-16-7.2-16-16V16zM212.1 96.5c7 1.9 11.9 8.2 11.9 15.5V336c0 8.8-7.2 16-16 16H80c-5.7 0-11-3-13.8-8s-2.9-11-.1-16l128-224c3.6-6.3 11-9.4 18-7.5zM5.7 404.3C2.8 394.1 10.5 384 21.1 384H554.9c10.6 0 18.3 10.1 15.4 20.3l-4 14.3C550.7 473.9 500.4 512 443 512H133C75.6 512 25.3 473.9 9.7 418.7l-4-14.3z"
     }
 }
 

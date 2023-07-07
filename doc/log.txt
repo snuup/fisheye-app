@@ -1,8 +1,10 @@
 7.7.
++ mark the invs
++ vessels icon
 - how all vessels related -> lists with path lengths
-- mark the invs
 - put all navs into the model
 - lavinia data, names
+- search for vessels
 
 6.7.
 // most essential improvements

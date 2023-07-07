@@ -4,8 +4,7 @@ import { mount } from '../utils/common'
 import { createDom, h } from './hyperaw'
 
 const flag1 = (
-    <svg height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns: xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 284.822 284.822" xml: space="preserve">
+    <svg class="flag" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 284.822 284.822" xml: space="preserve">
         <g>
             <path style="fill:#010002;" d="M75.326,28.49c13.086-7.789,38.851-18.933,66.291-7.511c37.519,15.61,50.872,46.515,107.775,5.635
 		c4.879-3.508,8.697-1.675,8.697,4.335v106.513c0,6.01-3.307,14.462-7.854,18.389c-9.91,8.561-28.011,21.299-47.429,20.696

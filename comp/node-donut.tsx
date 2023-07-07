@@ -4,6 +4,7 @@ import { FishNode, NodeLinkData } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
 import { log } from 'console'
 import '../assets/flags'
+import { flag } from '../assets/flags'
 
 
 
@@ -90,6 +91,7 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .text(n.id)
     }
 
+    g.append(() => flag()).select('g').attr('transform', `translate(100,${outerRadius})`)
 
     return g
 }

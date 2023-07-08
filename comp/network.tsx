@@ -19,8 +19,13 @@ let simulation: any = null
 
 type FishNodeForce = FishNode & { x: number, y: number, isinv: boolean }
 class FishLinkForce {
-    constructor(public l: SuperLink, public source: FishNode, public target: FishNode) { }
+    constructor(public l: SuperLink, public source: FishNodeForce, public target: FishNodeForce) { }
 }
+
+// interface FishNode{
+//     x: number
+//     y: number
+// }
 
 function rund3(e: SVGElement) {
 
@@ -39,7 +44,7 @@ function rund3(e: SVGElement) {
     // .style('height', height)
 
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
-    let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source), m.netgraph.getnode(l.target)))
+    let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source) as any, m.netgraph.getnode(l.target) as any))
     mount({ linksm, nodesm })
     restore()
 
@@ -183,9 +188,8 @@ function rund3(e: SVGElement) {
         if (!json) return
         let ns = JSON.parse(json)
         ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
-        m.netgraph.fixupnodemap()
-        m.netgraph.nodes.forEach(n => Object.assign(n, m.netgraph.nodemap.get(n.id)))
-
+        let nodemap = new Map(ns.map(n => [n.id, n]))
+        m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
     }
 
     svg.node()?.append(defsFilter!)

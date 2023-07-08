@@ -26,6 +26,11 @@ export class SuperLink implements ILink {
     }
 
     get typeCounts() {
-        return this.links.countBy(l => l.type).entries
+        let prevsum = 0
+        return this.links.countBy(l => l.type).entries.map(([type, count]) => {
+            let r = { type, count, prevsum }
+            prevsum += count
+            return r
+        })
     }
 }

@@ -48,19 +48,20 @@ function rund3(e: SVGElement) {
 
     let link =
         linkg
-        .append('line')
-        .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
-        .on('mousedown', (ev, { l }) => console.log(ev.target.getAttribute("stroke-width"), l.links))
+            .append('line')
+            .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
+            .on('mousedown', (ev, { l }) => console.log(ev.target.getAttribute("stroke-width"), l.links))
 
-    linkg
-        .selectAll('rect.linkadorn')
-        .data(flf => flf.l.typeCounts.map(tc => ({ tc, l: flf.l })))
-        .join('rect')
-        .attr('class', tc => cc('linkadorn', tc.tc[0]))
-        .attr('x', (_,i) => 11 + i * 5)
-        .attr('y', 22)
-        .attr('width', 5)
-        .attr('height', 5)
+    let linkadorns =
+        linkg
+            .selectAll('rect.linkadorn')
+            .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf }))) // could group typeCounts also by directions
+            .join('rect')
+            .attr('class', flfx => cc('linkadorn', flfx.tc[0]))
+            .attr('x', (flfx, i) => flfx.tc.prevsum)
+    // .attr('y', 22)
+    //.attr('width', d => d)
+    // .attr('height', 5)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -121,6 +122,10 @@ function rund3(e: SVGElement) {
             .attr('x2', d => xscaler(d.target.x) as number)
             .attr('y2', d => yscaler(d.target.y) as number)
 
+        linkadorns
+            //.attr('translate', ({flf}) => [xscaler(flf.source.x), yscaler(flf.source.y)])
+            .attr('transform', ({flf}) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)})`)
+
         //let angle = d.source.x
         //link.selectAll('line.adorns')
 
@@ -131,14 +136,14 @@ function rund3(e: SVGElement) {
     updateview() // show random placements
 
     function onnodeclick(ev: MouseEvent, n: FishNode) {
-        if(ev.ctrlKey){
+        if (ev.ctrlKey) {
             c.togglenetnode(ev, n)
         }
     }
 
     function drag(simulation) {
         function dragstarted(event) {
-            if(event.sourceEvent.ctrlKey) return
+            if (event.sourceEvent.ctrlKey) return
 
             if (!event.active) simulation.alphaTarget(0.3).restart()
             // event.subject.fx = xscaler.invert(event.sourceEvent.offsetX)
@@ -151,7 +156,7 @@ function rund3(e: SVGElement) {
         }
 
         function dragended(event) {
-            if(event.sourceEvent.ctrlKey) return
+            if (event.sourceEvent.ctrlKey) return
             if (!event.active) simulation.alphaTarget(0)
             if (event.sourceEvent.shiftKey) {
                 event.subject.fx = null

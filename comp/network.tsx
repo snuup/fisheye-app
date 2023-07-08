@@ -12,7 +12,7 @@ import { FishLink } from '../elements/fishlink'
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 5, 6, 8, 20])
-const adornScaler = d3.scaleLinear([1, 10, 100], [3, 10, 50])
+//const adornScaler = d3.scaleLinear([1, 10, 100], [3, 10, 50])
 
 mount({ rand100 })
 
@@ -23,6 +23,9 @@ class FishLinkForce {
     constructor(public l: SuperLink, public source: FishNodeForce, public target: FishNodeForce) { }
     get s() { return this.source }
     get t() { return this.target }
+    get dx() { return this.t.x - this.s.x }
+    get dy() { return this.t.y - this.s.y }
+    get length() { return Math.sqrt(this.dx * this.dx + this.dy * this.dy) }
     get sourceOuterRadius() { return getOuterRadius(this.source) }
     get targetOuterRadius() { return getOuterRadius(this.target) }
 }
@@ -72,9 +75,7 @@ function rund3(e: SVGElement) {
             .data(d => d.l.typeCounts.map(tc => ({ tc, flf: d }))) // MUST NOT destruct flf !
             .join('rect')
             .attr('class', d => cc('linkadorn', d.tc.type, d.tc.direction))
-            .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : ( d.flf.target.x - d.flf.targetOuterRadius - d.tc.prevsum - 5) )
-            .attr('y', -5)
-            .attr('width', d => adornScaler(d.tc.count))
+            .attr('width', d => d.tc.count)
             .attr('height', 10)
             .attr('direction', d => d.tc.direction)
 
@@ -109,10 +110,10 @@ function rund3(e: SVGElement) {
     simulation = d3
         .forceSimulation(nodesm)
         //.alphaDecay(0.5)
-        .force('many', d3.forceManyBody().strength(-.1))
+        //.force('many', d3.forceManyBody().strength(-.1))
         //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(10).strength(.1))
         //.force('collide', d3.forceCollide().radius(30).strength(2))
-        .force('center', d3.forceCenter(width / 2, height / 2).strength(.04))
+        //.force('center', d3.forceCenter(width / 2, height / 2).strength(-.01))
         .force('box', boxingForce)
         .on('tick', updateview)
         .on('end', store)
@@ -142,6 +143,8 @@ function rund3(e: SVGElement) {
             .attr('y2', d => d.target.y)
 
         linkadorns
+            .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))
+            .attr('y', -5)
             .attr('transform', ({ flf }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)})`)
 
         nodesv

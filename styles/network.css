@@ -67,6 +67,16 @@ svg.net-donut {
   stroke: none;
 }
 
+.net-graph .linkadorn.in {
+  stroke: green;
+  stroke-width: 4;
+}
+
+.net-graph .linkadorn.out {
+  stroke: red;
+  stroke-width: 4;
+}
+
 .bgcircle {
   fill: #eee;
 }

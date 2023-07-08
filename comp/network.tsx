@@ -32,12 +32,12 @@ function rund3(e: SVGElement) {
     let div = e.parentElement
     let width = div?.clientWidth!
     let height = div?.clientHeight!
-    const xscaler = d3.scaleLinear([0, 100], [0, width])
-    const yscaler = d3.scaleLinear([0, 100], [0, height])
+    //const xscaler = d3.scaleLinear([0, 100], [0, width])
+    //const yscaler = d3.scaleLinear([0, 100], [0, height])
 
     const angle = (d: FishLinkForce) => {
-        let dx = xscaler(d.t.x - d.s.x)
-        let dy = yscaler(d.t.y - d.s.y)
+        let dx = (d.t.x - d.s.x)
+        let dy = (d.t.y - d.s.y)
         return Math.atan2(dy, dx) * 180 / Math.PI
     }
 
@@ -71,8 +71,8 @@ function rund3(e: SVGElement) {
             .selectAll('rect.linkadorn')
             .data(d => d.l.typeCounts.map(tc => ({ tc, flf: d }))) // MUST NOT destruct flf !
             .join('rect')
-            .attr('class', d => cc('linkadorn', d.tc.type))
-            .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.target.x - d.flf.targetOuterRadius - d.tc.prevsum - 5) )
+            .attr('class', d => cc('linkadorn', d.tc.type, d.tc.direction))
+            .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : ( d.flf.target.x - d.flf.targetOuterRadius - d.tc.prevsum - 5) )
             .attr('y', -5)
             .attr('width', d => adornScaler(d.tc.count))
             .attr('height', 10)
@@ -108,11 +108,11 @@ function rund3(e: SVGElement) {
 
     simulation = d3
         .forceSimulation(nodesm)
-        .alphaDecay(0.5)
-        .force('many', d3.forceManyBody().strength(.001))
-        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.2))
-        .force('collide', d3.forceCollide().radius(5).strength(1))
-        .force('center', d3.forceCenter(50, 50).strength(.002))
+        //.alphaDecay(0.5)
+        .force('many', d3.forceManyBody().strength(-.1))
+        //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(10).strength(.1))
+        //.force('collide', d3.forceCollide().radius(30).strength(2))
+        .force('center', d3.forceCenter(width / 2, height / 2).strength(.04))
         .force('box', boxingForce)
         .on('tick', updateview)
         .on('end', store)
@@ -121,8 +121,8 @@ function rund3(e: SVGElement) {
 
     function boxingForce(alpha) {
         for (let n of nodesm) {
-            n.x = n.x.clamp(2, 98)
-            n.y = n.y.clamp(2, 98)
+            n.x = n.x.clamp(10, width)
+            n.y = n.y.clamp(10, height)
         }
     }
 
@@ -131,21 +131,21 @@ function rund3(e: SVGElement) {
     function updateview() {
         console.log('ontick')
         for (let n of nodesm) {
-            n.x = n.x.clamp(2, 98)
-            n.y = n.y.clamp(2, 98)
+            n.x = n.x.clamp(2, width)
+            n.y = n.y.clamp(2, height)
         }
 
         link
-            .attr('x1', d => xscaler(d.source.x) as number)
-            .attr('y1', d => yscaler(d.source.y) as number)
-            .attr('x2', d => xscaler(d.target.x) as number)
-            .attr('y2', d => yscaler(d.target.y) as number)
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d => d.target.x)
+            .attr('y2', d => d.target.y)
 
         linkadorns
-            .attr('transform', ({ flf }) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)}) rotate(${angle(flf)})`)
+            .attr('transform', ({ flf }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)})`)
 
         nodesv
-            .attr('transform', (d: any) => `translate(${xscaler(d.x)},${yscaler(d.y)})`)
+            .attr('transform', (d: any) => `translate(${(d.x)},${(d.y)})`)
     }
 
     updateview() // show random placements
@@ -166,8 +166,8 @@ function rund3(e: SVGElement) {
         }
 
         function dragged(event) {
-            event.subject.fx = xscaler.invert(event.sourceEvent.offsetX)
-            event.subject.fy = yscaler.invert(event.sourceEvent.offsetY)
+            event.subject.fx = event.sourceEvent.offsetX
+            event.subject.fy = event.sourceEvent.offsetY
         }
 
         function dragended(event) {

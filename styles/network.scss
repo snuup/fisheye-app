@@ -68,6 +68,14 @@ svg.net-donut {
 
     .linkadorn {
         stroke: none;
+        &.in{
+            stroke: green;
+            stroke-width: 4;
+        }
+        &.out{
+            stroke: red;
+            stroke-width: 4;
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import { SuperLink } from '../elements/superlink'
 import { d3nodedonut, getOuterRadius } from './node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
+import { FishLink } from '../elements/fishlink'
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
@@ -17,7 +18,9 @@ mount({ rand100 })
 let simulation: any = null
 
 type FishNodeForce = FishNode & { x: number, y: number, isinv: boolean }
-type FishLinkForce = { l: SuperLink, source: any, target: any } // link-force will assign nodes to source and target
+class FishLinkForce {
+    constructor(public l: SuperLink, public source: FishNode, public target: FishNode) { }
+}
 
 function rund3(e: SVGElement) {
 
@@ -36,11 +39,7 @@ function rund3(e: SVGElement) {
     // .style('height', height)
 
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
-    let linksm = m.netgraph.links.map(l => ({
-        l,
-        source: m.netgraph.getnode(l.source),
-        target: m.netgraph.getnode(l.target)
-    })) as FishLinkForce[]
+    let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source), m.netgraph.getnode(l.target)))
     mount({ linksm, nodesm })
     restore()
 
@@ -61,7 +60,7 @@ function rund3(e: SVGElement) {
             .selectAll('rect.linkadorn')
             .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf, sourceRadius: getOuterRadius(flf.source) }))) // could group typeCounts also by directions
             .join('rect')
-            .attr('class', flfx => cc('linkadorn', flfx.tc[0]))
+            .attr('class', flfx => cc('linkadorn', flfx.tc.type))
             .attr('x', (flfx, i) => flfx.sourceRadius + flfx.tc.prevsum)
             .attr('y', -7.5)
             .attr('width', d => 15)

@@ -60,7 +60,7 @@ svg.net-donut {
 }
 
 .net-graph .linkadorn {
-  fill: lightblue;
+  stroke: none;
 }
 
 .bgcircle {

@@ -22,11 +22,8 @@ class FishLinkForce {
     constructor(public l: SuperLink, public source: FishNodeForce, public target: FishNodeForce) { }
     get s() { return this.source }
     get t() { return this.target }
-    get angle() {
-        let dx = this.t.x - this.s.x
-        let dy = this.t.y - this.s.y
-        return Math.atan2(dy, dx) * 180 / Math.PI
-    }
+    get sourceOuterRadius() { return getOuterRadius(this.source) }
+    get targetOuterRadius() { return getOuterRadius(this.target) }
 }
 
 // interface FishNode{
@@ -41,6 +38,12 @@ function rund3(e: SVGElement) {
     let height = div?.clientHeight!
     const xscaler = d3.scaleLinear([0, 100], [0, width])
     const yscaler = d3.scaleLinear([0, 100], [0, height])
+
+    const angle = (d: FishLinkForce) => {
+        let dx = xscaler(d.t.x - d.s.x)
+        let dy = yscaler(d.t.y - d.s.y)
+        return Math.atan2(dy, dx) * 180 / Math.PI
+    }
 
     console.log("patch network!", m.netgraph, div?.clientWidth, div?.clientHeight)
 
@@ -70,14 +73,14 @@ function rund3(e: SVGElement) {
     let linkadorns =
         linkg
             .selectAll('rect.linkadorn')
-            .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf, sourceRadius: getOuterRadius(flf.source) }))) // could group typeCounts also by directions
+            .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf }))) // could group typeCounts also by directions
             .join('rect')
             .attr('class', flfx => cc('linkadorn', flfx.tc.type))
-            .attr('x', (flfx, i) => flfx.sourceRadius + flfx.tc.prevsum)
+            .attr('x', (d, i) => d.flf.sourceOuterRadius + d.tc.prevsum)
             .attr('y', -7.5)
             .attr('width', d => 15)
             .attr('height', 15)
-            .attr('angle', d => d.flf.angle)
+            //.attr('angle', d => d.flf.angle)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -139,10 +142,7 @@ function rund3(e: SVGElement) {
             .attr('y2', d => yscaler(d.target.y) as number)
 
         linkadorns
-            .attr('transform', ({ flf }) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)}) rotate(${flf.angle})`)
-
-        //let angle = d.source.x
-        //link.selectAll('line.adorns')
+            .attr('transform', ({ flf }) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)}) rotate(${angle(flf)})`)
 
         nodesv
             .attr('transform', (d: any) => `translate(${xscaler(d.x)},${yscaler(d.y)})`)

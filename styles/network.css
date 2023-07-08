@@ -20,10 +20,15 @@ svg.net-donut {
   text-anchor: middle;
   stroke: none;
   fill: #333;
+  visibility: hidden;
 }
 
 .net-graph g.inv text {
   fill: #bb0c0c;
+}
+
+.net-graph g.inv .bgcircle {
+  fill: orange;
 }
 
 .net-graph g {
@@ -65,6 +70,7 @@ svg.net-donut {
 
 .bgcircle {
   fill: #eee;
+  visibility: hidden;
 }
 
 div.path-matrix {

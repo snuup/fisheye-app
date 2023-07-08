@@ -19,10 +19,16 @@ svg.net-donut {
         text-anchor: middle;
         stroke: none;
         fill: #333;
+        visibility: hidden;
         //transform: translateY(31px);
     }
-    g.inv text {
-        fill: rgb(187, 12, 12);
+    g.inv {
+        text {
+            fill: rgb(187, 12, 12);
+        }
+        .bgcircle {
+            fill: orange;
+        }
     }
     g {
         cursor: pointer;

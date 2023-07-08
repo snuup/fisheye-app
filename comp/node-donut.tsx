@@ -10,11 +10,7 @@ import { m } from '../app/model'
 const innerRadius = 10
 let donutOuterRadiusScaler = d3.scaleSqrt([0, 300], [innerRadius + 5, innerRadius + 22])
 
-export function getOuterRadius(n: FishNode) {
-    let r = donutOuterRadiusScaler(n.degree)
-    console.log("r", r)
-    return r
-}
+export const getOuterRadius = (n: FishNode) => donutOuterRadiusScaler(n.degree)
 
 export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
 

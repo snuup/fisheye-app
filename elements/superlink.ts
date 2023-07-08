@@ -25,12 +25,19 @@ export class SuperLink implements ILink {
         return `${l.source} -(${this.links.length})> ${l.target}`
     }
 
-    get typeCounts() {
+    getTypeCounts(links: FishLink[], direction: string) {
         let prevsum = 0
-        return this.links.countBy(l => l.type).entries.map(([type, count]) => {
-            let r = { type, count, prevsum }
+        return links.countBy(l => l.type).entries.map(([type, count]) => {
+            let r = { type, count, prevsum, direction }
             prevsum += count
             return r
         })
+    }
+
+    get outlinks() { return this.links.filter(l => l.source == this.source) }
+    get inlinks() { return this.links.filter(l => l.source == this.target) }
+
+    get typeCounts() {
+        return this.getTypeCounts(this.outlinks, "out").concat(this.getTypeCounts(this.inlinks, "in"))
     }
 }

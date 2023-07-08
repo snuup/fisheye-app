@@ -69,13 +69,14 @@ function rund3(e: SVGElement) {
     let linkadorns =
         linkg
             .selectAll('rect.linkadorn')
-            .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf }))) // could group typeCounts also by directions
+            .data(d => d.l.typeCounts.map(tc => ({ tc, flf: d }))) // MUST NOT destruct flf !
             .join('rect')
-            .attr('class', flfx => cc('linkadorn', flfx.tc.type))
-            .attr('x', (d, i) => d.flf.sourceOuterRadius + d.tc.prevsum + 5)
+            .attr('class', d => cc('linkadorn', d.tc.type))
+            .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.target.x - d.flf.targetOuterRadius - d.tc.prevsum - 5) )
             .attr('y', -5)
             .attr('width', d => adornScaler(d.tc.count))
             .attr('height', 10)
+            .attr('direction', d => d.tc.direction)
 
     linkadorns
         .append('title')

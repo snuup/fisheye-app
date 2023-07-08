@@ -15,13 +15,17 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
         rebind(this)
         this.nodes = nodes
         this.links = links
-        this.nodemap = new Map(this.nodes.map(n => [n.id, n]))
+        this.fixupnodemap()
         let lm = new Map()
         for (let l of links) {
             lm.getorcreate(l.source, () => []).push(new DirectedLink(l, false))
             lm.getorcreate(l.target, () => []).push(new DirectedLink(l, true))
         }
         this.linkmap = lm
+    }
+
+    fixupnodemap() {
+        this.nodemap = new Map(this.nodes.map(n => [n.id, n]))
     }
 
     static Empty = new Graph([], [])

@@ -7,11 +7,18 @@ import '../assets/flags'
 import { flag } from '../assets/flags'
 import { m } from '../app/model'
 
+const innerRadius = 10
+let donutOuterRadiusScaler = d3.scaleSqrt([0, 300], [innerRadius + 5, innerRadius + 22])
 
+export function getOuterRadius(n: FishNode) {
+    let r = donutOuterRadiusScaler(n.degree)
+    console.log("r", r)
+    return r
+}
 
 export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
 
-    let shortname = n.id.slice(0,10)
+    let shortname = n.id.slice(0, 10)
 
     let donut = n.donut
     function undirect(n: NodeLinkData) {
@@ -20,11 +27,8 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
     }
     if (undirected) donut.forEach(undirect)
 
-    const sum = donut.sumBy(d => d.total)
-    let widthScale = d3.scaleSqrt([0, 300], [5, 22])
-    const innerRadius = 10
-    const outerRadius = innerRadius + widthScale(sum)
-    const scaleRadius = d3.scaleLinear().range([innerRadius, outerRadius])
+    const outerRadius = getOuterRadius(n)
+    const scaleMidRadius = d3.scaleLinear().range([innerRadius, outerRadius])
 
     const piedata = d3
         .pie()
@@ -32,7 +36,7 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
         .value((d: any) => d.total)(donut as any)
 
     const arc = d => {
-        const midRadius = scaleRadius(d.data.ins / d.value)
+        const midRadius = scaleMidRadius(d.data.ins / d.value)
         let [inner, outer] = d.ins ? [innerRadius, midRadius] : [midRadius, outerRadius]
 
         return d3.arc()

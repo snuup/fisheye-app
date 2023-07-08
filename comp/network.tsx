@@ -4,7 +4,7 @@ import { m } from '../app/model'
 import { cc, mount } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
-import { d3nodedonut } from './node-donut'
+import { d3nodedonut, getOuterRadius } from './node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
 
@@ -17,7 +17,7 @@ mount({ rand100 })
 let simulation: any = null
 
 type FishNodeForce = FishNode & { x: number, y: number, isinv: boolean }
-type FishLinkForce = { l: SuperLink, source: string | any, target: string | any } // link-force will assign nodes to source and target
+type FishLinkForce = { l: SuperLink, source: any, target: any } // link-force will assign nodes to source and target
 
 function rund3(e: SVGElement) {
 
@@ -36,7 +36,11 @@ function rund3(e: SVGElement) {
     // .style('height', height)
 
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
-    let linksm = m.netgraph.links.map(l => ({ l, source: l.source, target: l.target })) as FishLinkForce[]
+    let linksm = m.netgraph.links.map(l => ({
+        l,
+        source: m.netgraph.getnode(l.source),
+        target: m.netgraph.getnode(l.target)
+    })) as FishLinkForce[]
     mount({ linksm, nodesm })
     restore()
 
@@ -55,13 +59,13 @@ function rund3(e: SVGElement) {
     let linkadorns =
         linkg
             .selectAll('rect.linkadorn')
-            .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf }))) // could group typeCounts also by directions
+            .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf, sourceRadius: getOuterRadius(flf.source) }))) // could group typeCounts also by directions
             .join('rect')
             .attr('class', flfx => cc('linkadorn', flfx.tc[0]))
-            .attr('x', (flfx, i) => flfx.tc.prevsum)
-    // .attr('y', 22)
-    //.attr('width', d => d)
-    // .attr('height', 5)
+            .attr('x', (flfx, i) => flfx.sourceRadius + flfx.tc.prevsum)
+            .attr('y', -7.5)
+            .attr('width', d => 15)
+            .attr('height', 15)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -123,8 +127,7 @@ function rund3(e: SVGElement) {
             .attr('y2', d => yscaler(d.target.y) as number)
 
         linkadorns
-            //.attr('translate', ({flf}) => [xscaler(flf.source.x), yscaler(flf.source.y)])
-            .attr('transform', ({flf}) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)})`)
+            .attr('transform', ({ flf }) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)})`)
 
         //let angle = d.source.x
         //link.selectAll('line.adorns')
@@ -181,8 +184,9 @@ function rund3(e: SVGElement) {
         if (!json) return
         let ns = JSON.parse(json)
         ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
-        let nodemap = new Map(ns.map(n => [n.id, n]))
-        m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
+        m.netgraph.fixupnodemap()
+        m.netgraph.nodes.forEach(n => Object.assign(n, m.netgraph.nodemap.get(n.id)))
+
     }
 
     svg.node()?.append(defsFilter!)

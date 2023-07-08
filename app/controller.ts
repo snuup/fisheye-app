@@ -172,6 +172,7 @@ export class Controller {
         let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinctBy()
         m.netgraph.nodes = nodes
         m.netgraph.links = links
+        m.netgraph.fixupnodemap()
     }
 
     computepathmatrix() {

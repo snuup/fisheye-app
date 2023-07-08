@@ -101,6 +101,10 @@ mergePrototype(class extends Array {
         if (this.includes(x)) return
         this.push(x)
     }
+    get cumulativeSum() {
+        let sum = 0
+        return this.map(n => sum += n)
+    }
 }, Array)
 
 mergePrototype(class extends Map {

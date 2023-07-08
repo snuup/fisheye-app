@@ -32,6 +32,7 @@ interface Array<T> {
     remove(x:T)
     toggle(x, addOrRemove?: boolean): boolean
     ensure(x)
+    get cumulativeSum(): number[]
 }
 
 interface Set<T> {

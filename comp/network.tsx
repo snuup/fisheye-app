@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { mount } from '../utils/common'
+import { cc, mount } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
 import { SuperLink } from '../elements/superlink'
 import { d3nodedonut } from './node-donut'
@@ -40,13 +40,27 @@ function rund3(e: SVGElement) {
     mount({ linksm, nodesm })
     restore()
 
-    const link = svg
-        .selectAll('line')
+    const linkg = svg
+        .selectAll('g.line')
         .data(linksm)
-        .join('line')
-        .attr('class', fl => fl.l.type)
+        .join('g')
+        .attr('class', fl => cc(fl.l.type, ' line'))
+
+    let link =
+        linkg
+        .append('line')
         .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
         .on('mousedown', (ev, { l }) => console.log(ev.target.getAttribute("stroke-width"), l.links))
+
+    linkg
+        .selectAll('rect.linkadorn')
+        .data(flf => flf.l.typeCounts.map(tc => ({ tc, l: flf.l })))
+        .join('rect')
+        .attr('class', tc => cc('linkadorn', tc.tc[0]))
+        .attr('x', (_,i) => 11 + i * 5)
+        .attr('y', 22)
+        .attr('width', 5)
+        .attr('height', 5)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -56,12 +70,13 @@ function rund3(e: SVGElement) {
     })
 
     let nodesv = svg
-        .selectAll('g')
+        .selectAll('g.node')
         .data(nodesm)
         .join('g')
-        .classed('inv', fn => m.investigatees.includes(fn.id))
-        .attr("class", fn => fn.type ?? "undefined")
-        .attr('class', 'dragy')
+        .attr('class', fn => cc(
+            'node',
+            m.investigatees.includes(fn.id) && 'inv',
+            fn.type ?? "undefined"))
         .on('mousedown', onnodeclick)
 
     nodesv
@@ -82,7 +97,7 @@ function rund3(e: SVGElement) {
         .on('tick', updateview)
         .on('end', store)
 
-    svg.selectAll('g.dragy').call(drag(simulation))
+    svg.selectAll('g.node').call(drag(simulation))
 
     function boxingForce(alpha) {
         for (let n of nodesm) {
@@ -99,10 +114,15 @@ function rund3(e: SVGElement) {
             n.x = n.x.clamp(2, 98)
             n.y = n.y.clamp(2, 98)
         }
-        link.attr('x1', d => xscaler(d.source.x) as number)
+
+        link
+            .attr('x1', d => xscaler(d.source.x) as number)
             .attr('y1', d => yscaler(d.source.y) as number)
             .attr('x2', d => xscaler(d.target.x) as number)
             .attr('y2', d => yscaler(d.target.y) as number)
+
+        //let angle = d.source.x
+        //link.selectAll('line.adorns')
 
         nodesv
             .attr('transform', (d: any) => `translate(${xscaler(d.x)},${yscaler(d.y)})`)

@@ -59,6 +59,10 @@ svg.net-donut {
   fill: red;
 }
 
+.net-graph .linkadorn {
+  fill: lightblue;
+}
+
 .bgcircle {
   fill: #eee;
 }

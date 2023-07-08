@@ -24,4 +24,8 @@ export class SuperLink implements ILink {
         let l = this.links.first
         return `${l.source} -(${this.links.length})> ${l.target}`
     }
+
+    get typeCounts() {
+        return this.links.countBy(l => l.type).entries
+    }
 }

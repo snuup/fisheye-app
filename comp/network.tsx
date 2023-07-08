@@ -20,6 +20,13 @@ let simulation: any = null
 type FishNodeForce = FishNode & { x: number, y: number, isinv: boolean }
 class FishLinkForce {
     constructor(public l: SuperLink, public source: FishNodeForce, public target: FishNodeForce) { }
+    get s() { return this.source }
+    get t() { return this.target }
+    get angle() {
+        let dx = this.t.x - this.s.x
+        let dy = this.t.y - this.s.y
+        return Math.atan2(dy, dx) * 180 / Math.PI
+    }
 }
 
 // interface FishNode{
@@ -70,6 +77,7 @@ function rund3(e: SVGElement) {
             .attr('y', -7.5)
             .attr('width', d => 15)
             .attr('height', 15)
+            .attr('angle', d => d.flf.angle)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -131,7 +139,7 @@ function rund3(e: SVGElement) {
             .attr('y2', d => yscaler(d.target.y) as number)
 
         linkadorns
-            .attr('transform', ({ flf }) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)})`)
+            .attr('transform', ({ flf }) => `translate(${xscaler(flf.source.x)},${yscaler(flf.source.y)}) rotate(${flf.angle})`)
 
         //let angle = d.source.x
         //link.selectAll('line.adorns')

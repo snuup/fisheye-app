@@ -19,7 +19,7 @@ svg.net-donut {
         text-anchor: middle;
         stroke: none;
         fill: #333;
-        visibility: hidden;
+        //visibility: hidden;
         //transform: translateY(31px);
     }
     g.inv {
@@ -38,7 +38,7 @@ svg.net-donut {
         }
     }
     line {
-        stroke: #333;
+        stroke: #555;
     }
     g.donut {
         transform: initial;

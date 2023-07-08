@@ -20,7 +20,6 @@ svg.net-donut {
   text-anchor: middle;
   stroke: none;
   fill: #333;
-  visibility: hidden;
 }
 
 .net-graph g.inv text {
@@ -40,7 +39,7 @@ svg.net-donut {
 }
 
 .net-graph line {
-  stroke: #333;
+  stroke: #555;
 }
 
 .net-graph g.donut {
@@ -70,7 +69,6 @@ svg.net-donut {
 
 .bgcircle {
   fill: #eee;
-  visibility: hidden;
 }
 
 div.path-matrix {

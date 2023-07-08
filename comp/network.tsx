@@ -11,7 +11,8 @@ import { FishLink } from '../elements/fishlink'
 
 const randscale = d3.scaleLinear([0, 1], [0, 100])
 const rand100 = () => randscale(Math.random())
-const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1, 4, 6, 8, 10, 100])
+const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 5, 6, 8, 20])
+const adornScaler = d3.scaleLinear([1, 10, 100], [3, 10, 50])
 
 mount({ rand100 })
 
@@ -25,11 +26,6 @@ class FishLinkForce {
     get sourceOuterRadius() { return getOuterRadius(this.source) }
     get targetOuterRadius() { return getOuterRadius(this.target) }
 }
-
-// interface FishNode{
-//     x: number
-//     y: number
-// }
 
 function rund3(e: SVGElement) {
 
@@ -76,11 +72,14 @@ function rund3(e: SVGElement) {
             .data(flf => flf.l.typeCounts.map(tc => ({ tc, flf }))) // could group typeCounts also by directions
             .join('rect')
             .attr('class', flfx => cc('linkadorn', flfx.tc.type))
-            .attr('x', (d, i) => d.flf.sourceOuterRadius + d.tc.prevsum)
-            .attr('y', -7.5)
-            .attr('width', d => 15)
-            .attr('height', 15)
-            //.attr('angle', d => d.flf.angle)
+            .attr('x', (d, i) => d.flf.sourceOuterRadius + d.tc.prevsum + 5)
+            .attr('y', -5)
+            .attr('width', d => adornScaler(d.tc.count))
+            .attr('height', 10)
+
+    linkadorns
+        .append('title')
+        .text(d => `${d.tc.count} (${d.tc.type})`)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)

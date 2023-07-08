@@ -8,13 +8,14 @@ import { d3nodedonut, getOuterRadius } from './node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
 import { FishLink } from '../elements/fishlink'
+import { log } from 'console'
 
-const randscale = d3.scaleLinear([0, 1], [0, 100])
-const rand100 = () => randscale(Math.random())
+// const randscale = d3.scaleLinear([0, 1], [0, 100])
+// const rand100 = () => randscale(Math.random())
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 5, 6, 8, 20])
 //const adornScaler = d3.scaleLinear([1, 10, 100], [3, 10, 50])
 
-mount({ rand100 })
+//mount({ rand100 })
 
 let simulation: any = null
 
@@ -85,8 +86,8 @@ function rund3(e: SVGElement) {
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
-        fn.x ??= rand100()
-        fn.y ??= rand100()
+        fn.x ??= width * Math.random()
+        fn.y ??= height * Math.random()
         fn.isinv = isinv
     })
 
@@ -107,14 +108,17 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
+    console.log("center", width / 2)
+    console.log("center", height / 2)
+
     simulation = d3
         .forceSimulation(nodesm)
         //.alphaDecay(0.5)
-        //.force('many', d3.forceManyBody().strength(-.1))
+        //.force('many', d3.forceManyBody().strength(-.00001))
         //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(10).strength(.1))
         //.force('collide', d3.forceCollide().radius(30).strength(2))
-        //.force('center', d3.forceCenter(width / 2, height / 2).strength(-.01))
-        .force('box', boxingForce)
+        .force('center', d3.forceCenter(width / 2, height / 2).strength(-.01))
+        //.force('box', boxingForce)
         .on('tick', updateview)
         .on('end', store)
 

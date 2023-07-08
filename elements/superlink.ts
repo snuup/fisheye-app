@@ -1,7 +1,5 @@
+import * as d3 from 'd3'
 import { FishLink } from "./fishlink"
-import { FishNode } from "./fishnode"
-
-// refcount = number of links in this SuperLink
 
 export class SuperLink implements ILink {
 
@@ -28,7 +26,7 @@ export class SuperLink implements ILink {
     getTypeCounts(links: FishLink[], direction: string) {
         let prevsum = 0
         return links.countBy(l => l.type).entries.map(([type, count]) => {
-            let r = { type, count, prevsum, direction }
+            let r = { type, count: adornScaler(count), prevsum, direction } // * 2 is a rude visual scaler
             prevsum += count
             return r
         })
@@ -41,3 +39,5 @@ export class SuperLink implements ILink {
         return this.getTypeCounts(this.outlinks, "out").concat(this.getTypeCounts(this.inlinks, "in"))
     }
 }
+
+const adornScaler = d3.scaleLinear([1, 2, 3, 10, 100], [3, 4, 6, 8, 12])

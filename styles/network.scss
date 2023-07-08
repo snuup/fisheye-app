@@ -19,8 +19,6 @@ svg.net-donut {
         text-anchor: middle;
         stroke: none;
         fill: #333;
-        //visibility: hidden;
-        //transform: translateY(31px);
     }
     g.inv {
         text {
@@ -68,14 +66,14 @@ svg.net-donut {
 
     .linkadorn {
         stroke: none;
-        &.in{
-            stroke: green;
-            stroke-width: 4;
-        }
-        &.out{
-            stroke: red;
-            stroke-width: 4;
-        }
+        // &.in{
+        //     stroke: green;
+        //     stroke-width: 4;
+        // }
+        // &.out{
+        //     stroke: red;
+        //     stroke-width: 4;
+        // }
     }
 }
 

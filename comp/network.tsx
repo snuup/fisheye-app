@@ -59,7 +59,7 @@ function rund3(e: SVGElement) {
         linkg
             .append('line')
             .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
-            .on('mousedown', (ev, { l }) => console.log(ev.target.getAttribute("stroke-width"), l.links))
+            .on('mousedown', (ev, { l }) => console.log(l))
 
     let linkadorns =
         linkg
@@ -105,10 +105,10 @@ function rund3(e: SVGElement) {
     simulation = d3
         .forceSimulation(nodesm)
         //.alphaDecay(0.5)
-        //.force('many', d3.forceManyBody().strength(-.00001))
-        //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(10).strength(.1))
-        //.force('collide', d3.forceCollide().radius(30).strength(2))
-        .force('center', d3.forceCenter(width / 2, height / 2).strength(-.01))
+        //.force('many', d3.forceManyBody().strength(-10))
+        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
+        .force('collide', d3.forceCollide().radius(25).strength(1))
+        //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
         //.force('box', boxingForce)
         .on('tick', updateview)
         .on('end', store)

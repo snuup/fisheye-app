@@ -7,15 +7,8 @@ import { SuperLink } from '../elements/superlink'
 import { d3nodedonut, getOuterRadius } from './node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
-import { FishLink } from '../elements/fishlink'
-import { log } from 'console'
 
-// const randscale = d3.scaleLinear([0, 1], [0, 100])
-// const rand100 = () => randscale(Math.random())
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 5, 6, 8, 20])
-//const adornScaler = d3.scaleLinear([1, 10, 100], [3, 10, 50])
-
-//mount({ rand100 })
 
 let simulation: any = null
 
@@ -36,8 +29,6 @@ function rund3(e: SVGElement) {
     let div = e.parentElement
     let width = div?.clientWidth!
     let height = div?.clientHeight!
-    //const xscaler = d3.scaleLinear([0, 100], [0, width])
-    //const yscaler = d3.scaleLinear([0, 100], [0, height])
 
     const angle = (d: FishLinkForce) => {
         let dx = (d.t.x - d.s.x)
@@ -49,7 +40,7 @@ function rund3(e: SVGElement) {
 
     const svg = d3
         .select(e)
-    //.attr('viewBox', [0, 0, width, height])
+    // .attr('viewBox', [0, 0, width, height])
     // .style('width', width)
     // .style('height', height)
 

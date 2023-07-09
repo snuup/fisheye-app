@@ -15,12 +15,7 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
 
     let shortname = n.id.slice(0, 10)
 
-    let donut = n.donut
-    function undirect(n: NodeLinkData) {
-        n.ins = 0
-        n.outs = n.total
-    }
-    if (undirected) donut.forEach(undirect)
+    let donut = undirected ? n.donut.map(n => ({ ...n, ins: 0, outs: n.total })) : n.donut
 
     const outerRadius = getOuterRadius(n)
     const scaleMidRadius = d3.scaleLinear().range([innerRadius, outerRadius])

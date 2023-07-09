@@ -80,6 +80,8 @@ export class GraphAlgos {
 
         //console.log("findpathsmulti", start, targets)
         if (!Array.isArray(targets)) throw "targets must be an array!"
+        if (typeof start !== "string") throw "start must be a string id"
+        if (targets.find(t => typeof t !== "string")) throw "targets must be string ids"
 
         let stargets = new Set(targets)
 
@@ -122,3 +124,5 @@ export class GraphAlgos {
         return { goalpaths, visited }
     }
 }
+
+mount({ GraphAlgos })

@@ -14,7 +14,7 @@ import { NetworkView } from "../comp/networkview"
 
 let App = () => {
     return (
-        <body class="node-focus">
+        <body class="">
             <header>
                 <h2>Mini Challenge 1</h2>
                 <Link url={['nodestats']} />

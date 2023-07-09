@@ -11,9 +11,17 @@ svg.net-donut {
   user-select: none;
 }
 
-body.node-focus .net-graph .donut:not(.suspect) * {
-  fill: lightseagreen;
-  opacity: .75;
+body.highlightpaths .net-graph .node:not(.highlight) * {
+  fill: lightseagreen !important;
+  opacity: 0.75;
+}
+
+body.highlightpaths .net-graph g:not(.highlight) {
+  opacity: 0.5;
+}
+
+body.highlightpaths .net-graph g.highlight * {
+  stroke: red;
 }
 
 .net-graph > svg {

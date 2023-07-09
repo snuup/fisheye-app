@@ -53,7 +53,7 @@ function rund3(e: SVGElement) {
         .selectAll('g.line')
         .data(linksm)
         .join('g')
-        .attr('class', fl => cc(fl.l.type, ' line'))
+        .attr('class', d => cc(d.l.type, ' line', { highlight: d.l.highlight }))
 
     let link =
         linkg
@@ -99,11 +99,10 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
-    nodesv.on("mouseenter mouseout", function (...args) {
-        console.log("enter/out", ...args)
-        d3.select(this)
-            .attr("fill", 'red')
-    })
+    // nodesv.on("mouseenter mouseout", function (ev: MouseEvent, n: FishNode) {
+    //     if (!ev.ctrlKey) return
+    //     c.highlightbadpaths(n)
+    // })
 
     console.log("center", width / 2)
     console.log("center", height / 2)
@@ -111,6 +110,7 @@ function rund3(e: SVGElement) {
     simulation = d3
         .forceSimulation(nodesm)
         //.alphaDecay(0.5)
+        //.velocityDecay(.8)
         //.force('many', d3.forceManyBody().strength(-10))
         .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
         .force('collide', d3.forceCollide().radius(25).strength(1))
@@ -156,17 +156,22 @@ function rund3(e: SVGElement) {
 
     function onnodeclick(ev: MouseEvent, n: FishNode) {
         if (ev.ctrlKey) {
-            c.togglenetnode(ev, n)
+            c.highlightbadpaths(n)
+            return
         }
+        c.unhighlightbadpaths()
+        // if (ev.ctrlKey) {
+        //     c.togglenetnode(ev, n)
+        // }
     }
 
     function drag(simulation) {
         function dragstarted(event) {
-            if (event.sourceEvent.ctrlKey) return
+            //if (event.sourceEvent.ctrlKey) return
 
-            if (!event.active) simulation.alphaTarget(0.3).restart()
-            // event.subject.fx = xscaler.invert(event.sourceEvent.offsetX)
-            // event.subject.fy = xscaler.invert(event.sourceEvent.offsetY)
+            if (!event.active) simulation.alphaTarget(.2).restart()
+            //event.subject.fx = event.sourceEvent.offsetX
+            //event.subject.fy = event.sourceEvent.offsetY
         }
 
         function dragged(event) {

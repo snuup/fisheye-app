@@ -7,6 +7,7 @@ export class SuperLink implements ILink {
     target: string
     type: string
     weight: number
+    highlight = false
 
     constructor(public links: FishLink[]) {
         let [source, target] = links.first.unodeids

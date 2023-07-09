@@ -39,7 +39,7 @@ export class Controller {
         m.supergraph = new Graph(nodes, superlinks)
 
         m.invs = m.investigatees.map(m.graph.getnode)
-        m.suspects = m.graph.nodes.filter(n => issuspicious(n.id) )
+        m.suspects = m.graph.nodes.filter(n => issuspicious(n.id))
 
         this.restore()
         this.computepathmatrix()
@@ -199,6 +199,27 @@ export class Controller {
         }
 
         m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
+    }
+
+    highlightbadpaths(n: FishNode) {
+        console.log("highlightbadpaths", n)
+        this.unhighlightbadpaths()
+        document.body.classList.add("highlightpaths")
+        let bads = m.netgraph.nodes.filter(n => m.suspects.includes(n)).map(n => n.id)
+        let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, bads)
+        let highlightlinks = goalpaths.flat().flatMap(p => p.links).map(dl => dl.link).distinctBy()
+        highlightlinks.forEach(l => l.highlight = true)
+
+        console.log("highlightlinks", highlightlinks)
+
+        updateview('.net-graph > svg')
+    }
+
+    unhighlightbadpaths() {
+        console.log("unhighlightbadpaths")
+        m.netgraph.links.forEach(l => l.highlight = false)
+        document.body.classList.remove("highlightpaths")
+        updateview('.net-graph > svg')
     }
 
     store() {

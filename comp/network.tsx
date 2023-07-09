@@ -72,12 +72,12 @@ function rund3(e: SVGElement) {
             .attr('height', 10)
             .attr('direction', d => d.tc.direction)
 
-    linkg
-        .selectAll('path.arrows')
-        .data(d => d.l.arrows) // MUST NOT destruct flf !
-        .join('path')
-        .attr("d", d3.symbol(d3.symbolTriangle2))
-        .attr('direction', d => d.direction)
+    // linkg
+    //     .selectAll('path.arrows')
+    //     .data(d => d.l.arrows) // MUST NOT destruct flf !
+    //     .join('path')
+    //     .attr("d", d3.symbol(d3.symbolTriangle2))
+    //     .attr('direction', d => d.direction)
 
     linkadorns
         .append('title')

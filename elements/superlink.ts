@@ -40,6 +40,15 @@ export class SuperLink implements ILink {
         return this.getTypeCounts(this.outlinks, "out").concat(this.getTypeCounts(this.inlinks, "in"))
     }
 
+    get adornments() {
+        let outs = this.getTypeCounts(this.outlinks, "out")
+        let ins = this.getTypeCounts(this.inlinks, "in")
+        let a = [] as any[]
+        if (ins.length) a.push({ ins })
+        if (outs.length) a.push({ outs })
+        return a
+    }
+
     get arrows(): { pos: number, direction: string }[] {
         let outs = this.getTypeCounts(this.outlinks, "out")
         let ins = this.getTypeCounts(this.inlinks, "in")
@@ -49,5 +58,10 @@ export class SuperLink implements ILink {
         return a
     }
 }
+
+// class LinkAdornment {
+//     side: "source" | "target"
+//     typecounts: any[]
+// }
 
 const adornScaler = d3.scaleLinear([1, 2, 3, 10, 100], [4, 9, 12, 20, 50])

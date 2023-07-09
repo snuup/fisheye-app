@@ -37,7 +37,8 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 .net-graph text {
   text-anchor: middle;
   stroke: none;
-  fill: #333;
+  fill: #555;
+  font-weight: 100;
 }
 
 .net-graph g.inv text {
@@ -58,7 +59,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 
 .net-graph line {
   stroke: #333;
-  opacity: 0.2;
+  opacity: .4;
 }
 
 .net-graph g.donut {
@@ -136,14 +137,4 @@ div.path-matrix text.h-label {
 
 div.path-matrix text.v-label {
   text-anchor: start;
-}
-
-.linkadorns .in {
-  fill: red;
-  stroke-width: 1;
-}
-
-.linkadorns .out {
-  fill: #82882e;
-  stroke-width: 1;
 }

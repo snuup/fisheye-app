@@ -48,7 +48,8 @@ svg.net-donut {
     text {
         text-anchor: middle;
         stroke: none;
-        fill: #333;
+        fill: #555;
+        font-weight: 100;
     }
     g.inv {
         text {
@@ -67,7 +68,7 @@ svg.net-donut {
     }
     line {
         stroke: #333;
-        opacity: 0.2;
+        opacity: .4;
     }
     g.donut {
         transform: initial;
@@ -157,11 +158,11 @@ div.path-matrix {
     }
 }
 
-.linkadorns .in {
-    fill: red;
-    stroke-width: 1;
-}
-.linkadorns .out {
-    fill: rgb(130, 136, 46);
-    stroke-width: 1;
-}
+// .linkadorns .in {
+//     fill: red;
+//     stroke-width: 1;
+// }
+// .linkadorns .out {
+//     fill: rgb(130, 136, 46);
+//     stroke-width: 1;
+// }

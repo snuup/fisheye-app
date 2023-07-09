@@ -62,66 +62,33 @@ function rund3(e: SVGElement) {
             .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
             .on('mousedown', (ev, { l }) => console.log(l))
 
-    // let linkadorns =
-    //     linkg
-    //         .selectAll('rect.linkadorn')
-    //         .data(d => d.l.typeCounts.map(tc => ({ tc, flf: d }))) // MUST NOT destruct flf !
-    //         .join('rect')
-    //         .attr('class', d => cc('linkadorn', d.tc.type, d.tc.direction))
-    //         .attr('width', d => d.tc.countpos)
-    //         .attr('height', 10)
-    //         .attr('direction', d => d.tc.direction)
-
     const computeAdornSides = (flf: FishLinkForce) => {
 
         return flf.l.typeCountsPerSide.map(side => {
             let t = side.tcs.first
             let direction = t.direction
             let radius = getOuterRadius(direction === "out" ? flf.source : flf.target)
-            //let dx = direction === "in" ? radius + side.tcs.last.prevsum + 10 : 0
-            let dx = direction === "out" ? (radius + 20) : (radius + side.tcs.last.prevsum + 20)
+            let dx = direction === "out" ? (radius + 5) : (radius + side.tcs.last.prevsum + side.tcs.last.countpos + 5)
             return { ...side, radius, direction, flf, dx }
         })
     }
 
-    let linkadornSidesOuts =
+    let linkadorns =
         linkg
-            .selectAll('g.linkadorns.out')
-            .data(d => computeAdornSides(d).filter(d => d.direction == "out"))
+            .selectAll('g.linkadorns')
+            .data(computeAdornSides)
             .join('g')
-            .attr('class', 'linkadorns out')
+            .attr('class', d => cc('linkadorns', d.direction))
 
-    let linkadornSidesIns =
-        linkg
-            .selectAll('g.linkadorns.in')
-            .data(d => computeAdornSides(d).filter(d => d.direction == "in"))
-            .join('g')
-            .attr('class', 'linkadorns in')
-
-    let linkadornsOuts =
-        linkadornSidesOuts
-            .selectAll('rect.linkadorn.out')
-            .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "out"))
-            .join('rect')
-            //.attr('x', ({ tc, radius }) => radius + tc.prevsum + 5)
-            .attr('x', ({ tc, radius }) => tc.prevsum)
-            .attr('y', -5)
-            .attr('class', ({ tc }) => cc('linkadorn out', tc.type))
-            .attr('width', ({ tc }) => tc.countpos)
-            .attr('height', 10)
-
-    let linkadornsIns =
-        linkadornSidesIns
-            .selectAll('rect.linkadorn.in')
-            .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "in"))
-            .join('rect')
-            //.attr('x', ({ tc, radius }) => 0) //: (d.flf.length - radius - tc.prevsum - 5))
-            .attr('x', ({ tc, radius }) => tc.prevsum)
-            .attr('y', -5)
-            .attr('class', ({ tc }) => cc('linkadorn in', tc.type))
-            .attr('width', ({ tc }) => tc.countpos)
-            .attr('height', 10)
-
+    linkadorns
+        .selectAll('rect.linkadorn')
+        .data(side => side.tcs.map(tc => ({ ...side, tc })))
+        .join('rect')
+        .attr('x', ({ tc, radius }) => tc.prevsum)
+        .attr('y', -5)
+        .attr('class', ({ tc }) => cc('linkadorn', tc.direction, tc.type))
+        .attr('width', ({ tc }) => tc.countpos)
+        .attr('height', 10)
 
     // linkg
     //     .selectAll('path.arrows')
@@ -193,13 +160,9 @@ function rund3(e: SVGElement) {
             .attr('x2', d => d.target.x)
             .attr('y2', d => d.target.y)
 
-        linkadornSidesOuts
-            //     .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))
-            .attr('transform', ({ flf, dx }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)}) translate(${dx},0)`)
-
-        linkadornSidesIns
-            //     .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))
-            .attr('transform', ({ flf, dx }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)}) translate(${flf.length - dx},0)`)
+        linkadorns
+            .attr('transform',
+            ({ flf, dx, direction }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)}) translate(${direction === "out" ? dx : flf.length - dx},0)`)
 
         nodesv
             .attr('transform', (d: any) => `translate(${(d.x)},${(d.y)})`)

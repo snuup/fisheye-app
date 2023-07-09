@@ -68,7 +68,8 @@ svg.net-donut {
         }
     }
     line {
-        stroke: #bbb;
+        stroke: #333;
+        opacity: .2
     }
     g.donut {
         transform: initial;

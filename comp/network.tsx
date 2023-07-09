@@ -78,7 +78,7 @@ function rund3(e: SVGElement) {
             let t = side.tcs.first
             let direction = t.direction
             let radius = getOuterRadius(direction === "out" ? flf.source : flf.target)
-            let dx = direction === "in" ? radius + side.tcs.last.prevsum + 5 : 0
+            let dx = direction === "in" ? radius + side.tcs.last.prevsum + 10 : 0
             return { ...side, radius, direction, flf, dx }
         })
     }
@@ -113,7 +113,8 @@ function rund3(e: SVGElement) {
             .selectAll('rect.linkadorn.in')
             .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "in"))
             .join('rect')
-            .attr('x', ({ tc, radius }) => 0) //: (d.flf.length - radius - tc.prevsum - 5))
+            //.attr('x', ({ tc, radius }) => 0) //: (d.flf.length - radius - tc.prevsum - 5))
+            .attr('x', ({ tc, radius }) => tc.prevsum - 5)
             .attr('y', -5)
             .attr('class', ({ tc }) => cc('linkadorn in', tc.type))
             .attr('width', ({ tc }) => tc.countpos)

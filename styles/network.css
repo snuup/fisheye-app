@@ -57,7 +57,8 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 }
 
 .net-graph line {
-  stroke: #bbb;
+  stroke: #333;
+  opacity: .2;
 }
 
 .net-graph g.donut {

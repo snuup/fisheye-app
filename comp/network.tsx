@@ -99,6 +99,12 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
+    nodesv.on("mouseenter mouseout", function (...args) {
+        console.log("enter/out", ...args)
+        d3.select(this)
+            .attr("fill", 'red')
+    })
+
     console.log("center", width / 2)
     console.log("center", height / 2)
 

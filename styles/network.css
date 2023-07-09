@@ -11,6 +11,11 @@ svg.net-donut {
   user-select: none;
 }
 
+body.node-focus .net-graph .donut:not(.suspect) * {
+  fill: lightseagreen;
+  opacity: .75;
+}
+
 .net-graph > svg {
   width: 100%;
   height: 100%;

@@ -40,6 +40,7 @@ export const mraw = {
     // ui
     selection: [] as any[],
 
+    invs: [] as FishNode[],
     suspects: [] as FishNode[],
 
     countryColorScaler: d3.scaleOrdinal(d3.schemeAccent)

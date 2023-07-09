@@ -8,6 +8,19 @@ svg.net-donut {
 }
 
 .net-graph {
+
+    //body.node-focus .net-graph .donut:not(.suspect) * {
+
+    body.node-focus & {
+        .donut:not(.suspect) * {
+            fill: lightseagreen;
+            opacity: .75;
+        }
+        // .donut.suspect {
+        //     opacity: 1 ip !important;
+        // }
+    }
+
     // background: lightseagreen;
     user-select: none;
     & > svg {

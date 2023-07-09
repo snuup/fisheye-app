@@ -2,7 +2,6 @@ import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
 import { FishNode, NodeLinkData } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
-import { log } from 'console'
 import '../assets/flags'
 import { flag } from '../assets/flags'
 import { m } from '../app/model'
@@ -50,7 +49,7 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             .attr('height', outerRadius * 2)
             .append('g')
             .attr("class", "donut")
-            .classed('inv', m.investigatees.includes(n.id))
+            .classed('inv', m.invs.includes(n))
             .classed('suspect', m.suspects.includes(n))
             .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 

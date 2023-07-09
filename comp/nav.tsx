@@ -7,7 +7,7 @@ export const Navigation = () => {
 
     return (
         <nav>
-            { m.suspects.map(n => <NodeView n={n} />) }
+            { m.invs.concat(m.suspects).map(n => <NodeView n={n} />) }
         </nav>
     )
 }

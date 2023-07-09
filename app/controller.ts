@@ -38,9 +38,8 @@ export class Controller {
         let superlinks = links.groupBy(l => l.ukey).entries.map(([_, ls]) => new SuperLink(ls))
         m.supergraph = new Graph(nodes, superlinks)
 
-        let invs = m.investigatees.map(m.graph.getnode)
-        let susps = m.graph.nodes.filter(n => issuspicious(n.id) )
-        m.suspects = invs.concat(susps)
+        m.invs = m.investigatees.map(m.graph.getnode)
+        m.suspects = m.graph.nodes.filter(n => issuspicious(n.id) )
 
         this.restore()
         this.computepathmatrix()

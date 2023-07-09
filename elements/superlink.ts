@@ -40,24 +40,33 @@ export class SuperLink implements ILink {
         return this.getTypeCounts(this.outlinks, "out").concat(this.getTypeCounts(this.inlinks, "in"))
     }
 
-    get adornments() {
-        let outs = this.getTypeCounts(this.outlinks, "out")
-        let ins = this.getTypeCounts(this.inlinks, "in")
-        let a = [] as any[]
-        if (ins.length) a.push({ ins })
-        if (outs.length) a.push({ outs })
-        return a
-    }
+    // get adornments(): {typeCounts:Adornment[] {
+    //     let outs = this.getTypeCounts(this.outlinks, "out")
+    //     let ins = this.getTypeCounts(this.inlinks, "in")
+    //     let a = [] as any[]
+    //     if (ins.length) a.push({ typeCounts: ins })
+    //     if (outs.length) a.push({ typeCounts: outs })
+    //     return a
+    // }
 
-    get arrows(): { pos: number, direction: string }[] {
+    get typeCountsPerSide(){
         let outs = this.getTypeCounts(this.outlinks, "out")
         let ins = this.getTypeCounts(this.inlinks, "in")
-        let a = [] as any[]
-        if (ins.length) a.push({ pos: ins.last.countpos, direction: "in" })
-        if (outs.length) a.push({ pos: outs.last.countpos, direction: "out" })
-        return a
+        return [outs, ins].filter(a => a.length)
+        // let a = [] as any[]
+        // if (ins.length) a.push({ pos: ins.last.countpos, direction: "in" })
+        // if (outs.length) a.push({ pos: outs.last.countpos, direction: "out" })
+        // return a
     }
 }
+
+// type Adornment = {
+//     type: string,
+//     count: number,
+//     countpos: number,
+//     prevsum: number,
+//     direction: string
+// }
 
 // class LinkAdornment {
 //     side: "source" | "target"

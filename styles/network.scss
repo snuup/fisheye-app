@@ -11,16 +11,27 @@ svg.net-donut {
     //body.node-focus .net-graph .donut:not(.suspect) * {
 
     body.highlightpaths & {
-        .node:not(.highlight) * {
-            fill: lightseagreen !important;
 
-            opacity: 0.75;
+        .node:not(.highlight):not(.focused) * {
+            fill: #555 !important;
+            opacity: 0.5;
+
+        }
+
+        .node.focused .bgcircle {
+            fill: yellowgreen !important;
+            opacity: 1;
+        }
+
+        g.highlight {
+            line {
+                stroke: red;
+            }
         }
         g:not(.highlight) {
-            opacity: 0.5;
-        }
-        g.highlight * {
-            stroke: red;
+            line {
+                opacity: 0.15;
+            }
         }
         // .donut.suspect {
         //     opacity: 1 ip !important;

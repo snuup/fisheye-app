@@ -71,12 +71,11 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
     gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
     getlinks(nid: string): DirectedLink<LinkType>[] { return this.linkmap.get(nid) ?? [] }
-    getneighborlinksu(nid: string): LinkType[] { return this.linkmap.get(nid)?.map(dl => dl.link) ?? [] }
 }
 
 export class GraphAlgos {
 
-    static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => DirectedLink<Link>[], start: string, targets: string[]) {
+    static findpathsmulti<Link extends ILink>(getneighborlinks: (string) => DirectedLink<Link>[], start: string, targets: string[], maxlength = 99, excludes: string[] = []) {
 
         //console.log("findpathsmulti", start, targets)
         if (!Array.isArray(targets)) throw "targets must be an array!"
@@ -103,7 +102,7 @@ export class GraphAlgos {
                 }
 
                 getneighborlinks(n)
-                    .filter(l => !visited.has(l.target))
+                    .filter(l => !visited.has(l.target) && !(excludes.includes(l.source) || excludes.includes(l.target)))
                     .map(l => p.with(l))
                     .forEach(p => nextfronteer.push(p))
             }
@@ -115,7 +114,7 @@ export class GraphAlgos {
         }
 
         let fronteer: Path<Link>[] = getneighborlinks(start).map(l => new Path([l]))
-        while (fronteer.length) {
+        while (fronteer.length && maxlength--) {
             fronteer = bfs(fronteer)
         }
 

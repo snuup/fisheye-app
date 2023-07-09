@@ -24,6 +24,8 @@ export class FishNode implements INode {
     outdegree: number
     indegree: number
     isinv?: boolean
+    highlight = false
+    focused = false
 
     get donut(): NodeLinkData[] { return this.original.donut }
     set donut(d) { }

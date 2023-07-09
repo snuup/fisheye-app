@@ -203,23 +203,49 @@ export class Controller {
 
     highlightbadpaths(n: FishNode) {
         console.log("highlightbadpaths", n)
-        this.unhighlightbadpaths()
+
+        this.resethighlights()
+
+        n.focused = true
+
         document.body.classList.add("highlightpaths")
         let bads = m.netgraph.nodes.filter(n => m.suspects.includes(n)).map(n => n.id)
-        let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, bads)
+        let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, bads, 3, ['FishEye International'])
+        console.log("goalpaths", goalpaths)
+        mount({ goalpaths })
+
         let highlightlinks = goalpaths.flat().flatMap(p => p.links).map(dl => dl.link).distinctBy()
         highlightlinks.forEach(l => l.highlight = true)
+        console.log("highlighted links:", highlightlinks)
+
+        let highlightnodes = highlightlinks.flatMap(l => l.nodeids).distinctBy()
+        m.netgraph.nodes.forEach(n => n.highlight = highlightnodes.includes(n.id))
 
         console.log("highlightlinks", highlightlinks)
+        console.log("highlightnodes", highlightnodes)
 
+        console.log("highs-focs:", m.netgraph.nodes.map(n => `${n.highlight} - ${n.focused}`).join(' '))
+
+        this.storenetgraph()
         updateview('.net-graph > svg')
     }
 
-    unhighlightbadpaths() {
-        console.log("unhighlightbadpaths")
+    resethighlights() {
+        console.log("resethighlights")
+
         m.netgraph.links.forEach(l => l.highlight = false)
+        m.netgraph.nodes.forEach(n => {
+            n.focused = false
+            n.highlight = false
+        })
+        this.storenetgraph()
+
+        this.printhfs(1)
+
         document.body.classList.remove("highlightpaths")
         updateview('.net-graph > svg')
+
+        this.printhfs(2)
     }
 
     store() {
@@ -235,6 +261,31 @@ export class Controller {
         let o = JSON.parse(json)
         m.pinnednodes = o.pinnednodes.map(nid => m.graph.getnode(nid))
         m.pinnedpaths = o.pinnedpaths
+    }
+
+    storenetgraph() {
+        localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
+        console.log("stored")
+        this.printhfs()
+    }
+
+    restorenetgraph() {
+        let json = localStorage.getItem("netgraph")
+        if (!json) return
+        let ns = JSON.parse(json)
+        ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
+        let nodemap = new Map(ns.map(n => [n.id, n]))
+        m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
+        console.log("restored")
+        this.printhfs()
+    }
+
+    printhfs(msg?) {
+        // console.log("printhfs", msg)
+        // for (let n of m.netgraph.nodes) {
+        //     if (n.highlight) console.log("high", n.id)
+        //     if (n.focused) console.log("focs", n.id)
+        // }
     }
 }
 

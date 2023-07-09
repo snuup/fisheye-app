@@ -37,9 +37,11 @@ function rund3(e: SVGElement) {
     }
 
     console.log("patch network!", m.netgraph, div?.clientWidth, div?.clientHeight)
+    console.log("highs:", m.netgraph.nodes.map(n => n.highlight))
 
     const svg = d3
         .select(e)
+        .on('click', c.resethighlights)
     // .attr('viewBox', [0, 0, width, height])
     // .style('width', width)
     // .style('height', height)
@@ -47,7 +49,7 @@ function rund3(e: SVGElement) {
     let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
     let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source) as any, m.netgraph.getnode(l.target) as any))
     mount({ linksm, nodesm })
-    restore()
+    c.restorenetgraph()
 
     const linkg = svg
         .selectAll('g.line')
@@ -86,10 +88,13 @@ function rund3(e: SVGElement) {
         .selectAll('g.node')
         .data(nodesm)
         .join('g')
-        .attr('class', fn => cc(
+        .attr('class', n => cc(
             'node',
-            m.investigatees.includes(fn.id) && 'inv',
-            fn.type ?? "undefined"))
+            m.investigatees.includes(n.id) && 'inv', n.type ?? "undefined",
+            {
+                highlight: n.highlight,
+                focused: n.focused
+            }))
         .on('mousedown', onnodeclick)
 
     nodesv
@@ -99,25 +104,17 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
-    // nodesv.on("mouseenter mouseout", function (ev: MouseEvent, n: FishNode) {
-    //     if (!ev.ctrlKey) return
-    //     c.highlightbadpaths(n)
-    // })
-
-    console.log("center", width / 2)
-    console.log("center", height / 2)
-
     simulation = d3
         .forceSimulation(nodesm)
         //.alphaDecay(0.5)
-        //.velocityDecay(.8)
+        //.velocityDecay(.5)
         //.force('many', d3.forceManyBody().strength(-10))
         .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
         .force('collide', d3.forceCollide().radius(25).strength(1))
         //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
         //.force('box', boxingForce)
         .on('tick', updateview)
-        .on('end', store)
+        .on('end', c.storenetgraph)
 
     svg.selectAll('g.node').call(drag(simulation))
 
@@ -159,7 +156,7 @@ function rund3(e: SVGElement) {
             c.highlightbadpaths(n)
             return
         }
-        c.unhighlightbadpaths()
+        c.resethighlights()
         // if (ev.ctrlKey) {
         //     c.togglenetnode(ev, n)
         // }
@@ -186,7 +183,7 @@ function rund3(e: SVGElement) {
                 event.subject.fx = null
                 event.subject.fy = null
             }
-            store()
+            c.storenetgraph()
         }
 
         return d3
@@ -194,19 +191,6 @@ function rund3(e: SVGElement) {
             .on('start', dragstarted)
             .on('drag', dragged)
             .on('end', dragended)
-    }
-
-    function store() {
-        localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
-    }
-
-    function restore() {
-        let json = localStorage.getItem("netgraph")
-        if (!json) return
-        let ns = JSON.parse(json)
-        ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
-        let nodemap = new Map(ns.map(n => [n.id, n]))
-        m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
     }
 
     svg.node()?.append(defsFilter!)

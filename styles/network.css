@@ -59,7 +59,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 
 .net-graph line {
   stroke: #333;
-  opacity: .4;
+  opacity: 0.4;
 }
 
 .net-graph g.donut {
@@ -137,4 +137,16 @@ div.path-matrix text.h-label {
 
 div.path-matrix text.v-label {
   text-anchor: start;
+}
+
+.out .triangle {
+  fill: red;
+  stroke: #333;
+  stroke-width: 1;
+}
+
+.in .triangle {
+  fill: yellowgreen;
+  stroke: #333;
+  stroke-width: 1;
 }

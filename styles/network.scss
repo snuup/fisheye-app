@@ -68,7 +68,7 @@ svg.net-donut {
     }
     line {
         stroke: #333;
-        opacity: .4;
+        opacity: 0.4;
     }
     g.donut {
         transform: initial;
@@ -166,3 +166,23 @@ div.path-matrix {
 //     fill: rgb(130, 136, 46);
 //     stroke-width: 1;
 // }
+
+.out {
+    .triangle {
+        fill: red;
+        //fill: #ddd;
+        stroke: #333;
+        stroke-width: 1;
+        // transform: rotate(90deg);
+    }
+}
+
+.in {
+    .triangle {
+        fill: yellowgreen;
+        //fill: #ddd;
+        stroke: #333;
+        stroke-width: 1;
+        // transform: rotate(90deg);
+    }
+}

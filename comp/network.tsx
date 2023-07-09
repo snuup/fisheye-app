@@ -8,7 +8,7 @@ import { d3nodedonut, getOuterRadius } from './node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
 
-const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 5, 6, 8, 20])
+const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
 
 let simulation: any = null
 
@@ -68,8 +68,9 @@ function rund3(e: SVGElement) {
             let t = side.tcs.first
             let direction = t.direction
             let radius = getOuterRadius(direction === "out" ? flf.source : flf.target)
-            let dx = direction === "out" ? (radius + 5) : (radius + side.tcs.last.prevsum + side.tcs.last.countpos + 5)
-            return { ...side, radius, direction, flf, dx }
+            let totalsize = side.tcs.last.prevsum + side.tcs.last.countpos
+            let dx = direction === "out" ? (radius + 10) : (radius + 10 + totalsize)
+            return { ...side, radius, direction, flf, dx, totalsize }
         })
     }
 
@@ -89,6 +90,12 @@ function rund3(e: SVGElement) {
         .attr('class', ({ tc }) => cc('linkadorn', tc.direction, tc.type))
         .attr('width', ({ tc }) => tc.countpos)
         .attr('height', 10)
+
+    linkadorns
+        .append('path')
+        .attr("d", d3.symbol(d3.symbolTriangle2))
+        .attr('class', 'triangle')
+        .attr('transform', ({ totalsize }) => `translate(${totalsize + 10},0) rotate(90)`)
 
     // linkg
     //     .selectAll('path.arrows')
@@ -162,7 +169,7 @@ function rund3(e: SVGElement) {
 
         linkadorns
             .attr('transform',
-            ({ flf, dx, direction }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)}) translate(${direction === "out" ? dx : flf.length - dx},0)`)
+                ({ flf, dx, direction }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)}) translate(${direction === "out" ? dx : flf.length - dx},0)`)
 
         nodesv
             .attr('transform', (d: any) => `translate(${(d.x)},${(d.y)})`)

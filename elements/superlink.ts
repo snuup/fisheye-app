@@ -24,7 +24,7 @@ export class SuperLink implements ILink {
         return `${l.source} -(${this.links.length})> ${l.target}`
     }
 
-    getTypeCounts(links: FishLink[], direction: string) {
+    getTypeCounts(links: FishLink[], direction: "in" | "out"): TypeCount[] {
         let prevsum = 0
         return links.countBy(l => l.type).entries.map(([type, count]) => {
             let r = { type, count, countpos: adornScaler(count), prevsum, direction } // * 2 is a rude visual scaler
@@ -40,33 +40,20 @@ export class SuperLink implements ILink {
         return this.getTypeCounts(this.outlinks, "out").concat(this.getTypeCounts(this.inlinks, "in"))
     }
 
-    // get adornments(): {typeCounts:Adornment[] {
-    //     let outs = this.getTypeCounts(this.outlinks, "out")
-    //     let ins = this.getTypeCounts(this.inlinks, "in")
-    //     let a = [] as any[]
-    //     if (ins.length) a.push({ typeCounts: ins })
-    //     if (outs.length) a.push({ typeCounts: outs })
-    //     return a
-    // }
-
-    get typeCountsPerSide(){
+    get typeCountsPerSide() {
         let outs = this.getTypeCounts(this.outlinks, "out")
         let ins = this.getTypeCounts(this.inlinks, "in")
-        return [outs, ins].filter(a => a.length)
-        // let a = [] as any[]
-        // if (ins.length) a.push({ pos: ins.last.countpos, direction: "in" })
-        // if (outs.length) a.push({ pos: outs.last.countpos, direction: "out" })
-        // return a
+        return [outs, ins].filter(a => a.length).map(tcs => ({ tcs, sl: this }))
     }
 }
 
-// type Adornment = {
-//     type: string,
-//     count: number,
-//     countpos: number,
-//     prevsum: number,
-//     direction: string
-// }
+export type TypeCount = {
+    type: string,
+    count: number,
+    countpos: number,
+    prevsum: number,
+    direction: string
+}
 
 // class LinkAdornment {
 //     side: "source" | "target"

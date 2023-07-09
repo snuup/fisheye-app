@@ -78,7 +78,8 @@ function rund3(e: SVGElement) {
             let t = side.tcs.first
             let direction = t.direction
             let radius = getOuterRadius(direction === "out" ? flf.source : flf.target)
-            let dx = direction === "in" ? radius + side.tcs.last.prevsum + 10 : 0
+            //let dx = direction === "in" ? radius + side.tcs.last.prevsum + 10 : 0
+            let dx = direction === "out" ? (radius + 20) : (radius + side.tcs.last.prevsum + 20)
             return { ...side, radius, direction, flf, dx }
         })
     }
@@ -88,21 +89,22 @@ function rund3(e: SVGElement) {
             .selectAll('g.linkadorns.out')
             .data(d => computeAdornSides(d).filter(d => d.direction == "out"))
             .join('g')
-            .attr('class', d => cc('linkadorns out', d.direction))
+            .attr('class', 'linkadorns out')
 
     let linkadornSidesIns =
         linkg
             .selectAll('g.linkadorns.in')
             .data(d => computeAdornSides(d).filter(d => d.direction == "in"))
             .join('g')
-            .attr('class', d => cc('linkadorns in', d.direction))
+            .attr('class', 'linkadorns in')
 
     let linkadornsOuts =
         linkadornSidesOuts
             .selectAll('rect.linkadorn.out')
             .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "out"))
             .join('rect')
-            .attr('x', ({ tc, radius }) => radius + tc.prevsum + 5)
+            //.attr('x', ({ tc, radius }) => radius + tc.prevsum + 5)
+            .attr('x', ({ tc, radius }) => tc.prevsum)
             .attr('y', -5)
             .attr('class', ({ tc }) => cc('linkadorn out', tc.type))
             .attr('width', ({ tc }) => tc.countpos)
@@ -114,27 +116,12 @@ function rund3(e: SVGElement) {
             .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "in"))
             .join('rect')
             //.attr('x', ({ tc, radius }) => 0) //: (d.flf.length - radius - tc.prevsum - 5))
-            .attr('x', ({ tc, radius }) => tc.prevsum - 5)
+            .attr('x', ({ tc, radius }) => tc.prevsum)
             .attr('y', -5)
             .attr('class', ({ tc }) => cc('linkadorn in', tc.type))
             .attr('width', ({ tc }) => tc.countpos)
             .attr('height', 10)
 
-    // let linkadornsIn =
-    //     linkadornSides
-    //         .selectAll('rect.linkadorn')
-    //         .data(side => side.tcs.map(tc => ({ ...side, tc })))
-    //         .join('rect')
-    //         .attr('x', ({ tc, radius }) => tc.direction == "out" ? (radius + tc.prevsum + 5) : 150) //: (d.flf.length - radius - tc.prevsum - 5))
-    //         .attr('y', -5)
-    //         .attr('class', ({ tc }) => cc('linkadorn', tc.type, tc.direction))
-    //         .attr('width', ({ tc }) => tc.countpos)
-    //         .attr('height', 10)
-    //         .attr('direction', ({ tc }) => tc.direction)
-
-    // .attr('width', d => d.tc.countpos)
-    // .attr('height', 10)
-    // .attr('direction', d => d.tc.direction)
 
     // linkg
     //     .selectAll('path.arrows')
@@ -142,10 +129,6 @@ function rund3(e: SVGElement) {
     //     .join('path')
     //     .attr("d", d3.symbol(d3.symbolTriangle2))
     //     .attr('direction', d => d.direction)
-
-    // linkadorns
-    //     .append('title')
-    //     .text(d => `${d.tc.count} (${d.tc.type})`)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)
@@ -212,7 +195,7 @@ function rund3(e: SVGElement) {
 
         linkadornSidesOuts
             //     .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))
-            .attr('transform', ({ flf }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)})`)
+            .attr('transform', ({ flf, dx }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)}) translate(${dx},0)`)
 
         linkadornSidesIns
             //     .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))

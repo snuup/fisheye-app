@@ -13,11 +13,9 @@ svg.net-donut {
     //body.node-focus .net-graph .donut:not(.suspect) * {
 
     body.highlightpaths & {
-
         .node:not(.highlight):not(.focused) * {
             fill: #555 !important;
             opacity: 0.5;
-
         }
 
         .node.focused .bgcircle {
@@ -69,7 +67,7 @@ svg.net-donut {
     }
     line {
         stroke: #333;
-        opacity: .2
+        opacity: 0.2;
     }
     g.donut {
         transform: initial;
@@ -117,7 +115,6 @@ svg.net-donut {
 div.path-matrix {
     display: none;
 
-
     body.showpathmatrix & {
         display: initial;
     }
@@ -158,4 +155,13 @@ div.path-matrix {
     text.v-label {
         text-anchor: start;
     }
+}
+
+.linkadorns .in {
+    fill: red;
+    stroke-width: 1;
+}
+.linkadorns .out {
+    fill: rgb(130, 136, 46);
+    stroke-width: 1;
 }

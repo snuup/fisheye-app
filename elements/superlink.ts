@@ -10,9 +10,9 @@ export class SuperLink implements ILink {
     highlight = false
 
     constructor(public links: FishLink[]) {
-        let [source, target] = links.first.unodeids
-        this.source = source
-        this.target = target
+        let l = links.first
+        this.source = l.source
+        this.target = l.target
     }
 
     get nodeids() {

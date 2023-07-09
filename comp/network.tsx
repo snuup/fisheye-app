@@ -89,17 +89,39 @@ function rund3(e: SVGElement) {
             .join('g')
             .attr('class', d => cc('linkadorns', d.direction))
 
-    let linkadorns =
+    let linkadornsOuts =
         linkadornSides
             .selectAll('rect.linkadorn')
-            .data(side => side.tcs.map(tc => ({ ...side, tc })))
+            .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "out"))
             .join('rect')
-            .attr('x', ({ tc, radius }) => tc.direction == "out" ? (radius + tc.prevsum + 5) : 150) //: (d.flf.length - radius - tc.prevsum - 5))
+            .attr('x', ({ tc, radius }) => radius + tc.prevsum + 5)
             .attr('y', -5)
-            .attr('class', ({ tc }) => cc('linkadorn', tc.type, tc.direction))
+            .attr('class', ({ tc }) => cc('linkadorn out', tc.type))
             .attr('width', ({ tc }) => tc.countpos)
             .attr('height', 10)
-            .attr('direction', ({ tc }) => tc.direction)
+
+    // let linkadornsIns =
+    //     linkadornSides
+    //         .selectAll('rect.linkadorn')
+    //         .data(side => side.tcs.map(tc => ({ ...side, tc })).filter(d => d.direction == "in"))
+    //         .join('rect')
+    //         .attr('x', ({ tc, radius }) => 150) //: (d.flf.length - radius - tc.prevsum - 5))
+    //         .attr('y', -5)
+    //         .attr('class', ({ tc }) => cc('linkadorn in', tc.type))
+    //         .attr('width', ({ tc }) => tc.countpos)
+    //         .attr('height', 10)
+
+    // let linkadornsIn =
+    //     linkadornSides
+    //         .selectAll('rect.linkadorn')
+    //         .data(side => side.tcs.map(tc => ({ ...side, tc })))
+    //         .join('rect')
+    //         .attr('x', ({ tc, radius }) => tc.direction == "out" ? (radius + tc.prevsum + 5) : 150) //: (d.flf.length - radius - tc.prevsum - 5))
+    //         .attr('y', -5)
+    //         .attr('class', ({ tc }) => cc('linkadorn', tc.type, tc.direction))
+    //         .attr('width', ({ tc }) => tc.countpos)
+    //         .attr('height', 10)
+    //         .attr('direction', ({ tc }) => tc.direction)
 
     // .attr('width', d => d.tc.countpos)
     // .attr('height', 10)
@@ -179,10 +201,10 @@ function rund3(e: SVGElement) {
             .attr('x2', d => d.target.x)
             .attr('y2', d => d.target.y)
 
-         linkadorns
-        //     .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))
+        linkadornSides
+            //     .attr('x', (d, i) => d.tc.direction == "out" ? (d.flf.sourceOuterRadius + d.tc.prevsum + 5) : (d.flf.length - d.flf.targetOuterRadius - d.tc.prevsum - 5))
 
-             .attr('transform', ({ flf }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)})`)
+            .attr('transform', ({ flf }) => `translate(${(flf.source.x)},${(flf.source.y)}) rotate(${angle(flf)})`)
 
         nodesv
             .attr('transform', (d: any) => `translate(${(d.x)},${(d.y)})`)

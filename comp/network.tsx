@@ -37,7 +37,6 @@ function rund3(e: SVGElement) {
     }
 
     console.log("patch network!", m.netgraph, div?.clientWidth, div?.clientHeight)
-    console.log("highs:", m.netgraph.nodes.map(n => n.highlight))
 
     const svg = d3
         .select(e)
@@ -69,9 +68,16 @@ function rund3(e: SVGElement) {
             .data(d => d.l.typeCounts.map(tc => ({ tc, flf: d }))) // MUST NOT destruct flf !
             .join('rect')
             .attr('class', d => cc('linkadorn', d.tc.type, d.tc.direction))
-            .attr('width', d => d.tc.count)
+            .attr('width', d => d.tc.countpos)
             .attr('height', 10)
             .attr('direction', d => d.tc.direction)
+
+    linkg
+        .selectAll('path.arrows')
+        .data(d => d.l.arrows) // MUST NOT destruct flf !
+        .join('path')
+        .attr("d", d3.symbol(d3.symbolTriangle2))
+        .attr('direction', d => d.direction)
 
     linkadorns
         .append('title')

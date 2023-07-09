@@ -34,9 +34,9 @@ class FlowLink {
 export const SankeyForType = ({ links }: { links: FishLink[] }) => {
 
     let gn = m.graph.getnode
-    let sourcetypes = links.map(l => gn(l.source).type).distinctBy()
-    let targettypes = links.map(l => gn(l.target).type).distinctBy()
-    let alltypes = sourcetypes.concat(targettypes).distinctBy().sort().map(s => s ?? "undefined") as string[]
+    let sourcetypes = links.map(l => gn(l.source).type).distinct()
+    let targettypes = links.map(l => gn(l.target).type).distinct()
+    let alltypes = sourcetypes.concat(targettypes).distinct().sort().map(s => s ?? "undefined") as string[]
 
     console.log(alltypes)
 

@@ -62,7 +62,7 @@ export function getPathsHierarchy() {
 function createpathhierarchy(nd: Map<string, any>, p: Path) {
     let nodes: string[] = p.links
         .flatMap(dl => dl.ends)
-        .distinctBy()
+        .distinct()
         .toReversed()
         .slice(1)
 
@@ -91,7 +91,7 @@ function rund3(e) {
     let names = root
         .descendants()
         .map(n => n.data.id)
-        .distinctBy()
+        .distinct()
     let nameColors = d3.scaleOrdinal().domain(names).range(d3.schemeSet1)
 
     const width = 1000

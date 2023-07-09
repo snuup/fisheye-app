@@ -20,7 +20,7 @@ interface Array<T> {
     groupBy(selector: (x: T) => string | undefined): { [key: string | undefined]: T[] }
     sortBy(selector: (x: T) => U): T[]
     sortWithUndefinedLast(): T[]
-    distinctBy(selector?): T[]
+    distinct(selector?): T[]
     get combinations(): T[]
     sumBy(selector: (x: T) => number): number
     get average(): number

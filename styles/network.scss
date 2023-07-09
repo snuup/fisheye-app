@@ -1,3 +1,5 @@
+$suspect-color: rgb(202, 76, 86);
+
 article.network {
     display: grid;
     gap: 1em;
@@ -66,7 +68,7 @@ svg.net-donut {
         }
     }
     line {
-        stroke: #555;
+        stroke: #bbb;
     }
     g.donut {
         transform: initial;
@@ -85,11 +87,11 @@ svg.net-donut {
 
     g.donut.suspect:not(.inv) {
         .bgcircle {
-            fill: red;
+            fill: $suspect-color;
         }
         &:hover {
             .bgcircle {
-                fill: red;
+                fill: lighten($suspect-color, 20);
             }
         }
     }
@@ -113,6 +115,7 @@ svg.net-donut {
 
 div.path-matrix {
     display: none;
+
 
     body.showpathmatrix & {
         display: initial;

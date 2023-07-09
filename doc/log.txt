@@ -1,7 +1,8 @@
 9.7.
 - software engineering - clean code
 -  lavinia
-. red path
++ red path
+- need flooding
 
 8.7.
 - colorize red bads in path matrix

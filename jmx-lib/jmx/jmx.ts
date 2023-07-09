@@ -296,7 +296,7 @@ export function updateviewmany(...selectors: (string | Node)[]) {
     console.log(x)
     x = x.filter(n => !!n)
     console.log(x)
-    x = x.distinctBy()
+    x = x.distinct()
     console.log(x)
     x.forEach(n => patch(n, n.comp.factory))
 }

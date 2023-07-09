@@ -71,6 +71,7 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
     gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
     getlinks(nid: string): DirectedLink<LinkType>[] { return this.linkmap.get(nid) ?? [] }
+    getneighbors(nid) { return this.getlinks(nid).map(dl => dl.target) }
 }
 
 export class GraphAlgos {
@@ -121,6 +122,25 @@ export class GraphAlgos {
         //console.log("visited", visited.size, "nodes", "found paths", goalpaths)
 
         return { goalpaths, visited }
+    }
+
+    static getfronteers(getneighbors: (string) => string[], start: string, maxlength = 99, excludes: string[] = []) {
+
+        let visited = new Set<string>(excludes) // consider excludes as visited
+
+        const bfs = (fronteer: string[]) => {
+            fronteer.forEach(n => visited.add(n))
+            return fronteer.flatMap(n => getneighbors(n)).distinct().filter(n => !visited.has(n))
+        }
+
+        let fronteers = [] as string[][]
+        let f = [start]
+        while (f.length && maxlength--) {
+            fronteers.push(f)
+            f = bfs(f)
+        }
+
+        return fronteers
     }
 }
 

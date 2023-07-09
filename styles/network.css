@@ -57,7 +57,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 }
 
 .net-graph line {
-  stroke: #555;
+  stroke: #bbb;
 }
 
 .net-graph g.donut {
@@ -74,11 +74,11 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 }
 
 .net-graph g.donut.suspect:not(.inv) .bgcircle {
-  fill: red;
+  fill: #ca4c56;
 }
 
 .net-graph g.donut.suspect:not(.inv):hover .bgcircle {
-  fill: red;
+  fill: #e19ba0;
 }
 
 .net-graph .linkadorn {

@@ -49,7 +49,7 @@ mergePrototype(class extends Array {
     get combinations() {
         return [...arraycombinations(this)]
     }
-    distinctBy(selector) {
+    distinct(selector) {
         selector = selector ?? identity
         let m = new Map(this.map(x => [selector(x), x]))
         return [...m.values()]

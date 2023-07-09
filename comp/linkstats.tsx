@@ -18,9 +18,9 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
     function rund3(tableDom: HTMLTableElement) {
 
         let g = m.graph
-        let sourcetypes = links.map(l => g.getnode(l.source).type).distinctBy()
-        let targettypes = links.map(l => g.getnode(l.target).type).distinctBy()
-        let alltypes = sourcetypes.concat(targettypes).distinctBy().sort() as string[]
+        let sourcetypes = links.map(l => g.getnode(l.source).type).distinct()
+        let targettypes = links.map(l => g.getnode(l.target).type).distinct()
+        let alltypes = sourcetypes.concat(targettypes).distinct().sort() as string[]
 
         let linksbysource = links.groupBy(l => g.getnode(l.source).type)
         let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => g.getnode(l.target).type))

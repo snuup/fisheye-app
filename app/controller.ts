@@ -54,7 +54,7 @@ export class Controller {
     //     nodes.flatMap(n => n.outlinks)
     //     let links1 = nodes.flatMap(n => n.outlinks).filter(l => l)
     //     let nodes1 = links1.map(l => l.tid).map(m.graph.getnode)
-    //     return new Graph(nodes.concat(nodes1).distinctBy(), links1)
+    //     return new Graph(nodes.concat(nodes1).distinct(), links1)
     // }
 
     setroute() {
@@ -167,8 +167,8 @@ export class Controller {
 
     updatenetgraph() {
         let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
-        let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinctBy()
-        let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinctBy()
+        let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
+        let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
         m.netgraph.nodes = nodes
         m.netgraph.links = links
         m.netgraph.fixupnodemap()
@@ -211,20 +211,19 @@ export class Controller {
         document.body.classList.add("highlightpaths")
         let bads = m.netgraph.nodes.filter(n => m.suspects.includes(n)).map(n => n.id)
         let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, bads, 3, ['FishEye International'])
-        console.log("goalpaths", goalpaths)
+        //console.log("goalpaths", goalpaths)
         mount({ goalpaths })
 
-        let highlightlinks = goalpaths.flat().flatMap(p => p.links).map(dl => dl.link).distinctBy()
+        let highlightlinks = goalpaths.flat().flatMap(p => p.links).map(dl => dl.link).distinct()
         highlightlinks.forEach(l => l.highlight = true)
         console.log("highlighted links:", highlightlinks)
 
-        let highlightnodes = highlightlinks.flatMap(l => l.nodeids).distinctBy()
+        let highlightnodes = highlightlinks.flatMap(l => l.nodeids).distinct()
         m.netgraph.nodes.forEach(n => n.highlight = highlightnodes.includes(n.id))
 
-        console.log("highlightlinks", highlightlinks)
-        console.log("highlightnodes", highlightnodes)
-
-        console.log("highs-focs:", m.netgraph.nodes.map(n => `${n.highlight} - ${n.focused}`).join(' '))
+        //console.log("highlightlinks", highlightlinks)
+        //console.log("highlightnodes", highlightnodes)
+        //console.log("highs-focs:", m.netgraph.nodes.map(n => `${n.highlight} - ${n.focused}`).join(' '))
 
         this.storenetgraph()
         updateview('.net-graph > svg')

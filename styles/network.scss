@@ -169,20 +169,19 @@ div.path-matrix {
 
 .out {
     .triangle {
-        fill: red;
-        //fill: #ddd;
-        stroke: #333;
-        stroke-width: 1;
-        // transform: rotate(90deg);
+        // fill: red;
     }
 }
 
 .in {
     .triangle {
-        fill: yellowgreen;
-        //fill: #ddd;
-        stroke: #333;
-        stroke-width: 1;
-        // transform: rotate(90deg);
+        // fill: yellowgreen;
     }
+}
+
+.triangle {
+    fill: #ddd;
+    stroke: #333;
+    stroke-width: 1;
+    opacity: .5
 }

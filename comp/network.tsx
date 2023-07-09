@@ -67,10 +67,11 @@ function rund3(e: SVGElement) {
         return flf.l.typeCountsPerSide.map(side => {
             let t = side.tcs.first
             let direction = t.direction
-            let radius = getOuterRadius(direction === "out" ? flf.source : flf.target)
+            let isout = direction === "out"
+            let radius = getOuterRadius(isout ? flf.source : flf.target)
             let totalsize = side.tcs.last.prevsum + side.tcs.last.countpos
-            let dx = direction === "out" ? (radius + 10) : (radius + 10 + totalsize)
-            return { ...side, radius, direction, flf, dx, totalsize }
+            let dx = isout ? (radius + 10) : (radius + 10 + totalsize)
+            return { ...side, radius, direction, flf, dx, totalsize, isout }
         })
     }
 
@@ -90,19 +91,14 @@ function rund3(e: SVGElement) {
         .attr('class', ({ tc }) => cc('linkadorn', tc.direction, tc.type))
         .attr('width', ({ tc }) => tc.countpos)
         .attr('height', 10)
+        .append('title')
+        .text(d => `${d.tc.type} (${d.tc.count})`)
 
     linkadorns
         .append('path')
         .attr("d", d3.symbol(d3.symbolTriangle2))
         .attr('class', 'triangle')
-        .attr('transform', ({ totalsize }) => `translate(${totalsize + 10},0) rotate(90)`)
-
-    // linkg
-    //     .selectAll('path.arrows')
-    //     .data(d => d.l.arrows) // MUST NOT destruct flf !
-    //     .join('path')
-    //     .attr("d", d3.symbol(d3.symbolTriangle2))
-    //     .attr('direction', d => d.direction)
+        .attr('transform', ({ totalsize, isout }) => `translate(${isout ? totalsize + 10 : -10},0) rotate(${isout ? 90 : -90})`)
 
     nodesm.forEach(fn => {
         let isinv = m.investigatees.includes(fn.id)

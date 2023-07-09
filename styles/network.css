@@ -139,14 +139,9 @@ div.path-matrix text.v-label {
   text-anchor: start;
 }
 
-.out .triangle {
-  fill: red;
+.triangle {
+  fill: #ddd;
   stroke: #333;
   stroke-width: 1;
-}
-
-.in .triangle {
-  fill: yellowgreen;
-  stroke: #333;
-  stroke-width: 1;
+  opacity: .5;
 }

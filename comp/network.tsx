@@ -151,7 +151,7 @@ function rund3(e: SVGElement) {
     mount({ simulation })
 
     function updateview() {
-        console.log('ontick')
+      //  console.log('ontick')
         for (let n of nodesm) {
             n.x = n.x.clamp(2, width)
             n.y = n.y.clamp(2, height)

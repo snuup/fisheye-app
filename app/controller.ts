@@ -50,6 +50,10 @@ export class Controller {
         m.countryColorScaler = d3.scaleOrdinal(d3.schemeAccent) // d3.scaleOrdinal().domain(allcountries)
     }
 
+    getfronteer(nid: string, max) {
+        return GraphAlgos.getfronteers(m.supergraph.getneighbors, nid, max, ["FishEye International"])
+    }
+
     // getsubgraph(nodes: FishNode[]) {
     //     nodes.flatMap(n => n.outlinks)
     //     let links1 = nodes.flatMap(n => n.outlinks).filter(l => l)

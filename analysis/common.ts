@@ -76,6 +76,7 @@ let words2 = `
     Wheeler
     wheelers
     zombie
+    Amanda Mckenzie
     `
 
 let ws = words2.split("\n").map(s => s.trim()).filter(s => s !== "")

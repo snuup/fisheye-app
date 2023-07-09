@@ -136,8 +136,8 @@ export class GraphAlgos {
         let fronteers = [] as string[][]
         let f = [start]
         while (f.length && maxlength--) {
-            fronteers.push(f)
             f = bfs(f)
+            fronteers.push(f)
         }
 
         return fronteers

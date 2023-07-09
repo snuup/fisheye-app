@@ -50,7 +50,7 @@ export class FishLink implements ILink {
     get weight() { return this.original.weight }
     get nodes() { return [this.source, this.target] }
     get nodeids() { return [this.source, this.target] }
-    get unodeids() { return [this.source, this.target].sort() }
+    //get unodeids() { return [this.source, this.target].sort() }
 
     toString() {
         return `${this.source} -> ${this.target}`

@@ -40,4 +40,4 @@ export class SuperLink implements ILink {
     }
 }
 
-const adornScaler = d3.scaleLinear([1, 2, 3, 10, 100], [3, 4, 6, 8, 12])
+const adornScaler = d3.scaleLinear([1, 2, 3, 10, 100], [4, 9, 12, 20, 50])

@@ -1,3 +1,14 @@
+9.7.
+- software engineering - clean code
+-  lavinia
+. red path
+
+8.7.
+- colorize red bads in path matrix
+- lavinia
+- flood
+- networkx ?
+
 7.7.
 + mark the invs
 + vessels icon

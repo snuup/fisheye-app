@@ -252,7 +252,6 @@ export class Controller {
     }
 
     store() {
-        return
         localStorage.setItem("session", JSON.stringify({
             pinnednodes: m.pinnednodes.map(n => n.id),
             pinnedpaths: m.pinnedpaths
@@ -268,7 +267,6 @@ export class Controller {
     }
 
     storenetgraph() {
-        return
         localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
         console.log("stored")
         this.printhfs()

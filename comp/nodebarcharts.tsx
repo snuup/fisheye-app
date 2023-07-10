@@ -62,13 +62,13 @@ export const NodeIdBarChart = () => {
             .data(Object.entries(stats).map(makekv))
             .join('rect')
             .attr("x", x(0))
-            .attr("y", (({ key }) => y(key)!))
-            .attr("width", ({ value }) => x(value)!)
+            .attr("y", (({ k }) => y(k)!))
+            .attr("width", ({ v }) => x(v)!)
             .attr("height", y.bandwidth())
             .attr("fill", "#777") // default fill
-            .attr("class", ({ key }) => cc("bar", key))
+            .attr("class", ({ k }) => cc("bar", k))
             .append("title")
-            .text(({value}) => value)
+            .text(({v}) => v)
 
         svg.append("g")
             .attr("class", "y-axis")

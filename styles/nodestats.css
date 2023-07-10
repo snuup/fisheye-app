@@ -12,7 +12,7 @@
 .stats-top {
   display: flex;
   flex-wrap: wrap;
-  gap: 2em;
+  gap: 4em;
 }
 
 .linkstats > div {

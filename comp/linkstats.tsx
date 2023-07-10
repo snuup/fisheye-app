@@ -5,7 +5,7 @@ import { SankeyForType } from "./sankey"
 import { mount, nicelinktypename } from "../utils/common"
 import { LinkHistogram } from "./linkweighthisto"
 import { m } from "../app/model"
-import { ObjectAsTable } from "./nodestats"
+import { ObjectAsTable } from "./namevalue"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -94,7 +94,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
     console.log("linkstats", links)
     return (
         <>
-            <h2>link stats</h2>
+            <h2>link statistics</h2>
             <div class="stats-top">
 
                 <div>

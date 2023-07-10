@@ -1,0 +1,15 @@
+span.value {
+  position: relative;
+}
+
+.gridtable .value {
+  position: relative;
+  overflow: visible;
+  min-width: 80px;
+}
+
+.gridtable .value span {
+  background: #abcccb;
+  display: inline-block;
+  padding: 0px 2px;
+}

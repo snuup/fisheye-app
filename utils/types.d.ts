@@ -22,7 +22,8 @@ interface Array<T> {
     sortWithUndefinedLast(): T[]
     distinct(selector?): T[]
     get combinations(): T[]
-    sumBy(selector: (x: T) => number): number
+    sumBy(selector?: (x: T) => number): number
+    max(): number
     get average(): number
     sortnumeric(selector): Array<T>
     get first(): T
@@ -49,7 +50,7 @@ interface Map<K, V> {
 
 interface Object {
     get entries(): [string, any][]
-    get entrieskv<T>(): { key: string, value: T }[]
+    get entrieskv<T>(): { k: string, v: T }[]
     get keys(): string[]
     get values(): any[]
     mapKeys(fmap: (string) => string): any

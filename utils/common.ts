@@ -1,4 +1,4 @@
-export const svgns = "http://www.w3.org/2000/svg";
+export const svgns = "http://www.w3.org/2000/svg"
 
 export function mount(x) {
     Object.assign(globalThis, x)
@@ -57,6 +57,9 @@ mergePrototype(class extends Array {
     sumBy(selector?) {
         selector = selector ?? identity
         return this.reduce((acc, b) => acc + selector(b), 0)
+    }
+    max() {
+        return Math.max(...this)
     }
     get average() {
         return this.sumBy() / this.length
@@ -128,7 +131,7 @@ mergePrototype(class extends Object {
         return Object.entries(this)
     }
     get entrieskv() {
-        return Object.entries(this).map(([key, value]) => ({ key, value }))
+        return Object.entries(this).map(([k, v]) => ({ k, v }))
     }
     get values() {
         return Object.values(this)
@@ -261,4 +264,4 @@ export function nicenodetypename(rawnodetype: string) {
     }
 }
 
-export function makekv<K, V>([key, value]: [K, V]) { return { key, value } }
+export function makekv<K, V>([k, v]: [K, V]) { return { k, v } }

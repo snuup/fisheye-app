@@ -1,4 +1,4 @@
-import { When, jsx, jsxf } from "../jmx-lib/core"
+import { jsx, jsxf } from "../jmx-lib/core"
 import * as d3 from 'd3'
 import { cc, makekv } from "../utils/common"
 
@@ -7,7 +7,7 @@ export function NameValue({ name, value, percent }: { name: string, value?: numb
         <>
             <label>{name}</label>
             <div class="value">
-                <span style={(percent !== undefined) ? `width:${percent}%` : undefined}>{value?.toString() ?? "-"}</span>
+                <span class={cc({ bar: percent !== undefined })} style={(percent !== undefined) ? `width:${percent}%` : undefined}>{value?.toString() ?? "-"}</span>
             </div>
         </>)
 }
@@ -19,7 +19,7 @@ export const ObjectAsTable = ({ o, multiplier, showbars }: { o: { [key: string]:
         <div class="gridtable">
             {Object.entries(o).map(makekv)
                 .sortBy(({ v }) => -v)
-                .map(({ k, v }) => <NameValue name={k} value={v} percent={showbars !== undefined ? scaler(v) : undefined} />)
+                .map(({ k, v }) => <NameValue name={k} value={v} percent={showbars ? scaler(v) : undefined} />)
             }
         </div>
     )

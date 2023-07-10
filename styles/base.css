@@ -9,7 +9,10 @@ span.value {
 }
 
 .gridtable .value span {
-  background: #abcccb;
   display: inline-block;
   padding: 0px 2px;
+}
+
+.gridtable .value span.bar {
+  background: #abcccb;
 }

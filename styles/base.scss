@@ -16,7 +16,9 @@ span.value {
         min-width: 80px;
 
         span {
-            background: #abcccb;
+            &.bar {
+                background: #abcccb;
+            }
             display: inline-block;
             padding: 0px 2px;
         }

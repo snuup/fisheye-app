@@ -46,7 +46,7 @@ let App = () => {
                 </When>
             </article>
 
-            <footer>footer</footer>
+            {/* <footer>footer</footer> */}
 
         </body>
     )

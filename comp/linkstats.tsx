@@ -1,4 +1,4 @@
-import { jsx } from "../jmx-lib/core"
+import { jsx, jsxf } from "../jmx-lib/core"
 import * as d3 from "d3"
 import { FishLink } from "../elements/fishlink"
 import { ChordForType } from "./chord"
@@ -93,7 +93,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
     console.log("linkstats", links)
     return (
-        <div class="linkstats">
+        <>
             <h2>link stats</h2>
             <LinkHistogram links={links} />
             {
@@ -107,5 +107,5 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                     </div>
                 ))
             }
-        </div>)
+        </>)
 }

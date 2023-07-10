@@ -24,7 +24,7 @@ export class Controller {
 
     prepareData() {
 
-        let nodes: FishNode[] = mc1.nodes.map(FishNode.createFromOriginal)
+        let nodes: FishNode[] = mc1.nodes.map(o => new FishNode(o))
         let links: FishLink[] = mc1.links.map(FishLink.createFromOriginal)
         m.graph = new Graph(nodes, links)
 
@@ -52,11 +52,11 @@ export class Controller {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
         console.log("setroute", m.url)
 
-        switch (m.url[0]) {
-            // case "network":
-            //     this.setfocus(m.url[1])
-            //     break
-        }
+        // switch (m.url[0]) {
+        //     case "network":
+        //         this.setfocus(m.url[1])
+        //         break
+        // }
 
         updateview('#main', false, true)
     }

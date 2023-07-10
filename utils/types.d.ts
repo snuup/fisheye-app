@@ -81,6 +81,13 @@ interface MC1Link {
     target: MC1Id
 }
 
+interface NodeLinkData {
+    type: string,
+    outs: number,
+    ins: number,
+    total: number
+}
+
 interface MC1Node {
     type?: string
     country?: string

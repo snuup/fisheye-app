@@ -4,8 +4,16 @@
 
 import * as fs from "fs"
 import { mc1 } from "../data/data"
-import { linktypes } from "../elements/fishnode"
 import { DirectedLink } from "../elements/fishlink"
+
+const linkTypeSortOrder = {
+    partnership: 0,
+    family_relationship: 1,
+    membership: 2,
+    ownership: 3,
+}
+
+export const linktypes = Object.keys(linkTypeSortOrder)
 
 let lm = new Map<string, DirectedLink<ILink>[]>()
 for (let l of mc1.links) {

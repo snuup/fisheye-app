@@ -1,3 +1,7 @@
+// data transformation script
+// run with:
+// npx tsx preprocess.ts
+
 import * as fs from "fs"
 import { mc1 } from "../data/data"
 import { linktypes } from "../elements/fishnode"
@@ -26,4 +30,4 @@ mc1.nodes.forEach(computenode)
 
 fs.writeFileSync("out.json", JSON.stringify(mc1))
 
-console.log("dono says the hop")
+console.log("done")

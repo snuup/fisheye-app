@@ -21,6 +21,11 @@ span.value {
 }
 
 .gridtable {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: auto auto;
+    grid-template-rows: min-content;
+    gap: 0.25em 1em;
 
     @include mono;
 
@@ -38,4 +43,8 @@ span.value {
             font-weight: 600;
         }
     }
+}
+
+.gridtable3 {
+    grid-template-columns: auto auto auto;
 }

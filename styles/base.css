@@ -7,6 +7,11 @@ span.value {
 }
 
 .gridtable {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: auto auto;
+  grid-template-rows: min-content;
+  gap: 0.25em 1em;
   font-size: 14px;
   font-family: 'Roboto Mono', sans-serif, monospace;
 }
@@ -25,4 +30,8 @@ span.value {
 
 .gridtable .value span.bar {
   background: #c4dbdb;
+}
+
+.gridtable3 {
+  grid-template-columns: auto auto auto;
 }

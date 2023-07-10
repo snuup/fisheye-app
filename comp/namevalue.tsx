@@ -18,7 +18,7 @@ export const ObjectAsTable = ({ o, multiplier, showbars }: { o: { [key: string]:
     return (
         <div class="gridtable">
             {Object.entries(o).map(makekv)
-                .sortBy(({ v }) => -v)
+                //.sortBy(({ v }) => -v)
                 .map(({ k, v }) => <NameValue name={k} value={v} percent={showbars ? scaler(v) : undefined} />)
             }
         </div>

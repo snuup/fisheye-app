@@ -1,4 +1,5 @@
-import { jsx } from "../jmx-lib/core"
+import { jsx, jsxf } from "../jmx-lib/core"
+import * as d3 from 'd3'
 import { cc, mount, nicenodetypename } from '../utils/common'
 import { m } from '../app/model'
 import { FishNode } from '../elements/fishnode'
@@ -10,14 +11,14 @@ export const NodeStats = () => {
     let g = m.graph
 
     let o: { country: number, id: number, type: number } = mc1.nodes.flatMap(n => n.keys).countBy()
-        delete (o as any).donut
-        let propertystats =
-        {
-            total: mc1.nodes.length as number,
-            id: o.id,
-            type: o.type,
-            country: o.country
-        }
+    delete (o as any).donut
+    let propertystats =
+    {
+        total: mc1.nodes.length as number,
+        id: o.id,
+        type: o.type,
+        country: o.country
+    }
 
     return (
         <div class="stats">
@@ -39,18 +40,30 @@ export const NodeStats = () => {
                 </div>
 
                 <div>
+                    <h3>node ids</h3>
+                    <NodeIdLengths />
+                </div>
+
+                <div>
                     <h3>node types</h3>
                     {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetypename)} multiplier={1} showbars={true} />}
                 </div>
 
+                <div>
+                    <h3>node id lengths</h3>
+                    {<ObjectAsTable o={mc1.nodes.countBy(n => n.id.length)} multiplier={1} showbars={true} />}
+                </div>
+
+
+
             </div>
 
-            <div class="topdegrees">
+            {/* <div class="topdegrees">
                 <h3>top 25 nodes with heighest degrees</h3>
                 <div class='degreecontainer'>
                     {g.gettopdegrees().map(n => DegreeView(n))}
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )
@@ -69,4 +82,25 @@ const DegreeView = (n: FishNode) => (
         <span>{n.country}</span>
     </div>
 )
+
+const NodeIdLengths = () => {
+    let o = mc1.nodes.groupBy(n => n.id.length)
+    let maxcount = o.values.map(v => v.length).max()
+    let scaler = d3.scaleLinear([0, maxcount], [0, 100])
+    return (
+        <div class="gridtable gridtable3">
+            {
+                o.entrieskv.sortBy(({v}) => -v.length).map(({ k, v }) => (
+                    <>
+                        <label>{k}</label>
+                        <div class="value">
+                            <span class='bar' style={`width:${scaler(v.length)}%`} > {v.length}</span>
+                        </div>
+                        <div>{v.first?.id ?? "-"}</div>
+                    </>
+                ))
+            }
+        </div >
+    )
+}
 

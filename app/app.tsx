@@ -15,6 +15,8 @@ import { NodeIdBarChart } from "../comp/nodebarcharts"
 
 //let App = () => <body><NodeIdBarChart /></body>
 
+mount({ mc1 })
+
 let App = () => {
     return (
         <body class="">
@@ -25,7 +27,7 @@ let App = () => {
                 <Link url={['network']} />
                 <Link url={['matrix']} />
                 <Link url={['tree']} />
-                <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")}  />
+                <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")} />
             </header>
 
             <Navigation />

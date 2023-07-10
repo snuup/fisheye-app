@@ -42,19 +42,23 @@
 }
 
 .nodeid-bars .domain {
-  stroke: #777;
+  stroke: #555;
+}
+
+.nodeid-bars .bar.total {
+  fill: #bbbbbb;
 }
 
 .nodeid-bars g.tick {
-  stroke: #777;
+  stroke: #555;
 }
 
 .nodeid-bars g.tick line {
-  stroke: #777;
+  stroke: #555;
 }
 
 .nodeid-bars g.tick text {
   stroke: none;
-  fill: #777;
+  fill: #555;
   font-size: 13px;
 }

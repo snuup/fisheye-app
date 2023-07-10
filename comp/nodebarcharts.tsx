@@ -54,11 +54,7 @@ export const NodeIdBarChart = () => {
         let y = d3.scaleBand()
             .range([0, height])
             .domain(stats.keys)
-            .padding(.1)
-
-        svg.append("g")
-            .attr("class", "y-axis")
-            .call(d3.axisLeft(y).tickSize(0))
+            .padding(.3)
 
         mount({ x, y })
 
@@ -74,6 +70,10 @@ export const NodeIdBarChart = () => {
             .attr("class", ({ key }) => cc("bar", key))
             .append("title")
             .text()
+
+        svg.append("g")
+            .attr("class", "y-axis")
+            .call(d3.axisLeft(y).tickSize(0))
     }
     return (
         <div class="nodeid-bars" >

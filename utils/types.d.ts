@@ -28,8 +28,8 @@ interface Array<T> {
     get first(): T
     get last(): T
     toReversed(): T[]
-    cross(other?: Array<T>) : Array<[T, T]>
-    remove(x:T)
+    cross(other?: Array<T>): Array<[T, T]>
+    remove(x: T)
     toggle(x, addOrRemove?: boolean): boolean
     ensure(x)
     get cumulativeSum(): number[]
@@ -48,13 +48,13 @@ interface Map<K, V> {
 }
 
 interface Object {
-    get entries(): [string, any][]
+    get entries<T = any>(): [string, T][]
+    get entrieskv<T>(): { key: string, value: T }[]
     get keys(): string[]
     get values(): any[]
     mapKeys(fmap: (string) => string): any
     mapValues(fmap: (any) => any): any
-    //fullclone(): any
-    //get entries(o: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
+    //get entries(this: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
     //get entries(): [string, ThisType<T>][];
 }
 

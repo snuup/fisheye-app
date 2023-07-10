@@ -2,36 +2,30 @@
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: 1fr auto;
-  grid-template-areas: 'name logo' 'gridtable gridtable';
+  grid-template-areas: "name logo" "gridtable gridtable";
   gap: 8px;
   padding: 0.5em;
   _background: #fafafa;
   _border-left: solid 4px #777;
   cursor: pointer;
 }
-
 .nodeview h3 {
   margin: 0;
 }
-
 .nodeview .gridtable {
   grid-area: gridtable;
 }
-
 .nodeview svg {
   grid-area: logo;
   align-self: center;
   justify-self: end;
 }
-
 .nodeview h3 {
   grid-area: name;
 }
-
 .nodeview:hover {
   background: #f8f8f8;
 }
-
 .nodeview.selected {
   background: white;
 }
@@ -48,8 +42,4 @@ nav {
   grid-template-columns: auto auto;
   grid-template-rows: min-content;
   gap: 0.25em 1em;
-}
-
-hase {
-  color: red;
 }

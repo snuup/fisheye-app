@@ -16,7 +16,7 @@
 }
 
 .linkstats {
-    & > div{
+    & > div {
         margin: 2em 0;
     }
     td,
@@ -25,10 +25,33 @@
         padding: 2px 4px;
         text-align: right;
     }
-    table{
+    table {
         border-collapse: collapse;
-        &.out{
+        &.out {
             margin-top: 1em;
+        }
+    }
+}
+
+.nodeid-bars {
+    padding: 0 0 0 3em;
+    margin: 1em 3em 3em 0;
+    width: 250px;
+    height: 80px;
+
+    .domain{
+        stroke: #777;
+    }
+
+    g.tick {
+        stroke: #777;
+        line{
+            stroke: #777;
+        }
+        text {
+            stroke: none;
+            fill: #777;
+            font-size: 13px;
         }
     }
 }

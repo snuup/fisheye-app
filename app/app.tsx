@@ -13,9 +13,9 @@ import { LinkStats } from "../comp/linkstats"
 import { NetworkView } from "../comp/networkview"
 import { NodeIdBarChart } from "../comp/nodebarcharts"
 
-let App = () => <NodeIdBarChart />
+//let App = () => <body><NodeIdBarChart /></body>
 
-let App2 = () => {
+let App = () => {
     return (
         <body class="">
             <header>

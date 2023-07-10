@@ -127,6 +127,9 @@ mergePrototype(class extends Object {
     get entries() {
         return Object.entries(this)
     }
+    get entrieskv() {
+        return Object.entries(this).map(([key, value]) => ({ key, value }))
+    }
     get values() {
         return Object.values(this)
     }
@@ -139,11 +142,6 @@ mergePrototype(class extends Object {
     mapValues(fmap) {
         return Object.fromEntries(this.entries.map(([k, v]) => [k, fmap(v)]))
     }
-    // fullclone() {
-    //     let oo = structuredClone(this)
-    //     Object.setPrototypeOf(oo, Object.getPrototypeOf(this))
-    //     return oo
-    // }
 }, Object)
 
 mergePrototype(class extends String {
@@ -262,3 +260,5 @@ export function nicenodetypename(rawnodetype: string) {
         default: return rawnodetype
     }
 }
+
+export function makekv<K, V>([key, value]: [K, V]) { return { key, value } }

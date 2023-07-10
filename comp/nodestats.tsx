@@ -40,8 +40,8 @@ export const NodeStats = () => {
                 </div>
 
                 <div>
-                    <h3>node ids</h3>
-                    <NodeIdLengths />
+                    <h3>node id string lengths</h3>
+                    <NodeIdStats />
                 </div>
 
                 <div>
@@ -50,11 +50,9 @@ export const NodeStats = () => {
                 </div>
 
                 <div>
-                    <h3>node id lengths</h3>
-                    {<ObjectAsTable o={mc1.nodes.countBy(n => n.id.length)} multiplier={1} showbars={true} />}
+                    <h3>node countries</h3>
+                    <NodeCountryStats />
                 </div>
-
-
 
             </div>
 
@@ -83,10 +81,14 @@ const DegreeView = (n: FishNode) => (
     </div>
 )
 
-const NodeIdLengths = () => {
+const NodeIdStats = () => {
     let o = mc1.nodes.groupBy(n => n.id.length)
     let maxcount = o.values.map(v => v.length).max()
     let scaler = d3.scaleLinear([0, maxcount], [0, 100])
+    // rename undefined into numbers
+    o.number = o.undefined
+    delete o.undefined
+
     return (
         <div class="gridtable gridtable3">
             {
@@ -97,6 +99,26 @@ const NodeIdLengths = () => {
                             <span class='bar' style={`width:${scaler(v.length)}%`} > {v.length}</span>
                         </div>
                         <div>{v.first?.id ?? "-"}</div>
+                    </>
+                ))
+            }
+        </div >
+    )
+}
+
+const NodeCountryStats = () => {
+    let o = mc1.nodes.groupBy(n => n.country)
+    let maxcount = o.values.map(v => v.length).max()
+    let scaler = d3.scaleLinear([0, maxcount], [0, 100])
+    return (
+        <div class="gridtable">
+            {
+                o.entrieskv.sortBy(({v}) => -v.length).map(({ k, v }) => (
+                    <>
+                        <label>{k}</label>
+                        <div class="value">
+                            <span class='bar' style={`width:${scaler(v.length)}%`} > {v.length}</span>
+                        </div>
                     </>
                 ))
             }

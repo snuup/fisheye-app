@@ -181,7 +181,6 @@ export class Controller {
     }
 
     store() {
-        return
         localStorage.setItem("session", JSON.stringify({
             pinnednodes: m.pinnednodes.map(n => n.id),
             pinnedpaths: m.pinnedpaths
@@ -197,7 +196,6 @@ export class Controller {
     }
 
     storenetgraph() {
-        return
         localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
         console.log("stored")
         this.printhfs()
@@ -207,7 +205,7 @@ export class Controller {
         let json = localStorage.getItem("netgraph")
         if (!json) return
         let ns = JSON.parse(json)
-        ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
+        // ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
         let nodemap = new Map(ns.map(n => [n.id, n]))
         m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
         console.log("restored")

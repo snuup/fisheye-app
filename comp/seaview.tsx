@@ -62,11 +62,9 @@ function rund3(e: HTMLElement) {
 
     let nodes = m.seagraph.nodes
     nodes.forEach(n => {
-        let isinv = m.investigatees.includes(n.id)
         n.x = rand100()
         n.y = rand100()
         n.z = isinv ? 1 : 0
-        n.isinv = isinv
         n.up = 0
     })
 

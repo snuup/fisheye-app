@@ -12,7 +12,7 @@ const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20
 
 let simulation: any = null
 
-type FishNodeForce = FishNode & { x: number, y: number, isinv: boolean }
+type FishNodeForce = FishNode & { x: number, y: number }
 class FishLinkForce {
     constructor(public l: SuperLink, public source: FishNodeForce, public target: FishNodeForce) { }
     get s() { return this.source }
@@ -101,10 +101,8 @@ function rund3(e: SVGElement) {
         .attr('transform', ({ totalsize, isout }) => `translate(${isout ? totalsize + 10 : -10},0) rotate(${isout ? 90 : -90})`)
 
     nodesm.forEach(fn => {
-        let isinv = m.investigatees.includes(fn.id)
         fn.x ??= width * Math.random()
         fn.y ??= height * Math.random()
-        fn.isinv = isinv
     })
 
     let nodesv = svg
@@ -227,4 +225,3 @@ export const Network = () => {
 }
 
 mount({ ng: m.netgraph })
-

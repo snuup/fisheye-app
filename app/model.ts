@@ -9,7 +9,7 @@ import { FishLink } from "../elements/fishlink"
 
 export const mraw = {
 
-    url: ['/'] as Url,
+    url: ['nodestats'] as Url,
 
     investigatees: [
         "Mar de la Vida OJSC",

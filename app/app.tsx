@@ -28,7 +28,7 @@ let App = () => {
             <Navigation />
 
             <article id='main' class={m.url[0]}>
-                <When cond={m.url[0] == 'nodestats'}>
+                <When cond={m.url[0] == 'nodestats' || m.url[0] as unknown == ''}>
                     <NodeStats />
                 </When>
                 <When cond={m.url[0] == 'linkstats'}>

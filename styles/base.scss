@@ -9,7 +9,21 @@ span.value {
     // }
 }
 
+@mixin mono {
+    font-size: 14px;
+    font-family: 'Roboto Mono', sans-serif, monospace;
+}
+
+.stats-top {
+    h3 {
+        margin-bottom: 0.25em;
+    }
+}
+
 .gridtable {
+
+    @include mono;
+
     .value {
         position: relative;
         overflow: visible;
@@ -17,10 +31,11 @@ span.value {
 
         span {
             &.bar {
-                background: #abcccb;
+                background: lighten(#abcccb, 8);
             }
             display: inline-block;
             padding: 0px 2px;
+            font-weight: 600;
         }
     }
 }

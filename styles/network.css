@@ -64,6 +64,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 
 .net-graph g.donut {
   transform: initial;
+  opacity: .1;
 }
 
 .net-graph g.donut text {

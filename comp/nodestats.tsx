@@ -33,15 +33,16 @@ export const NodeStats = () => {
                 </div>
 
                 <div>
-                    <h3>node types</h3>
-                    {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetypename)} multiplier={1} showbars={true} />}
-                </div>
-
-                <div>
                     <h3>node properties</h3>
                     {<ObjectAsTable o={propertystats} showbars={true} />}
                     {/* <NodeIdBarChart /> */}
                 </div>
+
+                <div>
+                    <h3>node types</h3>
+                    {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetypename)} multiplier={1} showbars={true} />}
+                </div>
+
             </div>
 
             <div class="topdegrees">

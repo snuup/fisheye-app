@@ -1,3 +1,10 @@
+10.7.
+- common histogram component
+- node properties with counts as histogram
+- node ids
+- cleanup fishnode
+
+
 9.7.
 - software engineering - clean code
 -  lavinia

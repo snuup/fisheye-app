@@ -21,14 +21,16 @@ export class FishNode implements INode {
 
     original: MC1Node
     id: string
-    outdegree: number
-    indegree: number
+
     isinv?: boolean
     highlight = false
     focused = false
 
     get donut(): NodeLinkData[] { return this.original.donut }
     set donut(d) { }
+
+    get outdegree(): number { return this.donut.sumBy(nd => nd.outs) }
+    get indegree(): number { return this.donut.sumBy(nd => nd.ins) }
 
     private constructor(original: MC1Node) {
         this.original = original

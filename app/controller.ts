@@ -26,16 +26,9 @@ export class Controller {
 
         let nodes: FishNode[] = mc1.nodes.map(FishNode.createFromOriginal)
         let links: FishLink[] = mc1.links.map(FishLink.createFromOriginal)
-        let g = m.graph = new Graph(nodes, links)
-        g.nodes.forEach(n => {
-            let counts = g.getlinks(n.id).countBy(dl => dl.rev.toString())
-            n.outdegree = counts.false ?? 0
-            n.indegree = counts.true ?? 0
-        })
+        m.graph = new Graph(nodes, links)
 
-        mount({ links })
-
-        let superlinks = links.groupBy(l => l.ukey).entries.map(([_, ls]) => new SuperLink(ls))
+        let superlinks = links.groupBy(l => l.ukey).values.map(ls => new SuperLink(ls))
         m.supergraph = new Graph(nodes, superlinks)
 
         m.invs = m.investigatees.map(m.graph.getnode)
@@ -46,20 +39,14 @@ export class Controller {
         this.updatenetgraph()
 
         // init country color scaler
-        //let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")
+        // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")
         m.countryColorScaler = d3.scaleOrdinal(d3.schemeAccent) // d3.scaleOrdinal().domain(allcountries)
+
     }
 
     getfronteer(nid: string, max) {
         return GraphAlgos.getfronteers(m.supergraph.getneighbors, nid, max, ["FishEye International"])
     }
-
-    // getsubgraph(nodes: FishNode[]) {
-    //     nodes.flatMap(n => n.outlinks)
-    //     let links1 = nodes.flatMap(n => n.outlinks).filter(l => l)
-    //     let nodes1 = links1.map(l => l.tid).map(m.graph.getnode)
-    //     return new Graph(nodes.concat(nodes1).distinct(), links1)
-    // }
 
     setroute() {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
@@ -73,63 +60,6 @@ export class Controller {
 
         updateview('#main', false, true)
     }
-
-
-    // floodsea(levels = 3) {
-    //     let g = m.seagraph = this.getsubgraph(m.investigatees.map(m.graph.getnode))
-    //     g.nodes.forEach(n => n.up = 0)
-    //     let fronteer = m.investigatees.map(g.getnode)
-    //     fronteer.forEach(n => n.up = 0.1)
-    //     let visited = [] as FishNode[]
-
-    //     function getnode(nid) {
-    //         let n = g.getnode(nid)
-    //         if (!n) {
-    //             n = FishNode.clone(m.graph.getnode(nid))
-    //             g.addnode(n)
-    //         }
-    //         return n
-    //     }
-
-    //     function floodfronteer(level) {
-    //         console.log("floodfronteer", level)
-
-    //         let nextfronteer: FishNode[] = []
-
-    //         console.log("tbd")
-
-    //         //     fronteer.forEach(n => {
-    //         //         if (visited.includes(n)) return
-    //         //         visited.push(n)
-
-    //         //         n.outlinks.forEach(l => {
-
-    //         //             // let x
-    //         //             // if (typeof l.target === "string") x = getnode(l.target)
-    //         //             // if (x == undefined) debugger
-
-    //         //             if (typeof l.target === undefined) debugger
-    //         //             if (typeof l.target === "string") l.target = getnode(l.target)
-
-    //         //             l.target.up += n.up! * l.weight
-    //         //             if (isNaN(l.target.up)) debugger
-    //         //             //console.log("", l.target.up, n.up, l.weight)
-    //         //         })
-    //         //         nextfronteer.push(...n.outlinks?.map(l => l.target) ?? [])
-    //         //         nextfronteer = nextfronteer.distinctBy()
-
-    //         //         fronteer = nextfronteer
-
-    //         //         let illegals = fronteer.filter(n => n.id.includes("llegal"))
-    //         //         console.log(illegals.map(n => n.id).join(" + "))
-
-    //         //         // console.log("fronteer", fronteer)
-    //         //     })
-    //         // }
-    //         // for (let i = 1; i <= levels; i++) {
-    //         //     floodfronteer(i)
-    //     }
-    // }
 
     togglenetnode(ev, n: FishNode) {
         let add = m.pinnednodes.toggle(n)
@@ -145,7 +75,6 @@ export class Controller {
         //updateview(".network")
         this.store()
     }
-
 
     // removepinnednode(n: FishNode) {
     //     let add = m.pinnednodes.toggle(n)
@@ -252,6 +181,7 @@ export class Controller {
     }
 
     store() {
+        return
         localStorage.setItem("session", JSON.stringify({
             pinnednodes: m.pinnednodes.map(n => n.id),
             pinnedpaths: m.pinnedpaths
@@ -267,6 +197,7 @@ export class Controller {
     }
 
     storenetgraph() {
+        return
         localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
         console.log("stored")
         this.printhfs()

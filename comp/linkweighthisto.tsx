@@ -20,7 +20,7 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
             const marginLeft = 40
 
             const x = d3.scaleLinear<number, number>()
-                .domain([bins[0].x0, bins[bins.length - 1].x1])
+                .domain([bins[0].x0!, bins[bins.length - 1].x1!])
                 .range([marginLeft, width - marginRight])
 
             // Declare the y (vertical position) scale.
@@ -50,8 +50,8 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                 .selectAll()
                 .data(bins)
                 .join("rect")
-                .attr("x", (d) => x(d.x0) + 1)
-                .attr("width", (d) => x(d.x1) - x(d.x0) - 1)
+                .attr("x", (d) => x(d.x0!) + 1)
+                .attr("width", (d) => x(d.x1!) - x(d.x0!) - 1)
                 .attr("y", (d) => y(d.length))
                 .attr("height", (d) => y(0) - y(d.length))
 

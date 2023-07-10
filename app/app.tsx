@@ -11,8 +11,11 @@ import { HierarchyView } from "../comp/hierarchyview"
 import { SeaView } from "../comp/seaview"
 import { LinkStats } from "../comp/linkstats"
 import { NetworkView } from "../comp/networkview"
+import { NodeIdBarChart } from "../comp/nodebarcharts"
 
-let App = () => {
+let App = () => <NodeIdBarChart />
+
+let App2 = () => {
     return (
         <body class="">
             <header>

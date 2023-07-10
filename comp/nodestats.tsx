@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 import { FishNode } from '../elements/fishnode'
 import { NodeDonut } from './node-donut'
 import { NameValue } from "./namevalue"
+import { NodeIdBarChart } from "./nodebarcharts"
 
 mount({ d3 })
 
@@ -33,6 +34,8 @@ export const NodeStats = () => {
                     {<ObjectAsTable o={g.linkcountsByType.mapKeys(nicelinktypename)} />}
                 </div>
             </div>
+
+            <NodeIdBarChart />
 
             <div class="topdegrees">
                 <h3>top 25 nodes with heighest degrees</h3>

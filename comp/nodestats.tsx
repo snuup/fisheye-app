@@ -65,7 +65,7 @@ const DegreeView = (n: FishNode) => (
     </div>
 )
 
-const ObjectAsTable = ({ o }: { o: any }) => (
+export const ObjectAsTable = ({ o }: { o: any }) => (
     <div class="gridtable">
         {o.entries
             .sortBy(([k, v]) => -v)

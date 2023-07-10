@@ -48,7 +48,7 @@ interface Map<K, V> {
 }
 
 interface Object {
-    get entries<T = any>(): [string, T][]
+    get entries(): [string, any][]
     get entrieskv<T>(): { key: string, value: T }[]
     get keys(): string[]
     get values(): any[]

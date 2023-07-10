@@ -1,11 +1,11 @@
 import { jsx, jsxf } from "../jmx-lib/core"
 import * as d3 from "d3"
 import { FishLink } from "../elements/fishlink"
-import { ChordForType } from "./chord"
 import { SankeyForType } from "./sankey"
-import { mount } from "../utils/common"
+import { mount, nicelinktypename } from "../utils/common"
 import { LinkHistogram } from "./linkweighthisto"
 import { m } from "../app/model"
+import { ObjectAsTable } from "./nodestats"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -95,7 +95,19 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
     return (
         <>
             <h2>link stats</h2>
-            <LinkHistogram links={links} />
+            <div class="stats-top">
+
+                <div>
+                    <h3>link types</h3>
+                    {<ObjectAsTable o={m.graph.linkcountsByType.mapKeys(nicelinktypename)} />}
+                </div>
+
+                <div>
+                    <h3>link weights</h3>
+                    <LinkHistogram links={links} />
+                </div>
+            </div>
+
             {
                 links.groupBy(l => l.type).entries.map(([type, links]) => (
                     <div >

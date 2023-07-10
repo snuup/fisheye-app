@@ -7,5 +7,12 @@
 }
 
 .link-weights {
-  max-width: 960px;
+  width: 200px;
+  height: 100px;
+  margin: 0 1em;
+}
+
+g.tick text {
+  font-size: 16px;
+  font-family: calibri;
 }

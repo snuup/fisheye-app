@@ -19,6 +19,9 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
             const marginBottom = 30
             const marginLeft = 40
 
+            console.log("link-histo", width, height);
+
+
             const x = d3.scaleLinear<number, number>()
                 .domain([bins[0].x0!, bins[bins.length - 1].x1!])
                 .range([marginLeft, width - marginRight])

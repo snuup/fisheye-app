@@ -25,7 +25,7 @@ export class Controller {
     prepareData() {
 
         let nodes: FishNode[] = mc1.nodes.map(o => new FishNode(o))
-        let links: FishLink[] = mc1.links.map(FishLink.createFromOriginal)
+        let links: FishLink[] = mc1.links.map(o => new FishLink(o))
         m.graph = new Graph(nodes, links)
 
         let superlinks = links.groupBy(l => l.ukey).values.map(ls => new SuperLink(ls))

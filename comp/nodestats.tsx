@@ -33,9 +33,12 @@ export const NodeStats = () => {
                     <h3>link types</h3>
                     {<ObjectAsTable o={g.linkcountsByType.mapKeys(nicelinktypename)} />}
                 </div>
-            </div>
 
-            <NodeIdBarChart />
+                <div>
+                    <h3>node properties</h3>
+                    <NodeIdBarChart />
+                </div>
+            </div>
 
             <div class="topdegrees">
                 <h3>top 25 nodes with heighest degrees</h3>

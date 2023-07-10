@@ -45,16 +45,15 @@ export const NodeIdBarChart = () => {
         svg.append("g")
             .attr("class", "x-axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x))
+            .call(d3.axisBottom(x).ticks(3))
             .selectAll("text")
-            .attr("transform", "translate(-10,0)rotate(-45)")
-            .style("text-anchor", "end")
+            .style("text-anchor", "center")
 
         // y axis
         let y = d3.scaleBand()
             .range([0, height])
             .domain(stats.keys)
-            .padding(.3)
+            .padding(.4)
 
         mount({ x, y })
 
@@ -69,14 +68,14 @@ export const NodeIdBarChart = () => {
             .attr("fill", "#777") // default fill
             .attr("class", ({ key }) => cc("bar", key))
             .append("title")
-            .text()
+            .text(({value}) => value)
 
         svg.append("g")
             .attr("class", "y-axis")
             .call(d3.axisLeft(y).tickSize(0))
     }
     return (
-        <div class="nodeid-bars" >
+        <div class="nodeid-bars">
             <svg patch={rund3}></svg>
         </div>
     )

@@ -12,7 +12,7 @@
 .stats-top {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 2em;
 }
 
 .linkstats > div {
@@ -37,8 +37,8 @@
 .nodeid-bars {
   padding: 0 0 0 3em;
   margin: 1em 3em 3em 0;
-  width: 250px;
-  height: 80px;
+  width: 150px;
+  height: 100px;
 }
 
 .nodeid-bars .domain {
@@ -47,6 +47,10 @@
 
 .nodeid-bars .bar.total {
   fill: #bbbbbb;
+}
+
+.nodeid-bars .bar {
+  cursor: pointer;
 }
 
 .nodeid-bars g.tick {
@@ -60,5 +64,6 @@
 .nodeid-bars g.tick text {
   stroke: none;
   fill: #555;
-  font-size: 13px;
+  font-size: 16px;
+  font-family: calibri;
 }

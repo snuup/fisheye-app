@@ -6,55 +6,33 @@
     color: darken($c, 20);
 }
 
-.ownership,
-.owner {
-    @include tricolori(rgb(57, 65, 62));
-}
-.membership,
-.member {
-    @include tricolori(rgb(127, 170, 211));
-}
-.family_relationship,
-.family {
-    @include tricolori(rgb(187, 125, 173));
-}
-.partnership,
-.partner {
-    @include tricolori(rgb(161, 106, 85));
-}
+$nodecolors: (
+    company: (#5c74a6),
+    event: (#ff8600),
+    location: (#829750),
+    movement : rgb(163, 158, 89),
+    organization : rgb(148, 104, 168),
+    political_organization : (#785586),
+    person : rgb(165, 75, 75),
+    vessel : rgb(77, 131, 153),
+    undefined : rgb(114, 114, 114)
+);
 
-.company {
-    @include tricolori(#5c74a6);
-}
+$linktypecolors: (
+    "ownership": rgb(57, 65, 62),
+    "membership": rgb(127, 170, 211),
+    "family_relationship": rgb(187, 125, 173),
+    "partnership": rgb(161, 106, 85),
+);
 
-.event {
-    @include tricolori(#ff8600);
-}
+@each $name, $color in $nodecolors {
+    .#{$name} {
+        @include tricolori($color);
+    }
+};
 
-.location {
-    @include tricolori(#829750);
-}
-
-.movement {
-    @include tricolori(rgb(163, 158, 89));
-}
-
-.organization {
-    @include tricolori(rgb(148, 104, 168));
-}
-
-.political_organization {
-    @include tricolori(#785586);
-}
-
-.person {
-    @include tricolori(rgb(165, 75, 75));
-}
-
-.vessel {
-    @include tricolori(rgb(77, 131, 153));
-}
-
-.undefined {
-    @include tricolori(rgb(114, 114, 114));
-}
+@each $name, $color in $linktypecolors {
+    .#{$name} {
+        @include tricolori($color);
+    }
+};

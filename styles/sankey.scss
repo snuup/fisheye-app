@@ -16,6 +16,9 @@
         &:not(:hover) {
             stroke: $color1;
         }
+        &.sel{
+            stroke: red;
+        }
     }
     rect,
     text {

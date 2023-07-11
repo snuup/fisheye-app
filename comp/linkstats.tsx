@@ -7,7 +7,7 @@ import { LinkHistogram } from "./linkweighthisto"
 import { m } from "../app/model"
 import { ObjectAsTable } from "./namevalue"
 import { mc1 } from "../data/data"
-import { LinkController } from "./LinkController"
+import { LinkController } from "./linkcontroller"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -89,9 +89,10 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
                 return cell
             }))
             .join('td')
-            .attr('class', d => d.st + "-" + d.tt)
+            .attr('connects', d => d.st + "-" + d.tt)
+            .on('click', (_, d) => c.select(d.st + "-" + d.tt))
             .text(d => d?.length)
-            .on('click', (_, d) => setout(d))
+        //.on('click', (_, d) => setout(d))
     }
 
     let tableout
@@ -100,19 +101,8 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
 
         function select(connects: string, force: boolean) {
             console.log("select linkstat!")
-
-            let td = e.querySelector(`.${connects}`)
+            let td = e.querySelector(`[connects=${connects}]`)
             td?.classList.toggle("sel", force)
-            // if (!td) return
-
-            // let thsource = td.closest('tr')!.querySelector('th')
-            // let thtarget = td.closest("table")!.querySelectorAll("thead th")[td.cellIndex]
-            // if (!thsource) return
-            // if (!thtarget) return
-
-            // let sourcecolor = window.getComputedStyle(thsource).backgroundColor
-            // let targetcolor = window.getComputedStyle(thtarget).backgroundColor
-
             // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
         }
 

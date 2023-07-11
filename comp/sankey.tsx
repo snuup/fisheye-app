@@ -3,7 +3,7 @@ import * as d3s from 'd3-sankey'
 import { FishLink } from "../elements/fishlink"
 import { jsx } from "../jmx-lib/core"
 import { m } from "../app/model"
-import { LinkController } from "./LinkController"
+import { LinkController } from "./linkcontroller"
 
 class SourceNode implements FlowNode {
     id: string
@@ -142,8 +142,10 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
 
     function onmount(e: HTMLElement) {
 
-        function select(connects: string) {
-            console.log("select!")
+        function select(connects: string, force: boolean) {
+            console.log("select sankey!", connects)
+            let path = e.querySelector(`[connects=${connects}]`)
+            path?.classList?.toggle("sel", force)
         }
 
         c.register(select)

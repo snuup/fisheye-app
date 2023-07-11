@@ -10,6 +10,7 @@ export class LinkController {
     }
 
     select(connects: string) {
+        console.log("select", connects)
         if (this.selection) this.callbacks.forEach(cb => cb(this.selection, false))
         this.callbacks.forEach(cb => cb(this.selection = connects, true))
     }

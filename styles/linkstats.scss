@@ -1,7 +1,7 @@
 @import '_exp.scss';
 
 .link-stats-table {
-
+    user-select: none;
     td {
         cursor: pointer;
 

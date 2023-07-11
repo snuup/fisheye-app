@@ -1,3 +1,7 @@
+.link-stats-table {
+  user-select: none;
+}
+
 .link-stats-table td {
   cursor: pointer;
 }

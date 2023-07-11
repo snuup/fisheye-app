@@ -17,6 +17,7 @@
 
 .link-stats-table td {
   cursor: pointer;
+  opacity: .8;
 }
 
 .link-stats-table td:hover {

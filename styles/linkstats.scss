@@ -23,6 +23,7 @@
     width: 800px;
     td {
         cursor: pointer;
+        opacity: .8;
         &:hover {
             background-color: white;
         }

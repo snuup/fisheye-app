@@ -102,326 +102,326 @@
   color: #5e3e32;
 }
 
-[connects=company-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #5c74a6 50%);
+.sel[connects=company-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #9eacca 50%);
 }
 
-[connects=company-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #5c74a6 50%);
+.sel[connects=company-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #9eacca 50%);
 }
 
-[connects=company-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #5c74a6 50%);
+.sel[connects=company-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #9eacca 50%);
 }
 
-[connects=company-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #5c74a6 50%);
+.sel[connects=company-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #9eacca 50%);
 }
 
-[connects=company-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #5c74a6 50%);
+.sel[connects=company-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #9eacca 50%);
 }
 
-[connects=company-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #5c74a6 50%);
+.sel[connects=company-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #9eacca 50%);
 }
 
-[connects=company-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #5c74a6 50%);
+.sel[connects=company-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #9eacca 50%);
 }
 
-[connects=company-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #5c74a6 50%);
+.sel[connects=company-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #9eacca 50%);
 }
 
-[connects=company-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #5c74a6 50%);
+.sel[connects=company-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #9eacca 50%);
 }
 
-[connects=event-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #ff8600 50%);
+.sel[connects=event-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #ffb666 50%);
 }
 
-[connects=event-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #ff8600 50%);
+.sel[connects=event-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #ffb666 50%);
 }
 
-[connects=event-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #ff8600 50%);
+.sel[connects=event-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #ffb666 50%);
 }
 
-[connects=event-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #ff8600 50%);
+.sel[connects=event-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #ffb666 50%);
 }
 
-[connects=event-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #ff8600 50%);
+.sel[connects=event-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #ffb666 50%);
 }
 
-[connects=event-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #ff8600 50%);
+.sel[connects=event-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #ffb666 50%);
 }
 
-[connects=event-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #ff8600 50%);
+.sel[connects=event-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #ffb666 50%);
 }
 
-[connects=event-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #ff8600 50%);
+.sel[connects=event-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #ffb666 50%);
 }
 
-[connects=event-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #ff8600 50%);
+.sel[connects=event-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #ffb666 50%);
 }
 
-[connects=location-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #829750 50%);
+.sel[connects=location-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #b2c28b 50%);
 }
 
-[connects=location-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #829750 50%);
+.sel[connects=location-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #b2c28b 50%);
 }
 
-[connects=location-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #829750 50%);
+.sel[connects=location-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #b2c28b 50%);
 }
 
-[connects=location-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #829750 50%);
+.sel[connects=location-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #b2c28b 50%);
 }
 
-[connects=location-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #829750 50%);
+.sel[connects=location-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #b2c28b 50%);
 }
 
-[connects=location-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #829750 50%);
+.sel[connects=location-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #b2c28b 50%);
 }
 
-[connects=location-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #829750 50%);
+.sel[connects=location-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #b2c28b 50%);
 }
 
-[connects=location-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #829750 50%);
+.sel[connects=location-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #b2c28b 50%);
 }
 
-[connects=location-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #829750 50%);
+.sel[connects=location-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #b2c28b 50%);
 }
 
-[connects=movement-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #a39e59 50%);
+.sel[connects=movement-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #c8c59a 50%);
 }
 
-[connects=movement-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #a39e59 50%);
+.sel[connects=movement-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #c8c59a 50%);
 }
 
-[connects=movement-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #a39e59 50%);
+.sel[connects=movement-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #c8c59a 50%);
 }
 
-[connects=movement-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #a39e59 50%);
+.sel[connects=movement-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #c8c59a 50%);
 }
 
-[connects=movement-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #a39e59 50%);
+.sel[connects=movement-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #c8c59a 50%);
 }
 
-[connects=movement-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #a39e59 50%);
+.sel[connects=movement-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #c8c59a 50%);
 }
 
-[connects=movement-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #a39e59 50%);
+.sel[connects=movement-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #c8c59a 50%);
 }
 
-[connects=movement-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #a39e59 50%);
+.sel[connects=movement-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #c8c59a 50%);
 }
 
-[connects=movement-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #a39e59 50%);
+.sel[connects=movement-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #c8c59a 50%);
 }
 
-[connects=organization-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #9468a8 50%);
+.sel[connects=organization-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #c2a9cd 50%);
 }
 
-[connects=organization-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #9468a8 50%);
+.sel[connects=organization-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #c2a9cd 50%);
 }
 
-[connects=organization-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #9468a8 50%);
+.sel[connects=organization-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #c2a9cd 50%);
 }
 
-[connects=organization-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #9468a8 50%);
+.sel[connects=organization-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #c2a9cd 50%);
 }
 
-[connects=organization-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #9468a8 50%);
+.sel[connects=organization-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #c2a9cd 50%);
 }
 
-[connects=organization-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #9468a8 50%);
+.sel[connects=organization-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #c2a9cd 50%);
 }
 
-[connects=organization-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #9468a8 50%);
+.sel[connects=organization-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #c2a9cd 50%);
 }
 
-[connects=organization-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #9468a8 50%);
+.sel[connects=organization-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #c2a9cd 50%);
 }
 
-[connects=organization-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #9468a8 50%);
+.sel[connects=organization-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #c2a9cd 50%);
 }
 
-[connects=political_organization-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #785586 50%);
+.sel[connects=political_organization-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #785586 50%);
+.sel[connects=political_organization-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #785586 50%);
+.sel[connects=political_organization-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #785586 50%);
+.sel[connects=political_organization-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #785586 50%);
+.sel[connects=political_organization-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #785586 50%);
+.sel[connects=political_organization-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #785586 50%);
+.sel[connects=political_organization-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #785586 50%);
+.sel[connects=political_organization-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #aa8bb6 50%);
 }
 
-[connects=political_organization-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #785586 50%);
+.sel[connects=political_organization-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #aa8bb6 50%);
 }
 
-[connects=person-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #a54b4b 50%);
+.sel[connects=person-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #cb8c8c 50%);
 }
 
-[connects=person-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #a54b4b 50%);
+.sel[connects=person-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #cb8c8c 50%);
 }
 
-[connects=person-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #a54b4b 50%);
+.sel[connects=person-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #cb8c8c 50%);
 }
 
-[connects=person-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #a54b4b 50%);
+.sel[connects=person-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #cb8c8c 50%);
 }
 
-[connects=person-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #a54b4b 50%);
+.sel[connects=person-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #cb8c8c 50%);
 }
 
-[connects=person-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #a54b4b 50%);
+.sel[connects=person-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #cb8c8c 50%);
 }
 
-[connects=person-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #a54b4b 50%);
+.sel[connects=person-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #cb8c8c 50%);
 }
 
-[connects=person-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #a54b4b 50%);
+.sel[connects=person-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #cb8c8c 50%);
 }
 
-[connects=person-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #a54b4b 50%);
+.sel[connects=person-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #cb8c8c 50%);
 }
 
-[connects=vessel-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #4d8399 50%);
+.sel[connects=vessel-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #89b2c3 50%);
 }
 
-[connects=vessel-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #4d8399 50%);
+.sel[connects=vessel-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #89b2c3 50%);
 }
 
-[connects=vessel-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #4d8399 50%);
+.sel[connects=vessel-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #89b2c3 50%);
 }
 
-[connects=vessel-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #4d8399 50%);
+.sel[connects=vessel-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #89b2c3 50%);
 }
 
-[connects=vessel-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #4d8399 50%);
+.sel[connects=vessel-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #89b2c3 50%);
 }
 
-[connects=vessel-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #4d8399 50%);
+.sel[connects=vessel-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #89b2c3 50%);
 }
 
-[connects=vessel-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #4d8399 50%);
+.sel[connects=vessel-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #89b2c3 50%);
 }
 
-[connects=vessel-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #4d8399 50%);
+.sel[connects=vessel-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #89b2c3 50%);
 }
 
-[connects=vessel-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #4d8399 50%);
+.sel[connects=vessel-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #89b2c3 50%);
 }
 
-[connects=undefined-company] {
-  background: linear-gradient(to bottom left, #5c74a6 50%, #727272 50%);
+.sel[connects=undefined-company] {
+  background: linear-gradient(to bottom left, #9eacca 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-event] {
-  background: linear-gradient(to bottom left, #ff8600 50%, #727272 50%);
+.sel[connects=undefined-event] {
+  background: linear-gradient(to bottom left, #ffb666 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-location] {
-  background: linear-gradient(to bottom left, #829750 50%, #727272 50%);
+.sel[connects=undefined-location] {
+  background: linear-gradient(to bottom left, #b2c28b 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-movement] {
-  background: linear-gradient(to bottom left, #a39e59 50%, #727272 50%);
+.sel[connects=undefined-movement] {
+  background: linear-gradient(to bottom left, #c8c59a 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-organization] {
-  background: linear-gradient(to bottom left, #9468a8 50%, #727272 50%);
+.sel[connects=undefined-organization] {
+  background: linear-gradient(to bottom left, #c2a9cd 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-political_organization] {
-  background: linear-gradient(to bottom left, #785586 50%, #727272 50%);
+.sel[connects=undefined-political_organization] {
+  background: linear-gradient(to bottom left, #aa8bb6 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-person] {
-  background: linear-gradient(to bottom left, #a54b4b 50%, #727272 50%);
+.sel[connects=undefined-person] {
+  background: linear-gradient(to bottom left, #cb8c8c 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-vessel] {
-  background: linear-gradient(to bottom left, #4d8399 50%, #727272 50%);
+.sel[connects=undefined-vessel] {
+  background: linear-gradient(to bottom left, #89b2c3 50%, #a5a5a5 50%);
 }
 
-[connects=undefined-undefined] {
-  background: linear-gradient(to bottom left, #727272 50%, #727272 50%);
+.sel[connects=undefined-undefined] {
+  background: linear-gradient(to bottom left, #a5a5a5 50%, #a5a5a5 50%);
 }

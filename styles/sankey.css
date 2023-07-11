@@ -11,10 +11,23 @@
   /* outline: solid 1px navy */
 }
 
+.sankey path {
+  stroke: #aaccbb;
+}
+
+.sankey rect, .sankey text {
+  fill: #aaccbb;
+  stroke: none;
+}
+
 .sankey path, .sankey rect {
   opacity: .5;
 }
 
 .sankey path:hover, .sankey rect:hover {
   opacity: 1;
+}
+
+.sankey text {
+  font-size: 12px;
 }

@@ -1,3 +1,5 @@
+@import '_exp';
+
 .sankey-path {
     fill: none;
 }
@@ -9,10 +11,20 @@
 .sankey {
     min-width: 600px;
     /* outline: solid 1px navy */
+    path {
+        stroke: $color1;
+    }
+    rect, text {
+        fill: $color1;
+        stroke: none;
+    }
     path, rect {
         opacity: .5;
         &:hover{
             opacity: 1;
         }
+    }
+    text{
+        font-size: 12px;
     }
 }

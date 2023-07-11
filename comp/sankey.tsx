@@ -57,6 +57,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
             const layout = d3s.sankey<FlowNode, any>()
                 .nodeId(d => d.flowid)
                 .nodeSort(null as any)
+                .linkSort((l1, l2) => l1._target.localeCompare(l2._target))
                 .nodeWidth(15)
                 .nodePadding(5)
                 .extent([[0, 0], [width, height]])
@@ -82,6 +83,17 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
                 .attr("class", d => d.id)
                 .append("title")
                 .text(d => d.id)
+
+            svg.append("g")
+                .selectAll("text")
+                .data(nodes)
+                .join("text")
+                .attr("x", d => d.x0! < width / 2 ? d.x1! + 6 : d.x0! - 6)
+                .attr("y", d => (d.y1! + d.y0!) / 2)
+                .attr("dy", "0.35em")
+                .attr("text-anchor", d => d.x0! < width / 2 ? "start" : "end")
+                .text(d => d.id)
+                .attr("class", d => d.id + " sankey-label")
 
             const link = svg.append("g")
                 .attr("fill", "none")
@@ -125,19 +137,6 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
 
             link.append("title")
                 .text(d => `${d.source.name} → ${d.target.name}\n${d.value}`)
-
-            svg.append("g")
-                .attr("font-family", "sans-serif")
-                .attr("font-size", 10)
-                .selectAll("text")
-                .data(nodes)
-                .join("text")
-                .attr("x", d => d.x0! < width / 2 ? d.x1! + 6 : d.x0! - 6)
-                .attr("y", d => (d.y1! + d.y0!) / 2)
-                .attr("dy", "0.35em")
-                .attr("text-anchor", d => d.x0! < width / 2 ? "start" : "end")
-                .text(d => d.id)
-                .attr("class", d => d.id + " sankey-label")
         }
     }
 

@@ -15,21 +15,6 @@
     gap: 4em;
 }
 
-.linkstats {
-    td,
-    th {
-        border: solid 1px #ccc;
-        padding: 2px 4px;
-        text-align: right;
-    }
-    table {
-        border-collapse: collapse;
-        &.out {
-            margin-top: 1em;
-            cursor: pointer;
-        }
-    }
-}
 
 $axis-color: #555;
 

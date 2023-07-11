@@ -103,325 +103,325 @@
 }
 
 .sel[connects=company-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=company-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #9eacca 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #9eacca 55%) !important;
 }
 
 .sel[connects=event-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=event-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #ffb666 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #ffb666 55%) !important;
 }
 
 .sel[connects=location-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=location-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #b2c28b 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #b2c28b 55%) !important;
 }
 
 .sel[connects=movement-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=movement-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #c8c59a 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #c8c59a 55%) !important;
 }
 
 .sel[connects=organization-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=organization-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #c2a9cd 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #c2a9cd 55%) !important;
 }
 
 .sel[connects=political_organization-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=political_organization-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #aa8bb6 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #aa8bb6 55%) !important;
 }
 
 .sel[connects=person-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=person-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #cb8c8c 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #cb8c8c 55%) !important;
 }
 
 .sel[connects=vessel-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=vessel-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #89b2c3 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #89b2c3 55%) !important;
 }
 
 .sel[connects=undefined-company] {
-  background: linear-gradient(to bottom left, #9eacca 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-event] {
-  background: linear-gradient(to bottom left, #ffb666 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-location] {
-  background: linear-gradient(to bottom left, #b2c28b 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-movement] {
-  background: linear-gradient(to bottom left, #c8c59a 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-organization] {
-  background: linear-gradient(to bottom left, #c2a9cd 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-political_organization] {
-  background: linear-gradient(to bottom left, #aa8bb6 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-person] {
-  background: linear-gradient(to bottom left, #cb8c8c 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-vessel] {
-  background: linear-gradient(to bottom left, #89b2c3 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #a5a5a5 55%) !important;
 }
 
 .sel[connects=undefined-undefined] {
-  background: linear-gradient(to bottom left, #a5a5a5 50%, #a5a5a5 50%);
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #a5a5a5 55%) !important;
 }

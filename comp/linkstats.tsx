@@ -34,6 +34,9 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
 
         mount({ matrix })
 
+        let max = Math.max(...matrix.values.flatMap(a => a.values).map(c => c.length))
+        let opacityScaler = d3.scaleLinear([0, max], [0, 1])
+
         let table = d3.select(tableDom)
         let thead = table.append("thead")
         let tbody = table.append("tbody")
@@ -91,6 +94,7 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
             .join('td')
             .attr('connects', d => d.st + "-" + d.tt)
             .on('click', (_, d) => c.select(d.st + "-" + d.tt))
+            .style("background", d => `rgba(170, 204, 187, ${opacityScaler(d.length)})`)
             .text(d => d?.length)
         //.on('click', (_, d) => setout(d))
     }
@@ -100,7 +104,7 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
     function onmount(e: HTMLElement) {
 
         function select(connects: string, force: boolean) {
-            console.log("select linkstat!")
+            //console.log("select linkstat!")
             let td = e.querySelector(`[connects=${connects}]`)
             td?.classList.toggle("sel", force)
             // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
@@ -143,7 +147,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             </div>
 
             {
-                links.groupBy(l => l.type).entries.slice(0, 1).map(([type, links]) => {
+                links.groupBy(l => l.type).entries.slice(0, 10).map(([type, links]) => {
                     let lc = new LinkController()
                     return (
                         <div>

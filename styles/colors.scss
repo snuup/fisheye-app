@@ -40,7 +40,7 @@ $linktypecolors: (
 @each $name1, $color1 in $nodetypecolors {
     @each $name2, $color2 in $nodetypecolors {
         .sel[connects=#{$name1}-#{$name2}] {
-            background: linear-gradient(to bottom left, lighten($color2, 20) 50%, lighten($color1, 20) 50%);
+            background: linear-gradient(to bottom left, lighten($color2, 20) 45%, transparent, lighten($color1, 20) 55%) !important;
         }
     }
 }

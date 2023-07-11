@@ -143,7 +143,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
     function onmount(e: HTMLElement) {
 
         function select(connects: string, force: boolean) {
-            console.log("select sankey!", connects)
+            // console.log("select sankey!", connects)
             let path = e.querySelector(`[connects=${connects}]`)
             path?.classList?.toggle("sel", force)
         }

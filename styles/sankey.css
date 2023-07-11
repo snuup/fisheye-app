@@ -28,7 +28,7 @@
 
 .sankey path,
 .sankey rect {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .sankey path:hover,

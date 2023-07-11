@@ -26,6 +26,7 @@
 
 .link-stats-table td.sel {
   opacity: 1;
+  font-weight: bold;
 }
 
 .link-weights {

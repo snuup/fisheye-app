@@ -68,6 +68,12 @@ mergePrototype(class extends Array {
         selector = selector ?? identity
         return this.sort((a, b) => selector(a) - selector(b))
     }
+    sortauto() {
+        return this.sort((a, b) => {
+            if (typeof a === 'number' && typeof b == 'number') return a - b
+            else return a.localeCompare(b)
+        })
+    }
     sortWithUndefinedLast() {
         return this.sortBy(s => s == "undefined" ? "zzzzz" : s)
     }

@@ -98,7 +98,7 @@ const NodeIdStats = () => {
                         <div class="value">
                             <span class='bar' style={`width:${scaler(v.length)}%`} > {v.length}</span>
                         </div>
-                        <div>{v.first?.id ?? "-"}</div>
+                        <div title={v.map(n => n.id).sortauto().join('\n')}>{v.first?.id + (v.length > 1 ? ", ..." : "")}</div>
                     </>
                 ))
             }
@@ -107,18 +107,20 @@ const NodeIdStats = () => {
 }
 
 const NodeCountryStats = () => {
-    let o = mc1.nodes.groupBy(n => n.country)
-    let maxcount = o.values.map(v => v.length).max()
+    let o = mc1.nodes.groupBy(n => n.country).entrieskv.groupBy(({ v }) => v.length)
+    mount({ o })
+    let maxcount = o.keys.map(x => +x).max()
     let scaler = d3.scaleLinear([0, maxcount], [0, 100])
     return (
-        <div class="gridtable">
+        <div class="gridtable gridtable3">
             {
-                o.entrieskv.sortBy(({v}) => -v.length).map(({ k, v }) => (
+                o.entrieskv.sortBy(({ k }) => -k).map(({ k, v }) => (
                     <>
-                        <label>{k}</label>
+                        <label>{v.length}</label>
                         <div class="value">
-                            <span class='bar' style={`width:${scaler(v.length)}%`} > {v.length}</span>
+                            <span class='bar' style={`width:${scaler(k)}%`} > {k}</span>
                         </div>
+                        <div>{v.first?.k + (v.length > 1 ? ", ..." : "")}</div>
                     </>
                 ))
             }

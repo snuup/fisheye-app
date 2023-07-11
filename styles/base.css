@@ -35,3 +35,7 @@ span.value {
 .gridtable3 {
   grid-template-columns: auto auto auto;
 }
+
+*[title] {
+  cursor: pointer;
+}

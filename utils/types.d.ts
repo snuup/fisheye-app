@@ -26,6 +26,7 @@ interface Array<T> {
     max(): number
     get average(): number
     sortnumeric(selector): Array<T>
+    sortauto(): Array<T>
     get first(): T
     get last(): T
     toReversed(): T[]

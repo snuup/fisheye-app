@@ -1,12 +1,20 @@
 .sankey-path {
-    fill: none;
+  fill: none;
 }
 
 .sankey-label {
-    stroke: none;
+  stroke: none;
 }
 
 .sankey {
-    min-width: 600px;
-    /* outline: solid 1px navy */
+  min-width: 600px;
+  /* outline: solid 1px navy */
+}
+
+.sankey path, .sankey rect {
+  opacity: .5;
+}
+
+.sankey path:hover, .sankey rect:hover {
+  opacity: 1;
 }

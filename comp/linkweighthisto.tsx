@@ -50,7 +50,7 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
 
             svg.append('rect')
                 .attr('class', 'ruler')
-                .attr('width', x(ruler))
+                .attr('width', x(ruler).clamp(0))
                 .attr('height', height)
 
             svg.append('text')

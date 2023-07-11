@@ -1,5 +1,18 @@
+.linkstats td,
+.linkstats th {
+  padding: 2px 4px;
+  text-align: right;
+}
+
+.linkstats table.out {
+  margin-top: 1em;
+  cursor: pointer;
+}
+
 .link-stats-table {
+  table-layout: fixed;
   user-select: none;
+  width: 800px;
 }
 
 .link-stats-table td {
@@ -11,7 +24,7 @@
 }
 
 .link-stats-table td.sel {
-  background-image: linear-gradient(to bottom left, lightseagreen 50%, lightsalmon 50%);
+  opacity: 1;
 }
 
 .link-weights {

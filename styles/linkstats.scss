@@ -8,8 +8,8 @@
         &:hover {
             background-color: white;
         }
-        & {
-            // background-image: linear-gradient(to bottom left, lightseagreen 50%, lightsalmon 50%);
+        &.sel {
+            background-image: linear-gradient(to bottom left, lightseagreen 50%, lightsalmon 50%);
         }
     }
 }
@@ -20,7 +20,7 @@ $color12: #aaccbb;
     width: 300px;
     height: 100px;
     .ruler {
-        fill: darken($color1, 20);
+        fill: darken($color2, 20);
         opacity: 0.2;
     }
     .rulervalue {

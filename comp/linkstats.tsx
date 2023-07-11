@@ -7,6 +7,7 @@ import { LinkHistogram } from "./linkweighthisto"
 import { m } from "../app/model"
 import { ObjectAsTable } from "./namevalue"
 import { mc1 } from "../data/data"
+import { LinkController } from "./LinkController"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -14,7 +15,7 @@ export type Matrix<T> = {
     }
 }
 
-const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
+const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }) => {
 
     function rund3(tableDom: HTMLTableElement) {
 
@@ -81,14 +82,14 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
             .selectAll('td')
             .data(st => alltypes.map(tt => {
                 let cell = matrix[st][tt] ?? []
-                if(cell){
+                if (cell) {
                     cell.st = st
                     cell.tt = tt
                 }
                 return cell
             }))
             .join('td')
-            .attr('connects', d => d.st + "-" + d.tt)
+            .attr('class', d => d.st + "-" + d.tt)
             .text(d => d?.length)
             .on('click', (_, d) => setout(d))
     }
@@ -96,7 +97,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
     let tableout
 
     return (
-        <div>
+        <div mounted={e => c.register(e)}>
             <table class="link-stats-table" patch={rund3} />
             <table class="out" mounted={e => tableout = e} />
         </div>)
@@ -129,15 +130,18 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             </div>
 
             {
-                links.groupBy(l => l.type).entries.map(([type, links]) => (
-                    <div >
-                        <h3 class={type}>{type}</h3>
-                        <div class="flexy link-type">
-                            <LinkStatsForType links={links} />
-                            <SankeyForType links={links} />
+                links.groupBy(l => l.type).entries.map(([type, links]) => {
+                    let lc = new LinkController()
+                    return (
+                        <div>
+                            <h3 class={type}>{type}</h3>
+                            <div class="flexy link-type">
+                                <LinkStatsForType links={links} c={lc} />
+                                <SankeyForType links={links} c={lc} />
+                            </div>
                         </div>
-                    </div>
-                ))
+                    )
+                })
             }
         </div>)
 }

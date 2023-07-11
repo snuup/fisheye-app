@@ -6,13 +6,17 @@
   background-color: white;
 }
 
+.link-stats-table td.sel {
+  background-image: linear-gradient(to bottom left, lightseagreen 50%, lightsalmon 50%);
+}
+
 .link-weights {
   width: 300px;
   height: 100px;
 }
 
 .link-weights .ruler {
-  fill: #6aa688;
+  fill: #85b4b4;
   opacity: 0.2;
 }
 

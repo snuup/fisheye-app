@@ -2,8 +2,8 @@ import * as d3 from "d3"
 import * as d3s from 'd3-sankey'
 import { FishLink } from "../elements/fishlink"
 import { jsx } from "../jmx-lib/core"
-import { mount } from "../utils/common"
 import { m } from "../app/model"
+import { LinkController } from "./LinkController"
 
 class SourceNode implements FlowNode {
     id: string
@@ -32,7 +32,7 @@ class FlowLink {
     get connects() { return this._source + "-" + this._target }
 }
 
-export const SankeyForType = ({ links }: { links: FishLink[] }) => {
+export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkController }) => {
 
     let gn = m.graph.getnode
     let sourcetypes = links.map(l => gn(l.source).type).distinct()
@@ -97,26 +97,29 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("class", l => l.source.id + " sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
-                .on('mouseenter', (ev, fl) => {
-                    td = ev.target.closest('.link-type').querySelector('td[connects=' + fl.connects + ']')
-                    if(!td) return
+                .on('click', (ev, fl) => {
 
-                    let thsource = td.closest('tr')!.querySelector('th')
-                    let thtarget = td.closest("table")!.querySelectorAll("thead th")[td.cellIndex]
-                    if(!thsource) return
-                    if(!thtarget) return
+                    // td = ev.target.closest('.link-type').querySelector('td[connects=' + fl.connects + ']')
+                    // if (!td) return
 
-                    let sourcecolor = window.getComputedStyle(thsource).backgroundColor
-                    let targetcolor = window.getComputedStyle(thtarget).backgroundColor
+                    // let thsource = td.closest('tr')!.querySelector('th')
+                    // let thtarget = td.closest("table")!.querySelectorAll("thead th")[td.cellIndex]
+                    // if (!thsource) return
+                    // if (!thtarget) return
 
-                    td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
+                    // let sourcecolor = window.getComputedStyle(thsource).backgroundColor
+                    // let targetcolor = window.getComputedStyle(thtarget).backgroundColor
 
-                    console.log("enter", fl, td, thsource, thtarget)
+                    // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
+
+                    c.select(e, fl.connects)
+
+                    //console.log("enter", fl, td, thsource, thtarget)
                 })
                 .on('mouseout', (ev, fl) => {
                     //console.log("out", fl)
-                    if(!td) return
-                    td.style.background = ""  //classList.remove("sel")
+                    if (!td) return
+                    // td.style.background = ""  //classList.remove("sel")
                     td = null
                 })
 
@@ -138,5 +141,5 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
         }
     }
 
-    return <div class="sankey" patch={rund3} />
+    return <div class="sankey" patch={rund3} mounted={e => c.register(e)} />
 }

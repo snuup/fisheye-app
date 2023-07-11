@@ -252,11 +252,11 @@ export function rebind(o) {
 }
 export function nicelinktypename(rawlinktype: string) {
     switch (rawlinktype) {
-        case "membership": return "member"
-        case "partnership": return "partner"
-        case "family_relationship": return "family"
-        case "ownership": return "owner"
-        default: return rawlinktype
+        // case "membership": return "member"
+        // case "partnership": return "partner"
+        // case "family_relationship": return "family"
+        // case "ownership": return "owner"
+        default: return rawlinktype.replace(/_/, "-")
     }
 }
 
@@ -265,8 +265,8 @@ export function nicenodetypename(rawnodetype: string) {
 
     switch (rawnodetype) {
         case "": return "undefined"
-        case "political_organization": return "political-org"
-        default: return rawnodetype
+        //case "political_organization": return "political-org"
+        default: return rawnodetype.replace(/_/, "-")
     }
 }
 

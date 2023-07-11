@@ -96,6 +96,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("fill", "none")
                 .attr("class", l => l.source.id + " sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
+                .attr('connects', fl => fl.connects)
                 .on('mouseenter', (ev, fl) => {
                     td = ev.target.closest('.link-type').querySelector('td[connects=' + fl.connects + ']')
                     if(!td) return

@@ -52,13 +52,16 @@ export class Controller {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
         console.log("setroute", m.url)
 
+
+
         // switch (m.url[0]) {
         //     case "network":
         //         this.setfocus(m.url[1])
         //         break
         // }
 
-        updateview('#main', false, true)
+        updateview(document.body, true, false)
+        updateview('#main', undefined, true)
     }
 
     togglenetnode(ev, n: FishNode) {

@@ -4,7 +4,7 @@ import '../utils/common'
 import { NodeStats } from '../comp/nodestats'
 import { m } from './model'
 import { Link } from './routes'
-import { mount } from '../utils/common'
+import { cc, mount } from '../utils/common'
 import { Navigation } from "../comp/nav"
 import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
@@ -19,7 +19,7 @@ mount({ mc1 })
 
 let App = () => {
     return (
-        <body class="">
+        <body class={cc(m.url)}>
             <header>
                 <h2>Mini Challenge 1</h2>
                 <Link url={['nodestats']} />

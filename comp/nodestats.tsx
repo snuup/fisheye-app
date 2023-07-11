@@ -86,7 +86,7 @@ const NodeIdStats = () => {
     let maxcount = o.values.map(v => v.length).max()
     let scaler = d3.scaleLinear([0, maxcount], [0, 100])
     // rename undefined into numbers
-    o.number = o.undefined
+    o.numeric = o.undefined
     delete o.undefined
 
     return (

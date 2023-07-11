@@ -7,24 +7,28 @@
 }
 
 .sankey {
+  user-select: none;
   min-width: 600px;
   /* outline: solid 1px navy */
 }
 
-.sankey path {
+.sankey path:not(:hover) {
   stroke: #aaccbb;
 }
 
-.sankey rect, .sankey text {
+.sankey rect:not(:hover),
+.sankey text:not(:hover) {
   fill: #aaccbb;
   stroke: none;
 }
 
-.sankey path, .sankey rect {
-  opacity: .5;
+.sankey path,
+.sankey rect {
+  opacity: 0.5;
 }
 
-.sankey path:hover, .sankey rect:hover {
+.sankey path:hover,
+.sankey rect:hover {
   opacity: 1;
 }
 

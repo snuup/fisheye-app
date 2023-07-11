@@ -96,8 +96,31 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
 
     let tableout
 
+    function onmount(e: HTMLElement) {
+
+        function select(connects: string, force: boolean) {
+            console.log("select linkstat!")
+
+            let td = e.querySelector(`.${connects}`)
+            td?.classList.toggle("sel", force)
+            // if (!td) return
+
+            // let thsource = td.closest('tr')!.querySelector('th')
+            // let thtarget = td.closest("table")!.querySelectorAll("thead th")[td.cellIndex]
+            // if (!thsource) return
+            // if (!thtarget) return
+
+            // let sourcecolor = window.getComputedStyle(thsource).backgroundColor
+            // let targetcolor = window.getComputedStyle(thtarget).backgroundColor
+
+            // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
+        }
+
+        c.register(select)
+    }
+
     return (
-        <div mounted={e => c.register(e)}>
+        <div mounted={onmount}>
             <table class="link-stats-table" patch={rund3} />
             <table class="out" mounted={e => tableout = e} />
         </div>)
@@ -130,7 +153,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             </div>
 
             {
-                links.groupBy(l => l.type).entries.map(([type, links]) => {
+                links.groupBy(l => l.type).entries.slice(0, 1).map(([type, links]) => {
                     let lc = new LinkController()
                     return (
                         <div>

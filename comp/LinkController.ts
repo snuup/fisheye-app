@@ -1,33 +1,16 @@
 
 
 export class LinkController {
-    // root: HTMLElement
-    // current: string
-    comps = [] as HTMLElement[]
-    selections = [] as HTMLElement[]
 
-    constructor() {
-        console.log("LinkController")
+    callbacks = [] as ((string, boolean) => void)[]
+    selection = ""
+
+    register(select: (string, boolean) => void) {
+        this.callbacks.push(select)
     }
 
-    register(comp: HTMLElement) {
-        console.log("register", comp)
-        this.comps.push(comp)
+    select(connects: string) {
+        if (this.selection) this.callbacks.forEach(cb => cb(this.selection, false))
+        this.callbacks.forEach(cb => cb(this.selection = connects, true))
     }
-
-    select(comp: HTMLElement, connects: string) {
-        console.log(connects)
-
-        this.selections.forEach(sel => sel.classList.remove("sel"))
-
-        let sel = this.other(comp).querySelector("." + connects) as HTMLElement | null
-        if (sel === null) return
-        this.selections.push(sel)
-        sel.classList.add("sel")
-
-        //this.root.classList.remove(this.current)
-        //this.current = connects
-    }
-
-    other(comp: HTMLElement) { return this.comps.filter(c => c != comp).first }
 }

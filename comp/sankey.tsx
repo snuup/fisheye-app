@@ -124,7 +124,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
 
                     // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
 
-                    c.select(e, fl.connects)
+                    c.select(fl.connects)
 
                     //console.log("enter", fl, td, thsource, thtarget)
                 })
@@ -140,5 +140,14 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
         }
     }
 
-    return <div class="sankey" patch={rund3} mounted={e => c.register(e)} />
+    function onmount(e: HTMLElement) {
+
+        function select(connects: string) {
+            console.log("select!")
+        }
+
+        c.register(select)
+    }
+
+    return <div class="sankey" patch={rund3} mounted={onmount} />
 }

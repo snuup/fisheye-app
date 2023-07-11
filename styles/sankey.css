@@ -16,10 +16,6 @@
   stroke: #aaccbb;
 }
 
-.sankey path.sel {
-  stroke: red;
-}
-
 .sankey rect:not(:hover),
 .sankey text:not(:hover) {
   fill: #aaccbb;

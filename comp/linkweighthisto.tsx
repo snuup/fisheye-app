@@ -43,7 +43,7 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                     let dx = ev.x - e.offsetLeft + 3
                     ruler = x.invert(dx)
                     let totalcountbelow = bins.filter(bin => bin.x1! <= ruler).sumBy(bin => bin.length)
-                    console.log(dx, ruler, totalcountbelow)
+                    //console.log(dx, ruler, totalcountbelow)
                     e.querySelector('.ruler')!.setAttribute('width', dx.toString())
                     e.querySelector('.rulervalue')!.textContent = `${totalcountbelow} (${ (totalcountbelow / mc1.links.length * 100).toFixed(2)}%)`
                 })

@@ -1,11 +1,15 @@
 @import '_exp.scss';
 
 .link-stats-table {
+
     td {
         cursor: pointer;
 
         &:hover {
             background-color: white;
+        }
+        & {
+            // background-image: linear-gradient(to bottom left, lightseagreen 50%, lightsalmon 50%);
         }
     }
 }
@@ -23,7 +27,7 @@ $color12: #aaccbb;
         fill: darken($color1, 40);
         font-size: 20px;
     }
-    rect{
+    rect {
         fill: darken($color1, 40);
     }
 }

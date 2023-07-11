@@ -29,6 +29,7 @@ class FlowLink {
         this.source = "s" + this._source
         this.target = "t" + this._target
     }
+    get connects() { return this._source + "-" + this._target }
 }
 
 export const SankeyForType = ({ links }: { links: FishLink[] }) => {
@@ -41,7 +42,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
     let flownodes: FlowNode[] = alltypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
     let flowlinks: FlowLink[] = []
     for (let source in linksbysource) {
-        let linksbytarget = linksbysource[source].groupBy(l =>  gn(l.target).type)
+        let linksbytarget = linksbysource[source].groupBy(l => gn(l.target).type)
         for (let target in linksbytarget) {
             flowlinks.push(new FlowLink(source, target, linksbytarget[target]?.length ?? 0))
         }
@@ -49,6 +50,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
 
     const width = 500
     const height = 300
+    let td = null as null | HTMLTableCellElement
 
     function rund3(e: HTMLElement) {
         {
@@ -94,8 +96,27 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("fill", "none")
                 .attr("class", l => l.source.id + " sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
-                .on('mouseenter', (...args) => {
-                    console.log(args)
+                .on('mouseenter', (ev, fl) => {
+                    td = ev.target.closest('.link-type').querySelector('td[connects=' + fl.connects + ']')
+                    if(!td) return
+
+                    let thsource = td.closest('tr')!.querySelector('th')
+                    let thtarget = td.closest("table")!.querySelectorAll("thead th")[td.cellIndex]
+                    if(!thsource) return
+                    if(!thtarget) return
+
+                    let sourcecolor = window.getComputedStyle(thsource).backgroundColor
+                    let targetcolor = window.getComputedStyle(thtarget).backgroundColor
+
+                    td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
+
+                    console.log("enter", fl, td, thsource, thtarget)
+                })
+                .on('mouseout', (ev, fl) => {
+                    //console.log("out", fl)
+                    if(!td) return
+                    td.style.background = ""  //classList.remove("sel")
+                    td = null
                 })
 
             link.append("title")

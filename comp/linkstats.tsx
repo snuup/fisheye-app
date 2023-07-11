@@ -18,6 +18,8 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
     function rund3(tableDom: HTMLTableElement) {
 
+        console.log("path link-stats-table!")
+
         let g = m.graph
         let sourcetypes = links.map(l => g.getnode(l.source).type).distinct()
         let targettypes = links.map(l => g.getnode(l.target).type).distinct()
@@ -49,6 +51,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
                 .selectAll('tr')
                 .data(alltypes)
                 .join('tr')
+                .attr('linktype', d => d)
 
         rows
             .append('th')
@@ -76,10 +79,18 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
         rows
             .selectAll('td')
-            .data(st => alltypes.map(tt => [st, tt]))
+            .data(st => alltypes.map(tt => {
+                let cell = matrix[st][tt] ?? []
+                if(cell){
+                    cell.st = st
+                    cell.tt = tt
+                }
+                return cell
+            }))
             .join('td')
-            .text(([st, tt]) => matrix[st][tt]?.length)
-            .on('click', (_, [st, tt]) => setout(matrix[st][tt]))
+            .attr('connects', d => d.st + "-" + d.tt)
+            .text(d => d?.length)
+            .on('click', (_, d) => setout(d))
     }
 
     let tableout
@@ -121,7 +132,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                 links.groupBy(l => l.type).entries.map(([type, links]) => (
                     <div >
                         <h3 class={type}>{type}</h3>
-                        <div class="flexy">
+                        <div class="flexy link-type">
                             <LinkStatsForType links={links} />
                             <SankeyForType links={links} />
                         </div>

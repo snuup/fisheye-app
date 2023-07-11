@@ -38,7 +38,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
     let targettypes = links.map(l => gn(l.target).type).distinct()
     let alltypes = sourcetypes.concat(targettypes).distinct().sort().map(s => s ?? "undefined") as string[]
 
-    console.log(alltypes)
+    //console.log(alltypes)
 
     let linksbysource = links.groupBy(l => gn(l.source).type)
 
@@ -82,7 +82,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("y", d => d.y0!)
                 .attr("height", d => d.y1! - d.y0!)
                 .attr("width", d => d.x1! - d.x0!)
-                .attr("class", d => d.id + " hase")
+                .attr("class", d => d.id)
                 .append("title")
                 .text(d => d.id)
 

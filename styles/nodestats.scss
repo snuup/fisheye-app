@@ -26,6 +26,7 @@
         border-collapse: collapse;
         &.out {
             margin-top: 1em;
+            cursor: pointer;
         }
     }
 }
@@ -72,8 +73,8 @@ $axis-color: #555;
         background: none;
     }
     .link-stats-table {
-        th {
-            // background-color: orange;
-        }
+        // th {
+        //     // background-color: orange;
+        // }
     }
 }

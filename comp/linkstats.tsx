@@ -6,6 +6,7 @@ import { mount, nicelinktypename } from "../utils/common"
 import { LinkHistogram } from "./linkweighthisto"
 import { m } from "../app/model"
 import { ObjectAsTable } from "./namevalue"
+import { mc1 } from "../data/data"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -58,7 +59,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 
         let setout = (links: any[]) => {
 
-            console.log("clücks", links)
+            //console.log("clücks", links)
             tableout.replaceChildren()
 
             let rows =
@@ -91,11 +92,19 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 }
 
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
-    console.log("linkstats", links)
+    //console.log("linkstats", links)
     return (
         <div class="stats">
             <h2>link statistics</h2>
             <div class="stats-top">
+
+                <div>
+                    <h3>counts</h3>
+                    {<ObjectAsTable o={{
+                        nodes: mc1.nodes.length,
+                        links: mc1.links.length
+                    }} />}
+                </div>
 
                 <div>
                     <h3>link types</h3>

@@ -2,8 +2,11 @@ import { jsx } from "../jmx-lib/core"
 import * as d3 from "d3"
 import { FishLink } from "../elements/fishlink"
 import { mount } from "../utils/common"
+import { mc1 } from "../data/data"
 
 export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
+
+    let ruler = 0
 
     function rund3(e: HTMLElement) {
         {
@@ -12,11 +15,13 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                 .value(d => d.weight)
                 (links)
 
+            mount({ bins })
+
             const width = e.clientWidth
             const height = e.clientHeight || 200
             const marginTop = 0
-            const marginRight = 20
-            const marginBottom = 25
+            const marginRight = 0
+            const marginBottom = 0
             const marginLeft = 0
 
             console.log("link-histo", width, height)
@@ -33,9 +38,25 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
             const svg = d3
                 .select(e)
                 .append("svg")
-                .attr("viewBox", [0, 0, width, height])
                 .attr("style", "max-width: 100%; height: auto;")
+                .on('mousemove', (ev) => {
+                    let dx = ev.x - e.offsetLeft + 3
+                    ruler = x.invert(dx)
+                    let totalcountbelow = bins.filter(bin => bin.x1! <= ruler).sumBy(bin => bin.length)
+                    console.log(dx, ruler, totalcountbelow)
+                    e.querySelector('.ruler')!.setAttribute('width', dx.toString())
+                    e.querySelector('.rulervalue')!.textContent = `${totalcountbelow} (${ (totalcountbelow / mc1.links.length * 100).toFixed(2)}%)`
+                })
 
+            svg.append('rect')
+                .attr('class', 'ruler')
+                .attr('width', x(ruler))
+                .attr('height', height)
+
+            svg.append('text')
+                .attr('class', 'rulervalue')
+                .attr('x', 30)
+                .attr('y', 55)
 
             // Add a rect for each bin.
             svg.append("g")
@@ -57,7 +78,7 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                     .attr("y", marginBottom - 4)
                     //.attr("fill", "currentColor")
                     .attr("text-anchor", "end"))
-                    //.text("weights →"))
+            //.text("weights →"))
 
             // Add the y-axis and label, and remove the domain line.
             // svg.append("g")

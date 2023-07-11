@@ -1,3 +1,5 @@
+@import '_exp.scss';
+
 .link-stats-table {
     td {
         cursor: pointer;
@@ -8,13 +10,26 @@
     }
 }
 
-.link-weights{
+$color12: #aaccbb;
+
+.link-weights {
     width: 300px;
     height: 100px;
+    .ruler {
+        fill: darken($color1, 20);
+        opacity: 0.2;
+    }
+    .rulervalue {
+        fill: darken($color1, 40);
+        font-size: 20px;
+    }
+    rect{
+        fill: darken($color1, 40);
+    }
 }
 
 g.tick {
-    text{
+    text {
         font-size: 16px;
         font-family: calibri;
     }

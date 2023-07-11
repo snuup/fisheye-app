@@ -11,6 +11,20 @@
   height: 100px;
 }
 
+.link-weights .ruler {
+  fill: #6aa688;
+  opacity: 0.2;
+}
+
+.link-weights .rulervalue {
+  fill: #406a55;
+  font-size: 20px;
+}
+
+.link-weights rect {
+  fill: #406a55;
+}
+
 g.tick text {
   font-size: 16px;
   font-family: calibri;

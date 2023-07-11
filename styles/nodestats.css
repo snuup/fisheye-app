@@ -28,6 +28,7 @@
 
 .linkstats table.out {
   margin-top: 1em;
+  cursor: pointer;
 }
 
 .nodeid-bars {

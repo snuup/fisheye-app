@@ -2,6 +2,8 @@
     color: $c;
     fill: $c;
     stroke: $c;
+    background: lighten($c, 30);
+    color: darken($c, 20);
 }
 
 .ownership,
@@ -50,7 +52,7 @@
 }
 
 .vessel {
-    @include tricolori(rgb(30, 77, 148));
+    @include tricolori(rgb(77, 131, 153));
 }
 
 .undefined {

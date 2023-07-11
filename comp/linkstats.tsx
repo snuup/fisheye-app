@@ -68,8 +68,8 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
                     .data(links.sortBy(l => -l.weight))
                     .join('tr')
 
-            rows.append('td').attr("class", d => linktypetext(d.source.type)).text(d => d.source)
-            rows.append('td').attr("class", d => linktypetext(d.target.type)).text(d => d.target)
+            rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.source).type)).text(d => d.source)
+            rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.target).type)).text(d => d.target)
             rows.append('td').text(d => d.weight.toFixed(4))
         }
 
@@ -93,7 +93,7 @@ const LinkStatsForType = ({ links }: { links: FishLink[] }) => {
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
     console.log("linkstats", links)
     return (
-        <>
+        <div class="stats">
             <h2>link statistics</h2>
             <div class="stats-top">
 
@@ -119,5 +119,5 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                     </div>
                 ))
             }
-        </>)
+        </div>)
 }

@@ -59,7 +59,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
         {
             const layout = d3s.sankey<FlowNode, any>()
                 .nodeId(d => d.flowid)
-                .nodeSort(null)
+                .nodeSort(null as any)
                 .nodeWidth(15)
                 .nodePadding(5)
                 .extent([[0, 0], [width, height]])
@@ -82,7 +82,7 @@ export const SankeyForType = ({ links }: { links: FishLink[] }) => {
                 .attr("y", d => d.y0!)
                 .attr("height", d => d.y1! - d.y0!)
                 .attr("width", d => d.x1! - d.x0!)
-                .attr("class", d => d.id)
+                .attr("class", d => d.id + " hase")
                 .append("title")
                 .text(d => d.id)
 

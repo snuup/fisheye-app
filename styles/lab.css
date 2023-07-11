@@ -63,6 +63,7 @@ th {
 
 table.out {
     margin: 1em 0;
+    cursor: crosshair;
 }
 
 table.out td {

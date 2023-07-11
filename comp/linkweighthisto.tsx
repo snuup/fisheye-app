@@ -8,19 +8,18 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
     function rund3(e: HTMLElement) {
         {
             const bins = d3.bin<FishLink, number>()
-                .thresholds(40)
+                .thresholds(50)
                 .value(d => d.weight)
                 (links)
 
             const width = e.clientWidth
             const height = e.clientHeight || 200
-            const marginTop = 20
+            const marginTop = 0
             const marginRight = 20
-            const marginBottom = 30
-            const marginLeft = 40
+            const marginBottom = 25
+            const marginLeft = 0
 
-            console.log("link-histo", width, height);
-
+            console.log("link-histo", width, height)
 
             const x = d3.scaleLinear<number, number>()
                 .domain([bins[0].x0!, bins[bins.length - 1].x1!])
@@ -31,18 +30,9 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                 .domain([0, d3.max(bins, (d) => d.length as any)])
                 .range([height - marginBottom, marginTop])
 
-            // Create the SVG container.
-            // const svg = d3.create("svg")
-            //     .attr("width", width)
-            //     .attr("height", height)
-            //     .attr("viewBox", [0, 0, width, height])
-            //     .attr("style", "max-width: 100%; height: auto;")
-
             const svg = d3
                 .select(e)
                 .append("svg")
-                //.attr("width", width)
-                //.attr("height", height)
                 .attr("viewBox", [0, 0, width, height])
                 .attr("style", "max-width: 100%; height: auto;")
 
@@ -61,25 +51,25 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
             // Add the x-axis and label.
             svg.append("g")
                 .attr("transform", `translate(0,${height - marginBottom})`)
-                .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
+                .call(d3.axisBottom(x).tickValues([0.5, 0.8, 1]))
                 .call((g) => g.append("text")
                     .attr("x", width)
                     .attr("y", marginBottom - 4)
                     //.attr("fill", "currentColor")
-                    .attr("text-anchor", "end")
-                    .text("weights →"))
+                    .attr("text-anchor", "end"))
+                    //.text("weights →"))
 
             // Add the y-axis and label, and remove the domain line.
-            svg.append("g")
-                .attr("transform", `translate(${marginLeft},0)`)
-                .call(d3.axisLeft(y).ticks(height / 40))
-                .call((g) => g.select(".domain").remove())
-                .call((g) => g.append("text")
-                    .attr("x", -marginLeft)
-                    .attr("y", 10)
-                    //.attr("fill", "currentColor")
-                    .attr("text-anchor", "start")
-                    .text("↑ occurrencies"))
+            // svg.append("g")
+            //     .attr("transform", `translate(${marginLeft},0)`)
+            //     .call(d3.axisLeft(y).ticks(5))
+            //     .call((g) => g.select(".domain").remove())
+            //     .call((g) => g.append("text")
+            //         .attr("x", -marginLeft)
+            //         .attr("y", 10)
+            //         //.attr("fill", "currentColor")
+            //         .attr("text-anchor", "start")
+            //         .text("↑ occurrencies"))
         }
     }
 

@@ -50,7 +50,7 @@ export const NodeStats = () => {
                 </div>
 
                 <div>
-                    <h3>node countries</h3>
+                    <h3>country appearances</h3>
                     <NodeCountryStats />
                 </div>
 
@@ -120,7 +120,7 @@ const NodeCountryStats = () => {
                         <div class="value">
                             <span class='bar' style={`width:${scaler(k)}%`} > {k}</span>
                         </div>
-                        <div>{v.first?.k + (v.length > 1 ? ", ..." : "")}</div>
+                        <div title={v.map(n => n.k).sortauto().join('\n')}>{v.first?.k + (v.length > 1 ? ", ..." : "")}</div>
                     </>
                 ))
             }

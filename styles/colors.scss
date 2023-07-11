@@ -6,7 +6,7 @@
     color: darken($c, 20);
 }
 
-$nodecolors: (
+$nodetypecolors: (
     company: (#5c74a6),
     event: (#ff8600),
     location: (#829750),
@@ -25,7 +25,7 @@ $linktypecolors: (
     "partnership": rgb(161, 106, 85),
 );
 
-@each $name, $color in $nodecolors {
+@each $name, $color in $nodetypecolors {
     .#{$name} {
         @include tricolori($color);
     }
@@ -36,3 +36,11 @@ $linktypecolors: (
         @include tricolori($color);
     }
 };
+
+@each $name1, $color1 in $nodetypecolors {
+    @each $name2, $color2 in $nodetypecolors {
+        [connects=#{$name1}-#{$name2}] {
+            background: linear-gradient(to bottom left, $color2 50%, $color1 50%);
+        }
+    }
+}

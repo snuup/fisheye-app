@@ -101,3 +101,327 @@
   background: #d9c0b6;
   color: #5e3e32;
 }
+
+[connects=company-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #5c74a6 50%);
+}
+
+[connects=company-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #5c74a6 50%);
+}
+
+[connects=company-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #5c74a6 50%);
+}
+
+[connects=company-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #5c74a6 50%);
+}
+
+[connects=company-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #5c74a6 50%);
+}
+
+[connects=company-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #5c74a6 50%);
+}
+
+[connects=company-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #5c74a6 50%);
+}
+
+[connects=company-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #5c74a6 50%);
+}
+
+[connects=company-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #5c74a6 50%);
+}
+
+[connects=event-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #ff8600 50%);
+}
+
+[connects=event-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #ff8600 50%);
+}
+
+[connects=event-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #ff8600 50%);
+}
+
+[connects=event-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #ff8600 50%);
+}
+
+[connects=event-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #ff8600 50%);
+}
+
+[connects=event-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #ff8600 50%);
+}
+
+[connects=event-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #ff8600 50%);
+}
+
+[connects=event-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #ff8600 50%);
+}
+
+[connects=event-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #ff8600 50%);
+}
+
+[connects=location-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #829750 50%);
+}
+
+[connects=location-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #829750 50%);
+}
+
+[connects=location-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #829750 50%);
+}
+
+[connects=location-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #829750 50%);
+}
+
+[connects=location-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #829750 50%);
+}
+
+[connects=location-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #829750 50%);
+}
+
+[connects=location-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #829750 50%);
+}
+
+[connects=location-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #829750 50%);
+}
+
+[connects=location-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #829750 50%);
+}
+
+[connects=movement-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #a39e59 50%);
+}
+
+[connects=movement-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #a39e59 50%);
+}
+
+[connects=movement-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #a39e59 50%);
+}
+
+[connects=movement-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #a39e59 50%);
+}
+
+[connects=movement-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #a39e59 50%);
+}
+
+[connects=movement-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #a39e59 50%);
+}
+
+[connects=movement-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #a39e59 50%);
+}
+
+[connects=movement-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #a39e59 50%);
+}
+
+[connects=movement-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #a39e59 50%);
+}
+
+[connects=organization-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #9468a8 50%);
+}
+
+[connects=organization-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #9468a8 50%);
+}
+
+[connects=organization-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #9468a8 50%);
+}
+
+[connects=organization-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #9468a8 50%);
+}
+
+[connects=organization-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #9468a8 50%);
+}
+
+[connects=organization-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #9468a8 50%);
+}
+
+[connects=organization-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #9468a8 50%);
+}
+
+[connects=organization-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #9468a8 50%);
+}
+
+[connects=organization-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #9468a8 50%);
+}
+
+[connects=political_organization-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #785586 50%);
+}
+
+[connects=political_organization-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #785586 50%);
+}
+
+[connects=political_organization-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #785586 50%);
+}
+
+[connects=political_organization-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #785586 50%);
+}
+
+[connects=political_organization-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #785586 50%);
+}
+
+[connects=political_organization-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #785586 50%);
+}
+
+[connects=political_organization-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #785586 50%);
+}
+
+[connects=political_organization-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #785586 50%);
+}
+
+[connects=political_organization-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #785586 50%);
+}
+
+[connects=person-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #a54b4b 50%);
+}
+
+[connects=person-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #a54b4b 50%);
+}
+
+[connects=person-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #a54b4b 50%);
+}
+
+[connects=person-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #a54b4b 50%);
+}
+
+[connects=person-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #a54b4b 50%);
+}
+
+[connects=person-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #a54b4b 50%);
+}
+
+[connects=person-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #a54b4b 50%);
+}
+
+[connects=person-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #a54b4b 50%);
+}
+
+[connects=person-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #a54b4b 50%);
+}
+
+[connects=vessel-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #4d8399 50%);
+}
+
+[connects=vessel-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #4d8399 50%);
+}
+
+[connects=vessel-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #4d8399 50%);
+}
+
+[connects=vessel-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #4d8399 50%);
+}
+
+[connects=vessel-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #4d8399 50%);
+}
+
+[connects=vessel-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #4d8399 50%);
+}
+
+[connects=vessel-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #4d8399 50%);
+}
+
+[connects=vessel-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #4d8399 50%);
+}
+
+[connects=vessel-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #4d8399 50%);
+}
+
+[connects=undefined-company] {
+  background: linear-gradient(to bottom left, #5c74a6 50%, #727272 50%);
+}
+
+[connects=undefined-event] {
+  background: linear-gradient(to bottom left, #ff8600 50%, #727272 50%);
+}
+
+[connects=undefined-location] {
+  background: linear-gradient(to bottom left, #829750 50%, #727272 50%);
+}
+
+[connects=undefined-movement] {
+  background: linear-gradient(to bottom left, #a39e59 50%, #727272 50%);
+}
+
+[connects=undefined-organization] {
+  background: linear-gradient(to bottom left, #9468a8 50%, #727272 50%);
+}
+
+[connects=undefined-political_organization] {
+  background: linear-gradient(to bottom left, #785586 50%, #727272 50%);
+}
+
+[connects=undefined-person] {
+  background: linear-gradient(to bottom left, #a54b4b 50%, #727272 50%);
+}
+
+[connects=undefined-vessel] {
+  background: linear-gradient(to bottom left, #4d8399 50%, #727272 50%);
+}
+
+[connects=undefined-undefined] {
+  background: linear-gradient(to bottom left, #727272 50%, #727272 50%);
+}

@@ -8,3 +8,7 @@ header {
 header a {
     margin: 1em;
 }
+
+a.selected {
+    background: lightseagreen;
+}

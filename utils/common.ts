@@ -71,7 +71,7 @@ mergePrototype(class extends Array {
     sortauto() {
         return this.sort((a, b) => {
             if (typeof a === 'number' && typeof b == 'number') return a - b
-            else return a.localeCompare(b)
+            else return a.localeCompare?.(b)
         })
     }
     sortWithUndefinedLast() {

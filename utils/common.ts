@@ -250,15 +250,15 @@ export function rebind(o) {
         o[name] = o[name].bind(o)
     }
 }
-export function nicelinktypename(rawlinktype: string) {
-    switch (rawlinktype) {
-        // case "membership": return "member"
-        // case "partnership": return "partner"
-        // case "family_relationship": return "family"
-        // case "ownership": return "owner"
-        default: return rawlinktype.replace(/_/, "-")
-    }
-}
+// export function nicelinktypename(rawlinktype: string) {
+//     switch (rawlinktype) {
+//         // case "membership": return "member"
+//         // case "partnership": return "partner"
+//         // case "family_relationship": return "family"
+//         // case "ownership": return "owner"
+//         default: return rawlinktype.replace(/_/, "-")
+//     }
+// }
 
 export function nicenodetypename(rawnodetype: string) {
     //console.log("rawnodetype", `|${rawnodetype}|`)
@@ -271,3 +271,4 @@ export function nicenodetypename(rawnodetype: string) {
 }
 
 export function makekv<K, V>([k, v]: [K, V]) { return { k, v } }
+

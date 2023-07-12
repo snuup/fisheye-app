@@ -1,14 +1,13 @@
 import { jsx } from "../jmx-lib/core"
 import { FishLink } from "../elements/fishlink"
 import { SankeyForType } from "./linktypesankey"
-import { nicelinktypename } from "../utils/common"
 import { LinkHistogram } from "../comp/linkweighthisto"
 import { m } from "../app/model"
 import { ObjectAsTable } from "../comp/namevalue"
 import { mc1 } from "../data/data"
 import { LinkController } from "./linkcontroller"
 import { LinkStatsForType } from "./linktypetable"
-import { linktypes } from "../analysis/common"
+import { linktypes, nicelinktyüe as nicelinktype } from "../analysis/common"
 
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
     //console.log("linkstats", links)
@@ -27,7 +26,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
 
                 <div>
                     <h3>link types</h3>
-                    {<ObjectAsTable o={m.graph.linkcountsByType.mapKeys(nicelinktypename)} />}
+                    {<ObjectAsTable o={m.graph.linkcountsByType.mapKeys(nicelinktype)} />}
                 </div>
 
                 <div>
@@ -41,7 +40,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                     let lc = new LinkController()
                     return (
                         <div>
-                            <h3 class={type}>{type}</h3>
+                            <h3 class={type}>{nicelinktype(type)}</h3>
                             <div class="flexy link-type">
                                 <LinkStatsForType c={lc} type={type} />
                                 <SankeyForType c={lc} type={type} />

@@ -3,6 +3,7 @@ import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
 import { jsx } from "../jmx-lib/core"
 import { getconnects, getlinkgroupkey, nicenodetype, nodetypes } from "../analysis/common"
+import { identity } from "../utils/common"
 
 export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
 
@@ -18,13 +19,31 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
         let thead = table.append("thead")
         let tbody = table.append("tbody")
 
-        thead
-            .append('tr')
-            .selectAll('th')
-            .data([".", ...nodetypes])
+        let headrow =
+            thead
+                .append('tr')
+
+        headrow
+            .append('th')
+            .text(".")
+            .attr("class", "all")
+            .on("mouseenter", (_, d) => {
+                tableDom.classList.add("multiselect")
+                c.select(nodetypes.cross().map(([st, tt]) => getlinkgroupkey(st, tt)))
+            })
+            .on("mouseout", () => {
+                tableDom.classList.remove("multiselect")
+                c.deselect()
+            })
+
+        headrow
+            .selectAll('th.x')
+            .data(nodetypes)
             .join('th')
             .text(nicenodetype)
-            .attr("class", d => d)
+            .attr("class", d => d + " x")
+            .on("mouseenter", (_, d) => c.select(nodetypes.map(st => getlinkgroupkey(st, d))))
+            .on("mouseout", () => c.deselect())
 
         let rows =
             tbody
@@ -37,6 +56,8 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             .append('th')
             .text(nicenodetype)
             .attr("class", d => d)
+            .on("mouseenter", (_, d) => c.select(nodetypes.map(tt => getlinkgroupkey(d, tt))))
+            .on("mouseout", () => c.deselect())
 
         let setout = (links: any[]) => {
 
@@ -63,9 +84,9 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             }))
             .join('td')
             .attr('connects', getconnects)
-            .on('mouseenter', (_, d) => c.select(getconnects(d)))
+            .on('mouseenter', (_, d) => c.select([getconnects(d)]))
             .on('mouseout', (_, d) => c.deselect())
-            .style("background", ({length}) => `rgba(170, 204, 187, ${opacityScaler(length)})`)
+            .style("background", ({ length }) => `rgba(170, 204, 187, ${opacityScaler(length)})`)
             .text(d => d?.length)
     }
 
@@ -75,11 +96,14 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
 
         function select(connects: string[], force: boolean) {
             //console.log("select linkstat!")
-            for(let c of connects){
-                let td = e.querySelector(`[connects=${c}]`)
-                td?.classList.toggle("sel", force)
+            if (connects.length < 10) {
+                for (let c of connects) {
+                    let td = e.querySelector(`[connects=${c}]`)
+                    td?.classList.toggle("sel", force)
+                }
             }
         }
+
         c.register(e, select)
     }
 

@@ -85,7 +85,7 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .attr("height", d => d.y1! - d.y0!)
                 .attr("width", d => d.x1! - d.x0!)
                 .attr("class", d => cc(d.id, d.flowid))
-                .on('mouseenter', (_, d) => c.select(...d.connects))
+                .on('mouseenter', (_, d) => c.select(d.connects))
                 .on('mouseout', () => c.deselect())
                 .append("title")
                 .text(d => d.id)
@@ -114,7 +114,7 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .attr("fill", "none")
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
-                .on('mouseenter', (_, fl) => { c.select(fl.connects) })
+                .on('mouseenter', (_, fl) => { c.select([fl.connects]) })
                 .on('mouseout', () => { c.deselect() })
 
             link.append("title")

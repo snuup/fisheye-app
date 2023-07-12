@@ -1,9 +1,14 @@
 .link-stats-table {
+  cursor: pointer;
   table-layout: fixed;
   user-select: none;
   max-width: 800px;
   width: 100%;
   background: white;
+}
+
+.link-stats-table th.all:hover {
+  background-color: #eee;
 }
 
 .link-stats-table td,

@@ -46,6 +46,8 @@ $linktypecolors: (
                 transparent,
                 lighten($color1, 20) 55%
             ) !important;
+            opacity: .75;
+            font-weight: bold;
         }
         .sankey path.sel[connects='#{$name1}-#{$name2}'] {
             stroke: $color1;

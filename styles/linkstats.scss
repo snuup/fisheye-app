@@ -1,6 +1,13 @@
 @import '_exp.scss';
 
 .link-stats-table {
+
+    cursor: pointer;
+    th.all {
+        &:hover{
+            background-color: #eee;
+        }
+    }
     td,
     th {
         // border: solid 1px #ccc;

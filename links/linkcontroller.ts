@@ -14,7 +14,7 @@ export class LinkController {
         window.addEventListener("mousedown", this.deselect)
     }
 
-    select(...connects: string[]) {
+    select(connects: string[], multiselect?: boolean) {
         console.log("select", connects)
         this.deselectall()
         this.callbacks.forEach(cb => cb(this.selection = connects, true))
@@ -26,7 +26,7 @@ export class LinkController {
     }
 
     deselect() {
-        console.log("deselect", this.selection)
+        //console.log("deselect", this.selection)
         if (!this.e.isConnected) return window.removeEventListener("mousedown", this.deselect)
         this.deselectall()
     }

@@ -113,11 +113,14 @@ export const nodetypes: NodeType[] = [
 
 mount({ linktypes, nodetypes })
 
-export function nicenodetype(type: string): string {
+export function nicenodetype(type: NodeType): string {
     switch (type) {
         case "political_organization": return "pol-org"
         default: return type
     }
 }
+
+export function nicelinktyüe(l: LinkType): string { return l.replace(/_/, "-") }
+
 
 mount({ issuspicious, words2 })

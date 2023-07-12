@@ -1,11 +1,12 @@
 import { jsx, jsxf } from "../jmx-lib/core"
 import * as d3 from 'd3'
-import { cc, mount, nicenodetypename } from '../utils/common'
+import { cc, mount } from '../utils/common'
 import { m } from '../app/model'
 import { FishNode } from '../elements/fishnode'
 import { NodeDonut } from './node-donut'
 import { mc1 } from "../data/data"
 import { ObjectAsTable } from "./namevalue"
+import { nicenodetype } from "../analysis/common"
 
 export const NodeStats = () => {
     let g = m.graph
@@ -46,7 +47,7 @@ export const NodeStats = () => {
 
                 <div>
                     <h3>node types</h3>
-                    {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetypename)} multiplier={1} showbars={true} />}
+                    {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetype)} multiplier={1} showbars={true} />}
                 </div>
 
                 <div>

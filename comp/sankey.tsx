@@ -94,7 +94,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
                 .attr("dy", "0.35em")
                 .attr("text-anchor", d => d.x0! < width / 2 ? "start" : "end")
                 .text(d => d.id)
-                .attr("class", d => d.id + " sankey-label")
+                .attr("class", d => "sankey-label")
 
             const link = svg.append("g")
                 .attr("fill", "none")
@@ -107,7 +107,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
             link.append("path")
                 .attr("d", d3s.sankeyLinkHorizontal())
                 .attr("fill", "none")
-                .attr("class", l => l.source.id + " sankey-path")
+                // .attr("class", l => "sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
                 .on('click', (ev, fl) => { c.select(fl.connects) })
@@ -127,6 +127,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
 
         function select(connects: string, force: boolean) {
             // console.log("select sankey!", connects)
+            // debugger
             let path = e.querySelector(`[connects=${connects}]`)
             path?.classList?.toggle("sel", force)
 

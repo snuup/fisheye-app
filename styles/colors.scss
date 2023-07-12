@@ -47,9 +47,9 @@ $linktypecolors: (
                 lighten($color1, 20) 55%
             ) !important;
         }
-        // .sankey path.sel[connects='#{$name1}-#{$name2}'] {
-        //     stroke: $color1;
-        // }
+        .sankey path.sel[connects='#{$name1}-#{$name2}'] {
+            stroke: $color1;
+        }
     }
 }
 

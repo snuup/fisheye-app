@@ -6,11 +6,7 @@ export class LinkController {
     callbacks = [] as ((string, boolean) => void)[]
     selection = ""
 
-    constructor() {
-        console.log("LC******************");
-        (window.a ??= []).push(this)
-        rebind(this)
-    }
+    constructor() { rebind(this) }
 
     register(e: HTMLElement, select: (string, boolean) => void) {
         this.e = e

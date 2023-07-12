@@ -13,10 +13,8 @@
     min-width: 600px;
     /* outline: solid 1px navy */
     path {
-        &:not(:hover) {
-            stroke: $color1;
-        }
-        &.sel{
+        stroke: $color1;
+        &.sel {
             // stroke: red;
         }
     }

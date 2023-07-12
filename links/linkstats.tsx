@@ -8,6 +8,7 @@ import { ObjectAsTable } from "../comp/namevalue"
 import { mc1 } from "../data/data"
 import { LinkController } from "./linkcontroller"
 import { LinkStatsForType } from "./linktypetable"
+import { linktypes } from "../analysis/common"
 
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
     //console.log("linkstats", links)
@@ -36,14 +37,14 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
             </div>
 
             {
-                links.groupBy(l => l.type).entries.slice(0, 10).map(([type, links]) => {
+                linktypes.map(type => {
                     let lc = new LinkController()
                     return (
                         <div>
                             <h3 class={type}>{type}</h3>
                             <div class="flexy link-type">
-                                <LinkStatsForType links={links} c={lc} type={type} />
-                                <SankeyForType links={links} c={lc} />
+                                <LinkStatsForType c={lc} type={type} />
+                                <SankeyForType c={lc} type={type} />
                             </div>
                         </div>
                     )

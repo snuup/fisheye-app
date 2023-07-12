@@ -1,10 +1,10 @@
 import * as d3 from "d3"
 import * as d3s from 'd3-sankey'
-import { FishLink } from "../elements/fishlink"
 import { jsx } from "../jmx-lib/core"
 import { m } from "../app/model"
 import { LinkController } from "./linkcontroller"
 import { cc } from "../utils/common"
+import { getlinkgroupkey, nodetypes } from "../analysis/common"
 
 class SourceNode implements FlowNode {
     id: string
@@ -31,29 +31,24 @@ class FlowLink {
         this.target = "t" + this._target
     }
     get connects() { return this._source + "-" + this._target }
-    //get sourcesort() {  }
 }
 
-export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkController }) => {
+export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
 
-    let gn = m.graph.getnode
-    let sourcetypes = links.map(l => gn(l.source).type).distinct()
-    let targettypes = links.map(l => gn(l.target).type).distinct()
-    let alltypes = sourcetypes.concat(targettypes).distinct().sort().map(s => s ?? "undefined") as string[]
-    let linksbysource = links.groupBy(l => gn(l.source).type)
+    let lg = m.linkgroups [type]
 
-    let flownodes: FlowNode[] = alltypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
-    let flowlinks: FlowLink[] = []
-    for (let source in linksbysource) {
-        let linksbytarget = linksbysource[source].groupBy(l => gn(l.target).type)
-        for (let target in linksbytarget) {
-            flowlinks.push(new FlowLink(source, target, linksbytarget[target]?.length ?? 0))
-        }
-    }
+    let flownodes: FlowNode[] = nodetypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
+
+    let flowlinks: FlowLink[] =
+
+        nodetypes.cross().map(([s, t]) => {
+            let c = getlinkgroupkey(s, t)
+            let links = lg[c] ?? []
+            return new FlowLink(s, t, links.length)
+        })
 
     const width = 500
     const height = 300
-    let td = null as null | HTMLTableCellElement
 
     function rund3(e: HTMLElement) {
         {

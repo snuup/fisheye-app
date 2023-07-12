@@ -7,6 +7,12 @@ import { mount } from "../utils/common"
 import { Url } from "./routes"
 import { FishLink } from "../elements/fishlink"
 
+type LinkGroup = {
+    [keys in LinkType]: {
+        [connects: string]: FishLink[]
+    }
+}
+
 export const mraw = {
 
     url: ['nodestats'] as Url,
@@ -21,9 +27,7 @@ export const mraw = {
     entity: "",
 
     graph: Graph.Empty as Graph<FishLink>,
-    linkgroups: {} as {
-        [keys in keyof LinkType]: { [connects: string]: FishLink[] }
-    },
+    linkgroups: {} as LinkGroup,
 
     supergraph: Graph.Empty as Graph<SuperLink>,
 

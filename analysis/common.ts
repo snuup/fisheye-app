@@ -85,11 +85,12 @@ export function issuspicious(id: string) {
     return ws.find(s => id.includes(s))
 }
 
-export function getlinkgroupkey(sourcenodetype: string, targetnodetype: string): string {
+export function getlinkgroupkey(sourcenodetype: NodeType, targetnodetype: NodeType): string {
     return sourcenodetype + "-" + targetnodetype
 }
 
 export const getconnects = ({st, tt}) => getlinkgroupkey(st, tt)
+export const splitconnects = (connects) => connects.split('-')
 
 export const linktypes: LinkType[] = [
     "partnership",
@@ -109,6 +110,8 @@ export const nodetypes: NodeType[] = [
     "event",
     "movement"
 ]
+
+mount({ linktypes, nodetypes })
 
 export function nicenodetype(type: string):string {
     switch(type){

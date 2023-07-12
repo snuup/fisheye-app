@@ -17,8 +17,14 @@ export const mraw = {
         "Oceanfront Oasis Inc Carriers",
         "n8327"
     ],
+
     entity: "",
+
     graph: Graph.Empty as Graph<FishLink>,
+    linkgroups: {} as {
+        [key: string]: FishLink[]
+    },
+
     supergraph: Graph.Empty as Graph<SuperLink>,
 
     netgraph: Graph.Empty as Graph<SuperLink>,

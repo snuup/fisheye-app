@@ -9,7 +9,7 @@ import { Navigation } from "../comp/nav"
 import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
 import { SeaView } from "../comp/seaview"
-import { LinkStats } from "../comp/linkstats"
+import { LinkStats } from "../links/linkstats"
 import { NetworkView } from "../comp/networkview"
 import { NodeIdBarChart } from "../comp/nodebarcharts"
 

@@ -89,4 +89,23 @@ export function getlinkgroupkey(sourcenodetype: string, targetnodetype: string, 
     return sourcenodetype + "-" + targetnodetype + "|" + linktype
 }
 
+export const linktypes : LinkType[] = [
+    "partnership",
+    "family_relationship",
+    "membership",
+    "ownership"
+]
+
+export const nodetypes : NodeType[] = [
+    "company" ,
+    "organization" ,
+    "undefined" ,
+    "person" ,
+    "location" ,
+    "political-organization" ,
+    "vessel" ,
+    "movement" ,
+    "event"
+]
+
 mount({ issuspicious, words2 })

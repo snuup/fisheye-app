@@ -1,16 +1,8 @@
 import * as d3 from "d3"
-import { FishLink } from "../elements/fishlink"
 import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
-import { mount } from "../utils/common"
 import { jsx } from "../jmx-lib/core"
-import { getconnects, getlinkgroupkey, linktypes, nicenodetype, nodetypes } from "../analysis/common"
-
-export type Matrix<T> = {
-    [columns: string]: {
-        [rows: string]: T
-    }
-}
+import { getconnects, getlinkgroupkey, nicenodetype, nodetypes } from "../analysis/common"
 
 export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
 
@@ -26,7 +18,6 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
         let thead = table.append("thead")
         let tbody = table.append("tbody")
 
-        // header row
         thead
             .append('tr')
             .selectAll('th')
@@ -46,8 +37,6 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             .append('th')
             .text(d => d)
             .attr("class", d => d)
-
-        // let out = d3.select(tableout).on('click', () => setout([]))
 
         let setout = (links: any[]) => {
 
@@ -88,7 +77,6 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             //console.log("select linkstat!")
             let td = e.querySelector(`[connects=${connects}]`)
             td?.classList.toggle("sel", force)
-            // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
         }
 
         c.register(e, select)

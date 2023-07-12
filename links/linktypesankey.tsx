@@ -6,21 +6,19 @@ import { LinkController } from "./linkcontroller"
 import { cc } from "../utils/common"
 import { getlinkgroupkey, nodetypes } from "../analysis/common"
 
-class SourceNode implements FlowNode {
+abstract class FlowNode {
     id: string
     constructor(id) { this.id = id }
+    abstract get flowid(): string
+}
+
+class SourceNode extends FlowNode {
     get flowid() { return "s" + this.id }
 }
 
-class TargetNode implements FlowNode {
-    id: string
-    constructor(id) { this.id = id }
-    get flowid() { return "t" + this.id }
-}
+class TargetNode extends FlowNode {
 
-interface FlowNode {
-    get id(): string
-    get flowid(): string
+    get flowid() { return "t" + this.id }
 }
 
 class FlowLink {

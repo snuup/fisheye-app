@@ -63,8 +63,8 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             }))
             .join('td')
             .attr('connects', getconnects)
-            //.on('mouseenter', (_, d) => c.select(d.connects))
-            //.on('mouseout', (_, d) => c.deselect())
+            .on('mouseenter', (_, d) => c.select(getconnects(d)))
+            .on('mouseout', (_, d) => c.deselect())
             .style("background", ({length}) => `rgba(170, 204, 187, ${opacityScaler(length)})`)
             .text(d => d?.length)
     }

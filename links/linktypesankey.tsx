@@ -85,7 +85,8 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .attr("height", d => d.y1! - d.y0!)
                 .attr("width", d => d.x1! - d.x0!)
                 .attr("class", d => cc(d.id, d.flowid))
-                .on('click', (_, d) => c.select(...d.connects))
+                .on('mouseenter', (_, d) => c.select(...d.connects))
+                .on('mouseout', () => c.deselect())
                 .append("title")
                 .text(d => d.id)
 
@@ -111,11 +112,10 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
             link.append("path")
                 .attr("d", d3s.sankeyLinkHorizontal())
                 .attr("fill", "none")
-                // .attr("class", l => "sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
-                .on('click', (ev, fl) => { c.select(fl.connects) })
-            //.on('mouseout', (ev, fl) => { c.deselect() })
+                .on('mouseenter', (_, fl) => { c.select(fl.connects) })
+                .on('mouseout', () => { c.deselect() })
 
             link.append("title")
                 .text(d => `${d.source.name} → ${d.target.name}\n${d.value}`)

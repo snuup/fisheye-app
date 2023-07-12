@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { log } from "console"
 import { rebind, setAttributeSmooth } from "../util/common"
 import { setape } from "./props"
 
@@ -192,7 +191,7 @@ function getHName(h: HNode) {
 
 const iswebcomponent = (h: HTag) => (h.tag as string).includes("-")
 
-function sync(p: HTMLElement, i: number, h: HNode, compinfo?: CompInfo, syncchildren = true): number {
+function sync(p: HTMLElement, i: number, h: HNode, compinfo: CompInfo | undefined, syncchildren: boolean): number {
 
     // console.log("sync", p, i, h, compinfo, compinfo && getHName(compinfo.factory))
 
@@ -215,7 +214,7 @@ function sync(p: HTMLElement, i: number, h: HNode, compinfo?: CompInfo, syncchil
                     }
 
                     const [h2, ci] = evalComponent(h as HFunction | HClassComp, p.childNodes[i])
-                    return h2 ? sync(p, i, h2, ci) : i // can be null, if function component returns null | undefined
+                    return h2 ? sync(p, i, h2, ci, syncchildren) : i // can be null, if function component returns null | undefined
 
                 case "string": {
                     switch (h.tag) {
@@ -256,7 +255,7 @@ function syncChildren(e: HTMLElement, h: H, j: number): number {
         evaluate(h.children)
             .flatMap(evaluate) // children passed from components
             .filter(c => c !== null && c !== undefined && c !== false) as HNode[]
-    hcn.forEach(hc => j = sync(e, j, hc))
+    hcn.forEach(hc => j = sync(e, j, hc, undefined, true))
     return j
 }
 
@@ -270,7 +269,7 @@ export function patch(e: Node, h: HNode, patchElementOnly = false) {
 }
 
 // uses attached comps to patch elements
-export function updateview(selector: string | Node = "body", patchElementOnly?: true, replace = false) {
+export function updateview(selector: string | Node = "body", patchElementOnly?: boolean, replace = false) {
     //    console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
     const ns = (typeof selector == "string") ? document.querySelectorAll(selector) : [selector]
     let n: Node | null
@@ -290,7 +289,7 @@ function getcompnode(n: Node): Node {
 
 export function updateviewmany(...selectors: (string | Node)[]) {
     //    console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
-    let x : any[] = selectors.flatMap(s => ((typeof s == "string") ? [...document.querySelectorAll(s)] : [s]) as Node[])
+    let x: any[] = selectors.flatMap(s => ((typeof s == "string") ? [...document.querySelectorAll(s)] : [s]) as Node[])
     console.log(x)
     x = x.map(getcompnode)
     console.log(x)

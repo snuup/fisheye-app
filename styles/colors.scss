@@ -39,10 +39,23 @@ $linktypecolors: (
 
 @each $name1, $color1 in $nodetypecolors {
     @each $name2, $color2 in $nodetypecolors {
-        .sel[connects=#{$name1}-#{$name2}],
-        .sankey path.sel[connects=#{$name1}-#{$name2}]
-        {
-            stroke: $color1;
+        .sel[connects='#{$name1}-#{$name2}'] {
+            background: linear-gradient(
+                to bottom left,
+                lighten($color2, 20) 45%,
+                transparent,
+                lighten($color1, 20) 55%
+            ) !important;
         }
+        // .sankey path.sel[connects='#{$name1}-#{$name2}'] {
+        //     stroke: $color1;
+        // }
+    }
+}
+
+@each $name, $color in $nodetypecolors {
+    .sankey rect.sel.s#{$name},
+    .sankey rect.sel.t#{$name} {
+        fill: $color;
     }
 }

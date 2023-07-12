@@ -15,7 +15,7 @@ export type Matrix<T> = {
     }
 }
 
-const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }) => {
+const LinkStatsForType = ({ links, c, type }: { links: FishLink[], c: LinkController, type }) => {
 
     function rund3(tableDom: HTMLTableElement) {
 
@@ -32,7 +32,9 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
         const linktypetext = d => (d?.toString() ?? "undefined")
         const linktypetextcut = d => linktypetext(d).slice(0, 10)
 
-        mount({ matrix })
+        let o = {}
+        o[`matrix${type}`] = matrix
+        mount(o)
 
         let max = Math.max(...matrix.values.flatMap(a => a.values).map(c => c.length))
         let opacityScaler = d3.scaleLinear([0, max], [0, 1])
@@ -110,7 +112,7 @@ const LinkStatsForType = ({ links, c }: { links: FishLink[], c: LinkController }
             // td.style.backgroundImage = `linear-gradient(to bottom left, ${targetcolor} 50%, ${sourcecolor} 50%)`
         }
 
-        c.register(select)
+        c.register(e, select)
     }
 
     return (
@@ -153,7 +155,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
                         <div>
                             <h3 class={type}>{type}</h3>
                             <div class="flexy link-type">
-                                <LinkStatsForType links={links} c={lc} />
+                                <LinkStatsForType links={links} c={lc} type={type} />
                                 <SankeyForType links={links} c={lc} />
                             </div>
                         </div>

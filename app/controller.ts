@@ -41,7 +41,6 @@ export class Controller {
         // init country color scaler
         // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")
         m.countryColorScaler = d3.scaleOrdinal(d3.schemeAccent) // d3.scaleOrdinal().domain(allcountries)
-
     }
 
     getfronteer(nid: string, max) {
@@ -60,8 +59,9 @@ export class Controller {
         //         break
         // }
 
-        updateview(document.body, true, false)
-        updateview('#main', undefined, true)
+        // debugger
+        updateview("header", false, false)
+        updateview('#main', undefined, true) // replace!! non replace does not work: to debug
     }
 
     togglenetnode(ev, n: FishNode) {

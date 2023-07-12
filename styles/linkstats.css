@@ -12,12 +12,17 @@
 .link-stats-table {
   table-layout: fixed;
   user-select: none;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
+  background: white;
+}
+
+.link-stats-table th {
+  overflow: hidden;
 }
 
 .link-stats-table td {
   cursor: pointer;
-  opacity: .8;
 }
 
 .link-stats-table td:hover {
@@ -25,7 +30,6 @@
 }
 
 .link-stats-table td.sel {
-  opacity: 1;
   font-weight: bold;
 }
 

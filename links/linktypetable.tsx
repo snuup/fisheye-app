@@ -4,6 +4,7 @@ import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
 import { mount } from "../utils/common"
 import { jsx } from "../jmx-lib/core"
+import { getconnects, getlinkgroupkey, linktypes, nodetypes } from "../analysis/common"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -11,29 +12,15 @@ export type Matrix<T> = {
     }
 }
 
-export const LinkStatsForType = ({ links, c, type }: { links: FishLink[], c: LinkController, type }) => {
+export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
 
     function rund3(tableDom: HTMLTableElement) {
 
         console.log("path link-stats-table!")
 
-        let g = m.graph
-        let sourcetypes = links.map(l => g.getnode(l.source).type).distinct()
-        let targettypes = links.map(l => g.getnode(l.target).type).distinct()
-        let alltypes = sourcetypes.concat(targettypes).distinct().sort() as string[]
-
-        let linksbysource = links.groupBy(l => g.getnode(l.source).type)
-        let matrix: Matrix<any> = linksbysource.mapValues(links => links.groupBy(l => g.getnode(l.target).type))
-
-        const linktypetext = d => (d?.toString() ?? "undefined")
-        const linktypetextcut = d => linktypetext(d).slice(0, 10)
-
-        // let o = {}
-        // o[`matrix${type}`] = matrix
-        // mount(o)
-
-        let max = Math.max(...matrix.values.flatMap(a => a.values).map(c => c.length))
-        let opacityScaler = d3.scaleLinear([0, max], [0, 1])
+        let lg = m.linkgroups[type]
+        let max = lg.values.map(ls => ls.length).max()
+        let opacityScaler = d3.scalePow([0, max], [0, 1])
 
         let table = d3.select(tableDom)
         let thead = table.append("thead")
@@ -43,50 +30,53 @@ export const LinkStatsForType = ({ links, c, type }: { links: FishLink[], c: Lin
         thead
             .append('tr')
             .selectAll('th')
-            .data([".", ...alltypes])
+            .data([".", ...nodetypes])
             .join('th')
-            .text(linktypetextcut)
-            .attr("class", linktypetext)
+            .text(d => d)
+            .attr("class", d => d)
 
         let rows =
             tbody
                 .selectAll('tr')
-                .data(alltypes)
+                .data(nodetypes)
                 .join('tr')
                 .attr('linktype', d => d)
 
         rows
             .append('th')
-            .text(linktypetextcut)
-            .attr("class", linktypetext)
+            .text(d => d)
+            .attr("class", d => d)
 
         // let out = d3.select(tableout).on('click', () => setout([]))
 
         let setout = (links: any[]) => {
 
-            //console.log("clücks", links)
-            tableout.replaceChildren()
+            throw "tbd"
 
-            let rows =
-                d3.select(tableout)
-                    .on('click', () => setout([]))
-                    .selectAll('tr')
-                    .data(links.sortBy(l => -l.weight))
-                    .join('tr')
+            // tableout.replaceChildren()
 
-            rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.source).type)).text(d => d.source)
-            rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.target).type)).text(d => d.target)
-            rows.append('td').text(d => d.weight.toFixed(4))
+            // let rows =
+            //     d3.select(tableout)
+            //         .on('click', () => setout([]))
+            //         .selectAll('tr')
+            //         .data(links.sortBy(l => -l.weight))
+            //         .join('tr')
+
+            // rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.source).type)).text(d => d.source)
+            // rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.target).type)).text(d => d.target)
+            // rows.append('td').text(d => d.weight.toFixed(4))
         }
 
         rows
             .selectAll('td')
-            .data(st => alltypes.map(tt => Object.assign(matrix[st][tt] ?? [], { st, tt, connects: st + "-" + tt })))
+            .data(st => nodetypes.map(tt => {
+                return ({ st, tt, length: lg[getlinkgroupkey(st, tt)]?.length ?? 0 })
+            }))
             .join('td')
-            .attr('connects', ({ connects }) => connects)
+            .attr('connects', getconnects)
             //.on('mouseenter', (_, d) => c.select(d.connects))
             //.on('mouseout', (_, d) => c.deselect())
-            .style("background", d => `rgba(170, 204, 187, ${opacityScaler(d.length)})`)
+            .style("background", ({length}) => `rgba(170, 204, 187, ${opacityScaler(length)})`)
             .text(d => d?.length)
     }
 

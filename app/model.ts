@@ -22,7 +22,7 @@ export const mraw = {
 
     graph: Graph.Empty as Graph<FishLink>,
     linkgroups: {} as {
-        [key: string]: FishLink[]
+        [keys in keyof LinkType]: { [connects: string]: FishLink[] }
     },
 
     supergraph: Graph.Empty as Graph<SuperLink>,

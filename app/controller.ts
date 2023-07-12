@@ -43,7 +43,10 @@ export class Controller {
             l.sourcetype = g.getnode(l.source).type ?? "undefined"
             l.targettype = g.getnode(l.target).type ?? "undefined"
         })
-        m.linkgroups = m.graph.links.groupBy(l => getlinkgroupkey(l.sourcetype, l.targettype, l.type))
+        m.linkgroups =
+            m.graph.links
+                .groupBy(l => l.type)
+                .mapValues(ls => ls.groupBy(l => getlinkgroupkey(l.sourcetype, l.targettype)))
 
         // init country color scaler
         // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")

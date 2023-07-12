@@ -85,27 +85,29 @@ export function issuspicious(id: string) {
     return ws.find(s => id.includes(s))
 }
 
-export function getlinkgroupkey(sourcenodetype: string, targetnodetype: string, linktype: string): string {
-    return sourcenodetype + "-" + targetnodetype + "|" + linktype
+export function getlinkgroupkey(sourcenodetype: string, targetnodetype: string): string {
+    return sourcenodetype + "-" + targetnodetype
 }
 
-export const linktypes : LinkType[] = [
+export const getconnects = ({st, tt}) => getlinkgroupkey(st, tt)
+
+export const linktypes: LinkType[] = [
     "partnership",
     "family_relationship",
     "membership",
     "ownership"
 ]
 
-export const nodetypes : NodeType[] = [
-    "company" ,
-    "organization" ,
-    "undefined" ,
-    "person" ,
-    "location" ,
-    "political-organization" ,
-    "vessel" ,
-    "movement" ,
-    "event"
+export const nodetypes: NodeType[] = [
+    "person",
+    "organization",
+    "undefined",
+    "location",
+    "political-organization",
+    "vessel",
+    "company",
+    "event",
+    "movement"
 ]
 
 mount({ issuspicious, words2 })

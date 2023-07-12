@@ -41,6 +41,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
     let targettypes = links.map(l => gn(l.target).type).distinct()
     let alltypes = sourcetypes.concat(targettypes).distinct().sort().map(s => s ?? "undefined") as string[]
     let linksbysource = links.groupBy(l => gn(l.source).type)
+
     let flownodes: FlowNode[] = alltypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
     let flowlinks: FlowLink[] = []
     for (let source in linksbysource) {
@@ -111,8 +112,8 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
                 // .attr("class", l => "sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
-                .on('click', (ev, fl) => { c.select(fl.connects) })
-                .on('mouseout', (ev, fl) => { c.deselect() })
+                //.on('click', (ev, fl) => { c.select(fl.connects) })
+                //.on('mouseout', (ev, fl) => { c.deselect() })
 
             link.append("title")
                 .text(d => `${d.source.name} → ${d.target.name}\n${d.value}`)

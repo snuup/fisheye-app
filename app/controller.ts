@@ -11,7 +11,7 @@ import { Url } from "./routes"
 import { Path, PathMatrixBuilder } from "../elements/path"
 import { Paths } from "../comp/pathmatrix"
 import { SuperLink } from "../elements/superlink"
-import { issuspicious } from "../analysis/common"
+import { getlinkgroupkey, issuspicious } from "../analysis/common"
 
 
 export class Controller {
@@ -27,6 +27,7 @@ export class Controller {
         let nodes: FishNode[] = mc1.nodes.map(o => new FishNode(o))
         let links: FishLink[] = mc1.links.map(o => new FishLink(o))
         m.graph = new Graph(nodes, links)
+        let g = m.graph
 
         let superlinks = links.groupBy(l => l.ukey).values.map(ls => new SuperLink(ls))
         m.supergraph = new Graph(nodes, superlinks)
@@ -37,6 +38,12 @@ export class Controller {
         this.restore()
         this.computepathmatrix()
         this.updatenetgraph()
+
+        links.forEach(l => {
+            l.sourcetype = g.getnode(l.source).type ?? "undefined"
+            l.targettype = g.getnode(l.target).type ?? "undefined"
+        })
+        m.linkgroups = m.graph.links.groupBy(l => getlinkgroupkey(l.sourcetype, l.targettype, l.type))
 
         // init country color scaler
         // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")

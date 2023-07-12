@@ -85,4 +85,8 @@ export function issuspicious(id: string) {
     return ws.find(s => id.includes(s))
 }
 
+export function getlinkgroupkey(sourcenodetype: string, targetnodetype: string, linktype: string): string {
+    return sourcenodetype + "-" + targetnodetype + "|" + linktype
+}
+
 mount({ issuspicious, words2 })

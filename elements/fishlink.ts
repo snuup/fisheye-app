@@ -6,6 +6,8 @@ export class FishLink implements ILink {
     original: MC1Link
     source: string
     target: string
+    sourcetype: string
+    targettype: string
 
     constructor(original) {
         this.original = original

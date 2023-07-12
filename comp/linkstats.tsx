@@ -88,8 +88,8 @@ const LinkStatsForType = ({ links, c, type }: { links: FishLink[], c: LinkContro
             .data(st => alltypes.map(tt => Object.assign(matrix[st][tt] ?? [], { st, tt, connects: st + "-" + tt })))
             .join('td')
             .attr('connects', ({ connects }) => connects)
-            .on('mouseenter', (_, d) => c.select(d.connects))
-            .on('mouseout', (_, d) => c.deselect())
+            //.on('mouseenter', (_, d) => c.select(d.connects))
+            //.on('mouseout', (_, d) => c.deselect())
             .style("background", d => `rgba(170, 204, 187, ${opacityScaler(d.length)})`)
             .text(d => d?.length)
     }

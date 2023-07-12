@@ -38,7 +38,7 @@
   color: #5e3e6c;
 }
 
-.political_organization {
+.political-organization {
   color: #785586;
   fill: #785586;
   stroke: #785586;
@@ -142,11 +142,11 @@
   stroke: #5c74a6;
 }
 
-.sel[connects='company-political_organization'] {
+.sel[connects='company-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #9eacca 55%) !important;
 }
 
-.sankey path.sel[connects='company-political_organization'] {
+.sankey path.sel[connects='company-political-organization'] {
   stroke: #5c74a6;
 }
 
@@ -214,11 +214,11 @@
   stroke: #ff8600;
 }
 
-.sel[connects='event-political_organization'] {
+.sel[connects='event-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #ffb666 55%) !important;
 }
 
-.sankey path.sel[connects='event-political_organization'] {
+.sankey path.sel[connects='event-political-organization'] {
   stroke: #ff8600;
 }
 
@@ -286,11 +286,11 @@
   stroke: #829750;
 }
 
-.sel[connects='location-political_organization'] {
+.sel[connects='location-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #b2c28b 55%) !important;
 }
 
-.sankey path.sel[connects='location-political_organization'] {
+.sankey path.sel[connects='location-political-organization'] {
   stroke: #829750;
 }
 
@@ -358,11 +358,11 @@
   stroke: #a39e59;
 }
 
-.sel[connects='movement-political_organization'] {
+.sel[connects='movement-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #c8c59a 55%) !important;
 }
 
-.sankey path.sel[connects='movement-political_organization'] {
+.sankey path.sel[connects='movement-political-organization'] {
   stroke: #a39e59;
 }
 
@@ -430,11 +430,11 @@
   stroke: #9468a8;
 }
 
-.sel[connects='organization-political_organization'] {
+.sel[connects='organization-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #c2a9cd 55%) !important;
 }
 
-.sankey path.sel[connects='organization-political_organization'] {
+.sankey path.sel[connects='organization-political-organization'] {
   stroke: #9468a8;
 }
 
@@ -462,75 +462,75 @@
   stroke: #9468a8;
 }
 
-.sel[connects='political_organization-company'] {
+.sel[connects='political-organization-company'] {
   background: linear-gradient(to bottom left, #9eacca 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-company'] {
+.sankey path.sel[connects='political-organization-company'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-event'] {
+.sel[connects='political-organization-event'] {
   background: linear-gradient(to bottom left, #ffb666 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-event'] {
+.sankey path.sel[connects='political-organization-event'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-location'] {
+.sel[connects='political-organization-location'] {
   background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-location'] {
+.sankey path.sel[connects='political-organization-location'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-movement'] {
+.sel[connects='political-organization-movement'] {
   background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-movement'] {
+.sankey path.sel[connects='political-organization-movement'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-organization'] {
+.sel[connects='political-organization-organization'] {
   background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-organization'] {
+.sankey path.sel[connects='political-organization-organization'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-political_organization'] {
+.sel[connects='political-organization-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-political_organization'] {
+.sankey path.sel[connects='political-organization-political-organization'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-person'] {
+.sel[connects='political-organization-person'] {
   background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-person'] {
+.sankey path.sel[connects='political-organization-person'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-vessel'] {
+.sel[connects='political-organization-vessel'] {
   background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-vessel'] {
+.sankey path.sel[connects='political-organization-vessel'] {
   stroke: #785586;
 }
 
-.sel[connects='political_organization-undefined'] {
+.sel[connects='political-organization-undefined'] {
   background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #aa8bb6 55%) !important;
 }
 
-.sankey path.sel[connects='political_organization-undefined'] {
+.sankey path.sel[connects='political-organization-undefined'] {
   stroke: #785586;
 }
 
@@ -574,11 +574,11 @@
   stroke: #a54b4b;
 }
 
-.sel[connects='person-political_organization'] {
+.sel[connects='person-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #cb8c8c 55%) !important;
 }
 
-.sankey path.sel[connects='person-political_organization'] {
+.sankey path.sel[connects='person-political-organization'] {
   stroke: #a54b4b;
 }
 
@@ -646,11 +646,11 @@
   stroke: #4d8399;
 }
 
-.sel[connects='vessel-political_organization'] {
+.sel[connects='vessel-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #89b2c3 55%) !important;
 }
 
-.sankey path.sel[connects='vessel-political_organization'] {
+.sankey path.sel[connects='vessel-political-organization'] {
   stroke: #4d8399;
 }
 
@@ -718,11 +718,11 @@
   stroke: #727272;
 }
 
-.sel[connects='undefined-political_organization'] {
+.sel[connects='undefined-political-organization'] {
   background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #a5a5a5 55%) !important;
 }
 
-.sankey path.sel[connects='undefined-political_organization'] {
+.sankey path.sel[connects='undefined-political-organization'] {
   stroke: #727272;
 }
 
@@ -775,8 +775,8 @@
   fill: #9468a8;
 }
 
-.sankey rect.sel.spolitical_organization,
-.sankey rect.sel.tpolitical_organization {
+.sankey rect.sel.spolitical-organization,
+.sankey rect.sel.tpolitical-organization {
   fill: #785586;
 }
 

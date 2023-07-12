@@ -4,7 +4,7 @@ import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
 import { mount } from "../utils/common"
 import { jsx } from "../jmx-lib/core"
-import { getconnects, getlinkgroupkey, linktypes, nodetypes } from "../analysis/common"
+import { getconnects, getlinkgroupkey, linktypes, nicenodetype, nodetypes } from "../analysis/common"
 
 export type Matrix<T> = {
     [columns: string]: {
@@ -20,7 +20,7 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
 
         let lg = m.linkgroups[type]
         let max = lg.values.map(ls => ls.length).max()
-        let opacityScaler = d3.scalePow([0, max], [0, 1])
+        let opacityScaler = d3.scaleSqrt([0, max], [0, 1])
 
         let table = d3.select(tableDom)
         let thead = table.append("thead")
@@ -32,7 +32,7 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             .selectAll('th')
             .data([".", ...nodetypes])
             .join('th')
-            .text(d => d)
+            .text(nicenodetype)
             .attr("class", d => d)
 
         let rows =

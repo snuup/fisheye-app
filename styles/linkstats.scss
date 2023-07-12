@@ -1,32 +1,17 @@
 @import '_exp.scss';
 
-.linkstats {
+.link-stats-table {
     td,
     th {
         // border: solid 1px #ccc;
         padding: 2px 4px;
-        text-align: right;
     }
-    table {
-        // border-collapse: collapse;
-        &.out {
-            margin-top: 1em;
-            cursor: pointer;
-        }
-    }
-}
-
-
-.link-stats-table {
-    table-layout: fixed;
-    user-select: none;
-    max-width: 800px;
-    width: 100%;
-    background: white;
-    th{
+    th {
         overflow: hidden;
+        text-align: center;
     }
     td {
+        text-align: right;
         cursor: pointer;
         &:hover {
             background-color: white;
@@ -35,6 +20,18 @@
             font-weight: bold;
         }
     }
+    table {
+        // border-collapse: collapse;
+        &.out {
+            margin-top: 1em;
+            cursor: pointer;
+        }
+    }
+    table-layout: fixed;
+    user-select: none;
+    max-width: 800px;
+    width: 100%;
+    background: white;
 }
 
 $color12: #aaccbb;

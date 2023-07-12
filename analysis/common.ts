@@ -110,4 +110,11 @@ export const nodetypes: NodeType[] = [
     "movement"
 ]
 
+export function nicenodetype(type: string):string {
+    switch(type){
+        case "political-organization": return "pol-org"
+        default: return type
+    }
+}
+
 mount({ issuspicious, words2 })

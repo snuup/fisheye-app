@@ -1,14 +1,3 @@
-.linkstats td,
-.linkstats th {
-  padding: 2px 4px;
-  text-align: right;
-}
-
-.linkstats table.out {
-  margin-top: 1em;
-  cursor: pointer;
-}
-
 .link-stats-table {
   table-layout: fixed;
   user-select: none;
@@ -17,11 +6,18 @@
   background: white;
 }
 
+.link-stats-table td,
+.link-stats-table th {
+  padding: 2px 4px;
+}
+
 .link-stats-table th {
   overflow: hidden;
+  text-align: center;
 }
 
 .link-stats-table td {
+  text-align: right;
   cursor: pointer;
 }
 
@@ -31,6 +27,11 @@
 
 .link-stats-table td.sel {
   font-weight: bold;
+}
+
+.link-stats-table table.out {
+  margin-top: 1em;
+  cursor: pointer;
 }
 
 .link-weights {

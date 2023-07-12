@@ -4,7 +4,7 @@ import { jsx } from "../jmx-lib/core"
 import { m } from "../app/model"
 import { LinkController } from "./linkcontroller"
 import { cc } from "../utils/common"
-import { getlinkgroupkey, nodetypes } from "../analysis/common"
+import { getlinkgroupkey, nodetypes, splitconnects } from "../analysis/common"
 
 abstract class FlowNode {
 
@@ -130,10 +130,9 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 let path = e.querySelector(`[connects=${c}]`)
                 path?.classList?.toggle("sel", force)
 
-                // let [s, t] = connects.split("-")
-
-                // e.querySelector(`.s${s}`)?.classList?.toggle("sel", force)
-                // e.querySelector(`.t${t}`)?.classList?.toggle("sel", force)
+                let [s, t] = splitconnects(c)
+                e.querySelector(`.s${s}`)?.classList?.toggle("sel", force)
+                e.querySelector(`.t${t}`)?.classList?.toggle("sel", force)
             }
         }
 

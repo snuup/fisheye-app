@@ -31,6 +31,7 @@ class FlowLink {
         this.target = "t" + this._target
     }
     get connects() { return this._source + "-" + this._target }
+    //get sourcesort() {  }
 }
 
 export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkController }) => {
@@ -111,12 +112,7 @@ export const SankeyForType = ({ links, c }: { links: FishLink[], c: LinkControll
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
                 .on('click', (ev, fl) => { c.select(fl.connects) })
-                .on('mouseout', (ev, fl) => {
-                    //console.log("out", fl)
-                    if (!td) return
-                    // td.style.background = ""  //classList.remove("sel")
-                    td = null
-                })
+                .on('mouseout', (ev, fl) => { c.deselect() })
 
             link.append("title")
                 .text(d => `${d.source.name} → ${d.target.name}\n${d.value}`)

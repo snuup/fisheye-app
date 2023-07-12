@@ -26,6 +26,7 @@ export class LinkController {
     }
 
     deselect() {
+        console.log("select", this.selection)
         if (!this.e.isConnected) return window.removeEventListener("mousedown", this.deselect)
         this.deselectall()
     }

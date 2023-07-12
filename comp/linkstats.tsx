@@ -85,20 +85,13 @@ const LinkStatsForType = ({ links, c, type }: { links: FishLink[], c: LinkContro
 
         rows
             .selectAll('td')
-            .data(st => alltypes.map(tt => {
-                let cell = matrix[st][tt] ?? []
-                if (cell) {
-                    cell.st = st
-                    cell.tt = tt
-                }
-                return cell
-            }))
+            .data(st => alltypes.map(tt => Object.assign(matrix[st][tt] ?? [], { st, tt, connects: st + "-" + tt })))
             .join('td')
-            .attr('connects', d => d.st + "-" + d.tt)
-            .on('click', (_, d) => c.select(d.st + "-" + d.tt))
+            .attr('connects', ({ connects }) => connects)
+            .on('mouseenter', (_, d) => c.select(d.connects))
+            .on('mouseout', (_, d) => c.deselect())
             .style("background", d => `rgba(170, 204, 187, ${opacityScaler(d.length)})`)
             .text(d => d?.length)
-        //.on('click', (_, d) => setout(d))
     }
 
     let tableout

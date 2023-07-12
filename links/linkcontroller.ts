@@ -3,8 +3,8 @@ import { rebind } from "../utils/common"
 export class LinkController {
 
     e: HTMLElement
-    callbacks = [] as ((string, boolean) => void)[]
-    selection = ""
+    callbacks = [] as ((selections: string[], select: boolean) => void)[]
+    selection = [] as string[]
 
     constructor() { rebind(this) }
 
@@ -14,7 +14,7 @@ export class LinkController {
         window.addEventListener("mousedown", this.deselect)
     }
 
-    select(connects: string) {
+    select(...connects: string[]) {
         console.log("select", connects)
         this.deselectall()
         this.callbacks.forEach(cb => cb(this.selection = connects, true))

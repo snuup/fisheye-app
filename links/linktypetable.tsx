@@ -73,12 +73,13 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
 
     function onmount(e: HTMLElement) {
 
-        function select(connects: string, force: boolean) {
+        function select(connects: string[], force: boolean) {
             //console.log("select linkstat!")
-            let td = e.querySelector(`[connects=${connects}]`)
-            td?.classList.toggle("sel", force)
+            for(let c of connects){
+                let td = e.querySelector(`[connects=${c}]`)
+                td?.classList.toggle("sel", force)
+            }
         }
-
         c.register(e, select)
     }
 

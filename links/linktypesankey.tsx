@@ -7,9 +7,18 @@ import { cc } from "../utils/common"
 import { getlinkgroupkey, nodetypes } from "../analysis/common"
 
 abstract class FlowNode {
+
+    sourceLinks: FlowLink[] // assigned by d3
+    targetLinks: FlowLink[] // ...
+
     id: string
     constructor(id) { this.id = id }
+
     abstract get flowid(): string
+
+    get connects() {
+        return this.sourceLinks.concat(this.targetLinks).map(l => l.connects)
+    }
 }
 
 class SourceNode extends FlowNode {
@@ -17,7 +26,6 @@ class SourceNode extends FlowNode {
 }
 
 class TargetNode extends FlowNode {
-
     get flowid() { return "t" + this.id }
 }
 
@@ -33,7 +41,7 @@ class FlowLink {
 
 export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
 
-    let lg = m.linkgroups [type]
+    let lg = m.linkgroups[type]
 
     let flownodes: FlowNode[] = nodetypes.flatMap(t => [new SourceNode(t), new TargetNode(t)])
 
@@ -77,6 +85,7 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .attr("height", d => d.y1! - d.y0!)
                 .attr("width", d => d.x1! - d.x0!)
                 .attr("class", d => cc(d.id, d.flowid))
+                .on('click', (_, d) => c.select(...d.connects))
                 .append("title")
                 .text(d => d.id)
 
@@ -106,7 +115,7 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
                 .on('click', (ev, fl) => { c.select(fl.connects) })
-                //.on('mouseout', (ev, fl) => { c.deselect() })
+            //.on('mouseout', (ev, fl) => { c.deselect() })
 
             link.append("title")
                 .text(d => `${d.source.name} → ${d.target.name}\n${d.value}`)
@@ -115,16 +124,17 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
 
     function onmount(e: HTMLElement) {
 
-        function select(connects: string, force: boolean) {
+        function select(connects: string[], force: boolean) {
             // console.log("select sankey!", connects)
-            // debugger
-            let path = e.querySelector(`[connects=${connects}]`)
-            path?.classList?.toggle("sel", force)
+            for (let c of connects) {
+                let path = e.querySelector(`[connects=${c}]`)
+                path?.classList?.toggle("sel", force)
 
-            let [s, t] = connects.split("-")
+                // let [s, t] = connects.split("-")
 
-            e.querySelector(`.s${s}`)?.classList?.toggle("sel", force)
-            e.querySelector(`.t${t}`)?.classList?.toggle("sel", force)
+                // e.querySelector(`.s${s}`)?.classList?.toggle("sel", force)
+                // e.querySelector(`.t${t}`)?.classList?.toggle("sel", force)
+            }
         }
 
         c.register(e, select)

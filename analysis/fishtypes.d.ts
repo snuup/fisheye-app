@@ -10,7 +10,7 @@ type NodeType =
     "undefined" |
     "person" |
     "location" |
-    "political-organization" |
+    "political_organization" |
     "vessel" |
     "movement" |
     "event"

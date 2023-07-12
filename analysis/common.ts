@@ -89,7 +89,7 @@ export function getlinkgroupkey(sourcenodetype: NodeType, targetnodetype: NodeTy
     return sourcenodetype + "-" + targetnodetype
 }
 
-export const getconnects = ({st, tt}) => getlinkgroupkey(st, tt)
+export const getconnects = ({ st, tt }) => getlinkgroupkey(st, tt)
 export const splitconnects = (connects) => connects.split('-')
 
 export const linktypes: LinkType[] = [
@@ -100,22 +100,22 @@ export const linktypes: LinkType[] = [
 ]
 
 export const nodetypes: NodeType[] = [
-    "person",
-    "organization",
-    "undefined",
-    "location",
-    "political-organization",
-    "vessel",
     "company",
     "event",
-    "movement"
+    "location",
+    "organization",
+    "movement",
+    "person",
+    "political_organization",
+    "vessel",
+    "undefined"
 ]
 
 mount({ linktypes, nodetypes })
 
-export function nicenodetype(type: string):string {
-    switch(type){
-        case "political-organization": return "pol-org"
+export function nicenodetype(type: string): string {
+    switch (type) {
+        case "political_organization": return "pol-org"
         default: return type
     }
 }

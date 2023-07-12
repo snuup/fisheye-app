@@ -107,7 +107,7 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 // .attr("class", l => "sankey-path")
                 .attr("stroke-width", d => Math.max(1, d.width))
                 .attr('connects', fl => fl.connects)
-                //.on('click', (ev, fl) => { c.select(fl.connects) })
+                .on('click', (ev, fl) => { c.select(fl.connects) })
                 //.on('mouseout', (ev, fl) => { c.deselect() })
 
             link.append("title")

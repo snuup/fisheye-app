@@ -35,7 +35,7 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
 
         rows
             .append('th')
-            .text(d => d)
+            .text(nicenodetype)
             .attr("class", d => d)
 
         let setout = (links: any[]) => {

@@ -47,7 +47,7 @@ table.data-list td {
   display: block;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 15px;
   height: 11px;
 }
@@ -59,4 +59,4 @@ table.data-list td {
 
 ::-webkit-scrollbar-thumb {
   background: #538a6f;
-}
+} */

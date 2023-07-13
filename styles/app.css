@@ -122,3 +122,22 @@ h2 {
   color: maroon;
   background: red;
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b1c5bb;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #538a6f;
+}

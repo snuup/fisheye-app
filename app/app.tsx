@@ -19,6 +19,7 @@ import { GraphStats } from "../graphstats/graphstats"
 mount({ mc1 })
 
 let App = () => {
+    console.log("????????", m.url, 'network' == m.url[0])
     return (
         <body class={cc(m.url)}>
             <header>
@@ -32,7 +33,9 @@ let App = () => {
                 <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")} />
             </header>
 
-            <Navigation />
+            <When cond={'network' == m.url[0]}>
+                <Navigation />
+            </When>
 
             <article id='main' class={m.url[0]}>
                 <When cond={m.url[0] == 'nodestats' || m.url[0] as unknown == ''}>

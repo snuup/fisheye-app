@@ -56,7 +56,7 @@ export const GraphStats = () => {
                         {<ArrayAsTable array={multilinksdirected.map(([, b]) => b.length).countBy().entries.sortBy(([length, counts]) => -length)} />}
                     </div>
                     <table class="data-list">
-                        {multilinksdirected.flatMap(([_, ls]) => ls).slice(0, 30).map(l => (
+                        {multilinksdirected.flatMap(([_, ls]) => ls).slice(0, 50).map(l => (
                             <tr>
                                 <td>{l.source}</td>
                                 <td>{l.target}</td>
@@ -76,7 +76,7 @@ export const GraphStats = () => {
                         {<ArrayAsTable array={multilinksundirected.map(([, b]) => b.length).countBy().entries.sortBy(([length, counts]) => -length)} />}
                     </div>
                     <table class="data-list">
-                        {multilinksundirected.flatMap(([_, ls]) => ls).slice(0, 30).map(l => (
+                        {multilinksundirected.flatMap(([_, ls]) => ls).slice(0, 50).map(l => (
                             <tr>
                                 <td>{l.source}</td>
                                 <td>{l.target}</td>

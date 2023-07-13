@@ -70,8 +70,9 @@ export class Controller {
         // }
 
         // debugger
-        updateview("header", false, false)
-        updateview('#main', undefined, true) // replace!! non replace does not work: to debug
+        updateview(document.body, false, true)
+        //updateview("header", false, false)
+        //updateview('#main', undefined, true) // replace!! non replace does not work: to debug
     }
 
     togglenetnode(ev, n: FishNode) {

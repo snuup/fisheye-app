@@ -1,3 +1,5 @@
+@import '_exp.scss';
+
 .multilinks {
     // background: lightseagreen;
 }
@@ -14,7 +16,7 @@ table.data-list {
     border-collapse: separate;
     td {
         margin: 2px;
-        padding: 0 4px 2px 0;
+        padding: 0 4px 0 0;
         background-color: transparent !important;
     }
 }
@@ -33,9 +35,10 @@ table.data-list {
 .supergraph {
     margin: 2em 0 4em 0;
     display: inline-block;
-    .gridtable {
-        justify-content: start;
-    }
+}
+
+.gridtable {
+    justify-content: start;
 }
 
 .degree {
@@ -48,3 +51,4 @@ table.data-list {
         display: block;
     }
 }
+

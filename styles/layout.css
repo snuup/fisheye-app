@@ -50,7 +50,8 @@ footer {
 }
 
 body.nodestats,
-body.linkstats
+body.linkstats,
+body.graphstats
  {
     display: grid;
     grid-template-areas:
@@ -65,3 +66,4 @@ body.linkstats
     grid-template-rows: auto 1fr;
     grid-gap: 10px;
 }
+

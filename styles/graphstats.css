@@ -10,7 +10,7 @@ table.data-list {
 
 table.data-list td {
   margin: 2px;
-  padding: 0 4px 2px 0;
+  padding: 0 4px 0 0;
   background-color: transparent !important;
 }
 
@@ -31,7 +31,7 @@ table.data-list td {
   display: inline-block;
 }
 
-.supergraph .gridtable {
+.gridtable {
   justify-content: start;
 }
 
@@ -45,4 +45,18 @@ table.data-list td {
 
 .degree span {
   display: block;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #538a6f;
 }

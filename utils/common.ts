@@ -153,6 +153,9 @@ mergePrototype(class extends Object {
     mapValues(fmap) {
         return Object.fromEntries(this.entries.map(([k, v]) => [k, fmap(v)]))
     }
+    filterByValue(f) {
+        return Object.fromEntries(this.entries.filter(([, v]) => f(v)))
+    }
 }, Object)
 
 mergePrototype(class extends String {

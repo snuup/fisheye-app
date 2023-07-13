@@ -56,6 +56,7 @@ interface Object {
     get values(): any[]
     mapKeys(fmap: (string) => string): any
     mapValues(fmap: (any) => any): any
+    filterByValue(f: (string) => boolean): any
     //get entries(this: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
     //get entries(): [string, ThisType<T>][];
 }

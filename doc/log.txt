@@ -20,6 +20,8 @@
     ends are both minors
     ends have 2 neighbors (just 1 other)
 
+  removing inner links -> supernodes
+
 
 10.7.
 - common histogram component

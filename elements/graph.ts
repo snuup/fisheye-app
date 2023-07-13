@@ -96,6 +96,13 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     innerlinks(majors: Set<string>) {
         return this.minorlinks(majors).filter(l => this.isinnerlink(l))
     }
+
+    joinablenodes() {
+        let nns = this.nodes.map(n => ({ n, neighbors: this.getneighbors(n.id).sort() })) // adorn node with neighbors
+        nns = nns.filter(nn => nn.neighbors.length == 2) // filter nodes with just 2 neighbors
+        let o = nns.groupBy((nn) => nn.neighbors.join()) // group by neighbors, nodes with same 2 neighbors are grouped
+        return o.filterByValue(v => v.length > 1) // where that group is larger than 1, we can aggregate
+    }
 }
 
 export class GraphAlgos {

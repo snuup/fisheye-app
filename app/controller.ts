@@ -180,7 +180,7 @@ export class Controller {
     }
 
     resethighlights() {
-        console.log("resethighlights")
+        //console.log("resethighlights")
 
         m.netgraph.links.forEach(l => l.highlight = false)
         m.netgraph.nodes.forEach(n => {
@@ -214,7 +214,7 @@ export class Controller {
 
     storenetgraph() {
         localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
-        console.log("stored")
+        //console.log("stored")
         this.printhfs()
     }
 
@@ -225,7 +225,7 @@ export class Controller {
         // ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
         let nodemap = new Map(ns.map(n => [n.id, n]))
         m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
-        console.log("restored")
+        //console.log("restored")
         this.printhfs()
     }
 

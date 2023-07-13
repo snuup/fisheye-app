@@ -9,9 +9,10 @@ import { Navigation } from "../comp/nav"
 import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
 import { SeaView } from "../comp/seaview"
-import { LinkStats } from "../links/linkstats"
 import { NetworkView } from "../comp/networkview"
 import { NodeIdBarChart } from "../comp/nodebarcharts"
+import { LinkStats } from "../linkstats/linkstats"
+import { GraphStats } from "../graphstats/graphstats"
 
 //let App = () => <body><NodeIdBarChart /></body>
 
@@ -24,6 +25,7 @@ let App = () => {
                 <h2>Mini Challenge 1</h2>
                 <Link url={['nodestats']} />
                 <Link url={['linkstats']} />
+                <Link url={['graphstats']} />
                 <Link url={['network']} />
                 <Link url={['matrix']} />
                 <Link url={['tree']} />
@@ -38,6 +40,9 @@ let App = () => {
                 </When>
                 <When cond={m.url[0] == 'linkstats'}>
                     <LinkStats links={m.graph.links} />
+                </When>
+                <When cond={m.url[0] == 'graphstats'}>
+                    <GraphStats links={m.graph.links} />
                 </When>
                 <When cond={m.url[0] == 'matrix'}>
                     <MatrixView />

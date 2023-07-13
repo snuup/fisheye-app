@@ -16,7 +16,7 @@ interface HTMLElement {
 }
 
 interface Array<T> {
-    countBy(selector: (x: T) => string): { [key: string]: number }
+    countBy(selector?: (x: T) => string): { [key: string]: number }
     groupBy(selector: (x: T) => string | undefined): { [key: string | undefined]: T[] }
     sortBy(selector: (x: T) => U): T[]
     sortWithUndefinedLast(): T[]

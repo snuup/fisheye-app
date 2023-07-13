@@ -5,9 +5,10 @@ import { m } from "./model"
 export type Url =
     ["/"] |
     ["nodestats"] |
+    ["linkstats", string?] |
+    ["graphstats", string?] |
     ["matrix"] |
     ["network", string?] |
-    ["linkstats", string?] |
     ["tree", string?]
 
 export const Link = ({ url }: { url: Url }) => <a href={'/' + url.join('/')} class={cc({ selected: url[0] === m.url[0] })}>{url[0]}</a>

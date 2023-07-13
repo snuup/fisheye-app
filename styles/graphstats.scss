@@ -1,0 +1,25 @@
+.multilinks {
+    // background: lightseagreen;
+}
+
+.small-grid .gridtable {
+    grid-template-columns: min-content min-content;
+}
+
+table.data-list {
+    // background: lightcoral;
+    gap: 0;
+    margin-top: 1em;
+
+    border-collapse: separate;
+    td {
+        margin: 2px;
+        padding: 0 4px 2px 0;
+        background-color: transparent !important;
+    }
+
+}
+
+.occuriences {
+    margin-top: 1em;
+}

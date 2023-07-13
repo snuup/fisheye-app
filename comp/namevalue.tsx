@@ -12,7 +12,7 @@ export function NameValue({ name, value, percent }: { name: string, value?: numb
         </>)
 }
 
-export const ObjectAsTable = ({ o, multiplier, showbars }: { o: { [key: string]: number }, multiplier?: number, showbars?: undefined | true }) => {
+export const ObjectAsTable = ({ o, multiplier, showbars, reverse }: { o: { [key: string]: number }, multiplier?: number, showbars?: undefined | true, reverse?: true  }) => {
     multiplier ??= 1
     let scaler = d3.scaleLinear([0, Object.values(o).max()], [0, 100 * multiplier])
     return (
@@ -20,6 +20,19 @@ export const ObjectAsTable = ({ o, multiplier, showbars }: { o: { [key: string]:
             {Object.entries(o).map(makekv)
                 //.sortBy(({ v }) => -v)
                 .map(({ k, v }) => <NameValue name={k} value={v} percent={showbars ? scaler(v) : undefined} />)
+            }
+        </div>
+    )
+}
+
+export const ArrayAsTable = ({ array, multiplier, showbars }: { array: any[], multiplier?: number, showbars?: undefined | true }) => {
+    multiplier ??= 1
+    let scaler = d3.scaleLinear([0, array.map(([k,v]) => v).max()], [0, 100 * multiplier])
+    return (
+        <div class="gridtable">
+            {array
+                //.sortBy(({ v }) => -v)
+                .map(([k, v]) => <NameValue name={k} value={v} percent={showbars ? scaler(v) : undefined} />)
             }
         </div>
     )

@@ -112,6 +112,8 @@ mergePrototype(class extends Array {
         let sum = 0
         return this.map(n => sum += n)
     }
+    mapfst() { return this.map(a => a[0]) }
+    mapsnd() { return this.map(a => a[1]) }
 }, Array)
 
 mergePrototype(class extends Map {

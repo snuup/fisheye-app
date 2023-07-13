@@ -15,7 +15,7 @@ export class LinkController {
     }
 
     select(connects: string[], multiselect?: boolean) {
-        console.log("select", connects)
+        //console.log("select", connects)
         this.deselectall()
         this.callbacks.forEach(cb => cb(this.selection = connects, true))
     }

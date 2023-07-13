@@ -2,7 +2,7 @@ import * as d3 from "d3"
 import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
 import { jsx } from "../jmx-lib/core"
-import { getconnects, getlinkgroupkey, nicenodetype, nodetypes } from "../analysis/common"
+import { getconnects, getlinkgroupkey, nicelinktype, nicenodetype, nodetypes } from "../analysis/common"
 import { identity } from "../utils/common"
 
 export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
@@ -61,33 +61,35 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
 
         let setout = (links: any[]) => {
 
-            throw "tbd"
+            console.log("setout", links)
 
-            // tableout.replaceChildren()
+            tableout.replaceChildren()
 
-            // let rows =
-            //     d3.select(tableout)
-            //         .on('click', () => setout([]))
-            //         .selectAll('tr')
-            //         .data(links.sortBy(l => -l.weight))
-            //         .join('tr')
+            let rows =
+                d3.select(tableout)
+                    .on('click', () => setout([]))
+                    .selectAll('tr')
+                    .data(links.sortBy(l => -l.weight))
+                    .join('tr')
 
-            // rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.source).type)).text(d => d.source)
-            // rows.append('td').attr("class", d => linktypetext(m.graph.getnode(d.target).type)).text(d => d.target)
-            // rows.append('td').text(d => d.weight.toFixed(4))
+            rows.append('td').attr("class", d => nicenodetype(m.graph.getnode(d.source).type)).text(d => d.source)
+            rows.append('td').attr("class", d => nicenodetype(m.graph.getnode(d.target).type)).text(d => d.target)
+            rows.append('td').text(d => d.weight.toFixed(4))
         }
 
         rows
             .selectAll('td')
             .data(st => nodetypes.map(tt => {
-                return ({ st, tt, length: lg[getlinkgroupkey(st, tt)]?.length ?? 0 })
+                let links = lg[getlinkgroupkey(st, tt)] ?? []
+                return ({ st, tt, links, length: links.length })
             }))
             .join('td')
             .attr('connects', getconnects)
             .on('mouseenter', (_, d) => c.select([getconnects(d)]))
             .on('mouseout', (_, d) => c.deselect())
+            .on("click", (_, d) => setout(d.links))
             .style("background", ({ length }) => `rgba(170, 204, 187, ${opacityScaler(length)})`)
-            .text(d => d?.length)
+            .text(d => d.length)
     }
 
     let tableout

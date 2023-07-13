@@ -70,32 +70,6 @@ interface Window {
     [key: string]: any
 }
 
-// mc1
-
-type MC1Id = number | string
-
-interface MC1Link {
-    //id: number | string
-    type: string
-    weight: number
-    key: string
-    source: MC1Id
-    target: MC1Id
-}
-
-interface NodeLinkData {
-    type: string,
-    outs: number,
-    ins: number,
-    total: number
-}
-
-interface MC1Node {
-    type?: string
-    country?: string
-    id: MC1Id
-    donut: NodeLinkData[]
-}
 
 interface INode {
     id: string

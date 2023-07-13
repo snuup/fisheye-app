@@ -7,7 +7,7 @@ import { ObjectAsTable } from "../comp/namevalue"
 import { mc1 } from "../data/data"
 import { LinkController } from "./linkcontroller"
 import { LinkStatsForType } from "./linktypetable"
-import { linktypes, nicelinktyüe as nicelinktype } from "../analysis/common"
+import { linktypes, nicelinktype as nicelinktype } from "../analysis/common"
 
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
     //console.log("linkstats", links)

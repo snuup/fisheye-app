@@ -70,7 +70,6 @@ interface Window {
     [key: string]: any
 }
 
-
 interface INode {
     id: string
 }

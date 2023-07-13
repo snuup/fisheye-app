@@ -118,7 +118,7 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .on('mouseout', () => { c.deselect() })
 
             link.append("title")
-                .text(d => `${d.source.name} → ${d.target.name}\n${d.value}`)
+                .text(d => `${d.source.id} → ${d.target.id}\n${d.value}`)
         }
     }
 

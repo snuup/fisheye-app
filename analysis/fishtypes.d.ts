@@ -4,7 +4,7 @@ type LinkType =
     "membership" |
     "ownership"
 
-type NodeType =
+type RawNodeType =
     "company" |
     "organization" |
     undefined |
@@ -15,7 +15,7 @@ type NodeType =
     "movement" |
     "event"
 
-type NodeTypeS =
+type NodeType =
     "company" |
     "organization" |
     "undefined" |

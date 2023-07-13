@@ -108,7 +108,7 @@ export const nodetypes: NodeType[] = [
     "person",
     "political_organization",
     "vessel",
-    undefined
+    "undefined"
 ]
 
 mount({ linktypes, nodetypes })

@@ -1,3 +1,13 @@
+13.7.
++ link, node, graph stats done
+- network view: avoid path matrix and show all paths as single links
+  -> view shows paths, not links
+  > clutters view
+  > slider for max path length
+  > for selected show all paths
+  > pin paths
+  > nodes on paths are light shown
+
 10.7.
 - common histogram component
 - node properties with counts as histogram

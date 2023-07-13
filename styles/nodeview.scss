@@ -47,14 +47,14 @@ nav {
     }
 }
 
-.gridtable {
-    display: grid;
-    align-items: stretch;
+// .gridtable {
+//     display: grid;
+//     align-items: stretch;
 
-    grid-template-columns: auto auto;
-    grid-template-rows: min-content;
-    gap: 0.25em 1em;
-}
+//     grid-template-columns: auto auto;
+//     grid-template-rows: min-content;
+//     gap: 0.25em 1em;
+// }
 
 g.donut {
     opacity: 0.92;

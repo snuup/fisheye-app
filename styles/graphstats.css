@@ -27,6 +27,22 @@ table.data-list td {
 }
 
 .supergraph {
+  margin: 2em 0 4em 0;
   display: inline-block;
-  width: 150px;
+}
+
+.supergraph .gridtable {
+  justify-content: start;
+}
+
+.degree {
+  display: block;
+}
+
+.degree svg {
+  margin-bottom: 0.25em;
+}
+
+.degree span {
+  display: block;
 }

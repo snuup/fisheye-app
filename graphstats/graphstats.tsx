@@ -1,8 +1,10 @@
 import { m } from '../app/model'
 import { ArrayAsTable, ObjectAsTable } from '../comp/namevalue'
+import { NodeDonut } from '../comp/node-donut'
 import { mc1 } from '../data/data'
+import { FishNode } from '../elements/fishnode'
 import { jsx } from '../jmx-lib/core'
-import { mount } from '../utils/common'
+import { cc, mount } from '../utils/common'
 
 export const GraphStats = () => {
     let components = [
@@ -84,12 +86,36 @@ export const GraphStats = () => {
                     </table>
                 </div>
 
-                <div class="supergraph">
-                    <h3>supergraph</h3>
-                    <ObjectAsTable o={{ nodes: m.supergraph.nodes.length, links: m.supergraph.links.length }} />
-                </div>
-
             </div>
+
+            <div class="supergraph">
+                <h3>supergraph</h3>
+                <ObjectAsTable o={{ nodes: m.supergraph.nodes.length, links: m.supergraph.links.length }} />
+            </div>
+
+            <div class="topdegrees">
+                <h3>top 25 nodes with heighest degrees</h3>
+                <div class='degreecontainer'>
+                    {m.supergraph.gettopdegrees().map(n => DegreeView(n))}
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+const NodeName = ({ nid }: { nid: string }) => {
+    let red = m.investigatees.find(n => n === nid)
+    return <span class={cc('nodename', { red })}>{nid}</span>
+}
+
+const DegreeView = (n: FishNode) => {
+    return (
+        <div class='degree'>
+            <NodeDonut n={n} />
+            <NodeName nid={n.id} />
+            <span>{n?.type}</span>
+            <span>{n.country}</span>
         </div>
     )
 }

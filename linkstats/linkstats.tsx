@@ -1,7 +1,7 @@
 import { jsx } from "../jmx-lib/core"
 import { FishLink } from "../elements/fishlink"
 import { SankeyForType } from "./linktypesankey"
-import { LinkHistogram } from "../comp/linkweighthisto"
+import { LinkHistogram } from "./linkweighthisto"
 import { m } from "../app/model"
 import { ObjectAsTable } from "../comp/namevalue"
 import { mc1 } from "../data/data"

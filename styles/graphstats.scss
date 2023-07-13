@@ -17,9 +17,20 @@ table.data-list {
         padding: 0 4px 2px 0;
         background-color: transparent !important;
     }
-
 }
 
 .occuriences {
     margin-top: 1em;
+}
+
+.topdegrees{
+    margin-top: 2em;
+    h3{
+        margin-bottom: 2em;
+    }
+}
+
+.supergraph{
+    display: inline-block;
+    width: 150px;
 }

@@ -1,7 +1,7 @@
 import { patch, jsx, When, updateview } from "../jmx-lib/core"
 import { mc1 } from '../data/data'
 import '../utils/common'
-import { NodeStats } from '../comp/nodestats'
+import { NodeStats } from '../nodestats/nodestats'
 import { m } from './model'
 import { Link } from './routes'
 import { cc, mount } from '../utils/common'
@@ -10,7 +10,7 @@ import { MatrixView } from "../comp/matrixview"
 import { HierarchyView } from "../comp/hierarchyview"
 import { SeaView } from "../comp/seaview"
 import { NetworkView } from "../comp/networkview"
-import { NodeIdBarChart } from "../comp/nodebarcharts"
+import { NodeIdBarChart } from "../nodestats/nodebarcharts"
 import { LinkStats } from "../linkstats/linkstats"
 import { GraphStats } from "../graphstats/graphstats"
 

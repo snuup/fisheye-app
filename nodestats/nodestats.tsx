@@ -3,9 +3,9 @@ import * as d3 from 'd3'
 import { cc, mount } from '../utils/common'
 import { m } from '../app/model'
 import { FishNode } from '../elements/fishnode'
-import { NodeDonut } from './node-donut'
+import { NodeDonut } from '../comp/node-donut'
 import { mc1 } from "../data/data"
-import { ObjectAsTable } from "./namevalue"
+import { ObjectAsTable } from "../comp/namevalue"
 import { nicenodetype } from "../analysis/common"
 
 export const NodeStats = () => {
@@ -57,30 +57,12 @@ export const NodeStats = () => {
 
             </div>
 
-            {/* <div class="topdegrees">
-                <h3>top 25 nodes with heighest degrees</h3>
-                <div class='degreecontainer'>
-                    {g.gettopdegrees().map(n => DegreeView(n))}
-                </div>
-            </div> */}
-
         </div>
     )
 }
 
-const NodeName = ({ nid }: { nid: string }) => {
-    let red = m.investigatees.find(n => n === nid)
-    return <span class={cc('nodename', { red })}>{nid}</span>
-}
 
-const DegreeView = (n: FishNode) => (
-    <div class='degree'>
-        <NodeDonut n={n} />
-        <NodeName nid={n.id} />
-        <span>{n?.type}</span>
-        <span>{n.country}</span>
-    </div>
-)
+
 
 const NodeIdStats = () => {
     let o = mc1.nodes.groupBy(n => n.id.length)

@@ -302,6 +302,5 @@ export function updateviewmany(...selectors: (string | Node)[]) {
 
 // lib
 export const When = ({ cond }, { children }) => {
-    console.log("When cond", cond, children)
     return cond && jsxf(null, { children })
 }

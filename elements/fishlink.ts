@@ -20,7 +20,7 @@ export class FishLink implements ILink {
     get type() { return this.original.type }
     get weight() { return this.original.weight }
     get nodes() { return [this.source, this.target] }
-    get nodeids() { return [this.source, this.target] }
+    get nodeids(): [string, string] { return [this.source, this.target] }
 
     toString() { return `${this.source} -> ${this.target}` }
     get text() { return `${this.source} -(${this.type} / ${this.weight})> ${this.target}` }

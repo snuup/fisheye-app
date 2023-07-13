@@ -8,6 +8,19 @@
   > pin paths
   > nodes on paths are light shown
 
+  -> compute all paths
+
+  /node melting:
+    2 nodes are linked
+    both nodes have just 1 other link
+
+    from link view:
+
+    1 link
+    ends are both minors
+    ends have 2 neighbors (just 1 other)
+
+
 10.7.
 - common histogram component
 - node properties with counts as histogram

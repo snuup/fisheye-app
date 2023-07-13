@@ -89,4 +89,6 @@ interface ILink {
 
     //key: string
     text: string
+
+    nodeids: [string, string]
 }

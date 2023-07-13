@@ -1,5 +1,5 @@
 import { mount, rebind } from "../utils/common"
-import { DirectedLink } from "./fishlink"
+import { DirectedLink, FishLink } from "./fishlink"
 import { FishNode } from "./fishnode"
 import { Path } from "./path"
 
@@ -15,17 +15,25 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
         rebind(this)
         this.nodes = nodes
         this.links = links
+        this.fixup()
+    }
+
+    fixup() {
         this.fixupnodemap()
-        let lm = new Map()
-        for (let l of links) {
-            lm.getorcreate(l.source, () => []).push(new DirectedLink(l, false))
-            lm.getorcreate(l.target, () => []).push(new DirectedLink(l, true))
-        }
-        this.linkmap = lm
+        this.fixuplinkmap()
     }
 
     fixupnodemap() {
         this.nodemap = new Map(this.nodes.map(n => [n.id, n]))
+    }
+
+    fixuplinkmap() {
+        let lm = new Map()
+        for (let l of this.links) {
+            lm.getorcreate(l.source, () => []).push(new DirectedLink(l, false))
+            lm.getorcreate(l.target, () => []).push(new DirectedLink(l, true))
+        }
+        this.linkmap = lm
     }
 
     static Empty = new Graph([], [])
@@ -72,6 +80,22 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
     getlinks(nid: string): DirectedLink<LinkType>[] { return this.linkmap.get(nid) ?? [] }
     getneighbors(nid) { return this.getlinks(nid).map(dl => dl.target) }
+
+    minorlinks(majors: Set<string>) {
+        return this.links.filter(l => this.isminorlink(majors, l))
+    }
+
+    isminorlink(majors: Set<string>, l: ILink): boolean {
+        return l.nodeids.every(nid => !majors.has(nid))
+    }
+
+    isinnerlink(l: ILink) {
+        return (this.getneighbors(l.source).length == 2) && (this.getneighbors(l.target).length == 2)
+    }
+
+    innerlinks(majors: Set<string>) {
+        return this.minorlinks(majors).filter(l => this.isinnerlink(l))
+    }
 }
 
 export class GraphAlgos {
@@ -142,6 +166,8 @@ export class GraphAlgos {
 
         return fronteers
     }
+
+
 }
 
 mount({ GraphAlgos })

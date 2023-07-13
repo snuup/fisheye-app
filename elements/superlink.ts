@@ -1,6 +1,9 @@
 import * as d3 from 'd3'
 import { FishLink } from "./fishlink"
 
+type A = [string, string]
+let z : A = ["1", "2"]
+
 export class SuperLink implements ILink {
 
     source: string
@@ -15,7 +18,7 @@ export class SuperLink implements ILink {
         this.target = l.target
     }
 
-    get nodeids() {
+    get nodeids() : [string, string] {
         return [this.source, this.target]
     }
 

@@ -1,10 +1,16 @@
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 1em;
+}
+
 .nodeview {
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: 1fr auto;
-  grid-template-areas: 'name logo' 'gridtable gridtable';
+  grid-template-areas: 'name logo';
   gap: 8px;
-  padding: 0.5em;
+  padding: 0.25em;
   _background: #fafafa;
   _border-left: solid 4px #777;
   cursor: pointer;
@@ -36,10 +42,12 @@
   background: white;
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.gridtable {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: auto auto;
+  grid-template-rows: min-content;
+  gap: 0.25em 1em;
 }
 
 g.donut {

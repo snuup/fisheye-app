@@ -19,7 +19,6 @@ import { GraphStats } from "../graphstats/graphstats"
 mount({ mc1 })
 
 let App = () => {
-    console.log("????????", m.url, 'network' == m.url[0])
     return (
         <body class={cc(m.url)}>
             <header>

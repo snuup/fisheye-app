@@ -77,15 +77,18 @@ export class Controller {
 
     togglenetnode(ev, n: FishNode) {
         let add = m.pinnednodes.toggle(n)
-        //m.netgraph.togglenode(n, add) // ... create new graph class ? add node, compute path matrix
+        this.updateAfterNodeToggle(ev.currentTarget)
+    }
 
+    updateAfterNodeToggle(e: Node) {
         this.computepathmatrix()
+        m.pinnedpaths = m.pathmatrix.map(p => p.key)
         this.updatenetgraph()
 
-        let currentkeys = m.pathmatrix.map(ps => ps.key)
-        m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
+        //let currentkeys = m.pathmatrix.map(ps => ps.key)
+        //m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
 
-        updateviewmany(ev.currentTarget, ".network") // ".net-graph > svg", ".path-matrix")
+        updateviewmany(e, ".network") // ".net-graph > svg", ".path-matrix")
         //updateview(".network")
         this.store()
     }
@@ -118,7 +121,7 @@ export class Controller {
         let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
         m.netgraph.nodes = nodes
         m.netgraph.links = links
-        m.netgraph.fixupnodemap()
+        m.netgraph.fixup()
     }
 
     computepathmatrix() {

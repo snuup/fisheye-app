@@ -1,3 +1,10 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 1em;
+}
+
 .nodeview {
     h3 {
         margin: 0;
@@ -5,12 +12,12 @@
 
     display: grid;
     grid-template-columns: auto auto;
-    grid-template-rows: 1fr auto;
+    // grid-template-rows: 1fr auto;
     grid-template-areas:
-        'name logo'
-        'gridtable gridtable';
+        'name logo';
+        // 'gridtable gridtable';
     gap: 8px;
-    padding: 0.5em;
+    padding: 0.25em;
     _background: #fafafa;
     _border-left: solid 4px #777;
 
@@ -38,12 +45,6 @@
     &.selected {
         background: white;
     }
-}
-
-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
 }
 
 .gridtable {

@@ -29,6 +29,7 @@ export class Path<L extends ILink> {
     get start() { return this.links[0].source }
     get end() { return this.links.last.target }
     get ends() { return [this.start, this.end] }
+    get allnodes() { return [this.start, ...this.links.map(l => l.target)] }
 
     get text() { return this.start + " - " + this.end + ` (${this.links.length})` }
     get longtext() { return this.length.toString() + " " + this.links.flatMap(l => l.text).join(" ") + " " + this.end }

@@ -4,7 +4,7 @@ import { jsx } from "../jmx-lib/core"
 import { m } from "../app/model"
 import { LinkController } from "./linkcontroller"
 import { cc } from "../utils/common"
-import { getlinkgroupkey, nodetypes, splitconnects } from "../analysis/common"
+import { getlinkgroupkey, nicenodetype, nodetypes, splitconnects } from "../analysis/common"
 
 abstract class FlowNode {
 
@@ -98,8 +98,8 @@ export const SankeyForType = ({ c, type }: { c: LinkController, type: LinkType }
                 .attr("y", d => (d.y1! + d.y0!) / 2)
                 .attr("dy", "0.35em")
                 .attr("text-anchor", d => d.x0! < width / 2 ? "start" : "end")
-                .text(d => d.id)
-                .attr("class", d => "sankey-label")
+                .text(d =>  nicenodetype(d.id as any))
+                .attr("class", d => "sankey-label " + d.id)
 
             const link = svg.append("g")
                 .attr("fill", "none")

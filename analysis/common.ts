@@ -121,7 +121,8 @@ export function nicenodetype(type: NodeType): string {
     }
 }
 
-export function nicelinktype(l: LinkType): string { return l.replace(/_/, "-") }
-
+export function nicelinktype(l: LinkType): string {
+    return l.replace(/_/, "-")
+}
 
 mount({ issuspicious, words2 })

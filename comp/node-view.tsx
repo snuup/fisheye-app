@@ -11,14 +11,15 @@ export const NodeView = ({ n }: { n: FishNode }) => {
         <div class={cc('nodeview', { selected: m.pinnednodes.includes(n) })} onclick={(ev) => c.togglenetnode(ev, n)}>
             <NodeDonut n={n} />
             <h3>{n.id}</h3>
-            <div class='gridtable'>
+            {/* <div class='gridtable'>
                 <NameValue
                     name='degree'
                     value={`${n.outdegree} / ${n.indegree} = ${n.degree}`}
                 />
                 <NameValue name='type' value={n.type} />
                 <NameValue name='country' value={n.country} />
-            </div>
+            </div> */}
         </div>
     )
 }
+

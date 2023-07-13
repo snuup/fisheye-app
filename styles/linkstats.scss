@@ -1,11 +1,11 @@
 @import '_exp.scss';
 
 .link-stats-table {
-
     cursor: pointer;
     th.all {
-        &:hover{
-            background-color: #eee;
+        background: transparent;
+        &:hover {
+            background-color: $color1;
         }
     }
     td,
@@ -16,6 +16,10 @@
     th {
         overflow: hidden;
         text-align: center;
+        &:hover {
+            // opacity: 0.9;
+            filter: contrast(1.1);
+        }
     }
     td {
         text-align: right;
@@ -27,18 +31,27 @@
             font-weight: bold;
         }
     }
-    table {
-        // border-collapse: collapse;
-        &.out {
-            margin-top: 1em;
-            cursor: pointer;
-        }
-    }
+
     table-layout: fixed;
     user-select: none;
     max-width: 800px;
     width: 100%;
-    background: white;
+    // background: white;
+}
+
+article.linkstats {
+    table.out {
+        // border-collapse: collapse;
+        margin-top: 1.5em;
+        cursor: pointer;
+        td {
+            padding: 0 8px;
+        }
+    }
+    h3 {
+        margin-bottom: 0.5em;
+        background: none;
+    }
 }
 
 $color12: #aaccbb;

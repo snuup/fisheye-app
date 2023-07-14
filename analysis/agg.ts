@@ -54,14 +54,22 @@ export class AggregateGraphBuilder {
 
     static sync(ag: AGraph, g: FishGraph): void {
 
+        console.log("sync agraph");
+
+
         let innernodegroups = g.joinablenodes()
+        mount({ innernodegroups })
 
         let snodes = [...g.nodes]
         let slinks = [...g.links]
 
+        let newnodes = new Set<string>()
+
         function ensurenode(...fns: FishNode[]) {
-            let id = fns.map(fn => fn.id).join()
-            if (!ag.hasnode(id)) ag.addnode(new AggregatedNode(fns))
+            let n = new AggregatedNode(fns)
+            newnodes.add(n.id)
+            if (!ag.hasnode(n.id)) ag.addnode(n)
+            return n.id
         }
         function ensurelink(n1, n2) {
             if (!ag.haslink([n1, n2])) ag.appendlink(new AggregatedLink(n1, n2))
@@ -70,11 +78,9 @@ export class AggregateGraphBuilder {
         innernodegroups.values().map(innernodes => {
             let commonneighbors = innernodes.first.neighbors
             let [n1, n2] = commonneighbors
-            let an = commonneighbors.join("+")
-
 
             let ns = innernodes.map(({ n }) => n)
-            ensurenode(...ns)
+            let an = ensurenode(...ns)
             snodes.remove(...ns)
 
             ensurelink(n1, an)
@@ -88,6 +94,9 @@ export class AggregateGraphBuilder {
 
         snodes.forEach(sn => ensurenode(sn))
         slinks.forEach(sl => ensurelink(sl.source, sl.target))
+
+        let removals = ag.nodes.filter(n => !newnodes.has(n.id))
+        console.log({ removals })
 
         mount({ snodes, innernodegroups })
     }

@@ -6,12 +6,15 @@ import { Paths } from "../comp/pathmatrix"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
 import { FishLink } from "../elements/fishlink"
+import { AGraph } from '../analysis/agg'
 
 type LinkGroup = {
     [keys in LinkType]: {
         [connects: string]: FishLink[]
     }
 }
+
+export type FishGraph = Graph<FishNode, SuperLink>
 
 export const mraw = {
 
@@ -29,9 +32,9 @@ export const mraw = {
     graph: Graph.Empty as Graph<FishNode, FishLink>,
     linkgroups: {} as LinkGroup,
 
-    supergraph: Graph.Empty as Graph<FishNode, SuperLink>,
-
-    netgraph: Graph.Empty as Graph<FishNode, SuperLink>,
+    supergraph: Graph.Empty as FishGraph,
+    netgraph: Graph.Empty as FishGraph,
+    agraph: Graph.Empty as AGraph,
 
     pinnednodes: [] as FishNode[],
     pinnedpaths: [] as string[],

@@ -68,7 +68,7 @@ export const NodeStats = () => {
 
 const NodeIdStats = () => {
     let o = mc1.nodes.groupBy(n => n.id.length)
-    let maxcount = o.values.map(v => v.length).max()
+    let maxcount = o.values().map(v => v.length).max()
     let scaler = d3.scaleLinear([0, maxcount], [0, 100])
     // rename undefined into numbers
     o.numeric = o.undefined

@@ -12,7 +12,7 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
         console.log("path link-stats-table!")
 
         let lg = m.linkgroups[type]
-        let max = lg.values.map(ls => ls.length).max()
+        let max = lg.values().map(ls => ls.length).max()
         let opacityScaler = d3.scaleSqrt([0, max], [0, 1])
 
         let table = d3.select(tableDom)

@@ -89,9 +89,11 @@ mergePrototype(class extends Array {
         this.forEach(x => o.forEach(y => result.push([x, y])))
         return result
     }
-    remove(x: any) {
-        const i = this.indexOf(x)
-        if (i > -1) this.splice(i, 1)
+    remove(...xs: any[]) {
+        for (let x of xs) {
+            const i = this.indexOf(x)
+            if (i > -1) this.splice(i, 1)
+        }
     }
     toggle(x, addOrRemove?: boolean): boolean {
         addOrRemove ??= !this.includes(x)
@@ -141,9 +143,7 @@ mergePrototype(class extends Object {
     get entrieskv() {
         return Object.entries(this).map(([k, v]) => ({ k, v }))
     }
-    get values() {
-        return Object.values(this)
-    }
+    values() { return Object.values(this) }
     get keys() {
         return Object.keys(this)
     }

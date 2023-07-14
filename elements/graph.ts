@@ -36,10 +36,13 @@ export class Graph<N extends INode, L extends ILink> implements IGraph<N, L> {
         this.linkmap = lm
     }
 
-    static Empty = new Graph([], [])
+    static get Empty() { return new Graph([], []) }
 
     getnode(nid): N { return this.nodemap.get(nid)! }
-    hasnode(n: N): boolean { return this.nodemap.has(n.id) }
+
+    hasnode(n: N | string): boolean {
+        return (typeof n === "string") ? this.nodemap.has(n) : this.nodemap.has(n.id)
+    }
 
     addnode(n: N) {
         if (this.nodemap.has(n.id)) return
@@ -68,7 +71,14 @@ export class Graph<N extends INode, L extends ILink> implements IGraph<N, L> {
         return this.nodes.find(n => n.id.toLowerCase().startsWith(nidstart))
     }
 
-    haslink(l: L): boolean { return this.links.includes(l) }
+    haslink(l: L | [string, string]): boolean {
+        if (Array.isArray(l)) {
+            return this.linkmap.get(l[0])?.find(dl => dl.target == l[1]) !== undefined
+        }
+        else {
+            return this.links.includes(l)
+        }
+    }
     appendlink(l: L) { if (!this.haslink(l)) this.links.push(l) }
     appendlinks(ls: L[]) { ls.forEach(this.appendlink) }
     getoutlinks(nid: string) { return this.links.filter(l => l.source == nid) }
@@ -98,7 +108,6 @@ export class Graph<N extends INode, L extends ILink> implements IGraph<N, L> {
         let o = nns.groupBy((nn) => nn.neighbors.join("|")) // group by neighbors, nodes with same 2 neighbors are grouped
         return o.filterByValue(v => v.length > 1) // where that group is larger than 1, we can aggregate
     }
-
 
     // get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
     // get linkcountsByType() { return this.links.countBy(n => n.type) }
@@ -177,4 +186,4 @@ export class GraphAlgos {
 
 }
 
-mount({ GraphAlgos })
+mount({ GraphAlgos, Graph })

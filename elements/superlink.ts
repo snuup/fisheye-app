@@ -18,9 +18,8 @@ export class SuperLink implements ILink {
         this.target = l.target
     }
 
-    get nodeids() : [string, string] {
-        return [this.source, this.target]
-    }
+    get nodeids() : [string, string] { return [this.source, this.target] }
+    get ukey() { return this.nodeids.sort().join() }
 
     get text() {
         let l = this.links.first

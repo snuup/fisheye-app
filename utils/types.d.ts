@@ -1,5 +1,3 @@
-import { Property } from "@babel/types"
-
 interface HTMLElement {
     getParentByPredicate(predicate: (e: HTMLElement) => boolean): HTMLElement
     toggleClass(className: string): boolean
@@ -33,7 +31,7 @@ interface Array<T> {
     get last(): T
     toReversed(): T[]
     cross(other?: Array<T>): Array<[T, T]>
-    remove(x: T)
+    remove(...x: T[])
     toggle(x, addOrRemove?: boolean): boolean
     ensure(x)
     get cumulativeSum(): number[]
@@ -55,11 +53,10 @@ interface Object {
     get entries(): [string, any][]
     get entrieskv<T>(): { k: string, v: T }[]
     get keys(): string[]
-    //get values<T>(this: { [s: string]: T } | ArrayLike<T>): T[]
-    get values(): any[]
+    values<T>(this: { [s: string]: T }): T[]
     mapKeys(fmap: (string) => string): any
     mapValues(fmap: (any) => any): any
-    filterByValue<T>(this : T, f: (string) => boolean): T
+    filterByValue<T>(this: T, f: (string) => boolean): T
 
     //get entries(this: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
     //get entries(): [string, ThisType<T>][];

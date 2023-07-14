@@ -1,4 +1,4 @@
-import { m } from "../app/model"
+import { FishGraph, m } from "../app/model"
 import { mount } from "../utils/common"
 import { FishLink } from "../elements/fishlink"
 import { FishNode } from "../elements/fishnode"
@@ -6,13 +6,15 @@ import { Graph } from "../elements/graph"
 import { SuperLink } from "../elements/superlink"
 
 
-class AggregatedNode implements INode {
-
-    constructor(public fnodes: FishNode[]) { }
-    get id() { return this.fnodes.map(n => n.id).sort().join() }
+export class AggregatedNode implements INode {
+    id: string
+    constructor(public fnodes: FishNode[]) {
+        this.id = this.fnodes.map(n => n.id).sort().join()
+        console.log("ctor AggregatedNode", this.id)
+    }
 }
 
-class AggregatedLink implements ILink {
+export class AggregatedLink implements ILink {
 
     constructor(
         public source: string,
@@ -44,59 +46,57 @@ mount({ AggregatedNode, AggregatedLink })
 //     get nodeids() { return this.links.first.nodeids }
 // }
 
-let ag: Graph<AggregatedNode, AggregatedLink> = Graph.Empty
+export type AGraph = Graph<AggregatedNode, AggregatedLink>
+
+//let ag: Graph<AggregatedNode, AggregatedLink> = Graph.Empty
 
 export class AggregateGraphBuilder {
 
-    static create(g: Graph<FishNode, SuperLink>): Graph<AggregatedNode, AggregatedLink> {
+    static sync(ag: AGraph, g: FishGraph): void {
 
-        // let ilinks = g.innerlinks(m.majors)
-        // tbd
+        let innernodegroups = g.joinablenodes()
 
-        // ...
+        let snodes = [...g.nodes]
+        let slinks = [...g.links]
 
-        let vs = Object.values({ a:"1", b:45 })
-        let vs3 = ({ a:"1", b:45 }).values
-        let vs2 = Object.assign({}, { a:"1", b:45 } as any).keys
+        function ensurenode(...fns: FishNode[]) {
+            let id = fns.map(fn => fn.id).join()
+            if (!ag.hasnode(id)) ag.addnode(new AggregatedNode(fns))
+        }
+        function ensurelink(n1, n2) {
+            if (!ag.haslink([n1, n2])) ag.appendlink(new AggregatedLink(n1, n2))
+        }
 
-
-        let innernodes = g.joinablenodes()
-        let anodes: string[] = []
-        let alinks: [string, string][] = []
-        let hidelinks: [string, string][] = []
-        let addlinks = innernodes.values.map(a => {
-            let commonneighbors = a.first.neighbors
+        innernodegroups.values().map(innernodes => {
+            let commonneighbors = innernodes.first.neighbors
             let [n1, n2] = commonneighbors
             let an = commonneighbors.join("+")
-            anodes.push(an)
-            alinks.push([n1, an])
-            alinks.push([an, n2])
 
+
+            let ns = innernodes.map(({ n }) => n)
+            ensurenode(...ns)
+            snodes.remove(...ns)
+
+            ensurelink(n1, an)
+            ensurelink(an, n2)
+
+            for (let dl of innernodes.flatMap(({ n }) => m.netgraph.getlinks(n.id))) {
+                let l = dl.link
+                slinks.remove(l)
+            }
         })
-        let remlinks = innernodes.values.flat().flatMap(n => g.getlinks(n.n.id).map(dl => dl.link))
 
-        let s = new Set(remlinks)
+        snodes.forEach(sn => ensurenode(sn))
+        slinks.forEach(sl => ensurelink(sl.source, sl.target))
 
-        let links =
-            g.links.filter(l => !s.has(l)).map(l => new AggregatedLink(l.source, l.target))
-                .concat(addlinks)
-
-        // aggregate the nodes !!
-
-        //return new Graph<AggregatedLink>()
-
-        mount({ g, innernodes, links, addlinks, remlinks })
-
-        return Graph.Empty
+        mount({ snodes, innernodegroups })
     }
 
     static run() {
 
-        AggregateGraphBuilder.create(m.netgraph)
+        AggregateGraphBuilder.sync(m.agraph, m.netgraph)
 
     }
 }
 
 mount({ AggregateGraphBuilder })
-
-

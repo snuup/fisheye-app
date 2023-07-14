@@ -31,7 +31,7 @@ export class Controller {
         m.graph = new Graph(nodes, links)
         let g = m.graph
 
-        let superlinks = links.groupBy(l => l.ukey).values.map(ls => new SuperLink(ls))
+        let superlinks = links.groupBy(l => l.ukey).values().map(ls => new SuperLink(ls))
         m.supergraph = new Graph(nodes, superlinks)
 
         m.invs = m.investigatees.map(m.graph.getnode)

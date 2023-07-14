@@ -1,3 +1,5 @@
+import { Property } from "@babel/types"
+
 interface HTMLElement {
     getParentByPredicate(predicate: (e: HTMLElement) => boolean): HTMLElement
     toggleClass(className: string): boolean
@@ -53,10 +55,12 @@ interface Object {
     get entries(): [string, any][]
     get entrieskv<T>(): { k: string, v: T }[]
     get keys(): string[]
+    //get values<T>(this: { [s: string]: T } | ArrayLike<T>): T[]
     get values(): any[]
     mapKeys(fmap: (string) => string): any
     mapValues(fmap: (any) => any): any
-    filterByValue(f: (string) => boolean): any
+    filterByValue<T>(this : T, f: (string) => boolean): T
+
     //get entries(this: { [s: string]: T } | ArrayLike<T>): [string, ThisType<T>][];
     //get entries(): [string, ThisType<T>][];
 }

@@ -154,7 +154,7 @@ mergePrototype(class extends Object {
         return Object.fromEntries(this.entries.map(([k, v]) => [k, fmap(v)]))
     }
     filterByValue(f) {
-        return Object.fromEntries(this.entries.filter(([, v]) => f(v)))
+        return Object.fromEntries(this.entries.filter(([, v]) => f(v))) as any
     }
 }, Object)
 

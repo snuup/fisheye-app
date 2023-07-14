@@ -25,6 +25,8 @@ export const GraphStats = () => {
 
     mount({ multilinksdirected, multilinksundirected })
 
+    function gettopdegrees(count = 25) { return m.supergraph.nodes.sortBy(n => -n.degree).slice(0, count) }
+
     return (
         <div class='stats'>
             <h2>graph statistics</h2>
@@ -91,7 +93,7 @@ export const GraphStats = () => {
             <div class="topdegrees">
                 <h3>top 25 nodes with heighest degrees</h3>
                 <div class='degreecontainer'>
-                    {m.supergraph.gettopdegrees().map(n => DegreeView(n))}
+                    {gettopdegrees().map(n => DegreeView(n))}
                 </div>
             </div>
 

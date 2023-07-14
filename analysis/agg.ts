@@ -1,8 +1,9 @@
 import { m } from "../app/model"
 import { mount } from "../utils/common"
-import { FishLink } from "./fishlink"
-import { FishNode } from "./fishnode"
-import { Graph } from "./graph"
+import { FishLink } from "../elements/fishlink"
+import { FishNode } from "../elements/fishnode"
+import { Graph } from "../elements/graph"
+import { SuperLink } from "../elements/superlink"
 
 
 class AggregatedNode implements INode {
@@ -43,28 +44,59 @@ mount({ AggregatedNode, AggregatedLink })
 //     get nodeids() { return this.links.first.nodeids }
 // }
 
-class AggregateGraphBuilder {
-    static create(g: Graph<FishNode, FishLink>): Graph<AggregatedNode, AggregatedLink> {
+let ag: Graph<AggregatedNode, AggregatedLink> = Graph.Empty
+
+export class AggregateGraphBuilder {
+
+    static create(g: Graph<FishNode, SuperLink>): Graph<AggregatedNode, AggregatedLink> {
 
         // let ilinks = g.innerlinks(m.majors)
         // tbd
 
         // ...
 
+        let vs = Object.values({ a:"1", b:45 })
+        let vs3 = ({ a:"1", b:45 }).values
+        let vs2 = Object.assign({}, { a:"1", b:45 } as any).keys
+
+
         let innernodes = g.joinablenodes()
-        let addlinks = innernodes.values.map(a => { let [n1, n2] = a.first.neighbors; return new AggregatedLink(n1, n2) })
+        let anodes: string[] = []
+        let alinks: [string, string][] = []
+        let hidelinks: [string, string][] = []
+        let addlinks = innernodes.values.map(a => {
+            let commonneighbors = a.first.neighbors
+            let [n1, n2] = commonneighbors
+            let an = commonneighbors.join("+")
+            anodes.push(an)
+            alinks.push([n1, an])
+            alinks.push([an, n2])
+
+        })
         let remlinks = innernodes.values.flat().flatMap(n => g.getlinks(n.n.id).map(dl => dl.link))
 
-        let s = new Set<FishLink>(remlinks)
+        let s = new Set(remlinks)
 
         let links =
             g.links.filter(l => !s.has(l)).map(l => new AggregatedLink(l.source, l.target))
-            .concat(addlinks)
+                .concat(addlinks)
 
-            // aggregate the nodes !!
+        // aggregate the nodes !!
 
         //return new Graph<AggregatedLink>()
 
-        throw "tbd"
+        mount({ g, innernodes, links, addlinks, remlinks })
+
+        return Graph.Empty
+    }
+
+    static run() {
+
+        AggregateGraphBuilder.create(m.netgraph)
+
     }
 }
+
+mount({ AggregateGraphBuilder })
+
+

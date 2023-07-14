@@ -12,6 +12,8 @@ import { Path, PathMatrixBuilder } from "../elements/path"
 import { Paths } from "../comp/pathmatrix"
 import { SuperLink } from "../elements/superlink"
 import { getlinkgroupkey, issuspicious } from "../analysis/common"
+import "../analysis/agg"
+//import { AggregateGraphBuilder } from "../analysis/agg"
 
 
 export class Controller {

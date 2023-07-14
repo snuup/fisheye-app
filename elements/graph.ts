@@ -1,17 +1,17 @@
 import { mount, rebind } from "../utils/common"
-import { DirectedLink, FishLink } from "./fishlink"
-import { FishNode } from "./fishnode"
+import { DirectedLink } from "./fishlink"
 import { Path } from "./path"
 
-export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
-    nodes: FishNode[]
-    links: LinkType[]
+export class Graph<N extends INode, L extends ILink> implements IGraph<N, L> {
 
-    nodemap: Map<string, FishNode>
-    linkmap: Map<string, DirectedLink<LinkType>[]>
+    nodes: N[]
+    links: L[]
 
-    constructor(nodes: FishNode[], links: LinkType[]) {
+    nodemap: Map<string, N>
+    linkmap: Map<string, DirectedLink<L>[]>
+
+    constructor(nodes: N[], links: L[]) {
         rebind(this)
         this.nodes = nodes
         this.links = links
@@ -38,21 +38,21 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
 
     static Empty = new Graph([], [])
 
-    getnode(nid): FishNode { return this.nodemap.get(nid)! }
-    hasnode(n: FishNode): boolean { return this.nodemap.has(n.id) }
+    getnode(nid): N { return this.nodemap.get(nid)! }
+    hasnode(n: N): boolean { return this.nodemap.has(n.id) }
 
-    addnode(n: FishNode) {
+    addnode(n: N) {
         if (this.nodemap.has(n.id)) return
         this.nodes.push(n)
         this.nodemap.set(n.id, n)
     }
 
-    removenode(n: FishNode) {
+    removenode(n: N) {
         this.nodes.remove(n)
         this.nodemap.delete(n.id)
     }
 
-    togglenode(n: FishNode, add?) {
+    togglenode(n: N, add?) {
         add ??= this.hasnode(n)
         if (add) {
             this.addnode(n)
@@ -63,22 +63,17 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
         }
     }
 
-    searchnode(nidstart: string): FishNode | undefined {
+    searchnode(nidstart: string): N | undefined {
         nidstart = nidstart.toLowerCase()
         return this.nodes.find(n => n.id.toLowerCase().startsWith(nidstart))
     }
 
-    haslink(l: LinkType): boolean { return this.links.includes(l) }
-    appendlink(l: LinkType) { if (!this.haslink(l)) this.links.push(l) }
-    appendlinks(ls: LinkType[]) { ls.forEach(this.appendlink) }
+    haslink(l: L): boolean { return this.links.includes(l) }
+    appendlink(l: L) { if (!this.haslink(l)) this.links.push(l) }
+    appendlinks(ls: L[]) { ls.forEach(this.appendlink) }
     getoutlinks(nid: string) { return this.links.filter(l => l.source == nid) }
     getinlinks(nid: string) { return this.links.filter(l => l.target == nid) }
-
-    get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
-    get linkcountsByType() { return this.links.countBy(n => n.type) }
-
-    gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
-    getlinks(nid: string): DirectedLink<LinkType>[] { return this.linkmap.get(nid) ?? [] }
+    getlinks(nid: string): DirectedLink<L>[] { return this.linkmap.get(nid) ?? [] }
     getneighbors(nid) { return this.getlinks(nid).map(dl => dl.target) }
 
     minorlinks(majors: Set<string>) {
@@ -100,9 +95,14 @@ export class Graph<LinkType extends ILink> implements IGraph<LinkType> {
     joinablenodes() {
         let nns = this.nodes.map(n => ({ n, neighbors: this.getneighbors(n.id).sort() })) // adorn node with neighbors
         nns = nns.filter(nn => nn.neighbors.length == 2) // filter nodes with just 2 neighbors
-        let o = nns.groupBy((nn) => nn.neighbors.join()) // group by neighbors, nodes with same 2 neighbors are grouped
+        let o = nns.groupBy((nn) => nn.neighbors.join("|")) // group by neighbors, nodes with same 2 neighbors are grouped
         return o.filterByValue(v => v.length > 1) // where that group is larger than 1, we can aggregate
     }
+
+
+    // get nodecountsByType() { return this.nodes.countBy(n => n.type ?? "") }
+    // get linkcountsByType() { return this.links.countBy(n => n.type) }
+    // gettopdegrees(count = 25) { return this.nodes.sortBy(n => -n.degree).slice(0, count) }
 }
 
 export class GraphAlgos {

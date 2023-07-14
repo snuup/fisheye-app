@@ -11,6 +11,8 @@ import { nicenodetype } from "../analysis/common"
 export const NodeStats = () => {
     let g = m.graph
 
+    const nodecountsByType = g.nodes.countBy(n => n.type ?? "")
+
     let o: { country: number, id: number, type: number } = mc1.nodes.flatMap(n => n.keys).countBy()
     delete (o as any).donut
     let propertystats =
@@ -47,7 +49,7 @@ export const NodeStats = () => {
 
                 <div>
                     <h3>node types</h3>
-                    {<ObjectAsTable o={g.nodecountsByType.mapKeys(nicenodetype)} multiplier={1} showbars={true} />}
+                    {<ObjectAsTable o={nodecountsByType.mapKeys(nicenodetype)} multiplier={1} showbars={true} />}
                 </div>
 
                 <div>

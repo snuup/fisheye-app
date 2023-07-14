@@ -10,7 +10,9 @@ import { LinkStatsForType } from "./linktypetable"
 import { linktypes, nicelinktype as nicelinktype } from "../analysis/common"
 
 export const LinkStats = ({ links }: { links: FishLink[] }) => {
-    //console.log("linkstats", links)
+
+    let linkcountsByType = m.graph.links.countBy(n => n.type)
+
     return (
         <div class="stats">
             <h2>link statistics</h2>
@@ -26,7 +28,7 @@ export const LinkStats = ({ links }: { links: FishLink[] }) => {
 
                 <div>
                     <h3>link types</h3>
-                    {<ObjectAsTable o={m.graph.linkcountsByType.mapKeys(nicelinktype)} />}
+                    {<ObjectAsTable o={linkcountsByType.mapKeys(nicelinktype)} />}
                 </div>
 
                 <div>

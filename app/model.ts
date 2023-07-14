@@ -26,12 +26,12 @@ export const mraw = {
 
     entity: "",
 
-    graph: Graph.Empty as Graph<FishLink>,
+    graph: Graph.Empty as Graph<FishNode, FishLink>,
     linkgroups: {} as LinkGroup,
 
-    supergraph: Graph.Empty as Graph<SuperLink>,
+    supergraph: Graph.Empty as Graph<FishNode, SuperLink>,
 
-    netgraph: Graph.Empty as Graph<SuperLink>,
+    netgraph: Graph.Empty as Graph<FishNode, SuperLink>,
 
     pinnednodes: [] as FishNode[],
     pinnedpaths: [] as string[],

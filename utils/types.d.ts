@@ -75,13 +75,6 @@ interface INode {
     id: string
 }
 
-interface IGraph<LinkType extends ILinkType> {
-    nodes: INode[]
-    links: LinkType[]
-    getoutlinks(nid: string): LinkType[]
-    getinlinks(nid: string): LinkType[]
-}
-
 interface ILink {
     source: string
     target: string
@@ -92,4 +85,11 @@ interface ILink {
     text: string
 
     nodeids: [string, string]
+}
+
+interface IGraph<N extends INode, L extends ILinkType> {
+    nodes: N[]
+    links: L[]
+    getoutlinks(nid: string): L[]
+    getinlinks(nid: string): L[]
 }

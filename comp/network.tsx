@@ -2,26 +2,28 @@ import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
 import { cc, mount } from '../utils/common'
-import { FishNode } from '../elements/fishnode'
-import { SuperLink, TypeCount } from '../elements/superlink'
 import { d3nodedonut, getOuterRadius } from './node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
+import { ALink, ANode } from '../analysis/agg'
 
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
 
 let simulation: any = null
 
-type FishNodeForce = FishNode & { x: number, y: number }
-class FishLinkForce {
-    constructor(public l: SuperLink, public source: FishNodeForce, public target: FishNodeForce) { }
+const getOuterRadiusA = (an: ANode) => getOuterRadius(an.f1)
+
+type ANodeForce = ANode & { x: number, y: number }
+
+class ALinkForce {
+    constructor(public l: ALink, public source: ANodeForce, public target: ANodeForce) { }
     get s() { return this.source }
     get t() { return this.target }
     get dx() { return this.t.x - this.s.x }
     get dy() { return this.t.y - this.s.y }
     get length() { return Math.sqrt(this.dx * this.dx + this.dy * this.dy) }
-    get sourceOuterRadius() { return getOuterRadius(this.source) }
-    get targetOuterRadius() { return getOuterRadius(this.target) }
+    get sourceOuterRadius() { return getOuterRadiusA(this.source) }
+    get targetOuterRadius() { return getOuterRadiusA(this.target) }
 }
 
 function rund3(e: SVGElement) {
@@ -30,7 +32,7 @@ function rund3(e: SVGElement) {
     let width = div?.clientWidth!
     let height = div?.clientHeight!
 
-    const angle = (d: FishLinkForce) => {
+    const angle = (d: ALinkForce) => {
         let dx = (d.t.x - d.s.x)
         let dy = (d.t.y - d.s.y)
         return Math.atan2(dy, dx) * 180 / Math.PI
@@ -45,8 +47,8 @@ function rund3(e: SVGElement) {
     // .style('width', width)
     // .style('height', height)
 
-    let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
-    let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source) as any, m.netgraph.getnode(l.target) as any))
+    let nodesm = m.agraph.nodes as unknown as ANodeForce[] // .map(n => ({ n, id: n.id }))
+    let linksm = m.agraph.links.map(l => new ALinkForce(l, m.agraph.getnode(l.source) as any, m.agraph.getnode(l.target) as any))
     mount({ linksm, nodesm })
     c.restorenetgraph()
 
@@ -59,16 +61,16 @@ function rund3(e: SVGElement) {
     let link =
         linkg
             .append('line')
-            .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
+            .attr('stroke-width', (fl: ALinkForce) => strokeScaler(fl.l.weight))
             .on('mousedown', (ev, { l }) => console.log(l))
 
-    const computeAdornSides = (flf: FishLinkForce) => {
+    const computeAdornSides = (flf: ALinkForce) => {
 
         return flf.l.typeCountsPerSide.map(side => {
             let t = side.tcs.first
             let direction = t.direction
             let isout = direction === "out"
-            let radius = getOuterRadius(isout ? flf.source : flf.target)
+            let radius = getOuterRadiusA(isout ? flf.source : flf.target)
             let totalsize = side.tcs.last.prevsum + side.tcs.last.countpos
             let dx = isout ? (radius + 10) : (radius + 10 + totalsize)
             return { ...side, radius, direction, flf, dx, totalsize, isout }
@@ -92,7 +94,7 @@ function rund3(e: SVGElement) {
         .attr('width', ({ tc }) => tc.countpos)
         .attr('height', 10)
         .append('title')
-        .text(d => `${d.tc.type} (${d.tc.count})`)
+        //.text(d => `${d.tc.type} (${d.tc.count})`)
 
     linkadorns
         .append('path')
@@ -130,7 +132,7 @@ function rund3(e: SVGElement) {
         //.alphaDecay(0.5)
         //.velocityDecay(.5)
         //.force('many', d3.forceManyBody().strength(-10))
-        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
+        .force('link', d3.forceLink(linksm).id((n: ANodeForce) => n.id).distance(1).strength(.01))
         .force('collide', d3.forceCollide().radius(25).strength(1))
         //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
         //.force('box', boxingForce)
@@ -149,7 +151,7 @@ function rund3(e: SVGElement) {
     mount({ simulation })
 
     function updateview() {
-      //  console.log('ontick')
+        //  console.log('ontick')
         for (let n of nodesm) {
             n.x = n.x.clamp(2, width)
             n.y = n.y.clamp(2, height)
@@ -171,7 +173,7 @@ function rund3(e: SVGElement) {
 
     updateview() // show random placements
 
-    function onnodeclick(ev: MouseEvent, n: FishNode) {
+    function onnodeclick(ev: MouseEvent, n: ANode) {
         if (ev.ctrlKey) {
             c.highlightbadpaths(n)
             return

@@ -3,25 +3,42 @@ import { mount } from "../utils/common"
 import { FishLink } from "../elements/fishlink"
 import { FishNode } from "../elements/fishnode"
 import { Graph } from "../elements/graph"
-import { SuperLink } from "../elements/superlink"
+import { SuperLink, TypeCount } from "../elements/superlink"
 
 
-export class AggregatedNode implements INode {
+export class ANode implements INode {
+
     id: string
+
     constructor(public fnodes: FishNode[]) {
         this.id = this.fnodes.map(n => n.id).sort().join()
         console.log("ctor AggregatedNode", this.id)
     }
+
+    get f1() { return this.fnodes.first }
+    get type() { return this.fnodes.map(n => n.type).join() }
+
+    get donut() { return this.f1.donut }
+    highlight = false
+    focused = false
 }
 
-export class AggregatedLink implements ILink {
+export class ALink implements ILink {
+
+    highlight = false
 
     constructor(
         public source: string,
         public target: string,
         public type = "no-type",
-        public weight = 0
     ) { }
+
+    get typeCountsPerSide() : any[] {
+        // let outs = this.getTypeCounts(this.outlinks, "out")
+        // let ins = this.getTypeCounts(this.inlinks, "in")
+        // return [outs, ins].filter(a => a.length).map(tcs => ({ tcs, sl: this }))
+        return []
+    }
 
     //get source() { return this.links.first.source }
     //get target() { return this.links.first.target }
@@ -29,10 +46,11 @@ export class AggregatedLink implements ILink {
     //get weight() { return this.links.map(l => l.weight).sumBy() }
     get text() { return "link-text" }
     get nodeids(): [string, string] { return [this.source, this.target] }
+    get weight() { return 1 }
 }
 
 
-mount({ AggregatedNode, AggregatedLink })
+mount({ ANode: ANode, ALink: ALink })
 
 // class AggregatedLink implements ILink {
 
@@ -46,7 +64,7 @@ mount({ AggregatedNode, AggregatedLink })
 //     get nodeids() { return this.links.first.nodeids }
 // }
 
-export type AGraph = Graph<AggregatedNode, AggregatedLink>
+export type AGraph = Graph<ANode, ALink>
 
 //let ag: Graph<AggregatedNode, AggregatedLink> = Graph.Empty
 
@@ -54,7 +72,7 @@ export class AggregateGraphBuilder {
 
     static sync(ag: AGraph, g: FishGraph): void {
 
-        console.log("sync agraph");
+        console.log("sync agraph")
 
 
         let innernodegroups = g.joinablenodes()
@@ -66,13 +84,13 @@ export class AggregateGraphBuilder {
         let newnodes = new Set<string>()
 
         function ensurenode(...fns: FishNode[]) {
-            let n = new AggregatedNode(fns)
+            let n = new ANode(fns)
             newnodes.add(n.id)
             if (!ag.hasnode(n.id)) ag.addnode(n)
             return n.id
         }
         function ensurelink(n1, n2) {
-            if (!ag.haslink([n1, n2])) ag.appendlink(new AggregatedLink(n1, n2))
+            if (!ag.haslink([n1, n2])) ag.appendlink(new ALink(n1, n2))
         }
 
         innernodegroups.values().map(innernodes => {

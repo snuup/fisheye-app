@@ -13,6 +13,7 @@ import { Paths } from "../comp/pathmatrix"
 import { SuperLink } from "../elements/superlink"
 import { getlinkgroupkey, issuspicious } from "../analysis/common"
 import "../analysis/agg"
+import { ANode, AggregateGraphBuilder } from "../analysis/agg"
 //import { AggregateGraphBuilder } from "../analysis/agg"
 
 
@@ -124,6 +125,7 @@ export class Controller {
         m.netgraph.nodes = nodes
         m.netgraph.links = links
         m.netgraph.fixup()
+        AggregateGraphBuilder.sync(m.agraph, m.netgraph)
     }
 
     computepathmatrix() {
@@ -153,7 +155,7 @@ export class Controller {
         m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
     }
 
-    highlightbadpaths(n: FishNode) {
+    highlightbadpaths(n: ANode) {
         console.log("highlightbadpaths", n)
 
         this.resethighlights()

@@ -9,6 +9,11 @@ export class FishNode implements INode {
     focused = false
     pinned = false
 
+    inv?: boolean
+    suspect?: boolean
+
+    home?: { x: number, y: number }
+
     constructor(original: MC1Node) {
         this.original = original
         this.id = cleanid(original.id)
@@ -17,7 +22,7 @@ export class FishNode implements INode {
     get donut(): NodeLinkData[] { return this.original.donut }
     get outdegree(): number { return this.donut.sumBy(nd => nd.outs) }
     get indegree(): number { return this.donut.sumBy(nd => nd.ins) }
-    get type() : NodeType { return this.original.type ?? "undefined" }
+    get type(): NodeType { return this.original.type ?? "undefined" }
     get country() { return this.original.country }
     get id10() { return this.id.truncate(10) }
     get degree() { return this.outdegree + this.indegree }

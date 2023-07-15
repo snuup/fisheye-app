@@ -8,6 +8,7 @@ import { d3nodedonut, getOuterRadius } from '../comp/node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
 import * as f3 from '../force/index'
+import { homeforce } from './homeforce'
 
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
 
@@ -106,16 +107,21 @@ function rund3(e: SVGElement) {
         fn.y ??= height * Math.random()
     })
 
+    nodesm.filter(n => n.inv).forEach((n, i) => n.home = { x: 50, y: 30 + i * 70 })
+    nodesm.filter(n => n.suspect).forEach((n, i) => n.home = { x: width - 50, y: 30 + i * 30 })
+
     let nodesv = svg
         .selectAll('g.node')
         .data(nodesm)
         .join('g')
         .attr('class', n => cc(
             'node',
-            m.investigatees.includes(n.id) && 'inv', n.type ?? "undefined",
+            n.type ?? "undefined",
             {
+                inv: m.investigatees.includes(n.id),
                 highlight: n.highlight,
-                focused: n.focused
+                focused: n.focused,
+                athome: n.home
             }))
         .on('mousedown', onnodeclick)
 
@@ -126,17 +132,23 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
-    simulation = f3.forceSimulation(nodesm)
-        //.alphaDecay(0.5)
-        //.velocityDecay(.5)
-        //.force('many', d3.forceManyBody().strength(-10))
-        //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
-        //.force('collide', d3.forceCollide().radius(80).strength(1))
-        //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
-        //.force('box', boxingForce)
-        .force("x", f3.forceX(100))
-        .on('tick', updateview)
-        .on('end', c.storenetgraph)
+
+//    nodesm.filter(n => n.home)
+
+    simulation =
+        f3.forceSimulation(nodesm)
+            //.alphaDecay(0.5)
+            //.velocityDecay(.5)
+            //.force('many', d3.forceManyBody().strength(-10))
+            //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
+            //.force('collide', d3.forceCollide().radius(80).strength(1))
+            //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
+            //.force('box', boxingForce)
+            .force("x", f3.forceX(100).x(n => n.home?.x))
+            .force("y", f3.forceY(100).y(n => n.home?.y))
+            //.force("home", homeforce())
+            .on('tick', updateview)
+            .on('end', c.storenetgraph)
 
     svg.selectAll('g.node').call(drag(simulation))
 
@@ -150,7 +162,7 @@ function rund3(e: SVGElement) {
     mount({ simulation })
 
     function updateview() {
-      //  console.log('ontick')
+        //  console.log('ontick')
         for (let n of nodesm) {
             n.x = n.x.clamp(2, width)
             n.y = n.y.clamp(2, height)

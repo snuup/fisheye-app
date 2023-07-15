@@ -49,6 +49,10 @@ export class Controller {
                 .groupBy(l => l.type)
                 .mapValues(ls => ls.groupBy(l => getlinkgroupkey(l.sourcetype, l.targettype)))
 
+        nodes.forEach(n => n.inv = m.invs.includes(n))
+        nodes.forEach(n => n.suspect = m.suspects.includes(n))
+        m.netgraph.nodes = m.invs.concat(m.suspects)
+
         // init country color scaler
         // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")
         m.countryColorScaler = d3.scaleOrdinal(d3.schemeAccent) // d3.scaleOrdinal().domain(allcountries)
@@ -120,7 +124,7 @@ export class Controller {
         // let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
         // let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
         // let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
-        m.netgraph.nodes = m.pinnednodes
+        //m.netgraph.nodes = m.pinnednodes
         m.netgraph.links = [] // links
         m.netgraph.fixup()
     }
@@ -199,6 +203,7 @@ export class Controller {
     }
 
     store() {
+        return
         localStorage.setItem("session", JSON.stringify({
             pinnednodes: m.pinnednodes.map(n => n.id),
             pinnedpaths: m.pinnedpaths
@@ -206,6 +211,7 @@ export class Controller {
     }
 
     restore() {
+        return
         let json = localStorage.getItem("session")
         if (!json) return
         let o = JSON.parse(json)
@@ -214,12 +220,14 @@ export class Controller {
     }
 
     storenetgraph() {
+        return
         localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
         //console.log("stored")
         this.printhfs()
     }
 
     restorenetgraph() {
+        return
         let json = localStorage.getItem("netgraph")
         if (!json) return
         let ns = JSON.parse(json)

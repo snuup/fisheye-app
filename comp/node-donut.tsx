@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import { jsx } from "../jmx-lib/core"
-import { FishNode, NodeLinkData } from '../elements/fishnode'
+import { FishNode } from '../elements/fishnode'
 import { identity, mount } from '../utils/common'
 import '../assets/flags'
 import { flag } from '../assets/flags'
@@ -75,20 +75,21 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
         })
 
-    if (addtext) {
-        let t =
-            g
-                .append('g')
-                .attr('class', 'text-container')
-                .attr('transform', `translate(0,${outerRadius + 5})`)
-        t
-            .append('text')
-            .text(shortname)
-            .attr("filter", "url(#solid)")
-        t
-            .append('text')
-            .text(shortname)
-    }
+    // if (addtext) {
+    //     // let t =
+    //     //     g
+    //     //         .append('g')
+    //     //         .attr('class', 'text-container')
+    //     //         .attr('transform', `translate(0,${outerRadius + 5})`)
+    //     let t =
+    //         g
+    //         .append('text')
+    //         .text(shortname)
+    //         .attr("filter", "url(#solid)")
+    //     t
+    //         .append('text')
+    //         .text(shortname)
+    // }
 
     g
         .append('g')

@@ -82,7 +82,7 @@ let words2 = `
 let ws = words2.split("\n").map(s => s.trim()).filter(s => s !== "")
 
 export function issuspicious(id: string) {
-    return ws.find(s => id.includes(s))
+    return ws.find(s => id.includes(s)) !== undefined
 }
 
 export function getlinkgroupkey(sourcenodetype: NodeType, targetnodetype: NodeType): string {

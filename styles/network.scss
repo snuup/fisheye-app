@@ -192,3 +192,11 @@ div.path-matrix {
     font-size: 20px;
     transition: all 1s;
 }
+
+.athome {
+    // scale: 50%;
+    .text-container {
+        scale: 200%;
+        transform: translateY(0);
+    }
+}

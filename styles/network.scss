@@ -186,3 +186,9 @@ div.path-matrix {
     opacity: 0.5;
     // display: none;
 }
+
+.net-graph svg text:hover {
+    fill: red;
+    font-size: 20px;
+    transition: all 1s;
+}

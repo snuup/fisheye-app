@@ -1,3 +1,7 @@
+14.7.
++ compression was dead end
+-> selection + next neighbors + next reds
+
 13.7.
 + link, node, graph stats done
 - network view: avoid path matrix and show all paths as single links

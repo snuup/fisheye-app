@@ -85,7 +85,7 @@ export class Controller {
 
     updateAfterNodeToggle(e: Node) {
         this.computepathmatrix()
-        m.pinnedpaths = m.pathmatrix.map(p => p.key)
+        //m.pinnedpaths = m.pathmatrix.map(p => p.key)
         this.updatenetgraph()
 
         //let currentkeys = m.pathmatrix.map(ps => ps.key)

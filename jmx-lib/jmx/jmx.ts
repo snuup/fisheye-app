@@ -290,13 +290,13 @@ function getcompnode(n: Node): Node {
 export function updateviewmany(...selectors: (string | Node)[]) {
     //    console.log(`updateview(%c${selector})`, "background:#d2f759;padding:2px")
     let x: any[] = selectors.flatMap(s => ((typeof s == "string") ? [...document.querySelectorAll(s)] : [s]) as Node[])
-    console.log(x)
+    //console.log(x)
     x = x.map(getcompnode)
-    console.log(x)
+    //console.log(x)
     x = x.filter(n => !!n)
-    console.log(x)
+    //console.log(x)
     x = x.distinct()
-    console.log(x)
+    //console.log(x)
     x.forEach(n => patch(n, n.comp.factory))
 }
 

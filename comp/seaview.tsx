@@ -1,4 +1,4 @@
-import * as d3d from '../force/index'
+import * as d3d from '../force3d/index'
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'

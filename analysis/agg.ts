@@ -68,7 +68,7 @@ export type AGraph = Graph<ANode, ALink>
 
 //let ag: Graph<AggregatedNode, AggregatedLink> = Graph.Empty
 
-export class AggregateGraphBuilder {
+class AggregateGraphBuilder {
 
     static sync(ag: AGraph, g: FishGraph): void {
 

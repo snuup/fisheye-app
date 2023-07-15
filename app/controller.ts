@@ -9,12 +9,10 @@ import { FishNode } from "../elements/fishnode"
 import { FishLink } from "../elements/fishlink"
 import { Url } from "./routes"
 import { Path, PathMatrixBuilder } from "../elements/path"
-import { Paths } from "../comp/pathmatrix"
+import { Paths } from "../networkview/pathmatrix"
 import { SuperLink } from "../elements/superlink"
 import { getlinkgroupkey, issuspicious } from "../analysis/common"
 import "../analysis/agg"
-import { ANode, AggregateGraphBuilder } from "../analysis/agg"
-//import { AggregateGraphBuilder } from "../analysis/agg"
 
 
 export class Controller {
@@ -119,13 +117,12 @@ export class Controller {
     }
 
     updatenetgraph() {
-        let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
-        let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
-        let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
-        m.netgraph.nodes = nodes
-        m.netgraph.links = links
+        // let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
+        // let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
+        // let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
+        m.netgraph.nodes = m.pinnednodes
+        m.netgraph.links = [] // links
         m.netgraph.fixup()
-        AggregateGraphBuilder.sync(m.agraph, m.netgraph)
     }
 
     computepathmatrix() {
@@ -155,7 +152,7 @@ export class Controller {
         m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
     }
 
-    highlightbadpaths(n: ANode) {
+    highlightbadpaths(n: FishNode) {
         console.log("highlightbadpaths", n)
 
         this.resethighlights()

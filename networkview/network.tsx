@@ -4,9 +4,10 @@ import { m } from '../app/model'
 import { cc, mount } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
 import { SuperLink, TypeCount } from '../elements/superlink'
-import { d3nodedonut, getOuterRadius } from './node-donut'
+import { d3nodedonut, getOuterRadius } from '../comp/node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
+import * as f3 from '../force/index'
 
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
 
@@ -125,15 +126,15 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
-    simulation = d3
-        .forceSimulation(nodesm)
+    simulation = f3.forceSimulation(nodesm)
         //.alphaDecay(0.5)
         //.velocityDecay(.5)
         //.force('many', d3.forceManyBody().strength(-10))
-        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
-        .force('collide', d3.forceCollide().radius(80).strength(1))
+        //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
+        //.force('collide', d3.forceCollide().radius(80).strength(1))
         //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
         //.force('box', boxingForce)
+        .force("x", f3.forceX(100))
         .on('tick', updateview)
         .on('end', c.storenetgraph)
 

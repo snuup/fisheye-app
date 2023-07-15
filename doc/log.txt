@@ -1,3 +1,6 @@
+15.7.
+place all nodes on force pane, start with invss
+
 14.7.
 + compression was dead end
 -> selection + next neighbors + next reds

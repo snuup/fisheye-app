@@ -155,7 +155,7 @@ h2 {
     // border-radius: 50px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: darken($color1, 30);
+    background: desaturate(darken($color1, 35), 5);
     // border: 1px solid #802113;
     // border-radius: 50px;
 }

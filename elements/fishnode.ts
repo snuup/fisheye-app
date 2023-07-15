@@ -7,6 +7,7 @@ export class FishNode implements INode {
     id: string
     highlight = false
     focused = false
+    pinned = false
 
     constructor(original: MC1Node) {
         this.original = original

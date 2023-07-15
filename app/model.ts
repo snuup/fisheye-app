@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import { FishNode } from "../elements/fishnode"
 import { Graph } from "../elements/graph"
 import { SuperLink } from "../elements/superlink"
-import { Paths } from "../comp/pathmatrix"
+import { Paths } from "../networkview/pathmatrix"
 import { mount } from "../utils/common"
 import { Url } from "./routes"
 import { FishLink } from "../elements/fishlink"

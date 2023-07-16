@@ -53,8 +53,9 @@ article.network {
             stroke: none;
             fill: #555;
             transition: all 0.1s;
+            transform: none;
         }
-        &.suspect {
+        &.sus {
             text {
                 text-anchor: end;
             }

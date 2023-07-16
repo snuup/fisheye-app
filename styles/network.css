@@ -42,13 +42,14 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   stroke: none;
   fill: #555;
   transition: all 0.1s;
+  transform: none;
 }
 
-.net-graph .node.suspect text {
+.net-graph .node.sus text {
   text-anchor: end;
 }
 
-.net-graph .node.suspect .donut {
+.net-graph .node.sus .donut {
   transform: translate(35px, 0);
 }
 

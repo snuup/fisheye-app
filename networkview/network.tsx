@@ -102,7 +102,7 @@ function rund3(e: SVGElement) {
         .append('path')
         .attr("d", d3.symbol(d3.symbolTriangle2))
         .attr('class', 'triangle')
-        .attr('transform', ({ totalsize, isout }) => `translate(${isout ? totalsize + 10 : -10},0) rotate(${isout ? 90 : -90})`)
+        .attr('transform', ({ totalsize, isout }) => `translate(${isout ? totalsize + 13 : -13},0) rotate(${isout ? 90 : -90})`)
 
     nodesm.forEach(fn => {
         fn.x ??= width * Math.random()
@@ -149,8 +149,19 @@ function rund3(e: SVGElement) {
         let susid = 0
         nodesm.forEach(n => {
             if (n.pinned) {
-                n.xgreed = width / 2
-                n.ygreed = height / 2
+                switch (n.role) {
+                    case "inv":
+                        n.xgreed = .4 * width
+                        n.ygreed = height / 2
+                        break
+                    case "sus":
+                        n.xgreed = .6 * width
+                        n.ygreed = height / 2
+                        break
+                    default:
+                        n.xgreed = width / 2
+                        n.ygreed = height / 2
+                }
             }
             else switch (n.role) {
                 case "inv":

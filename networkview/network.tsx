@@ -114,16 +114,35 @@ function rund3(e: SVGElement) {
         .selectAll('g.node')
         .data(nodesm)
         .join('g')
-        .attr('class', n => cc(
-            'node',
-            n.type ?? "undefined",
-            {
-                inv: m.investigatees.includes(n.id),
-                highlight: n.highlight,
-                focused: n.focused,
-                athome: !n.pinned
-            }))
         .on('mousedown', onnodeclick)
+        // .attr('class', (n: FishNode) => cc(
+        //     'node',
+        //     n.type ?? "undefined",
+        //     {
+        //         inv: m.investigatees.includes(n.id),
+        //         highlight: n.highlight,
+        //         focused: n.focused,
+        //         athome: !n.pinned,
+        //         pinned: n.pinned
+        //     }))
+
+    function updatenodeclasses() {
+        nodesv
+            .attr('class', (n: FishNode) => cc(
+                'node',
+                n.type ?? "undefined",
+                {
+                    inv: m.investigatees.includes(n.id),
+                    highlight: n.highlight,
+                    focused: n.focused,
+                    athome: !n.pinned,
+                    pinned: n.pinned
+                }))
+    }
+
+    updatenodeclasses()
+
+    mount({ updatenodeclasses })
 
     nodesv
         .append('g')
@@ -220,31 +239,23 @@ function rund3(e: SVGElement) {
 
     function onnodeclick(ev: MouseEvent, n: FishNode) {
         console.log("onnodeclick")
-        if (n.pinned) {
-            n.pinned = false
-            m.pinnednodes.remove(n)
-            setxys()
-            reheat(1)
-        }
-        else {
-            n.pinned = true
-            m.pinnednodes.push(n)
-            setxys()
-            reheat(1)
+
+        if (ev.ctrlKey) {
+            if (n.pinned) {
+                n.pinned = false
+                m.pinnednodes.remove(n)
+                setxys()
+                reheat(1)
+            }
+            else {
+                n.pinned = true
+                m.pinnednodes.push(n)
+                setxys()
+                reheat(1)
+            }
+            updatenodeclasses()
         }
 
-        svg
-            .selectAll('g.node')
-            .attr('class', (n: FishNode) => cc(
-                'node',
-                n.type ?? "undefined",
-                {
-                    inv: m.investigatees.includes(n.id),
-                    highlight: n.highlight,
-                    focused: n.focused,
-                    athome: !n.pinned,
-                    pinned: n.pinned
-                }))
         // if (ev.ctrlKey) {
         //     c.highlightbadpaths(n)
         //     return

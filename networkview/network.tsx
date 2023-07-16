@@ -175,7 +175,7 @@ function rund3(e: SVGElement) {
             //.velocityDecay(.25)
             //.force('many', d3.forceManyBody().strength(-10))
             //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
-            //.force('collide', d3.forceCollide().radius(80).strength(1))
+            .force('collide', f3.forceCollide(80, nodesm))
             //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
             //.force('box', boxingForce)
             //.force("x", f3.forceX(100).x(n => n.home?.x ?? width / 2))

@@ -10,9 +10,8 @@ function y(d) {
   return d.y + d.vy;
 }
 
-export default function(radius) {
-  var nodes,
-      radii,
+export default function(radius, nodes) {
+  var radii,
       random,
       strength = 1,
       iterations = 1;
@@ -32,6 +31,9 @@ export default function(radius) {
       tree = quadtree(nodes, x, y).visitAfter(prepare);
       for (i = 0; i < n; ++i) {
         node = nodes[i];
+
+        if(!node.pinned) continue // extension
+
         ri = radii[node.index], ri2 = ri * ri;
         xi = node.x + node.vx;
         yi = node.y + node.vy;
@@ -72,6 +74,8 @@ export default function(radius) {
   }
 
   function initialize() {
+    console.log("init collide")
+
     if (!nodes) return;
     var i, n = nodes.length, node;
     radii = new Array(n);
@@ -79,7 +83,7 @@ export default function(radius) {
   }
 
   force.initialize = function(_nodes, _random) {
-    nodes = _nodes;
+    //nodes = _nodes;
     random = _random;
     initialize();
   };

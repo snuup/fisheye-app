@@ -175,8 +175,8 @@ function rund3(e: SVGElement) {
     function xyforce(alpha) {
         const strength = .1
         nodesm.forEach((n) => {
-            if(n.xgreed == undefined) return
-            if(n.ygreed == undefined) return
+            if (n.xgreed == undefined) return
+            if (n.ygreed == undefined) return
             n.vx += (n.xgreed - n.x) * strength * alpha
             n.vy += (n.ygreed - n.y) * strength * alpha
         })
@@ -197,7 +197,8 @@ function rund3(e: SVGElement) {
             .on('tick', updateview)
             .on('end', c.storenetgraph)
 
-    // svg.selectAll('g.node').call(drag(simulation))
+    svg.selectAll('g.node')
+        .call(drag(simulation))
 
     function boxingForce(alpha) {
         for (let n of nodesm) {
@@ -256,11 +257,13 @@ function rund3(e: SVGElement) {
 
     mount({ reheat })
 
+    const isdragable = (n: FishNode) => n.pinned || n.isinter
+
     function drag(simulation) {
+
         function dragstarted(event, n: FishNode) {
             console.log(event, n)
-            if (!n.pinned) return
-            return false
+            if (!isdragable(n)) return
 
             //if (event.sourceEvent.ctrlKey) return
 
@@ -270,13 +273,13 @@ function rund3(e: SVGElement) {
         }
 
         function dragged(event, n) {
-            if (!n.pinned) return
+            if (!isdragable(n)) return
             event.subject.fx = event.sourceEvent.offsetX
             event.subject.fy = event.sourceEvent.offsetY
         }
 
         function dragended(event, n) {
-            if (!n.pinned) return
+            if (!isdragable(n)) return
             if (event.sourceEvent.ctrlKey) return
             if (!event.active) simulation.alphaTarget(0)
             if (event.sourceEvent.shiftKey) {
@@ -286,11 +289,11 @@ function rund3(e: SVGElement) {
             c.storenetgraph()
         }
 
-        // return d3
-        //     .drag()
-        //     .on('start', dragstarted)
-        //     .on('drag', dragged)
-        //     .on('end', dragended)
+        return d3
+            .drag()
+            .on('start', dragstarted)
+            .on('drag', dragged)
+            .on('end', dragended)
     }
 
     svg.node()?.append(defsFilter!)

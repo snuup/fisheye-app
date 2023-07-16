@@ -232,6 +232,19 @@ function rund3(e: SVGElement) {
             setxys()
             reheat(1)
         }
+
+        svg
+            .selectAll('g.node')
+            .attr('class', (n: FishNode) => cc(
+                'node',
+                n.type ?? "undefined",
+                {
+                    inv: m.investigatees.includes(n.id),
+                    highlight: n.highlight,
+                    focused: n.focused,
+                    athome: !n.pinned,
+                    pinned: n.pinned
+                }))
         // if (ev.ctrlKey) {
         //     c.highlightbadpaths(n)
         //     return

@@ -54,7 +54,7 @@ article.network {
             fill: #555;
             transition: all 0.1s;
         }
-        &:hover {
+        &:hover, &.pinned {
             .donut {
                 opacity: .9;
             }
@@ -88,11 +88,11 @@ article.network {
             font-weight: bold;
         }
 
-        &:hover {
-            .bgcircle {
-                fill: #fff;
-            }
-        }
+        // &:hover {
+        //     .bgcircle {
+        //         fill: #fff;
+        //     }
+        // }
     }
 
     g.donut.suspect:not(.inv) {

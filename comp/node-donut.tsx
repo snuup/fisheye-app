@@ -11,9 +11,7 @@ let donutOuterRadiusScaler = d3.scaleSqrt([0, 300], [innerRadius + 5, innerRadiu
 
 export const getOuterRadius = (n: FishNode) => donutOuterRadiusScaler(n.degree)
 
-export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
-
-    let shortname = n.id.slice(0, 10)
+export function d3nodedonut(svg, n: FishNode, undirected) {
 
     let donut = undirected ? n.donut.map(n => ({ ...n, ins: 0, outs: n.total })) : n.donut
 
@@ -37,27 +35,21 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             (d)
     }
 
-    const g =
+    svg
+        .attr('width', outerRadius * 2)
+        .attr('height', outerRadius * 2)
+        .attr("class", "donut")
+        .classed('inv', m.invs.includes(n))
+        .classed('suspect', m.suspects.includes(n))
+        .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 
-        sel
-            .attr('width', outerRadius * 2)
-            .attr('height', outerRadius * 2)
-            .append('g')
-            .attr("class", "donut")
-            .classed('inv', m.invs.includes(n))
-            .classed('suspect', m.suspects.includes(n))
-            .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
+        .append('circle').attr("r", outerRadius).attr("class", "bgcircle")
 
-    g.append('circle').attr("r", outerRadius).attr("class", "bgcircle")
-
-
-
-    g
+    svg
         .selectAll('g')
         .data(piedata)
         .join('g')
         .attr('class', (d: any) => d.data.type)
-
         .selectAll('path')
         .data((d: any) => {
             return [
@@ -75,39 +67,23 @@ export function d3nodedonut(sel, n: FishNode, undirected, addtext) {
             return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
         })
 
-    addIcon(g, outerRadius, n.type)
+    addIcon(svg, n.type)
 
-    // if (addtext) {
-    //     // let t =
-    //     //     g
-    //     //         .append('g')
-    //     //         .attr('class', 'text-container')
-    //     //         .attr('transform', `translate(0,${outerRadius + 5})`)
-    //     let t =
-    //         g
-    //         .append('text')
-    //         .text(shortname)
-    //         .attr("filter", "url(#solid)")
-    //     t
-    //         .append('text')
-    //         .text(shortname)
-    // }
-
-    g
+    svg
         .append('g')
         .attr('transform', `translate(${outerRadius},${-outerRadius * .8})`)
         .append(d => n.country ? flag(m.countryColorScaler(n.country)) : document.createElement('i'))
         .append('title')
         .text(n.country)
 
-    return g
+    return svg
 }
 
 export function NodeDonut({ n }: { n: FishNode }) {
-    return <svg patch={e => d3nodedonut(d3.select(e), n, false, false)}></svg>
+    return <svg patch={e => d3nodedonut(d3.select(e), n, false)}></svg>
 }
 
-function addIcon(g, outerRadius, name) {
+function addIcon(g, name) {
     let icon = icons[name]
     if (!icon) return
     g

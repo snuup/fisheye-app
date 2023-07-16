@@ -42,8 +42,9 @@ nav {
   background: white;
 }
 
-g.donut {
+.donut {
   opacity: 0.92;
+  overflow: visible;
 }
 
 .icon.company {

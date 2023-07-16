@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { jsx } from '../jmx-lib/core'
 import { m } from '../app/model'
-import { cc, mount } from '../utils/common'
+import { cc, mount, nidisplay } from '../utils/common'
 import { FishNode } from '../elements/fishnode'
 import { SuperLink, TypeCount } from '../elements/superlink'
 import { d3nodedonut, getOuterRadius } from '../comp/node-donut'
@@ -10,6 +10,8 @@ import { defsFilter } from '../assets/flags'
 import * as f3 from '../force/index'
 
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
+
+const adornScaler = d3.scaleLinear([1, 2, 3, 10, 100], [4, 9, 12, 20, 50])
 
 let simulation: any = null
 
@@ -71,7 +73,7 @@ function rund3(e: SVGElement) {
             let direction = t.direction
             let isout = direction === "out"
             let radius = getOuterRadius(isout ? flf.source : flf.target)
-            let totalsize = side.tcs.last.prevsum + side.tcs.last.countpos
+            let totalsize = side.tcs.last.prevsum + side.tcs.last.count
             let dx = isout ? (radius + 10) : (radius + 10 + totalsize)
             return { ...side, radius, direction, flf, dx, totalsize, isout }
         })
@@ -136,7 +138,8 @@ function rund3(e: SVGElement) {
 
     nodesv
         .append("text")
-        .text(d => d.id)
+        .text(d => nidisplay(d.id))
+        .attr('transform', d => `translate(0, ${getOuterRadius(d)})`)
 
     console.log("simulation:")
 

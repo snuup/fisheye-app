@@ -108,6 +108,7 @@ export class Controller {
             console.warn("tbd: remove links to", n.id)
             m.netgraph.nodes.remove(n)
         }
+        updateview("article")
     }
 
     updateAfterNodeToggle(e: Node) {

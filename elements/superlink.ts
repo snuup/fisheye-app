@@ -29,8 +29,9 @@ export class SuperLink implements ILink {
     getTypeCounts(links: FishLink[], direction: "in" | "out"): TypeCount[] {
         let prevsum = 0
         return links.countBy(l => l.type).entries.map(([type, count]) => {
-            let r = { type, count, countpos: adornScaler(count), prevsum, direction } // * 2 is a rude visual scaler
-            prevsum += count
+            let countpos = adornScaler(count)
+            let r = { type, count, countpos, prevsum, direction } // * 2 is a rude visual scaler
+            prevsum += countpos
             return r
         })
     }

@@ -287,3 +287,13 @@ export function nicenodetypename(rawnodetype: string) {
 
 export function makekv<K, V>([k, v]: [K, V]) { return { k, v } }
 
+const regexguid = /^([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})|[0-9]+$/i
+
+export function isguid(s: string) {
+    return s.length == 36 && regexguid.test(s)
+}
+
+export function nidisplay(nid: string) {
+    if (isguid(nid)) return nid.slice(0, 4)
+    return nid
+}

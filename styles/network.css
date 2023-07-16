@@ -60,6 +60,15 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   font-weight: bold;
 }
 
+.net-graph .node.pinned .donut, .net-graph .node.inter .donut {
+  transform: initial;
+}
+
+.net-graph .node.pinned text, .net-graph .node.inter text {
+  dominant-baseline: hanging;
+  text-anchor: middle;
+}
+
 .net-graph g.inv .bgcircle {
   fill: orange;
 }

@@ -107,24 +107,11 @@ function rund3(e: SVGElement) {
         fn.y ??= height * Math.random()
     })
 
-
-    //homys.filter(n => n.suspect).forEach((n, i) => n.home = { x: width - 50, y: 30 + i * 30 })
-
     let nodesv = svg
         .selectAll('g.node')
         .data(nodesm)
         .join('g')
         .on('mousedown', onnodeclick)
-        // .attr('class', (n: FishNode) => cc(
-        //     'node',
-        //     n.type ?? "undefined",
-        //     {
-        //         inv: m.investigatees.includes(n.id),
-        //         highlight: n.highlight,
-        //         focused: n.focused,
-        //         athome: !n.pinned,
-        //         pinned: n.pinned
-        //     }))
 
     function updatenodeclasses() {
         nodesv
@@ -132,7 +119,8 @@ function rund3(e: SVGElement) {
                 'node',
                 n.type ?? "undefined",
                 {
-                    inv: m.investigatees.includes(n.id),
+                    inv: n.inv,
+                    suspect: n.suspect,
                     highlight: n.highlight,
                     focused: n.focused,
                     athome: !n.pinned,
@@ -141,8 +129,6 @@ function rund3(e: SVGElement) {
     }
 
     updatenodeclasses()
-
-    mount({ updatenodeclasses })
 
     nodesv
         .append('g')
@@ -155,9 +141,6 @@ function rund3(e: SVGElement) {
         .append("text")
         .text(d => d.id)
 
-
-    //    nodesm.filter(n => n.home)
-
     console.log("simulation:")
 
     //let homys = nodesm.filter(n => !n.pinned)
@@ -167,18 +150,43 @@ function rund3(e: SVGElement) {
                 n.xgreed = width / 2
                 n.ygreed = height / 2
             }
-            else if (n.inv) {
+            else  {
                 n.xgreed = 50
                 n.ygreed = 30 + i * 30
             }
+        })
+        nodesm.filter(n => n.suspect).forEach((n, i) => {
+            if (n.pinned) {
+                n.xgreed = width / 2
+                n.ygreed = height / 2
+            }
             else if (n.suspect) {
                 n.xgreed = width - 50
-                n.ygreed = 30 + i * 30
+                n.ygreed = 10 + i * 16
             }
         })
+        // nodesm.forEach((n, i) => {
+        //     if (n.pinned) {
+        //         n.xgreed = width / 2
+        //         n.ygreed = height / 2
+        //     }
+        //     else if (n.inv) {
+        //         n.xgreed = 50
+        //         n.ygreed = 30 + i * 30
+        //     }
+        //     else if (n.suspect) {
+        //         n.xgreed = width - 50
+        //         n.ygreed = 30 + i * 30
+        //     }
+        //     else{
+        //         n.xgreed = n.ygreed = 0
+        //     }
+        // })
     }
 
     setxys()
+
+    mount({ setxys })
 
     function xyforce(alpha) {
         const strength = .1

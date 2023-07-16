@@ -44,8 +44,16 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   transition: all 0.1s;
 }
 
+.net-graph .node.suspect text {
+  text-anchor: end;
+}
+
+.net-graph .node.suspect .donut {
+  transform: translate(35px, 0);
+}
+
 .net-graph .node:hover .donut, .net-graph .node.pinned .donut {
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .net-graph .node:hover text, .net-graph .node.pinned text {

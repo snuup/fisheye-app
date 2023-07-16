@@ -6,13 +6,13 @@ article.network {
 }
 
 .net-graph {
-
     user-select: none;
 
     & > svg {
-        outline: solid 1px lightgreen;
+        // outline: solid 1px lightgreen;
         width: 100%;
         height: 100%;
+        overflow: visible;
     }
 
     body.highlightpaths & {
@@ -42,23 +42,28 @@ article.network {
     }
 
     .node {
-    }
-
-    // background: lightseagreen;
-
-
-    text {
-        // text-anchor: end;
-        stroke: none;
-        fill: #555;
-        font-weight: 100;
+        // outline: solid 1px lightcoral;
+        .donut {
+            opacity: 0;
+            transform: translate(-35px, 0);
+            transition: all 0.2s;
+        }
+        text {
+            dominant-baseline: middle;
+            stroke: none;
+            fill: #555;
+            transition: all 0.1s;
+        }
         &:hover {
-            // text-anchor: start;
-            fill: steelblue;
-            // font-size: 20px;
-            transition: all 1s;
+            .donut {
+                opacity: .9;
+            }
+            text {
+                font-weight: bold;
+            }
         }
     }
+
     g.inv {
         .bgcircle {
             fill: orange;

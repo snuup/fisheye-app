@@ -3,12 +3,14 @@ article.network {
   gap: 1em;
 }
 
-svg.net-donut {
-  overflow: visible;
-}
-
 .net-graph {
   user-select: none;
+}
+
+.net-graph > svg {
+  outline: solid 1px lightgreen;
+  width: 100%;
+  height: 100%;
 }
 
 body.highlightpaths .net-graph .node:not(.highlight):not(.focused) * {
@@ -29,20 +31,15 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   opacity: 0.15;
 }
 
-.net-graph > svg {
-  width: 100%;
-  height: 100%;
-}
-
 .net-graph text {
-  text-anchor: middle;
   stroke: none;
   fill: #555;
   font-weight: 100;
 }
 
-.net-graph g.inv text {
-  fill: #bb0c0c;
+.net-graph text:hover {
+  fill: steelblue;
+  transition: all 1s;
 }
 
 .net-graph g.inv .bgcircle {
@@ -91,63 +88,9 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   fill: #eee;
 }
 
-div.path-matrix {
-  display: none;
-  position: absolute;
-  bottom: 0;
-}
-
-body.showpathmatrix div.path-matrix {
-  display: initial;
-}
-
-div.path-matrix svg {
-  overflow: visible;
-}
-
-div.path-matrix g {
-  cursor: pointer;
-}
-
-div.path-matrix g.sel circle {
-  fill: #222;
-  stroke: none;
-}
-
-div.path-matrix g.sel text {
-  fill: white;
-}
-
-div.path-matrix circle {
-  fill: white;
-  stroke: #333;
-}
-
-div.path-matrix text {
-  fill: #333;
-  font-weight: bold;
-  text-anchor: middle;
-  dominant-baseline: central;
-}
-
-div.path-matrix text.h-label {
-  fill: #333;
-  text-anchor: start;
-}
-
-div.path-matrix text.v-label {
-  text-anchor: start;
-}
-
 .triangle {
   fill: #ddd;
   stroke: #333;
   stroke-width: 1;
   opacity: 0.5;
-}
-
-.net-graph svg text:hover {
-  fill: red;
-  font-size: 20px;
-  transition: all 1s;
 }

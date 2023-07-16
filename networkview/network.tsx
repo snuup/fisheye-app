@@ -117,7 +117,6 @@ function rund3(e: SVGElement) {
         .attr('class', n => cc(
             'node',
             n.type ?? "undefined",
-            "net-donut",
             {
                 inv: m.investigatees.includes(n.id),
                 highlight: n.highlight,
@@ -125,16 +124,13 @@ function rund3(e: SVGElement) {
                 athome: n.home
             }))
         .on('mousedown', onnodeclick)
-    // .select(((n, i, nodes) => {
-    //     d3nodedonut(d3.select(nodes[i]), n, true, true)
-    // }) as any)
 
     nodesv
-        // .append('svg')
-        //.attr("class", "net-donut")
+        .append('g')
         .select(((n, i, nodes) => {
-            d3nodedonut(d3.select(nodes[i]), n, true, true)
+            d3nodedonut(d3.select(nodes[i]), n, true)
         }) as any)
+        .attr('class', 'donut')
 
     nodesv
         .append("text")

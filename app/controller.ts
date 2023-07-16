@@ -51,7 +51,7 @@ export class Controller {
 
         nodes.forEach(n => n.inv = m.invs.includes(n))
         nodes.forEach(n => n.suspect = m.suspects.includes(n))
-        m.netgraph.nodes = m.invs.concat(m.suspects)
+        m.netgraph.nodes = m.invs.slice(0, 1) // .concat(m.suspects)
 
         // init country color scaler
         // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")

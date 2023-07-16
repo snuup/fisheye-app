@@ -1,0 +1,47 @@
+div.path-matrix {
+  display: none;
+  position: absolute;
+  bottom: 0;
+}
+
+body.showpathmatrix div.path-matrix {
+  display: initial;
+}
+
+div.path-matrix svg {
+  overflow: visible;
+}
+
+div.path-matrix g {
+  cursor: pointer;
+}
+
+div.path-matrix g.sel circle {
+  fill: #222;
+  stroke: none;
+}
+
+div.path-matrix g.sel text {
+  fill: white;
+}
+
+div.path-matrix circle {
+  fill: white;
+  stroke: #333;
+}
+
+div.path-matrix text {
+  fill: #333;
+  font-weight: bold;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+div.path-matrix text.h-label {
+  fill: #333;
+  text-anchor: start;
+}
+
+div.path-matrix text.v-label {
+  text-anchor: start;
+}

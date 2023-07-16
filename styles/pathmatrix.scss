@@ -1,0 +1,44 @@
+div.path-matrix {
+    display: none;
+
+    body.showpathmatrix & {
+        display: initial;
+    }
+
+    position: absolute;
+    bottom: 0;
+    // background: lightcoral;
+    svg {
+        // background: lightpink;
+        overflow: visible;
+    }
+    g {
+        cursor: pointer;
+        &.sel {
+            circle {
+                fill: #222;
+                stroke: none;
+            }
+            text {
+                fill: white;
+            }
+        }
+    }
+    circle {
+        fill: white;
+        stroke: #333;
+    }
+    text {
+        fill: #333;
+        font-weight: bold;
+        text-anchor: middle;
+        dominant-baseline: central;
+    }
+    text.h-label {
+        fill: #333;
+        text-anchor: start;
+    }
+    text.v-label {
+        text-anchor: start;
+    }
+}

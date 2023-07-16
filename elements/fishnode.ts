@@ -9,6 +9,7 @@ export class FishNode implements INode {
     // highlight = false
     // focused = false
 
+    selected = false
     pinned = false
 
     role: "inv" | "sus" | "inter" | undefined

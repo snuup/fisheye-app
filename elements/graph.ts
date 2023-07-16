@@ -186,6 +186,25 @@ export class GraphAlgos {
 
         return fronteers
     }
+
+    static getdistance(getneighbors: (string) => string[], start: string, goal: string, maxlength = 99, excludes: string[] = []) {
+
+        let visited = new Set<string>(excludes) // consider excludes as visited
+
+        const bfs = (fronteer: string[]) => {
+            fronteer.forEach(n => visited.add(n))
+            return fronteer.flatMap(n => getneighbors(n)).distinct().filter(n => !visited.has(n))
+        }
+
+        let f = [start]
+        let i = 0
+        while (f.length && maxlength--) {
+            i++
+            f = bfs(f)
+            if(f.includes(goal)) return i
+        }
+        return maxlength
+    }
 }
 
 export function printpath(p: Path<ILink>) {

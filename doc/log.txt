@@ -13,6 +13,11 @@
     paths can be pinned (later)
 
 
+// scoring:
+selection = only invs
+rank suspects by closeness to inv selection
+
+
 15.7.
 place all nodes on force pane, start with invss
 

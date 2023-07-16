@@ -52,6 +52,7 @@ export const mraw = {
 
     // ui
     selection: [] as any[],
+    suspectdistances: new Map<string, number>(),
 
     invs: [] as FishNode[],
     suspects: [] as FishNode[],

@@ -143,6 +143,8 @@ function rund3(e: SVGElement) {
 
     console.log("simulation:")
 
+    const distanceScaler = d3.scaleLinear([1, 2, 3, 4, 5, 90], [100, 80, 60, 30, 0])
+
     //let homys = nodesm.filter(n => !n.pinned)
     function setxys() {
         let invid = 0
@@ -169,7 +171,8 @@ function rund3(e: SVGElement) {
                     n.ygreed = 30 + invid++ * 30
                     break
                 case "sus":
-                    n.xgreed = width - 50
+                    let d = m.suspectdistances.get(n.id) ?? 0
+                    n.xgreed = width - 50 - distanceScaler(d)
                     n.ygreed = 10 + susid++ * 16
                     break
             }
@@ -248,6 +251,9 @@ function rund3(e: SVGElement) {
             setxys()
             reheat(1)
             updatenodeclasses()
+        }
+        else {
+            c.selectnode(n)
         }
     }
     function reheat(alpha = .2) {

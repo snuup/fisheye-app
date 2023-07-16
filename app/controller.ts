@@ -55,15 +55,17 @@ export class Controller {
         m.countryColorScaler = d3.scaleOrdinal(d3.schemeAccent) // d3.scaleOrdinal().domain(allcountries)
     }
 
-    getfronteer(nid: string, max) {
+    getfronteers(nid: string, max = 90) {
         return GraphAlgos.getfronteers(m.supergraph.getneighbors, nid, max, ["FishEye International"])
+    }
+
+    getdistance(start: string, goal: string) {
+        return GraphAlgos.getdistance(m.supergraph.getneighbors, start, goal, 90, ["FishEye International"])
     }
 
     setroute() {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
         console.log("setroute", m.url)
-
-
 
         // switch (m.url[0]) {
         //     case "network":
@@ -121,6 +123,21 @@ export class Controller {
 
         updateviewmany(e, ".network") // ".net-graph > svg", ".path-matrix")
         //updateview(".network")
+    }
+
+    selectnode(n: FishNode) {
+        n.selected = m.selection.toggle(n)
+        console.log("selection", m.selection)
+
+        console.log("compute illegal flow to selection", m.selection)
+
+        m.suspectdistances = new Map()
+        for (let sus of m.suspects) {
+            let d = c.getdistance(n.id, m.investigatees[0])
+            m.suspectdistances.set(sus.id, d)
+        }
+
+        updateview("article")
     }
 
     togglepaths(nps: Paths) {

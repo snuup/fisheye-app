@@ -25,7 +25,7 @@ export default function (nodes) {
     event = dispatch("tick", "end"),
     random = lcg()
 
-  console.log("yeah")
+  console.log("create simulation")
 
   if (nodes == null) nodes = []
 

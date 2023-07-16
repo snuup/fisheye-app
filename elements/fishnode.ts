@@ -12,7 +12,8 @@ export class FishNode implements INode {
     inv?: boolean
     suspect?: boolean
 
-    home?: { x: number, y: number }
+    xgreed = 0
+    ygreed = 0
 
     constructor(original: MC1Node) {
         this.original = original
@@ -27,5 +28,7 @@ export class FishNode implements INode {
     get id10() { return this.id.truncate(10) }
     get degree() { return this.outdegree + this.indegree }
 }
+
+export type FishNodeForce = FishNode & { x: number, y: number, vx:number, vy:number }
 
 mount({ FishNode })

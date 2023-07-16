@@ -1,32 +1,24 @@
-import { FishNode } from "../elements/fishnode"
+import { FishNodeForce } from "../elements/fishnode"
 
 export function homeforce() {
-    var strength: 0.1,
-        nodes: FishNode[],
-        xz
+
+    let strength = 0.1, nodes: FishNodeForce[]
 
     function force(alpha) {
-        for (var i = 0, n = nodes.length, node; i < n; ++i) {
-            node = nodes[i], node.vx += (xz[i] - node.home.x) * strength * alpha
-            if (isNaN(node.home.x)) debugger
-            if (isNaN(node.x)) debugger
-            //console.log(nodes[i])
-        }
-    }
-
-    function initialize() {
-        if (!nodes) return
-        xz = new Array(nodes.length)
+        nodes.forEach((n) => {
+            n.vx += (n.xgreed - n.x) * strength * alpha
+            n.vy += (n.ygreed - n.y) * strength * alpha
+            if (isNaN(n.vx)) debugger
+        })
     }
 
     force.initialize = function (_) {
         nodes = _
         console.log("home force intialized", _)
-        initialize()
     }
 
     force.strength = function (_) {
-        return arguments.length ? (strength = _, initialize(), force) : strength
+        return arguments.length ? (strength = _, force) : strength
     }
 
     return force

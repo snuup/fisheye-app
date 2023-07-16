@@ -1,14 +1,13 @@
 body {
     display: grid;
     grid-template-areas:
-        'header header'
-        'nav main';
+        'header'
+        'main';
         /* 'footer footer'; */
     width: 100vw;
     height: 100vh;
     padding: 0;
     margin: 0;
-    grid-template-columns: 260px 1fr;
     grid-template-rows: auto 1fr;
     grid-gap: 10px;
 }
@@ -48,22 +47,3 @@ header,
 footer {
     background-color: #e8f0f1;
 }
-
-body.nodestats,
-body.linkstats,
-body.graphstats
- {
-    display: grid;
-    grid-template-areas:
-        'header header'
-        'nav main';
-        /* 'footer footer'; */
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    grid-template-columns: 0 1fr;
-    grid-template-rows: auto 1fr;
-    grid-gap: 10px;
-}
-

@@ -5,12 +5,7 @@ import { NodeStats } from '../nodestats/nodestats'
 import { m } from './model'
 import { Link } from './routes'
 import { cc, mount } from '../utils/common'
-import { Navigation } from "../comp/nav"
-import { MatrixView } from "../comp/matrixview"
-import { HierarchyView } from "../comp/hierarchyview"
-import { SeaView } from "../comp/seaview"
 import { NetworkView } from "../networkview/networkview"
-import { NodeIdBarChart } from "../nodestats/nodebarcharts"
 import { LinkStats } from "../linkstats/linkstats"
 import { GraphStats } from "../graphstats/graphstats"
 
@@ -27,14 +22,8 @@ let App = () => {
                 <Link url={['linkstats']} />
                 <Link url={['graphstats']} />
                 <Link url={['network']} />
-                <Link url={['matrix']} />
-                <Link url={['tree']} />
-                <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")} />
+                {/* <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")} /> */}
             </header>
-
-            <When cond={'network' == m.url[0]}>
-                <Navigation />
-            </When>
 
             <article id='main' class={m.url[0]}>
                 <When cond={m.url[0] == 'nodestats' || m.url[0] as unknown == ''}>
@@ -46,15 +35,8 @@ let App = () => {
                 <When cond={m.url[0] == 'graphstats'}>
                     <GraphStats links={m.graph.links} />
                 </When>
-                <When cond={m.url[0] == 'matrix'}>
-                    <MatrixView />
-                </When>
                 <When cond={m.url[0] == 'network'}>
-                    {/* <SeaView /> */}
                     <NetworkView />
-                </When>
-                <When cond={m.url[0] == 'tree'}>
-                    <HierarchyView />
                 </When>
             </article>
 

@@ -36,7 +36,7 @@ export const mraw = {
     netgraph: Graph.Empty as FishGraph,
     agraph: Graph.Empty as AGraph,
 
-    pinnednodes: [] as FishNode[],
+    //pinnednodes: [] as FishNode[],
     pinnedpaths: [] as string[],
 
     graphfocus: "" as string | null,

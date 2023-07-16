@@ -4,11 +4,10 @@ import { updateview, updateviewmany } from "../jmx-lib/core"
 import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
-import { Graph, GraphAlgos } from "../elements/graph"
+import { Graph, GraphAlgos, printpath } from "../elements/graph"
 import { FishNode } from "../elements/fishnode"
 import { FishLink } from "../elements/fishlink"
 import { Url } from "./routes"
-import { Path, PathMatrixBuilder } from "../elements/path"
 import { Paths } from "../networkview/pathmatrix"
 import { SuperLink } from "../elements/superlink"
 import { getlinkgroupkey, issuspicious } from "../analysis/common"
@@ -36,7 +35,6 @@ export class Controller {
         m.invs = m.investigatees.map(m.graph.getnode)
         m.suspects = m.graph.nodes.filter(n => issuspicious(n.id))
 
-        this.restore()
         this.computepathmatrix()
         this.updatenetgraph()
 
@@ -49,9 +47,8 @@ export class Controller {
                 .groupBy(l => l.type)
                 .mapValues(ls => ls.groupBy(l => getlinkgroupkey(l.sourcetype, l.targettype)))
 
-        nodes.forEach(n => n.inv = m.invs.includes(n))
-        nodes.forEach(n => n.suspect = m.suspects.includes(n))
-        m.netgraph.nodes = m.invs.concat(m.suspects)
+        m.invs.forEach(n => n.role = "inv")
+        m.suspects.forEach(n => n.role = "sus")
 
         // init country color scaler
         // let allcountries = nodes.map(n => n.country).distinctBy().map(s => s ?? "undefined")
@@ -81,9 +78,36 @@ export class Controller {
     }
 
     togglenetnode(ev, n: FishNode) {
-        // console.log("toggle")
-        n.pinned = m.pinnednodes.toggle(n)
-        this.updateAfterNodeToggle(ev.currentTarget)
+        console.log("togglenetnode")
+        n.pinned = !n.pinned
+
+        if (n.pinned) {
+            m.netgraph.nodes.push(n)
+
+            console.warn("add links between", n.id, m.netgraph.nodes)
+            let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.map(n => n.id).except(n.id))
+            paths.forEach(printpath)
+
+            let links = paths.flatMap(p => p.links.map(dl => dl.link)).distinct()
+            let internodes =
+                links
+                    .flatMap(l => l.nodeids)
+                    .distinct()
+                    .exceptset(m.majorids)
+                    .map(nid => m.supergraph.getnode(nid))
+                    .filter(n => n.role === undefined) // only add nodes that are not yet already internodes
+
+            internodes.forEach(n => n.role = "inter")
+
+            m.netgraph.nodes.push(...internodes)
+            m.netgraph.links.ensures(links)
+
+            console.log(links)
+        }
+        else {
+            console.warn("tbd: remove links to", n.id)
+            m.netgraph.nodes.remove(n)
+        }
     }
 
     updateAfterNodeToggle(e: Node) {
@@ -96,159 +120,141 @@ export class Controller {
 
         updateviewmany(e, ".network") // ".net-graph > svg", ".path-matrix")
         //updateview(".network")
-        this.store()
     }
-
-    // removepinnednode(n: FishNode) {
-    //     let add = m.pinnednodes.toggle(n)
-    //     //m.netgraph.togglenode(n, add) // ... create new graph class ? add node, compute path matrix
-
-    //     this.computepathmatrix()
-    //     this.updatenetgraph()
-
-    //     let currentkeys = m.pathmatrix.map(ps => ps.key)
-    //     m.pinnedpaths.forEach(k => { if (!currentkeys.includes(k)) m.pinnedpaths.remove(k) })
-
-    //     updateviewmany(ev.currentTarget, ".net-graph > svg")
-    //     this.store()
-    // }
 
     togglepaths(nps: Paths) {
         m.pinnedpaths.toggle(nps.key)
         this.updatenetgraph()
         updateview('.path-matrix')
         updateview('.net-graph > svg')
-        this.store()
     }
 
     updatenetgraph() {
 
-        let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
-        let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
-        let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
-        m.netgraph.nodes = nodes
+        // let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
+        // let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
+        // let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
+        // m.netgraph.nodes = nodes
 
-        m.netgraph.nodes.forEach(n => n.isinter = !m.majors.includes(n))
+        // m.netgraph.nodes.forEach(n => n.isinter = !m.majors.includes(n))
 
-        m.netgraph.links = links
-        m.netgraph.fixup()
+        // m.netgraph.links = links
+        // m.netgraph.fixup()
     }
 
     computepathmatrix() {
 
         //console.log("computepathmatrix")
 
-        let nodes = m.pinnednodes
-        let n = nodes.length
-        let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
+        // let nodes = m.pinnednodes
+        // let n = nodes.length
+        // let indexes = d3.range(n).flatMap(x => d3.range(x).map(y => [x, y]))
 
-        function computepaths(i): Path<SuperLink>[] {
-            let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
-            return goalpaths
-        }
+        // function computepaths(i): Path<SuperLink>[] {
+        //     let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, nodes[i].id, nodes.slice(i + 1).map(n => n.id))
+        //     return goalpaths
+        // }
 
-        let allpaths = d3.range(n).flatMap(computepaths)
-        //console.log("allpaths", allpaths)
-        mount({ allpaths })
+        // let allpaths = d3.range(n).flatMap(computepaths)
+        // //console.log("allpaths", allpaths)
+        // mount({ allpaths })
 
-        function getpaths(i: number, j: number): Paths {
-            let n1 = nodes[i]
-            let n2 = nodes[j]
-            let ps = allpaths.filter(p => p.start == n2.id && p.end == n1.id)
-            return new Paths(ps, i, j, n1, n2)
-        }
+        // function getpaths(i: number, j: number): Paths {
+        //     let n1 = nodes[i]
+        //     let n2 = nodes[j]
+        //     let ps = allpaths.filter(p => p.start == n2.id && p.end == n1.id)
+        //     return new Paths(ps, i, j, n1, n2)
+        // }
 
-        m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
+        // m.pathmatrix = indexes.map(([i, j]) => getpaths(i, j))
     }
 
-    highlightbadpaths(n: FishNode) {
-        console.log("highlightbadpaths", n)
+    // highlightbadpaths(n: FishNode) {
+    //     console.log("highlightbadpaths", n)
 
-        this.resethighlights()
+    //     this.resethighlights()
 
-        n.focused = true
+    //     n.focused = true
 
-        document.body.classList.add("highlightpaths")
-        let bads = m.netgraph.nodes.filter(n => m.suspects.includes(n)).map(n => n.id)
-        let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, bads, 3, ['FishEye International'])
-        //console.log("goalpaths", goalpaths)
-        mount({ goalpaths })
+    //     document.body.classList.add("highlightpaths")
+    //     let bads = m.netgraph.nodes.filter(n => m.suspects.includes(n)).map(n => n.id)
+    //     let { goalpaths } = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, bads, 3, ['FishEye International'])
+    //     //console.log("goalpaths", goalpaths)
+    //     mount({ goalpaths })
 
-        let highlightlinks = goalpaths.flat().flatMap(p => p.links).map(dl => dl.link).distinct()
-        highlightlinks.forEach(l => l.highlight = true)
-        console.log("highlighted links:", highlightlinks)
+    //     let highlightlinks = goalpaths.flat().flatMap(p => p.links).map(dl => dl.link).distinct()
+    //     highlightlinks.forEach(l => l.highlight = true)
+    //     console.log("highlighted links:", highlightlinks)
 
-        let highlightnodes = highlightlinks.flatMap(l => l.nodeids).distinct()
-        m.netgraph.nodes.forEach(n => n.highlight = highlightnodes.includes(n.id))
+    //     let highlightnodes = highlightlinks.flatMap(l => l.nodeids).distinct()
+    //     m.netgraph.nodes.forEach(n => n.highlight = highlightnodes.includes(n.id))
 
-        //console.log("highlightlinks", highlightlinks)
-        //console.log("highlightnodes", highlightnodes)
-        //console.log("highs-focs:", m.netgraph.nodes.map(n => `${n.highlight} - ${n.focused}`).join(' '))
+    //     //console.log("highlightlinks", highlightlinks)
+    //     //console.log("highlightnodes", highlightnodes)
+    //     //console.log("highs-focs:", m.netgraph.nodes.map(n => `${n.highlight} - ${n.focused}`).join(' '))
 
-        this.storenetgraph()
-        updateview('.net-graph > svg')
-    }
+    //     this.storenetgraph()
+    //     updateview('.net-graph > svg')
+    // }
 
-    resethighlights() {
-        //console.log("resethighlights")
+    // resethighlights() {
+    //     //console.log("resethighlights")
 
-        m.netgraph.links.forEach(l => l.highlight = false)
-        m.netgraph.nodes.forEach(n => {
-            n.focused = false
-            n.highlight = false
-        })
-        this.storenetgraph()
+    //     m.netgraph.links.forEach(l => l.highlight = false)
+    //     m.netgraph.nodes.forEach(n => {
+    //         n.focused = false
+    //         n.highlight = false
+    //     })
+    //     this.storenetgraph()
 
-        this.printhfs(1)
+    //     this.printhfs(1)
 
-        document.body.classList.remove("highlightpaths")
-        updateview('.net-graph > svg')
+    //     document.body.classList.remove("highlightpaths")
+    //     updateview('.net-graph > svg')
 
-        this.printhfs(2)
-    }
+    //     this.printhfs(2)
+    // }
 
-    store() {
-        return
-        localStorage.setItem("session", JSON.stringify({
-            pinnednodes: m.pinnednodes.map(n => n.id),
-            pinnedpaths: m.pinnedpaths
-        }))
-    }
+    // store() {
+    //     return
+    //     localStorage.setItem("session", JSON.stringify({
+    //         pinnednodes: m.pinnednodes.map(n => n.id),
+    //         pinnedpaths: m.pinnedpaths
+    //     }))
+    // }
 
-    restore() {
-        return
-        let json = localStorage.getItem("session")
-        if (!json) return
-        let o = JSON.parse(json)
-        m.pinnednodes = o.pinnednodes.map(nid => m.graph.getnode(nid))
-        m.pinnedpaths = o.pinnedpaths
-    }
+    // restore() {
+    //     return
+    //     let json = localStorage.getItem("session")
+    //     if (!json) return
+    //     let o = JSON.parse(json)
+    //     m.pinnednodes = o.pinnednodes.map(nid => m.graph.getnode(nid))
+    //     m.pinnedpaths = o.pinnedpaths
+    // }
 
     storenetgraph() {
-        return
         localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
         //console.log("stored")
         this.printhfs()
     }
 
     restorenetgraph() {
-        return
         let json = localStorage.getItem("netgraph")
         if (!json) return
         let ns = JSON.parse(json)
-        // ns.forEach(n => n.donut = m.graph.getnode(n.id).donut) // fixup
-        let nodemap = new Map(ns.map(n => [n.id, n]))
-        m.netgraph.nodes.forEach(n => Object.assign(n, nodemap.get(n.id)))
-        //console.log("restored")
+        let nsmap = new Map(ns.map(n => [n.id, n]))
+        m.netgraph.nodes.forEach(n => Object.assign(m.graph.getnode(n.id), nsmap.get(n.id)))
+        console.log("restored")
         this.printhfs()
     }
 
     printhfs(msg?) {
-        // console.log("printhfs", msg)
-        // for (let n of m.netgraph.nodes) {
-        //     if (n.highlight) console.log("high", n.id)
-        //     if (n.focused) console.log("focs", n.id)
-        // }
+        console.log("printhfs", msg)
+        for (let n of m.netgraph.nodes) {
+            console.log("netnode", n.id)
+            //if (n.highlight) console.log("high", n.id)
+            //if (n.focused) console.log("focs", n.id)
+        }
     }
 }
 

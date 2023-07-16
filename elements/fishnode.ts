@@ -5,13 +5,13 @@ export class FishNode implements INode {
 
     original: MC1Node
     id: string
-    highlight = false
-    focused = false
+
+    // highlight = false
+    // focused = false
+
     pinned = false
 
-    inv?: boolean
-    suspect?: boolean
-    isinter?: boolean
+    role: "inv" | "sus" | "inter" | undefined
 
     xgreed : number |undefined = undefined
     ygreed : number |undefined = undefined

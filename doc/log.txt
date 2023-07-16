@@ -1,3 +1,18 @@
+16.7.
+// design:
+  m.netgraph.nodes = all nodes pinned
+  node.role = "inv" | "sus" | "inter" | undefined
+  nodes have boolean marks for their roles
+
+  netview displays invs/sus/inter
+
+  after adding/deleting a node, internodes are updated
+
+  inters depend on paths which are computed by
+    all paths between the new nodes, filtered by max-length
+    paths can be pinned (later)
+
+
 15.7.
 place all nodes on force pane, start with invss
 

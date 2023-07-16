@@ -15,7 +15,7 @@ function rund3(e: SVGElement) {
 
     console.log("patch path-matrix!")
 
-    let nodes = m.pinnednodes
+    let nodes = m.netgraph.nodes
     let n = nodes.length
     let svgsize = cellsize * n
 

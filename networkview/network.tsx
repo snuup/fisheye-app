@@ -8,7 +8,6 @@ import { d3nodedonut, getOuterRadius } from '../comp/node-donut'
 import { c } from '../app/controller'
 import { defsFilter } from '../assets/flags'
 import * as f3 from '../force/index'
-import { homeforce } from './homeforce'
 
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
 
@@ -47,10 +46,11 @@ function rund3(e: SVGElement) {
     // .style('width', width)
     // .style('height', height)
 
-    let nodesm = m.netgraph.nodes.concat(m.majors).distinct() as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
-    let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source) as any, m.netgraph.getnode(l.target) as any))
+    let nodesm = m.netgraph.nodes.concat(m.majors).distinct() as unknown as FishNodeForce[]
+    // we connect the links, so the link force does not need to do it
+    let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.supergraph.getnode(l.source) as any, m.supergraph.getnode(l.target) as any))
     mount({ linksm, nodesm })
-    c.restorenetgraph()
+    //c.restorenetgraph()
 
     const linkg = svg
         .selectAll('g.line')
@@ -117,14 +117,9 @@ function rund3(e: SVGElement) {
         nodesv
             .attr('class', (n: FishNode) => cc(
                 'node',
+                n.role,
                 n.type ?? "undefined",
                 {
-                    inv: n.inv,
-                    suspect: n.suspect,
-                    isinter: n.isinter,
-                    highlight: n.highlight,
-                    focused: n.focused,
-                    athome: !n.pinned,
                     pinned: n.pinned
                 }))
     }
@@ -137,6 +132,7 @@ function rund3(e: SVGElement) {
             d3nodedonut(d3.select(nodes[i]), n, true)
         }) as any)
         .attr('class', 'donut')
+        .attr('transform', null) // clear transform and center the donut
 
     nodesv
         .append("text")
@@ -146,24 +142,22 @@ function rund3(e: SVGElement) {
 
     //let homys = nodesm.filter(n => !n.pinned)
     function setxys() {
-        nodesm.filter(n => n.inv).forEach((n, i) => {
+        let invid = 0
+        let susid = 0
+        nodesm.forEach(n => {
             if (n.pinned) {
                 n.xgreed = width / 2
                 n.ygreed = height / 2
             }
-            else {
-                n.xgreed = 50
-                n.ygreed = 30 + i * 30
-            }
-        })
-        nodesm.filter(n => n.suspect).forEach((n, i) => {
-            if (n.pinned) {
-                n.xgreed = width / 2
-                n.ygreed = height / 2
-            }
-            else if (n.suspect) {
-                n.xgreed = width - 50
-                n.ygreed = 10 + i * 16
+            else switch (n.role) {
+                case "inv":
+                    n.xgreed = 50
+                    n.ygreed = 30 + invid++ * 30
+                    break
+                case "sus":
+                    n.xgreed = width - 50
+                    n.ygreed = 10 + susid++ * 16
+                    break
             }
         })
     }
@@ -233,7 +227,7 @@ function rund3(e: SVGElement) {
     updateview() // show random placements
 
     function onnodeclick(ev: MouseEvent, n: FishNode) {
-        // console.log("onnodeclick")
+        console.log("onnodeclick")
 
         if (ev.ctrlKey) {
             c.togglenetnode(ev, n)
@@ -241,15 +235,6 @@ function rund3(e: SVGElement) {
             reheat(1)
             updatenodeclasses()
         }
-
-        // if (ev.ctrlKey) {
-        //     c.highlightbadpaths(n)
-        //     return
-        // }
-        // c.resethighlights()
-        // if (ev.ctrlKey) {
-        //     c.togglenetnode(ev, n)
-        // }
     }
     function reheat(alpha = .2) {
         simulation.alpha(alpha).restart()
@@ -257,12 +242,11 @@ function rund3(e: SVGElement) {
 
     mount({ reheat })
 
-    const isdragable = (n: FishNode) => n.pinned || n.isinter
+    const isdragable = (n: FishNode) => n.pinned || n.role == "inter"
 
     function drag(simulation) {
 
         function dragstarted(event, n: FishNode) {
-            console.log(event, n)
             if (!isdragable(n)) return
 
             //if (event.sourceEvent.ctrlKey) return

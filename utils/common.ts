@@ -13,6 +13,12 @@ export function mergePrototype(mixin, ...targets) {
 }
 
 mergePrototype(class extends Array {
+    exceptset(exceptions: Set<any>) {
+        return this.filter(x => !exceptions.has(x))
+    }
+    except(...exceptions: any[]) {
+        return this.filter(x => !exceptions.includes(x))
+    }
     cast() { return this } // this is just for typescripts type safety
     countBy(selector): any {
         selector = selector ?? identity
@@ -110,6 +116,9 @@ mergePrototype(class extends Array {
         if (this.includes(x)) return
         this.push(x)
     }
+    ensures(xs: any[]) {
+        xs.forEach(x => this.ensure(x))
+    }
     get cumulativeSum() {
         let sum = 0
         return this.map(n => sum += n)
@@ -137,6 +146,7 @@ function* arraycombinations(arr) {
 }
 
 mergePrototype(class extends Object {
+    print() { console.log(this) }
     get entries() {
         return Object.entries(this)
     }

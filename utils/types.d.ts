@@ -16,6 +16,8 @@ interface HTMLElement {
 }
 
 interface Array<T> {
+    exceptset(exceptions: Set<any>): T[]
+    except(...exceptions: any[]): T[]
     countBy(selector?: (x: T) => string): { [key: string]: number }
     groupBy(selector: (x: T) => string | undefined): { [key: string | undefined]: T[] }
     sortBy(selector: (x: T) => U): T[]
@@ -34,6 +36,7 @@ interface Array<T> {
     remove(...x: T[])
     toggle(x, addOrRemove?: boolean): boolean
     ensure(x)
+    ensures(xs)
     get cumulativeSum(): number[]
 }
 
@@ -50,6 +53,7 @@ interface Map<K, V> {
 }
 
 interface Object {
+    print()
     get entries(): [string, any][]
     get entrieskv<T>(): { k: string, v: T }[]
     get keys(): string[]

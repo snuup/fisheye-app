@@ -161,7 +161,11 @@ export class GraphAlgos {
 
         //console.log("visited", visited.size, "nodes", "found paths", goalpaths)
 
-        return { goalpaths, visited }
+        mount({ goalpaths })
+
+        goalpaths.map(p => p.links.last.target + " " + p.links.length).distinct().print()
+
+        return goalpaths
     }
 
     static getfronteers(getneighbors: (string) => string[], start: string, maxlength = 99, excludes: string[] = []) {
@@ -182,8 +186,10 @@ export class GraphAlgos {
 
         return fronteers
     }
-
-
 }
 
-mount({ GraphAlgos, Graph })
+export function printpath(p: Path<ILink>) {
+    console.log(p.links.map(l => l.link.text).join())
+}
+
+mount({ GraphAlgos, Graph, printpath })

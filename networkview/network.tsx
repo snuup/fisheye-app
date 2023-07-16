@@ -107,7 +107,7 @@ function rund3(e: SVGElement) {
         fn.y ??= height * Math.random()
     })
 
-    nodesm.filter(n => n.inv).forEach((n, i) => n.home = { x: 50, y: 30 + i * 70 })
+    nodesm.filter(n => n.inv).forEach((n, i) => n.home = { x: 50, y: 30 + i * 30 })
     nodesm.filter(n => n.suspect).forEach((n, i) => n.home = { x: width - 50, y: 30 + i * 30 })
 
     let nodesv = svg
@@ -117,6 +117,7 @@ function rund3(e: SVGElement) {
         .attr('class', n => cc(
             'node',
             n.type ?? "undefined",
+            "net-donut",
             {
                 inv: m.investigatees.includes(n.id),
                 highlight: n.highlight,
@@ -124,16 +125,23 @@ function rund3(e: SVGElement) {
                 athome: n.home
             }))
         .on('mousedown', onnodeclick)
+    // .select(((n, i, nodes) => {
+    //     d3nodedonut(d3.select(nodes[i]), n, true, true)
+    // }) as any)
 
     nodesv
-        .append('svg')
-        .attr("class", "net-donut")
+        // .append('svg')
+        //.attr("class", "net-donut")
         .select(((n, i, nodes) => {
             d3nodedonut(d3.select(nodes[i]), n, true, true)
         }) as any)
 
+    nodesv
+        .append("text")
+        .text(d => d.id)
 
-//    nodesm.filter(n => n.home)
+
+    //    nodesm.filter(n => n.home)
 
     simulation =
         f3.forceSimulation(nodesm)

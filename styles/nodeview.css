@@ -45,3 +45,51 @@ nav {
 g.donut {
   opacity: 0.92;
 }
+
+.icon.company {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-200px, -240px);
+}
+
+.icon.person {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-170px, -260px);
+}
+
+.icon.organization {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-290px, -320px);
+}
+
+.icon.political-organization {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-270px, -300px);
+}
+
+.icon.vessel {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-280px, -300px);
+}
+
+.icon.location {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-200px, -280px);
+}
+
+.icon.event {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-255px, -260px);
+}
+
+.icon.movement {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-220px, -260px);
+}

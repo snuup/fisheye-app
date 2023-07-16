@@ -13,9 +13,8 @@ nav {
     display: grid;
     grid-template-columns: auto auto;
     // grid-template-rows: 1fr auto;
-    grid-template-areas:
-        'name logo';
-        // 'gridtable gridtable';
+    grid-template-areas: 'name logo';
+    // 'gridtable gridtable';
     gap: 8px;
     padding: 0.25em;
     _background: #fafafa;
@@ -58,4 +57,47 @@ nav {
 
 g.donut {
     opacity: 0.92;
+}
+
+.icon {
+    &.company {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-200px, -240px);
+    }
+    &.person {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-170px, -260px);
+    }
+    &.organization {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-290px, -320px);
+    }
+    &.political-organization {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-270px, -300px);
+    }
+    &.vessel {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-280px, -300px);
+    }
+    &.location {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-200px, -280px);
+    }
+    &.event {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-255px, -260px);
+    }
+    &.movement {
+        fill: #555;
+        scale: 3%;
+        transform: translate(-220px, -260px);
+    }
 }

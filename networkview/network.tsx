@@ -150,7 +150,7 @@ function rund3(e: SVGElement) {
                 n.xgreed = width / 2
                 n.ygreed = height / 2
             }
-            else  {
+            else {
                 n.xgreed = 50
                 n.ygreed = 30 + i * 30
             }
@@ -165,23 +165,6 @@ function rund3(e: SVGElement) {
                 n.ygreed = 10 + i * 16
             }
         })
-        // nodesm.forEach((n, i) => {
-        //     if (n.pinned) {
-        //         n.xgreed = width / 2
-        //         n.ygreed = height / 2
-        //     }
-        //     else if (n.inv) {
-        //         n.xgreed = 50
-        //         n.ygreed = 30 + i * 30
-        //     }
-        //     else if (n.suspect) {
-        //         n.xgreed = width - 50
-        //         n.ygreed = 30 + i * 30
-        //     }
-        //     else{
-        //         n.xgreed = n.ygreed = 0
-        //     }
-        // })
     }
 
     setxys()
@@ -249,18 +232,9 @@ function rund3(e: SVGElement) {
         console.log("onnodeclick")
 
         if (ev.ctrlKey) {
-            if (n.pinned) {
-                n.pinned = false
-                m.pinnednodes.remove(n)
-                setxys()
-                reheat(1)
-            }
-            else {
-                n.pinned = true
-                m.pinnednodes.push(n)
-                setxys()
-                reheat(1)
-            }
+            c.togglenetnode(ev, n)
+            setxys()
+            reheat(1)
             updatenodeclasses()
         }
 

@@ -7,7 +7,7 @@ export const NetworkView = () => {
     return (
         <>
             <Network />
-            {/* <PathMatrix /> */}
+            <PathMatrix />
         </>
     )
 }

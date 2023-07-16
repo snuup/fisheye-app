@@ -81,13 +81,14 @@ export class Controller {
     }
 
     togglenetnode(ev, n: FishNode) {
-        let add = m.pinnednodes.toggle(n)
+        console.log("toggle")
+        n.pinned = m.pinnednodes.toggle(n)
         this.updateAfterNodeToggle(ev.currentTarget)
     }
 
     updateAfterNodeToggle(e: Node) {
         this.computepathmatrix()
-        //m.pinnedpaths = m.pathmatrix.map(p => p.key)
+        m.pinnedpaths = m.pathmatrix.map(p => p.key)
         this.updatenetgraph()
 
         //let currentkeys = m.pathmatrix.map(ps => ps.key)
@@ -121,11 +122,13 @@ export class Controller {
     }
 
     updatenetgraph() {
-        // let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
-        // let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
-        // let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
-        //m.netgraph.nodes = m.pinnednodes
-        m.netgraph.links = [] // links
+
+        let ps = m.pathmatrix.filter(ps => m.pinnedpaths.includes(ps.key))
+        let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
+        let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
+        m.netgraph.nodes = nodes
+
+        m.netgraph.links = links
         m.netgraph.fixup()
     }
 

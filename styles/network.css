@@ -52,11 +52,11 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   transform: translate(35px, 0);
 }
 
-.net-graph .node:hover .donut, .net-graph .node.pinned .donut {
+.net-graph .node:hover .donut, .net-graph .node.pinned .donut, .net-graph .node.isinter .donut {
   opacity: 0.9;
 }
 
-.net-graph .node:hover text, .net-graph .node.pinned text {
+.net-graph .node:hover text, .net-graph .node.pinned text, .net-graph .node.isinter text {
   font-weight: bold;
 }
 

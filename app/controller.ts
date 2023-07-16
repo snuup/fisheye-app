@@ -81,7 +81,7 @@ export class Controller {
     }
 
     togglenetnode(ev, n: FishNode) {
-        console.log("toggle")
+        // console.log("toggle")
         n.pinned = m.pinnednodes.toggle(n)
         this.updateAfterNodeToggle(ev.currentTarget)
     }
@@ -127,6 +127,8 @@ export class Controller {
         let links = ps.flatMap(p => p.ps).flatMap(p => p.links).map(dl => dl.link).distinct()
         let nodes = links.flatMap(l => l.nodeids.map(nid => m.graph.getnode(nid))).concat(m.pinnednodes).distinct()
         m.netgraph.nodes = nodes
+
+        m.netgraph.nodes.forEach(n => n.isinter = !m.majors.includes(n))
 
         m.netgraph.links = links
         m.netgraph.fixup()

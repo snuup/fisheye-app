@@ -63,7 +63,8 @@ article.network {
             }
         }
         &:hover,
-        &.pinned {
+        &.pinned,
+        &.isinter {
             .donut {
                 opacity: 0.9;
             }

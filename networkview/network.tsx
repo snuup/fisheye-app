@@ -47,7 +47,7 @@ function rund3(e: SVGElement) {
     // .style('width', width)
     // .style('height', height)
 
-    let nodesm = m.netgraph.nodes as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
+    let nodesm = m.netgraph.nodes.concat(m.majors).distinct() as unknown as FishNodeForce[] // .map(n => ({ n, id: n.id }))
     let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.netgraph.getnode(l.source) as any, m.netgraph.getnode(l.target) as any))
     mount({ linksm, nodesm })
     c.restorenetgraph()
@@ -121,6 +121,7 @@ function rund3(e: SVGElement) {
                 {
                     inv: n.inv,
                     suspect: n.suspect,
+                    isinter: n.isinter,
                     highlight: n.highlight,
                     focused: n.focused,
                     athome: !n.pinned,
@@ -174,6 +175,8 @@ function rund3(e: SVGElement) {
     function xyforce(alpha) {
         const strength = .1
         nodesm.forEach((n) => {
+            if(n.xgreed == undefined) return
+            if(n.ygreed == undefined) return
             n.vx += (n.xgreed - n.x) * strength * alpha
             n.vy += (n.ygreed - n.y) * strength * alpha
         })
@@ -184,7 +187,7 @@ function rund3(e: SVGElement) {
             //.alphaDecay(0.15)
             //.velocityDecay(.25)
             //.force('many', d3.forceManyBody().strength(-10))
-            //.force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
+            .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
             .force('collide', f3.forceCollide(80, nodesm))
             //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
             //.force('box', boxingForce)
@@ -229,7 +232,7 @@ function rund3(e: SVGElement) {
     updateview() // show random placements
 
     function onnodeclick(ev: MouseEvent, n: FishNode) {
-        console.log("onnodeclick")
+        // console.log("onnodeclick")
 
         if (ev.ctrlKey) {
             c.togglenetnode(ev, n)

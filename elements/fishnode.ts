@@ -11,9 +11,10 @@ export class FishNode implements INode {
 
     inv?: boolean
     suspect?: boolean
+    isinter?: boolean
 
-    xgreed = 0
-    ygreed = 0
+    xgreed : number |undefined = undefined
+    ygreed : number |undefined = undefined
 
     constructor(original: MC1Node) {
         this.original = original

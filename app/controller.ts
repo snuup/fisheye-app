@@ -274,22 +274,25 @@ export class Controller {
 
     storenetgraph() {
         console.log("storenetgraph")
-        localStorage.setItem("selection", JSON.stringify(m.selection.map(n => n.id)))
-        localStorage.setItem("majors", JSON.stringify(m.majors))
-        localStorage.setItem("netgraphnodes", JSON.stringify(m.netgraph.nodes))
-        localStorage.setItem("netgraphlinks", JSON.stringify(m.netgraph.links))
-
+        let o = {
+            selection: m.selection.map(n => n.id),
+            majors: m.majors,
+            netnodes: m.netgraph.nodes,
+            netlinks: m.netgraph.links
+        }
+        localStorage.setItem("o", JSON.stringify(o))
     }
 
     restorenetgraph() {
-        m.selection = read("selection").map(m.supergraph.getnode)
-        let loadedmajors = read("majors")
-        d3.zip(m.majors, loadedmajors).forEach(([maj, loaded]) => Object.assign(maj, loaded))
+        let o = read("o")
+
+        m.selection = o.selection.map(m.supergraph.getnode)
+        d3.zip(m.majors, o.majors).forEach(([maj, loaded]) => Object.assign(maj, loaded))
 
         this.updateslectiondistances()
 
-        m.netgraph.nodes = read("netgraphnodes").map(loadednode => Object.assign(m.supergraph.getnode(loadednode.id), loadednode))
-        m.netgraph.links = read("netgraphlinks").map(l => m.supergraph.links.find(ll => ll.source == l.source && ll.target == l.target))
+        m.netgraph.nodes = o.netnodes.map(loadednode => Object.assign(m.supergraph.getnode(loadednode.id), loadednode))
+        m.netgraph.links = o.netlinks.map(l => m.supergraph.links.find(ll => ll.source == l.source && ll.target == l.target))
 
         updateview("article")
     }

@@ -52,7 +52,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   transform: translate(35px, 0);
 }
 
-.net-graph .node:not(.pinned):not(.inter) text {
+.net-graph .node:not(.pinned):not(.inter) text.id {
   transform: none;
 }
 
@@ -79,7 +79,8 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 
 .net-graph .node text.distance {
   text-anchor: start;
-  transform: translateX(10px);
+  transform: translateX(5px);
+  font-weight: bold;
   fill: #ca4c56;
 }
 

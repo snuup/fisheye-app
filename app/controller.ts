@@ -294,6 +294,12 @@ export class Controller {
         this.loadpersisto(read(name))
         updateview("article", undefined, true)
     }
+
+    clearnet() {
+        m.majors.forEach((n: FishNodeForce) => { n.pinned = false; n.fx = n.fy = undefined })
+        m.netgraph = Graph.Empty
+        updateview("article", undefined, true)
+    }
 }
 
 function read(name) {

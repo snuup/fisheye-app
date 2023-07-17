@@ -11,8 +11,6 @@ import * as f3 from '../force/index'
 
 const strokeScaler = d3.scaleLinear([1, 2, 3, 4, 10, 1000], [1.5, 3, 4, 5, 6, 20])
 
-const adornScaler = d3.scaleLinear([1, 2, 3, 10, 100], [4, 9, 12, 20, 50])
-
 let simulation: any = null
 
 type FishNodeForce = FishNode & { x: number, y: number, vx: number, vy: number }
@@ -43,13 +41,13 @@ function rund3(e: SVGElement) {
 
     const svg = d3.select(e)
 
-    let nodesm = m.netgraph.nodes.concat(m.majors).distinct() as unknown as FishNodeForce[]
+    let nodesm = m.netgraph.nodes.concat(m.majors).distinct().slice(0, 1000) as unknown as FishNodeForce[]
     // we connect the links, so the link force does not need to do it
     let linksm = m.netgraph.links.map(l => new FishLinkForce(l, m.supergraph.getnode(l.source) as any, m.supergraph.getnode(l.target) as any))
     mount({ linksm, nodesm })
     //c.restorenetgraph()
 
-    const linkg = svg
+    let linkg = svg
         .selectAll('g.line')
         .data(linksm)
         .join('g')
@@ -57,7 +55,9 @@ function rund3(e: SVGElement) {
 
     let link =
         linkg
-            .append('line')
+            .selectAll('line')
+            .data(d => [d])
+            .join('line')
             .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
             .on('mousedown', (ev, { l }) => console.log(l))
 
@@ -89,11 +89,15 @@ function rund3(e: SVGElement) {
         .attr('class', ({ tc }) => cc('linkadorn', tc.direction, tc.type))
         .attr('width', ({ tc }) => tc.countpos)
         .attr('height', 10)
-        .append('title')
+        .selectAll('title')
+        .data(d => [d])
+        .join('title')
         .text(d => `${d.tc.type} (${d.tc.count})`)
 
     linkadorns
-        .append('path')
+        .selectAll('path.triangle')
+        .data(d => [d])
+        .join("path")
         .attr("d", d3.symbol(d3.symbolTriangle2))
         .attr('class', 'triangle')
         .attr('transform', ({ totalsize, isout }) => `translate(${isout ? totalsize + 13 : -13},0) rotate(${isout ? 90 : -90})`)
@@ -124,7 +128,9 @@ function rund3(e: SVGElement) {
     updatenodeclasses()
 
     nodesv
-        .append('g')
+        .selectAll('g')
+        .data(d => [d])
+        .join('g')
         .select(((n, i, nodes) => {
             d3nodedonut(d3.select(nodes[i]), n, true)
         }) as any)
@@ -132,23 +138,28 @@ function rund3(e: SVGElement) {
         .attr('transform', null) // clear transform and center the donut
 
     nodesv
-        .append("text")
+        .selectAll("text.id")
+        .data(d => [d])
+        .join('text')
+        .attr('class', 'id')
         .text(d => nidisplay(d.id))
         .attr('transform', d => `translate(0, ${getOuterRadius(d)})`)
 
     nodesv
-        .attr('suspectdistance', n => n.suspectdistance ?? null)
-        .filter(n => !!n.suspectdistance)
-        .append("text")
-        .text(n => " (" + n.suspectdistance + ")")
+        .selectAll("text.distance")
+        .data(d => (d.suspectdistance && d.suspectdistance < 10) ? [d.suspectdistance] : [])
+        .join("text")
         .attr("class", "distance")
-        .classed("hop1", n => n.suspectdistance == 1)
-        .classed("hop2", n => n.suspectdistance == 2)
+        .attr('suspectdistance', n => n ?? null)
+        .text(n => " (" + n + ")")
+
+    //.classed("hop1", n => n.suspectdistance == 1)
+    //.classed("hop2", n => n.suspectdistance == 2)
 
     console.log("simulation:")
 
-    const distanceScaler = d3.scaleLinear([0, 1,    2,  3,  4, 5, 90],
-                                          [0, 100, 80, 60, 30, 0,  0])
+    const distanceScaler = d3.scaleLinear([0, 1, 2, 3, 4, 5, 90],
+        [0, 100, 80, 60, 30, 0, 0])
 
     function setxys() {
         let invid = 0
@@ -198,30 +209,23 @@ function rund3(e: SVGElement) {
         })
     }
 
-    simulation =
-        f3.forceSimulation(nodesm)
-            //.alphaDecay(0.15)
-            //.velocityDecay(.25)
-            .force('many', d3.forceManyBody().strength(-10))
-            .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
-            .force('collide', f3.forceCollide(80, nodesm))
-            //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
-            //.force('box', boxingForce)
-            //.force("x", f3.forceX(100).x(n => n.home?.x ?? width / 2))
-            //.force("y", f3.forceY(100).y(n => n.home?.y ?? height / 2))
-            .force("home", xyforce)
-            .on('tick', updateview)
-            //.on('end', c.storenetgraph)
+    simulation = f3.forceSimulation(nodesm)
+        //.stop()
+        //.alphaDecay(0.15)
+        //.velocityDecay(.25)
+        //.force('many', d3.forceManyBody().strength(-10))
+        .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.005))
+        .force('collide', f3.forceCollide(80, nodesm))
+        //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
+        //.force('box', boxingForce)
+        //.force("x", f3.forceX(100).x(n => n.home?.x ?? width / 2))
+        //.force("y", f3.forceY(100).y(n => n.home?.y ?? height / 2))
+        .force("home", xyforce)
+        .on('tick', updateview)
+    //.on('end', c.storenetgraph)
 
     svg.selectAll('g.node')
         .call(drag(simulation))
-
-    function boxingForce(alpha) {
-        for (let n of nodesm) {
-            n.x = n.x.clamp(10, width)
-            n.y = n.y.clamp(10, height)
-        }
-    }
 
     mount({ simulation })
 
@@ -233,10 +237,10 @@ function rund3(e: SVGElement) {
         }
 
         link
-            .attr('x1', d => d.source.x)
-            .attr('y1', d => d.source.y)
-            .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y)
+            .attr('x1', (d: any) => d.source.x)
+            .attr('y1', (d: any) => d.source.y)
+            .attr('x2', (d: any) => d.target.x)
+            .attr('y2', (d: any) => d.target.y)
 
         linkadorns
             .attr('transform',
@@ -305,7 +309,7 @@ function rund3(e: SVGElement) {
             .on('end', dragended)
     }
 
-    svg.node()?.append(defsFilter!)
+    //svg.node()?.append(defsFilter!)
 }
 
 export const Network = () => {

@@ -63,7 +63,7 @@ article.network {
             }
         }
         &:not(.pinned):not(.inter) {
-            text {
+            text.id {
                 transform: none;
             }
         }
@@ -92,7 +92,8 @@ article.network {
         }
         text.distance {
             text-anchor: start;
-            transform: translateX(10px);
+            transform: translateX(5px);
+            font-weight: bold;
             fill: rgb(202, 76, 86);
         }
         &.selected {
@@ -183,3 +184,4 @@ article.network {
     opacity: 0.5;
     // display: none;
 }
+

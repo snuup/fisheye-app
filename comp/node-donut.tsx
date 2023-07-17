@@ -42,14 +42,17 @@ export function d3nodedonut(svg, n: FishNode, undirected) {
         .classed('inv', m.invs.includes(n))
         .classed('suspect', m.suspects.includes(n))
         .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
-
-        .append('circle').attr("r", outerRadius).attr("class", "bgcircle")
+        .selectAll('circle.bgcircle')
+        .data(d => [d])
+        .join('circle')
+        .attr("r", outerRadius)
+        .attr("class", "bgcircle")
 
     svg
-        .selectAll('g')
+        .selectAll('g.pie')
         .data(piedata)
         .join('g')
-        .attr('class', (d: any) => d.data.type)
+        .attr('class', (d: any) => d.data.type + " pie")
         .selectAll('path')
         .data((d: any) => {
             return [
@@ -85,9 +88,14 @@ export function NodeDonut({ n }: { n: FishNode }) {
 
 function addIcon(g, name) {
     let icon = icons[name]
-    if (!icon) return
-    g
-        .append('path').attr('d', icon)
+    // if (!icon) return
+    // g
+    //     .append('path').attr('d', icon)
+    //     .attr('class', "icon " + name)
+    g.selectAll('path.icon')
+     .data(() => icon ? [icon] : [])
+     .join('path')
+     .attr('d', icon)
         .attr('class', "icon " + name)
 }
 

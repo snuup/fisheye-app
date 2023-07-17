@@ -1,0 +1,19 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1em;
+    gap: 1em;
+}
+
+header a {
+    margin: .25em;
+    padding: .25em;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+a.selected {
+    background: lightseagreen;
+    color: white;
+}

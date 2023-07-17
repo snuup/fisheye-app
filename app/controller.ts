@@ -83,42 +83,37 @@ export class Controller {
         console.log("togglenetnode")
         n.pinned = !n.pinned
 
-        this.updatedistances()
+        this.updatelinks(n)
         updateview("article")
     }
 
-    updatedistances() {
-        let n = m.selection[0] as FishNode
-        if (n?.role == "inv") {
-            if (n.pinned) {
-                m.netgraph.nodes.push(n)
+    updatelinks(n: FishNode) {
+        if (n.pinned) {
+            m.netgraph.nodes.push(n)
 
-                console.warn("add links between", n.id, m.netgraph.nodes)
-                let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.map(n => n.id).except(n.id))
-                paths.forEach(printpath)
+            console.warn("add links between", n.id, m.netgraph.nodes)
+            let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.map(n => n.id).except(n.id))
+            paths.forEach(printpath)
 
-                let links = paths.flatMap(p => p.links.map(dl => dl.link)).distinct()
-                let internodes =
-                    links
-                        .flatMap(l => l.nodeids)
-                        .distinct()
-                        .exceptset(m.majorids)
-                        .map(nid => m.supergraph.getnode(nid))
-                        .filter(n => n.role === undefined) // only add nodes that are not yet already internodes
+            let links = paths.flatMap(p => p.links.map(dl => dl.link)).distinct()
+            let internodes =
+                links
+                    .flatMap(l => l.nodeids)
+                    .distinct()
+                    .exceptset(m.majorids)
+                    .map(nid => m.supergraph.getnode(nid))
+                    .filter(n => n.role === undefined) // only add nodes that are not yet already internodes
 
-                internodes.forEach(n => n.role = "inter")
+            internodes.forEach(n => n.role = "inter")
 
-                m.netgraph.nodes.push(...internodes)
-                m.netgraph.links.ensures(links)
+            m.netgraph.nodes.push(...internodes)
+            m.netgraph.links.ensures(links)
 
-                console.log(links)
-            }
-            else {
-                console.warn("tbd: remove links to", n.id)
-                m.netgraph.nodes.remove(n)
-            }
-        } else {
-            m.suspectdistances.clear()
+            console.log(links)
+        }
+        else {
+            console.warn("tbd: remove links to", n.id)
+            m.netgraph.nodes.remove(n)
         }
     }
 

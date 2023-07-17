@@ -175,7 +175,7 @@ function rund3(e: SVGElement) {
                 case "sus":
                     let d = m.suspectdistances.get(n.id) ?? 0
                     let ds = distanceScaler(d)
-                    console.log(n.id, d, ds)
+                    //console.log(n.id, d, ds)
                     n.xgreed = width - 50 - ds
                     n.ygreed = 10 + susid++ * 16
                     break

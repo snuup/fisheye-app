@@ -141,6 +141,7 @@ function syncelement(p: HTMLElement, i: number, tag: string, props: Props | null
 
     //console.log("syncelement", p, i, c, tag)
 
+    //if (!c || c.tagName?.toUpperCase() != tag?.toUpperCase()) {
     if (!c || c.tagName != tag) {
         const n = createElement(tag)
         c ? c.replaceWith(n) : p.appendChild(n)

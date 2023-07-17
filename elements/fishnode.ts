@@ -37,6 +37,6 @@ export class FishNode implements INode {
     get degree() { return this.outdegree + this.indegree }
 }
 
-export type FishNodeForce = FishNode & { x: number, y: number, vx: number, vy: number }
+export type FishNodeForce = FishNode & { x: number, y: number, vx: number, vy: number, fx?: number, fy?: number }
 
 mount({ FishNode })

@@ -5,7 +5,7 @@ import { mc1 } from "../data/data"
 import { mount, rebind } from "../utils/common"
 import { mraw as m } from "./model"
 import { Graph, GraphAlgos, printpath } from "../elements/graph"
-import { FishNode } from "../elements/fishnode"
+import { FishNode, FishNodeForce } from "../elements/fishnode"
 import { FishLink } from "../elements/fishlink"
 import { Url } from "./routes"
 import { Paths } from "../networkview/pathmatrix"
@@ -68,7 +68,12 @@ export class Controller {
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
         console.log("setroute", m.url)
 
-        if (ps?.state) this.loadpersisto(ps.state)
+        if (ps?.state) {
+            this.loadpersisto(ps.state)
+            m.majors.filter(n => !n.pinned).map((n: FishNodeForce) => n.fx = n.fy = undefined)
+            window.setxys?.()
+            window.reheat()
+        }
 
         // switch (m.url[0]) {
         //     case "network":
@@ -88,6 +93,7 @@ export class Controller {
 
         this.updatelinks(n)
         updateview("article")
+        //window.rund3()
 
         history.pushState(this.getpersisto(), '', window.location.href)
     }
@@ -143,28 +149,22 @@ export class Controller {
 
         this.updateslectiondistances()
 
-        console.log("suspectdistances", m.suspectdistances)
-        updateview("article")
+        //updateview("article svg")
+        window.rund3()
 
         m.selection.map(n => n.id).print()
     }
 
     updateslectiondistances() {
+
+        m.supergraph.nodes.forEach(n => n.suspectdistance = undefined)
+
         let firstselect: FishNode | undefined = m.selection[0]
-        m.suspectdistances = new Map()
         if (firstselect) {
             for (let sus of m.suspects) {
-                let d = c.getdistance(firstselect.id, sus.id)
-                m.suspectdistances.set(sus.id, d)
+                sus.suspectdistance = c.getdistance(firstselect.id, sus.id)
             }
         }
-        this.adornsuspectdistances()
-    }
-
-    adornsuspectdistances() {
-        m.supergraph.nodes.forEach(n => {
-            n.suspectdistance = m.suspectdistances.get(n.id)
-        })
     }
 
     togglepaths(nps: Paths) {
@@ -260,23 +260,6 @@ export class Controller {
     //     this.printhfs(2)
     // }
 
-    // store() {
-    //     return
-    //     localStorage.setItem("session", JSON.stringify({
-    //         pinnednodes: m.pinnednodes.map(n => n.id),
-    //         pinnedpaths: m.pinnedpaths
-    //     }))
-    // }
-
-    // restore() {
-    //     return
-    //     let json = localStorage.getItem("session")
-    //     if (!json) return
-    //     let o = JSON.parse(json)
-    //     m.pinnednodes = o.pinnednodes.map(nid => m.graph.getnode(nid))
-    //     m.pinnedpaths = o.pinnedpaths
-    // }
-
     getpersisto() {
         return {
             selection: m.selection.map(n => n.id),
@@ -294,16 +277,6 @@ export class Controller {
         this.updateslectiondistances()
     }
 
-    storenetgraph() {
-        console.log("storenetgraph")
-        localStorage.setItem("o", JSON.stringify(this.getpersisto()))
-    }
-
-    restorenetgraph() {
-        this.loadpersisto(read("o"))
-        updateview("article")
-    }
-
     printhfs(msg?) {
         //console.log("printhfs", msg)
         for (let n of m.netgraph.nodes) {
@@ -311,6 +284,15 @@ export class Controller {
             //if (n.highlight) console.log("high", n.id)
             //if (n.focused) console.log("focs", n.id)
         }
+    }
+
+    save(name = "o") {
+        localStorage.setItem(name, JSON.stringify(c.getpersisto()))
+    }
+
+    load(name = "o") {
+        this.loadpersisto(read(name))
+        updateview("article", undefined, true)
     }
 }
 

@@ -28,7 +28,7 @@ class FishLinkForce {
 }
 
 function rund3(e: SVGElement) {
-
+    e ??= document.querySelector("article svg") as SVGElement
     let div = e.parentElement
     let width = div?.clientWidth!
     let height = div?.clientHeight!
@@ -175,9 +175,8 @@ function rund3(e: SVGElement) {
                     n.ygreed = 30 + invid++ * 30
                     break
                 case "sus":
-                    let d = m.suspectdistances.get(n.id) ?? 0
+                    let d = n.suspectdistance ?? 0
                     let ds = distanceScaler(d)
-                    //console.log(n.id, d, ds)
                     n.xgreed = width - 50 - ds
                     n.ygreed = 10 + susid++ * 16
                     break
@@ -203,7 +202,7 @@ function rund3(e: SVGElement) {
         f3.forceSimulation(nodesm)
             //.alphaDecay(0.15)
             //.velocityDecay(.25)
-            //.force('many', d3.forceManyBody().strength(-10))
+            .force('many', d3.forceManyBody().strength(-10))
             .force('link', d3.forceLink(linksm).id((n: FishNodeForce) => n.id).distance(1).strength(.01))
             .force('collide', f3.forceCollide(80, nodesm))
             //.force('center', d3.forceCenter(width / 2, height / 2).strength(1))
@@ -255,14 +254,14 @@ function rund3(e: SVGElement) {
         if (ev.ctrlKey) {
             c.togglenetnode(ev, n)
             setxys()
-            reheat(1)
+            reheat()
             updatenodeclasses()
         }
         else if (ev.shiftKey) {
             c.selectnode(n)
         }
     }
-    function reheat(alpha = .2) {
+    function reheat(alpha = 1) {
         simulation.alpha(alpha).restart()
     }
 
@@ -317,4 +316,4 @@ export const Network = () => {
     )
 }
 
-mount({ ng: m.netgraph })
+mount({ ng: m.netgraph, rund3 })

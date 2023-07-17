@@ -112,7 +112,7 @@ export const nodetypes: NodeType[] = [
 
 mount({ linktypes, nodetypes })
 
-export function nicenodetype(type: NodeType): string {
+export function nicenodetype(type: NodeType | undefined): string {
     switch (type) {
         case "political_organization": return "pol-org"
         case undefined: return "undefined"

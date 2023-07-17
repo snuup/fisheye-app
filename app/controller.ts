@@ -63,9 +63,12 @@ export class Controller {
         return GraphAlgos.getdistance(m.supergraph.getneighbors, start, goal, 90, ["FishEye International"])
     }
 
-    setroute() {
+    setroute(ps?: PopStateEvent) {
+        console.log("setroute0", ps?.state, ps)
         m.url = decodeURI(document.location.pathname).split('/').slice(1) as Url
         console.log("setroute", m.url)
+
+        if (ps?.state) this.loadpersisto(ps.state)
 
         // switch (m.url[0]) {
         //     case "network":
@@ -85,6 +88,8 @@ export class Controller {
 
         this.updatelinks(n)
         updateview("article")
+
+        history.pushState(this.getpersisto(), '', window.location.href)
     }
 
     updatelinks(n: FishNode) {
@@ -272,28 +277,30 @@ export class Controller {
     //     m.pinnedpaths = o.pinnedpaths
     // }
 
-    storenetgraph() {
-        console.log("storenetgraph")
-        let o = {
+    getpersisto() {
+        return {
             selection: m.selection.map(n => n.id),
             majors: m.majors,
             netnodes: m.netgraph.nodes,
             netlinks: m.netgraph.links
         }
-        localStorage.setItem("o", JSON.stringify(o))
+    }
+
+    loadpersisto(o: any) {
+        m.selection = o.selection.map(m.supergraph.getnode)
+        d3.zip(m.majors, o.majors).forEach(([maj, loaded]) => Object.assign(maj, loaded))
+        m.netgraph.nodes = o.netnodes.map(loadednode => Object.assign(m.supergraph.getnode(loadednode.id), loadednode))
+        m.netgraph.links = o.netlinks.map(l => m.supergraph.links.find(ll => ll.source == l.source && ll.target == l.target))
+        this.updateslectiondistances()
+    }
+
+    storenetgraph() {
+        console.log("storenetgraph")
+        localStorage.setItem("o", JSON.stringify(this.getpersisto()))
     }
 
     restorenetgraph() {
-        let o = read("o")
-
-        m.selection = o.selection.map(m.supergraph.getnode)
-        d3.zip(m.majors, o.majors).forEach(([maj, loaded]) => Object.assign(maj, loaded))
-
-        this.updateslectiondistances()
-
-        m.netgraph.nodes = o.netnodes.map(loadednode => Object.assign(m.supergraph.getnode(loadednode.id), loadednode))
-        m.netgraph.links = o.netlinks.map(l => m.supergraph.links.find(ll => ll.source == l.source && ll.target == l.target))
-
+        this.loadpersisto(read("o"))
         updateview("article")
     }
 
@@ -307,7 +314,7 @@ export class Controller {
     }
 }
 
-function read(name){
+function read(name) {
     return JSON.parse(localStorage.getItem(name) ?? "")
 }
 

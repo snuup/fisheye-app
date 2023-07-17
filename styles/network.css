@@ -150,3 +150,35 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   stroke-width: 1;
   opacity: 0.5;
 }
+
+#scores {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #c1e0de;
+  overflow: auto;
+}
+
+#scores table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#scores tr {
+  cursor: pointer;
+}
+
+#scores tr:hover {
+  background-color: #6a807e;
+  color: white;
+}
+
+#scores .distances {
+  font-weight: bold;
+}
+
+article {
+  position: relative;
+}

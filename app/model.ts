@@ -60,7 +60,14 @@ export const mraw = {
 
     scores: { selection: [] as string[], scores: new Map<string, number>() },
 
-    countryColorScaler: d3.scaleOrdinal(d3.schemeAccent)
+    countryColorScaler: d3.scaleOrdinal(d3.schemeAccent),
+
+    rankedscores: [] as {
+        id: string,
+        score: number,
+        node: FishNode,
+        distances: number[]
+    }[]
 }
 
 type Model = typeof mraw

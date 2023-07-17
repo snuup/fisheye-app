@@ -74,9 +74,22 @@ export class Controller {
         }
         for (let n of m.selection) {
             let fs = c.getfronteers(n.id, 3)
-            fs.forEach((fronteer, i) => fronteer.forEach(fn => inc(fn, i+1)))
+            fs.forEach((fronteer, i) => fronteer.forEach(fn => inc(fn, i + 1)))
         }
         m.scores = { selection: [...m.selection].mapids(), scores }
+
+        m.rankedscores =
+            [...m.scores.scores]
+                .sortBy(kv => -kv[1])
+                .slice(0, 100)
+                .map(([id, score]) => ({
+                    id,
+                    score,
+                    node: m.graph.getnode(id),
+                    distances: m.selection.map(n => c.getdistance(n.id, id))
+                }))
+
+        updateview("#scores")
     }
 
     setroute(ps?: PopStateEvent) {
@@ -169,6 +182,8 @@ export class Controller {
         window.rund3()
 
         m.selection.map(n => n.id).print()
+
+        this.getrankedneighbors()
     }
 
     updateslectiondistances() {

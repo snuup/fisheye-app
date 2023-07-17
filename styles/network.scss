@@ -185,3 +185,33 @@ article.network {
     // display: none;
 }
 
+#scores {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: rgb(193, 224, 222);
+    overflow: auto;
+
+    table{
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    tr {
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(106, 128, 126);
+            color: white;
+        }
+    }
+
+    .distances {
+        font-weight: bold;
+    }
+}
+
+article {
+    position: relative;
+}

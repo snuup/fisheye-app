@@ -52,7 +52,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   transform: translate(35px, 0);
 }
 
-.net-graph .node:not(.pinned) text {
+.net-graph .node:not(.pinned):not(.inter) text {
   transform: none;
 }
 

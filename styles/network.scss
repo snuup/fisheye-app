@@ -62,7 +62,7 @@ article.network {
                 transform: translate(+35px, 0);
             }
         }
-        &:not(.pinned) {
+        &:not(.pinned):not(.inter) {
             text {
                 transform: none;
             }

@@ -92,7 +92,7 @@ export class Controller {
             m.netgraph.nodes.push(n)
 
             console.warn("add links between", n.id, m.netgraph.nodes)
-            let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.map(n => n.id).except(n.id))
+            let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.filter(n => n.role == "inv").map(n => n.id).except(n.id))
             paths.forEach(printpath)
 
             let links = paths.flatMap(p => p.links.map(dl => dl.link)).distinct()

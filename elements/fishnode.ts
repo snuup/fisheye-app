@@ -24,6 +24,10 @@ export class FishNode implements INode {
         this.id = cleanid(original.id)
     }
 
+    get inv() { return this.role == "inv" }
+    get sus() { return this.role == "sus" }
+    get inter() { return this.role == "inter" }
+
     get donut(): NodeLinkData[] { return this.original.donut }
     get outdegree(): number { return this.donut.sumBy(nd => nd.outs) }
     get indegree(): number { return this.donut.sumBy(nd => nd.ins) }

@@ -13,6 +13,7 @@ export function mergePrototype(mixin, ...targets) {
 }
 
 mergePrototype(class extends Array {
+    mapids(){ return this.map(n => n.id) }
     exceptset(exceptions: Set<any>) {
         return this.filter(x => !exceptions.has(x))
     }

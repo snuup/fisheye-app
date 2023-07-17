@@ -51,12 +51,14 @@ export const mraw = {
     //superlinks: new Map<string, SuperLink>(),
 
     // ui
-    selection: [] as any[],
+    selection: [] as FishNode[],
 
     invs: [] as FishNode[],
     suspects: [] as FishNode[],
     get majorids() { return new Set(m.invs.concat(m.suspects).map(n => n.id)) },
     get majors() { return m.invs.concat(m.suspects) },
+
+    scores: { selection: [] as string[], scores: new Map<string, number>() },
 
     countryColorScaler: d3.scaleOrdinal(d3.schemeAccent)
 }

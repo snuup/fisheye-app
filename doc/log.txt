@@ -2,6 +2,8 @@
 + graph distances
 store / restore
 
+[...m.scores.scores].sortBy(kv => -kv[1]).slice(0, 100).map(kv => { id: kv[0], score: kv[1], node: m.graph.getnode(kv[0]) })
+
 16.7.
 // design:
   m.netgraph.nodes = all nodes pinned

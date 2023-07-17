@@ -60,7 +60,23 @@ export class Controller {
     }
 
     getdistance(start: string, goal: string) {
+        if (typeof start !== "string") throw "start must be a string"
+        if (typeof goal !== "string") throw "goal must be a string"
         return GraphAlgos.getdistance(m.supergraph.getneighbors, start, goal, 90, ["FishEye International"])
+    }
+
+    getrankedneighbors() {
+        let scores = new Map<string, number>()
+        let inc = (id, distance) => {
+            let score = scores.get(id) ?? 0
+            score += 1 / distance
+            scores.set(id, score)
+        }
+        for (let n of m.selection) {
+            let fs = c.getfronteers(n.id, 3)
+            fs.forEach((fronteer, i) => fronteer.forEach(fn => inc(fn, i+1)))
+        }
+        m.scores = { selection: [...m.selection].mapids(), scores }
     }
 
     setroute(ps?: PopStateEvent) {
@@ -145,7 +161,7 @@ export class Controller {
     selectnode(n: FishNode) {
 
         n.selected = m.selection.toggle(n)
-        m.selection.removeif(x => x !== n).forEach(n => n.selected = false)
+        //m.selection.removeif(x => x !== n).forEach(n => n.selected = false)
 
         this.updateslectiondistances()
 

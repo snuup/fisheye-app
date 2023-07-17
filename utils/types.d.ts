@@ -16,6 +16,7 @@ interface HTMLElement {
 }
 
 interface Array<T> {
+    mapids(): string[]
     exceptset(exceptions: Set<any>): T[]
     except(...exceptions: any[]): T[]
     countBy(selector?: (x: T) => string): { [key: string]: number }

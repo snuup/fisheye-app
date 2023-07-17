@@ -133,9 +133,12 @@ export class Controller {
 
         m.suspectdistances = new Map()
         for (let sus of m.suspects) {
-            let d = c.getdistance(n.id, m.investigatees[0])
+            let d = c.getdistance(n.id, sus.id)
             m.suspectdistances.set(sus.id, d)
         }
+
+        console.log(m.suspectdistances)
+
 
         updateview("article")
     }

@@ -17,7 +17,7 @@ let App = () => {
     return (
         <body class={cc(m.url)}>
             <header>
-                <h2>Mini Challenge 1</h2>
+                <h2>FishEye MC1</h2>
                 <Link url={['nodestats']} />
                 <Link url={['linkstats']} />
                 <Link url={['graphstats']} />

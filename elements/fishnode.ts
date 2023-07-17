@@ -14,8 +14,10 @@ export class FishNode implements INode {
 
     role: "inv" | "sus" | "inter" | undefined
 
-    xgreed : number |undefined = undefined
-    ygreed : number |undefined = undefined
+    suspectdistance: number | undefined
+
+    xgreed: number | undefined = undefined
+    ygreed: number | undefined = undefined
 
     constructor(original: MC1Node) {
         this.original = original
@@ -31,6 +33,6 @@ export class FishNode implements INode {
     get degree() { return this.outdegree + this.indegree }
 }
 
-export type FishNodeForce = FishNode & { x: number, y: number, vx:number, vy:number }
+export type FishNodeForce = FishNode & { x: number, y: number, vx: number, vy: number }
 
 mount({ FishNode })

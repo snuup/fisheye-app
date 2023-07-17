@@ -101,6 +101,11 @@ mergePrototype(class extends Array {
             if (i > -1) this.splice(i, 1)
         }
     }
+    removeif(pred: (any) => boolean) {
+        let removals = this.filter(pred)
+        this.remove(...removals)
+        return removals
+    }
     toggle(x, addOrRemove?: boolean): boolean {
         addOrRemove ??= !this.includes(x)
         if (addOrRemove) {

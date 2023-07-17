@@ -62,7 +62,6 @@ function rund3(e: SVGElement) {
             .on('mousedown', (ev, { l }) => console.log(l))
 
     const computeAdornSides = (flf: FishLinkForce) => {
-
         return flf.l.typeCountsPerSide.map(side => {
             let t = side.tcs.first
             let direction = t.direction
@@ -117,7 +116,8 @@ function rund3(e: SVGElement) {
                 n.role,
                 n.type ?? "undefined",
                 {
-                    pinned: n.pinned
+                    pinned: n.pinned,
+                    selected: n.selected
                 }))
     }
 
@@ -137,10 +137,13 @@ function rund3(e: SVGElement) {
         .attr('transform', d => `translate(0, ${getOuterRadius(d)})`)
 
     nodesv
-        .filter(n => m.suspectdistances.has(n.id))
+        .attr('suspectdistance', n => n.suspectdistance ?? null)
+        .filter(n => !!n.suspectdistance)
         .append("text")
-        .text(n => " (" + m.suspectdistances.get(n.id) + ")")
+        .text(n => " (" + n.suspectdistance + ")")
         .attr("class", "distance")
+        .classed("hop1", n => n.suspectdistance == 1)
+        .classed("hop2", n => n.suspectdistance == 2)
 
     console.log("simulation:")
 
@@ -256,7 +259,7 @@ function rund3(e: SVGElement) {
             reheat(1)
             updatenodeclasses()
         }
-        else {
+        else if (ev.shiftKey) {
             c.selectnode(n)
         }
     }

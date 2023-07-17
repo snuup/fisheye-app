@@ -34,6 +34,7 @@ interface Array<T> {
     toReversed(): T[]
     cross(other?: Array<T>): Array<[T, T]>
     remove(...x: T[])
+    removeif(pred: (T) => boolean): T[]
     toggle(x, addOrRemove?: boolean): boolean
     ensure(x)
     ensures(xs)

@@ -53,7 +53,6 @@ article.network {
             stroke: none;
             fill: #555;
             transition: all 0.1s;
-            transform: none;
         }
         &.sus {
             text {
@@ -61,6 +60,11 @@ article.network {
             }
             .donut {
                 transform: translate(+35px, 0);
+            }
+        }
+        &:not(.pinned) {
+            text {
+                transform: none;
             }
         }
         &:hover,
@@ -71,6 +75,9 @@ article.network {
             }
             text {
                 font-weight: bold;
+            }
+            text.distance {
+                display: none;
             }
         }
         &.pinned,
@@ -87,6 +94,26 @@ article.network {
             text-anchor: start;
             transform: translateX(10px);
             fill: rgb(202, 76, 86);
+        }
+        &.selected {
+            .donut {
+                opacity: 0.9;
+                path,
+                circle {
+                    fill: rgb(216, 146, 15);
+                }
+            }
+        }
+        &[suspectdistance='1'] {
+            text {
+                font-weight: bold;
+                fill: $suspect-color;
+            }
+        }
+        &[suspectdistance='2'] {
+            text {
+                fill: $suspect-color;
+            }
         }
     }
 

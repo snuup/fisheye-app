@@ -130,21 +130,34 @@ export class Controller {
     }
 
     selectnode(n: FishNode) {
-        n.selected = m.selection.toggle(n)
-        console.log("selection", m.selection)
 
+        n.selected = m.selection.toggle(n)
+        m.selection.removeif(x => x !== n).forEach(n => n.selected = false)
+
+        let firstselect: FishNode | undefined = m.selection[0]
+
+        console.log("selection", m.selection)
         console.log("compute illegal flow to selection", m.selection)
 
         m.suspectdistances = new Map()
-        for (let sus of m.suspects) {
-            let d = c.getdistance(n.id, sus.id)
-            m.suspectdistances.set(sus.id, d)
+        if (firstselect) {
+            for (let sus of m.suspects) {
+                let d = c.getdistance(n.id, sus.id)
+                m.suspectdistances.set(sus.id, d)
+            }
         }
+        this.adornsuspectdistances()
 
-        console.log(m.suspectdistances)
-
-
+        console.log("suspectdistances", m.suspectdistances)
         updateview("article")
+
+        m.selection.map(n => n.id).print()
+    }
+
+    adornsuspectdistances() {
+        m.supergraph.nodes.forEach(n => {
+            n.suspectdistance = m.suspectdistances.get(n.id)
+        })
     }
 
     togglepaths(nps: Paths) {

@@ -42,7 +42,6 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   stroke: none;
   fill: #555;
   transition: all 0.1s;
-  transform: none;
 }
 
 .net-graph .node.sus text {
@@ -53,12 +52,20 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   transform: translate(35px, 0);
 }
 
+.net-graph .node:not(.pinned) text {
+  transform: none;
+}
+
 .net-graph .node:hover .donut, .net-graph .node.pinned .donut, .net-graph .node.inter .donut {
   opacity: 0.9;
 }
 
 .net-graph .node:hover text, .net-graph .node.pinned text, .net-graph .node.inter text {
   font-weight: bold;
+}
+
+.net-graph .node:hover text.distance, .net-graph .node.pinned text.distance, .net-graph .node.inter text.distance {
+  display: none;
 }
 
 .net-graph .node.pinned .donut, .net-graph .node.inter .donut {
@@ -73,6 +80,24 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 .net-graph .node text.distance {
   text-anchor: start;
   transform: translateX(10px);
+  fill: #ca4c56;
+}
+
+.net-graph .node.selected .donut {
+  opacity: 0.9;
+}
+
+.net-graph .node.selected .donut path,
+.net-graph .node.selected .donut circle {
+  fill: #d8920f;
+}
+
+.net-graph .node[suspectdistance='1'] text {
+  font-weight: bold;
+  fill: #ca4c56;
+}
+
+.net-graph .node[suspectdistance='2'] text {
   fill: #ca4c56;
 }
 

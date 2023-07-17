@@ -70,6 +70,12 @@ body.highlightpaths .net-graph g:not(.highlight) line {
   text-anchor: middle;
 }
 
+.net-graph .node text.distance {
+  text-anchor: start;
+  transform: translateX(10px);
+  fill: #ca4c56;
+}
+
 .net-graph g.inv .bgcircle {
   fill: orange;
 }

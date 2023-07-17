@@ -41,12 +41,7 @@ function rund3(e: SVGElement) {
 
     console.log("patch network!", m.netgraph, div?.clientWidth, div?.clientHeight)
 
-    const svg = d3
-        .select(e)
-    //     .on('click', c.resethighlights)
-    // .attr('viewBox', [0, 0, width, height])
-    // .style('width', width)
-    // .style('height', height)
+    const svg = d3.select(e)
 
     let nodesm = m.netgraph.nodes.concat(m.majors).distinct() as unknown as FishNodeForce[]
     // we connect the links, so the link force does not need to do it
@@ -141,9 +136,16 @@ function rund3(e: SVGElement) {
         .text(d => nidisplay(d.id))
         .attr('transform', d => `translate(0, ${getOuterRadius(d)})`)
 
+    nodesv
+        .filter(n => m.suspectdistances.has(n.id))
+        .append("text")
+        .text(n => " (" + m.suspectdistances.get(n.id) + ")")
+        .attr("class", "distance")
+
     console.log("simulation:")
 
-    const distanceScaler = d3.scaleLinear([1, 2, 3, 4, 5, 90], [100, 80, 60, 30, 0])
+    const distanceScaler = d3.scaleLinear([0, 1,    2,  3,  4, 5, 90],
+                                          [0, 100, 80, 60, 30, 0,  0])
 
     //let homys = nodesm.filter(n => !n.pinned)
     function setxys() {

@@ -83,6 +83,11 @@ article.network {
                 text-anchor: middle;
             }
         }
+        text.distance {
+            text-anchor: start;
+            transform: translateX(10px);
+            fill: rgb(202, 76, 86);
+        }
     }
 
     g.inv {

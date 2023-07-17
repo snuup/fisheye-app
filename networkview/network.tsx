@@ -150,7 +150,6 @@ function rund3(e: SVGElement) {
     const distanceScaler = d3.scaleLinear([0, 1,    2,  3,  4, 5, 90],
                                           [0, 100, 80, 60, 30, 0,  0])
 
-    //let homys = nodesm.filter(n => !n.pinned)
     function setxys() {
         let invid = 0
         let susid = 0
@@ -213,7 +212,7 @@ function rund3(e: SVGElement) {
             //.force("y", f3.forceY(100).y(n => n.home?.y ?? height / 2))
             .force("home", xyforce)
             .on('tick', updateview)
-            .on('end', c.storenetgraph)
+            //.on('end', c.storenetgraph)
 
     svg.selectAll('g.node')
         .call(drag(simulation))
@@ -297,7 +296,7 @@ function rund3(e: SVGElement) {
                 event.subject.fx = null
                 event.subject.fy = null
             }
-            c.storenetgraph()
+            //c.storenetgraph()
         }
 
         return d3

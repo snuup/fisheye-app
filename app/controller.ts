@@ -93,6 +93,8 @@ export class Controller {
 
             console.warn("add links between", n.id, m.netgraph.nodes)
             let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.filter(n => n.role == "inv").map(n => n.id).except(n.id))
+            console.log("paths", paths.map(p => p.length))
+
             paths.forEach(printpath)
 
             let links = paths.flatMap(p => p.links.map(dl => dl.link)).distinct()
@@ -134,24 +136,24 @@ export class Controller {
         n.selected = m.selection.toggle(n)
         m.selection.removeif(x => x !== n).forEach(n => n.selected = false)
 
-        let firstselect: FishNode | undefined = m.selection[0]
-
-        console.log("selection", m.selection)
-        console.log("compute illegal flow to selection", m.selection)
-
-        m.suspectdistances = new Map()
-        if (firstselect) {
-            for (let sus of m.suspects) {
-                let d = c.getdistance(n.id, sus.id)
-                m.suspectdistances.set(sus.id, d)
-            }
-        }
-        this.adornsuspectdistances()
+        this.updateslectiondistances()
 
         console.log("suspectdistances", m.suspectdistances)
         updateview("article")
 
         m.selection.map(n => n.id).print()
+    }
+
+    updateslectiondistances() {
+        let firstselect: FishNode | undefined = m.selection[0]
+        m.suspectdistances = new Map()
+        if (firstselect) {
+            for (let sus of m.suspects) {
+                let d = c.getdistance(firstselect.id, sus.id)
+                m.suspectdistances.set(sus.id, d)
+            }
+        }
+        this.adornsuspectdistances()
     }
 
     adornsuspectdistances() {
@@ -271,34 +273,44 @@ export class Controller {
     // }
 
     storenetgraph() {
-        localStorage.setItem("netgraph", JSON.stringify(m.netgraph.nodes))
-        //console.log("stored")
-        this.printhfs()
+        console.log("storenetgraph")
+        localStorage.setItem("selection", JSON.stringify(m.selection.map(n => n.id)))
+        localStorage.setItem("majors", JSON.stringify(m.majors))
+        localStorage.setItem("netgraphnodes", JSON.stringify(m.netgraph.nodes))
+        localStorage.setItem("netgraphlinks", JSON.stringify(m.netgraph.links))
+
     }
 
     restorenetgraph() {
-        let json = localStorage.getItem("netgraph")
-        if (!json) return
-        let ns = JSON.parse(json)
-        let nsmap = new Map(ns.map(n => [n.id, n]))
-        m.netgraph.nodes.forEach(n => Object.assign(m.graph.getnode(n.id), nsmap.get(n.id)))
-        console.log("restored")
-        this.printhfs()
+        m.selection = read("selection").map(m.supergraph.getnode)
+        let loadedmajors = read("majors")
+        d3.zip(m.majors, loadedmajors).forEach(([maj, loaded]) => Object.assign(maj, loaded))
+
+        this.updateslectiondistances()
+
+        m.netgraph.nodes = read("netgraphnodes").map(loadednode => Object.assign(m.supergraph.getnode(loadednode.id), loadednode))
+        m.netgraph.links = read("netgraphlinks").map(l => m.supergraph.links.find(ll => ll.source == l.source && ll.target == l.target))
+
+        updateview("article")
     }
 
     printhfs(msg?) {
-        console.log("printhfs", msg)
+        //console.log("printhfs", msg)
         for (let n of m.netgraph.nodes) {
-            console.log("netnode", n.id)
+            //console.log("netnode", n.id)
             //if (n.highlight) console.log("high", n.id)
             //if (n.focused) console.log("focs", n.id)
         }
     }
 }
 
+function read(name){
+    return JSON.parse(localStorage.getItem(name) ?? "")
+}
+
 export let c = new Controller()
 
-mount({ c })
+mount({ c, read })
 
 // make a copy of node for force
 // make a link of node for force

@@ -50,7 +50,6 @@ let words2 = `
     illegal
     Illegal
     Illegal
-    Lobster
     mining
     Narcotics
     perpetrator

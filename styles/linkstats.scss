@@ -69,6 +69,11 @@ $color12: #aaccbb;
     }
     rect {
         fill: darken($color1, 40);
+        opacity: .7;
+        transition: opacity .2;
+        &.rulered {
+            opacity: 1;
+        }
     }
 }
 

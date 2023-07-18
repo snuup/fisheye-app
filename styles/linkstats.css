@@ -72,6 +72,12 @@ article.linkstats h3 {
 
 .link-weights rect {
   fill: #406a55;
+  opacity: .7;
+  transition: opacity .2;
+}
+
+.link-weights rect.rulered {
+  opacity: 1;
 }
 
 g.tick text {

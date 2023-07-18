@@ -45,13 +45,13 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                     let totalcountbelow = bins.filter(bin => bin.x1! <= ruler).sumBy(bin => bin.length)
                     //console.log(dx, ruler, totalcountbelow)
                     e.querySelector('.ruler')!.setAttribute('width', dx.toString())
-                    e.querySelector('.rulervalue')!.textContent = `${totalcountbelow} (${ (totalcountbelow / mc1.links.length * 100).toFixed(2)}%)`
+                    e.querySelector('.rulervalue')!.textContent = `${totalcountbelow} (${(totalcountbelow / mc1.links.length * 100).toFixed(2)}%)`
+                    console.log("doit");
+
+                    e.querySelectorAll('.bin').forEach(binrect => binrect.classList.toggle("rulered", (binrect as any).__data__ < ruler))
                 })
 
-            svg.append('rect')
-                .attr('class', 'ruler')
-                .attr('width', x(ruler).clamp(0))
-                .attr('height', height)
+            mount({ e })
 
             svg.append('text')
                 .attr('class', 'rulervalue')
@@ -68,6 +68,9 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                 .attr("width", (d) => x(d.x1!) - x(d.x0!) - 1)
                 .attr("y", (d) => y(d.length))
                 .attr("height", (d) => y(0) - y(d.length))
+                .attr('class', 'bin')
+                .datum(d => d.x1)
+            //.classed("rulered", d => d.x1! < ruler)
 
             // Add the x-axis and label.
             svg.append("g")
@@ -78,6 +81,12 @@ export const LinkHistogram = ({ links }: { links: FishLink[] }) => {
                     .attr("y", marginBottom - 4)
                     //.attr("fill", "currentColor")
                     .attr("text-anchor", "end"))
+
+            svg.append('rect')
+                .attr('class', 'ruler')
+                .attr('width', x(ruler).clamp(0))
+                .attr('height', height)
+
             //.text("weights →"))
 
             // Add the y-axis and label, and remove the domain line.

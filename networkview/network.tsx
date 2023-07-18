@@ -59,7 +59,14 @@ function rund3(e: SVGElement) {
             .data(d => [d])
             .join('line')
             .attr('stroke-width', (fl: FishLinkForce) => strokeScaler(fl.l.links.length))
-            .on('mousedown', (ev, { l }) => console.log(l))
+            .on('mousedown', (ev, { l }) => {
+                if (ev.altKey) {
+                    console.log(l)
+                    m.netgraph.links.remove(l)
+                    rund3(e)
+                }
+            })
+            .on("mouseenter", onmouse)
 
     const computeAdornSides = (flf: FishLinkForce) => {
         return flf.l.typeCountsPerSide.map(side => {
@@ -112,6 +119,7 @@ function rund3(e: SVGElement) {
         .data(nodesm)
         .join('g')
         .on('mousedown', onnodeclick)
+        .on("mouseenter", onmouse)
 
     function updatenodeclasses() {
         nodesv
@@ -265,6 +273,16 @@ function rund3(e: SVGElement) {
             c.selectnode(n)
         }
     }
+
+    function onmouse(ev: MouseEvent, x: any) {
+        console.log(x)
+        if (ev.altKey) {
+            if (x.l) m.netgraph.links.remove(x.l)
+            else m.netgraph.nodes.remove(x)
+            rund3(e)
+        }
+    }
+
     function reheat(alpha = 1) {
         setxys()
         simulation.alpha(alpha).restart()

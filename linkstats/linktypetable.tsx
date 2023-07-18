@@ -2,7 +2,7 @@ import * as d3 from "d3"
 import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
 import { jsx } from "../jmx-lib/core"
-import { getconnects, getlinkgroupkey, nicelinktype, nicenodetype, nodetypes } from "../analysis/common"
+import { getconnects, getlinkgroupkey, nicenodetype, nodetypes } from "../analysis/common"
 import { identity, mount } from "../utils/common"
 
 export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkType }) => {

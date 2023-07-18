@@ -118,7 +118,17 @@ export class Controller {
 
     togglenetnode(ev, n: FishNode) {
         console.log("togglenetnode")
+
+
         n.pinned = !n.pinned
+        // if (n.pinned) {
+        //     console.error("tbd, node untoggling")
+        // } else {
+        //     if (!m.majors.includes(n)) {
+        //         m.netgraph.nodes.push(n)
+        //         n.pinned = true
+        //     }
+        // }
 
         this.updatelinks(n)
         updateview("article")

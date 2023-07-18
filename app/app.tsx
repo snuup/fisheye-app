@@ -22,7 +22,10 @@ let App = () => {
                 <Link url={['linkstats']} />
                 <Link url={['graphstats']} />
                 <Link url={['network']} />
-                {/* <input type="checkbox" onchange={() => document.body.classList.toggle("showpathmatrix")} /> */}
+                <div id="mtoggle">
+                    <input id="showmatrix" type="checkbox" onchange={() => document.body.classList.toggle("showmatrix")} />
+                    <label for="showmatrix">show matrix</label>
+                </div>
             </header>
 
             <article id='main' class={m.url[0]}>

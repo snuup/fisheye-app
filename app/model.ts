@@ -55,7 +55,7 @@ export const mraw = {
 
     invs: [] as FishNode[],
     suspects: [] as FishNode[],
-    get majorids() { return new Set(m.invs.concat(m.suspects).map(n => n.id)) },
+    get majorids() { return new Set(m.invs.concat(m.suspects).mapids()) },
     get majors() { return m.invs.concat(m.suspects) },
 
     scores: { selection: [] as string[], scores: new Map<string, number>() },

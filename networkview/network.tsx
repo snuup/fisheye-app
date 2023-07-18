@@ -266,6 +266,7 @@ function rund3(e: SVGElement) {
         }
     }
     function reheat(alpha = 1) {
+        setxys()
         simulation.alpha(alpha).restart()
     }
 

@@ -75,6 +75,8 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 .net-graph .node.pinned text, .net-graph .node.inter text {
   dominant-baseline: hanging;
   text-anchor: middle;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 .net-graph .node text.distance {
@@ -90,7 +92,7 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 
 .net-graph .node.selected .donut path,
 .net-graph .node.selected .donut circle {
-  fill: #d8920f;
+  fill: #4e4e4e;
 }
 
 .net-graph .node[suspectdistance='1'] text {
@@ -126,6 +128,8 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 .net-graph g.donut text {
   dominant-baseline: hanging;
   font-weight: bold;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 .net-graph g.donut.suspect:not(.inv) .bgcircle {
@@ -152,13 +156,18 @@ body.highlightpaths .net-graph g:not(.highlight) line {
 }
 
 #scores {
+  display: none;
   position: absolute;
   top: 0;
   right: 0;
-  width: 400px;
+  width: 450px;
   height: 100%;
   background-color: #c1e0de;
   overflow: auto;
+}
+
+body.showmatrix #scores {
+  display: initial;
 }
 
 #scores table {

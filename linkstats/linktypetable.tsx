@@ -3,7 +3,7 @@ import { LinkController } from "./linkcontroller"
 import { m } from "../app/model"
 import { jsx } from "../jmx-lib/core"
 import { getconnects, getlinkgroupkey, nicelinktype, nicenodetype, nodetypes } from "../analysis/common"
-import { identity } from "../utils/common"
+import { identity, mount } from "../utils/common"
 
 export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkType }) => {
 
@@ -14,6 +14,8 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
         let lg = m.linkgroups[type]
         let max = lg.values().map(ls => ls.length).max()
         let opacityScaler = d3.scaleSqrt([0, max], [0, 1])
+        let bgcolor = d3.interpolateRgb("white", d3.rgb(170, 204, 187))
+        mount({ bgcolor })
 
         let table = d3.select(tableDom)
         let thead = table.append("thead")
@@ -88,7 +90,7 @@ export const LinkStatsForType = ({ c, type }: { c: LinkController, type: LinkTyp
             .on('mouseenter', (_, d) => c.select([getconnects(d)]))
             .on('mouseout', (_, d) => c.deselect())
             .on("click", (_, d) => setout(d.links))
-            .style("background", ({ length }) => `rgba(170, 204, 187, ${opacityScaler(length)})`)
+            .style("background", ({ length }) => bgcolor(opacityScaler(length)))
             .text(d => d.length)
     }
 

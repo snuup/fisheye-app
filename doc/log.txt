@@ -1,3 +1,7 @@
+18.7.
+video:
+n979 ... red
+
 17.7.
 + graph distances
 store / restore

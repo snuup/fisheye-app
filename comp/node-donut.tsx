@@ -67,7 +67,7 @@ export function d3nodedonut(svg, n: FishNode, undirected) {
         .style('stroke-width', '2px')
         .append('title')
         .text(d => {
-            return d.data.type + (d.ins ? `${d.data.ins} in` : `${d.data.outs} out`)
+            return d.data.type + (d.ins ? ` ${d.data.ins} in` : ` ${d.data.outs} out`)
         })
 
     addIcon(svg, n.type)

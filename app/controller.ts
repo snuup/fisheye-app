@@ -138,12 +138,20 @@ export class Controller {
     }
 
     updatelinks(n: FishNode) {
+
+        console.log("updatelinks", n.id, n)
+
         if (n.pinned) {
+
+            console.log("updatelinks pinned")
+
             m.netgraph.nodes.push(n)
 
             console.warn("add links between", n.id, m.netgraph.nodes)
 
-            let paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.filter(n => n.role == "inv").map(n => n.id).except(n.id))
+            let paths = GraphAlgos.findpathsmulti(
+                m.supergraph.getlinks,
+                n.id, m.netgraph.nodes.filter(n => n.role == "inv" || n.role == "sus").concat(m.selection).mapids().except(n.id))
 
             if (window.all) paths = GraphAlgos.findpathsmulti(m.supergraph.getlinks, n.id, m.netgraph.nodes.map(n => n.id).except(n.id))
 

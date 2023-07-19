@@ -1,0 +1,16 @@
+this is the tool we used to analyze fisheys graph data.
+
+from the 3500 nodeis we excluded 1500 numbrs and guids and analyzed the remaining 2000 for words hinting illegal activities.
+lavinia used chatgpt which revealed words we did not know before like "contraband". we also manually search through the list
+
+the distribution of the weights in the links motivates us to just use all links.
+we found that nost links connect the expected nodes of types, 
+    for instance ownership links relate orgs to orgs or persons to orgs
+    or family re link mainly persons
+
+    but we find fr between orgs 
+    and even fr vessels
+
+    we interpret such links that the owners of the 2 vessels are family related
+    
+

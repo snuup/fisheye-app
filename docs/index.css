@@ -1,0 +1,1865 @@
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+span.value {
+  position: relative;
+}
+
+.stats-top h3 {
+  margin-bottom: 0.25em;
+}
+
+.gridtable {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: auto auto;
+  grid-template-rows: min-content;
+  gap: 0.25em 1em;
+  font-size: 14px;
+  font-family: 'Roboto Mono', sans-serif, monospace;
+}
+
+.gridtable .value {
+  position: relative;
+  overflow: visible;
+  min-width: 80px;
+}
+
+.gridtable .value span {
+  display: inline-block;
+  padding: 0px 2px;
+  font-weight: 600;
+}
+
+.gridtable .value span.bar {
+  background: #c4dbdb;
+}
+
+.gridtable3 {
+  grid-template-columns: auto auto auto;
+}
+
+*[title] {
+  cursor: pointer;
+}
+body {
+    display: grid;
+    grid-template-areas:
+        'header'
+        'main';
+        /* 'footer footer'; */
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+}
+
+header {
+    grid-area: header;
+    /* background-color: lightskyblue; */
+}
+
+nav {
+    grid-area: nav;
+    overflow-y: auto;
+    /* background-color: lightcyan; */
+}
+
+#main {
+    grid-area: main;
+    /* background-color: lightsalmon; */
+    overflow-y: auto;
+    padding: 1em
+}
+
+footer {
+    grid-area: footer;
+    /* background-color: lightseagreen; */
+}
+
+#main,
+nav {
+    /* padding: 1em; */
+    /* padding-bottom: 5em */
+}
+
+#main,
+nav,
+header,
+footer {
+    background-color: #e8f0f1;
+}
+/* roboto-mono-regular - latin */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/roboto-mono-v12-latin-regular.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("/roboto-mono-v12-latin-regular.woff2") format("woff2"), url("/roboto-mono-v12-latin-regular.woff") format("woff"), url("/roboto-mono-v12-latin-regular.ttf") format("truetype"), url("/roboto-mono-v12-latin-regular.svg#RobotoMono") format("svg");
+  /* Legacy iOS */
+}
+
+/* roboto-mono-700 - latin */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: url("/roboto-mono-v12-latin-700.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("/roboto-mono-v12-latin-700.woff2") format("woff2"), url("/roboto-mono-v12-latin-700.woff") format("woff"), url("/roboto-mono-v12-latin-700.ttf") format("truetype"), url("/roboto-mono-v12-latin-700.svg#RobotoMono") format("svg");
+  /* Legacy iOS */
+}
+
+/* html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    padding: 0;
+} */
+*:focus {
+  background: #aaccbb;
+}
+
+body {
+  font-family: 'calibri';
+  font-weight: 400;
+  color: #3e545c;
+}
+
+/* h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: calibri;
+} */
+li {
+  padding: 2px;
+  margin: 2px;
+  list-style: none;
+}
+
+.funky {
+  padding: 4px;
+  background-color: lightcoral;
+}
+
+.fonky {
+  display: inline-block;
+  padding: 4px;
+  background-color: lightgreen;
+}
+
+button {
+  padding: 4px;
+  font-size: x-large;
+}
+
+.ownership,
+.membership,
+.family_relationship,
+.partnership {
+  font-weight: bold;
+}
+
+.degreecontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  align-items: stretch;
+  gap: 1em;
+}
+
+.degree {
+  display: grid;
+}
+
+.nodename {
+  font-weight: bold;
+}
+
+.red {
+  color: #d80303;
+}
+
+path {
+  cursor: pointer;
+}
+
+.namevalue .value {
+  margin-left: 1em;
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.flexy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.hase {
+  color: maroon;
+  background: red;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b1c5bb;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4e7562;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 1em;
+}
+
+.nodeview {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: 'name logo';
+  gap: 8px;
+  padding: 0.25em;
+  _background: #fafafa;
+  _border-left: solid 4px #777;
+  cursor: pointer;
+}
+
+.nodeview h3 {
+  margin: 0;
+}
+
+.nodeview .gridtable {
+  grid-area: gridtable;
+}
+
+.nodeview svg {
+  grid-area: logo;
+  align-self: center;
+  justify-self: end;
+}
+
+.nodeview h3 {
+  grid-area: name;
+}
+
+.nodeview:hover {
+  background: #f8f8f8;
+}
+
+.nodeview.selected {
+  background: white;
+}
+
+.donut {
+  opacity: 0.92;
+  overflow: visible;
+}
+
+.icon.company {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-200px, -240px);
+}
+
+.icon.person {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-170px, -260px);
+}
+
+.icon.organization {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-290px, -320px);
+}
+
+.icon.political_organization {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-270px, -300px);
+}
+
+.icon.vessel {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-280px, -300px);
+}
+
+.icon.location {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-200px, -280px);
+}
+
+.icon.event {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-255px, -260px);
+}
+
+.icon.movement {
+  fill: #555;
+  scale: 3%;
+  transform: translate(-220px, -260px);
+}
+.stats {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    align-items: stretch; */
+  gap: 1em;
+}
+
+.topdegrees {
+  width: 100%;
+}
+
+.stats-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4em;
+}
+
+.nodeid-bars {
+  padding: 0 0 0 3em;
+  margin: 1em 3em 3em 0;
+  width: 150px;
+  height: 100px;
+}
+
+.nodeid-bars .domain {
+  stroke: #555;
+}
+
+.nodeid-bars .bar.total {
+  fill: #bbbbbb;
+}
+
+.nodeid-bars .bar {
+  cursor: pointer;
+}
+
+.nodeid-bars g.tick {
+  stroke: #555;
+}
+
+.nodeid-bars g.tick line {
+  stroke: #555;
+}
+
+.nodeid-bars g.tick text {
+  stroke: none;
+  fill: #555;
+  font-size: 16px;
+  font-family: calibri;
+}
+.link-stats-table {
+  cursor: pointer;
+  table-layout: fixed;
+  user-select: none;
+  max-width: 800px;
+  width: 100%;
+}
+
+.link-stats-table th.all {
+  background: transparent;
+}
+
+.link-stats-table th.all:hover {
+  background-color: #aaccbb;
+}
+
+.link-stats-table td,
+.link-stats-table th {
+  padding: 2px 4px;
+}
+
+.link-stats-table th {
+  overflow: hidden;
+  text-align: center;
+}
+
+.link-stats-table th:hover {
+  filter: contrast(1.1);
+}
+
+.link-stats-table td {
+  text-align: right;
+  cursor: pointer;
+}
+
+.link-stats-table td:hover {
+  background-color: white;
+}
+
+.link-stats-table td.sel {
+  font-weight: bold;
+}
+
+article.linkstats table.out {
+  margin-top: 1.5em;
+  cursor: pointer;
+}
+
+article.linkstats table.out td {
+  padding: 0 8px;
+}
+
+article.linkstats h3 {
+  margin-bottom: 0.5em;
+  background: none;
+}
+
+.link-weights {
+  width: 300px;
+  height: 100px;
+}
+
+.link-weights .ruler {
+  fill: #85b4b4;
+  opacity: 0.2;
+}
+
+.link-weights .rulervalue {
+  fill: #406a55;
+  font-size: 20px;
+}
+
+.link-weights rect {
+  fill: #406a55;
+  opacity: .7;
+  transition: opacity .2;
+}
+
+.link-weights rect.rulered {
+  opacity: 1;
+}
+
+g.tick text {
+  font-size: 16px;
+  font-family: calibri;
+}
+.small-grid .gridtable {
+  grid-template-columns: min-content min-content;
+}
+
+table.data-list {
+  gap: 0;
+  margin-top: 1em;
+  border-collapse: separate;
+}
+
+table.data-list td {
+  margin: 2px;
+  padding: 0 4px 0 0;
+  background-color: transparent !important;
+}
+
+.occuriences {
+  margin-top: 1em;
+}
+
+.topdegrees {
+  margin-top: 2em;
+}
+
+.topdegrees h3 {
+  margin-bottom: 2em;
+}
+
+.supergraph {
+  margin: 2em 0 4em 0;
+  display: inline-block;
+}
+
+.gridtable {
+  justify-content: start;
+}
+
+.degree {
+  display: block;
+}
+
+.degree svg {
+  margin-bottom: 0.25em;
+}
+
+.degree span {
+  display: block;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 1em;
+  gap: 1em;
+}
+
+header a {
+  margin: .25em;
+  padding: .25em;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+a.selected {
+  background: lightseagreen;
+  color: white;
+}
+
+#mtoggle {
+  margin-left: auto;
+}
+.nid {
+    font-weight: bold;
+}
+
+.matrix td {
+    /* background-color: lightcoral; */
+    padding: 4px;
+}
+
+#graphview {
+    position: relative;
+    height: 100%;
+    background: #ddd;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+.nodelink {
+    width: 100%;
+    height: 100%;
+}
+
+#graphview svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #ddd;
+}
+
+.link {
+    stroke: #777;
+}
+/* svg {
+    margin: 1em;
+    display: block;
+} */
+
+svg.xy {
+    background-color: rgb(137, 156, 146);
+}
+
+svg.xz {
+    background-color: rgb(176, 201, 202);
+}
+
+circle.inv {
+    fill: rgb(253, 0, 0)
+}
+
+circle.focused {
+    fill: rgb(185, 19, 116)
+}
+
+.company {
+  color: #5c74a6;
+  fill: #5c74a6;
+  stroke: #5c74a6;
+  background: #bfc8dc;
+  color: #374665;
+}
+
+.event {
+  color: #ff8600;
+  fill: #ff8600;
+  stroke: #ff8600;
+  background: #ffcf99;
+  color: #995000;
+}
+
+.location {
+  color: #829750;
+  fill: #829750;
+  stroke: #829750;
+  background: #c8d3ad;
+  color: #49542d;
+}
+
+.movement {
+  color: #a39e59;
+  fill: #a39e59;
+  stroke: #a39e59;
+  background: #dad8bb;
+  color: #615e35;
+}
+
+.organization {
+  color: #9468a8;
+  fill: #9468a8;
+  stroke: #9468a8;
+  background: #d9c9e0;
+  color: #5e3e6c;
+}
+
+.political_organization {
+  color: #785586;
+  fill: #785586;
+  stroke: #785586;
+  background: #c1abc9;
+  color: #402d48;
+}
+
+.person {
+  color: #a54b4b;
+  fill: #a54b4b;
+  stroke: #a54b4b;
+  background: #daafaf;
+  color: #5f2b2b;
+}
+
+.vessel {
+  color: #4d8399;
+  fill: #4d8399;
+  stroke: #4d8399;
+  background: #abc8d4;
+  color: #2b4955;
+}
+
+.undefined {
+  color: #727272;
+  fill: #727272;
+  stroke: #727272;
+  background: #bfbfbf;
+  color: #3f3f3f;
+}
+
+.ownership {
+  color: #39413e;
+  fill: #39413e;
+  stroke: #39413e;
+  background: #82918b;
+  color: #090b0a;
+}
+
+.membership {
+  color: #7faad3;
+  fill: #7faad3;
+  stroke: #7faad3;
+  background: #f1f6fa;
+  color: #3c77b0;
+}
+
+.family_relationship {
+  color: #bb7dad;
+  fill: #bb7dad;
+  stroke: #bb7dad;
+  background: #f0e1ec;
+  color: #8a487b;
+}
+
+.partnership {
+  color: #a16a55;
+  fill: #a16a55;
+  stroke: #a16a55;
+  background: #d9c0b6;
+  color: #5e3e32;
+}
+
+.sel[connects='company-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-company'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-event'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-location'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-movement'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-organization'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-political_organization'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-person'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-vessel'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='company-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #9eacca 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='company-undefined'] {
+  stroke: #5c74a6;
+}
+
+.sel[connects='event-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-company'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-event'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-location'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-movement'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-organization'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-political_organization'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-person'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-vessel'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='event-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #ffb666 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='event-undefined'] {
+  stroke: #ff8600;
+}
+
+.sel[connects='location-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-company'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-event'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-location'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-movement'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-organization'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-political_organization'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-person'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-vessel'] {
+  stroke: #829750;
+}
+
+.sel[connects='location-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #b2c28b 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='location-undefined'] {
+  stroke: #829750;
+}
+
+.sel[connects='movement-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-company'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-event'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-location'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-movement'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-organization'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-political_organization'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-person'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-vessel'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='movement-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #c8c59a 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='movement-undefined'] {
+  stroke: #a39e59;
+}
+
+.sel[connects='organization-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-company'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-event'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-location'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-movement'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-organization'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-political_organization'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-person'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-vessel'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='organization-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #c2a9cd 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='organization-undefined'] {
+  stroke: #9468a8;
+}
+
+.sel[connects='political_organization-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-company'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-event'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-location'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-movement'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-organization'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-political_organization'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-person'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-vessel'] {
+  stroke: #785586;
+}
+
+.sel[connects='political_organization-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #aa8bb6 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='political_organization-undefined'] {
+  stroke: #785586;
+}
+
+.sel[connects='person-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-company'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-event'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-location'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-movement'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-organization'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-political_organization'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-person'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-vessel'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='person-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #cb8c8c 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='person-undefined'] {
+  stroke: #a54b4b;
+}
+
+.sel[connects='vessel-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-company'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-event'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-location'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-movement'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-organization'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-political_organization'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-person'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-vessel'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='vessel-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #89b2c3 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='vessel-undefined'] {
+  stroke: #4d8399;
+}
+
+.sel[connects='undefined-company'] {
+  background: linear-gradient(to bottom left, #9eacca 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-company'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-event'] {
+  background: linear-gradient(to bottom left, #ffb666 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-event'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-location'] {
+  background: linear-gradient(to bottom left, #b2c28b 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-location'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-movement'] {
+  background: linear-gradient(to bottom left, #c8c59a 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-movement'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-organization'] {
+  background: linear-gradient(to bottom left, #c2a9cd 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-organization'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-political_organization'] {
+  background: linear-gradient(to bottom left, #aa8bb6 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-political_organization'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-person'] {
+  background: linear-gradient(to bottom left, #cb8c8c 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-person'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-vessel'] {
+  background: linear-gradient(to bottom left, #89b2c3 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-vessel'] {
+  stroke: #727272;
+}
+
+.sel[connects='undefined-undefined'] {
+  background: linear-gradient(to bottom left, #a5a5a5 45%, transparent, #a5a5a5 55%) !important;
+  opacity: .75;
+  font-weight: bold;
+}
+
+.sankey path.sel[connects='undefined-undefined'] {
+  stroke: #727272;
+}
+
+.sankey rect.sel.scompany,
+.sankey rect.sel.tcompany {
+  fill: #5c74a6;
+}
+
+.sankey rect.sel.sevent,
+.sankey rect.sel.tevent {
+  fill: #ff8600;
+}
+
+.sankey rect.sel.slocation,
+.sankey rect.sel.tlocation {
+  fill: #829750;
+}
+
+.sankey rect.sel.smovement,
+.sankey rect.sel.tmovement {
+  fill: #a39e59;
+}
+
+.sankey rect.sel.sorganization,
+.sankey rect.sel.torganization {
+  fill: #9468a8;
+}
+
+.sankey rect.sel.spolitical_organization,
+.sankey rect.sel.tpolitical_organization {
+  fill: #785586;
+}
+
+.sankey rect.sel.sperson,
+.sankey rect.sel.tperson {
+  fill: #a54b4b;
+}
+
+.sankey rect.sel.svessel,
+.sankey rect.sel.tvessel {
+  fill: #4d8399;
+}
+
+.sankey rect.sel.sundefined,
+.sankey rect.sel.tundefined {
+  fill: #727272;
+}
+.sankey-path {
+  fill: none;
+}
+
+.sankey-label {
+  stroke: none;
+}
+
+.sankey {
+  user-select: none;
+  min-width: 600px;
+  /* outline: solid 1px navy */
+}
+
+.sankey path {
+  stroke: #aaccbb;
+}
+
+.sankey rect:not(:hover),
+.sankey text:not(:hover) {
+  fill: #aaccbb;
+  stroke: none;
+}
+
+.sankey path,
+.sankey rect {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.sankey path:hover,
+.sankey rect:hover {
+  opacity: 1;
+}
+
+.sankey text {
+  font-size: 12px;
+}
+article.network {
+  display: grid;
+  gap: 1em;
+}
+
+.net-graph {
+  user-select: none;
+}
+
+.net-graph > svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+body.highlightpaths .net-graph .node:not(.highlight):not(.focused) * {
+  fill: #555 !important;
+  opacity: 0.5;
+}
+
+body.highlightpaths .net-graph .node.focused .bgcircle {
+  fill: yellowgreen !important;
+  opacity: 1;
+}
+
+body.highlightpaths .net-graph g.highlight line {
+  stroke: red;
+}
+
+body.highlightpaths .net-graph g:not(.highlight) line {
+  opacity: 0.15;
+}
+
+.net-graph .node .donut {
+  opacity: 0;
+  transform: translate(-35px, 0);
+  transition: all 0.2s;
+}
+
+.net-graph .node text {
+  dominant-baseline: middle;
+  stroke: none;
+  fill: #555;
+  transition: all 0.1s;
+}
+
+.net-graph .node.sus text {
+  text-anchor: end;
+}
+
+.net-graph .node.sus .donut {
+  transform: translate(35px, 0);
+}
+
+.net-graph .node:not(.pinned):not(.inter) text.id {
+  transform: none;
+}
+
+.net-graph .node:hover .donut, .net-graph .node.pinned .donut, .net-graph .node.inter .donut {
+  opacity: 0.9;
+}
+
+.net-graph .node:hover text, .net-graph .node.pinned text, .net-graph .node.inter text {
+  font-weight: bold;
+}
+
+.net-graph .node:hover text.distance, .net-graph .node.pinned text.distance, .net-graph .node.inter text.distance {
+  display: none;
+}
+
+.net-graph .node.pinned .donut, .net-graph .node.inter .donut {
+  transform: initial;
+}
+
+.net-graph .node.pinned text, .net-graph .node.inter text {
+  dominant-baseline: hanging;
+  text-anchor: middle;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.net-graph .node text.distance {
+  text-anchor: start;
+  transform: translateX(5px);
+  font-weight: bold;
+  fill: #ca4c56;
+}
+
+.net-graph .node.selected .donut {
+  opacity: 0.9;
+}
+
+.net-graph .node.selected .donut path,
+.net-graph .node.selected .donut circle {
+  fill: #4e4e4e;
+}
+
+.net-graph .node[suspectdistance='1'] text {
+  font-weight: bold;
+  fill: #ca4c56;
+}
+
+.net-graph .node[suspectdistance='2'] text {
+  fill: #ca4c56;
+}
+
+.net-graph g.inv .bgcircle {
+  fill: orange;
+}
+
+.net-graph g {
+  cursor: pointer;
+}
+
+.net-graph g.sel {
+  fill: yellowgreen;
+}
+
+.net-graph line {
+  stroke: #333;
+  opacity: 0.4;
+}
+
+.net-graph g.donut {
+  transform: initial;
+}
+
+.net-graph g.donut text {
+  dominant-baseline: hanging;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.net-graph g.donut.suspect:not(.inv) .bgcircle {
+  fill: #ca4c56;
+}
+
+.net-graph g.donut.suspect:not(.inv):hover .bgcircle {
+  fill: #e19ba0;
+}
+
+.net-graph .linkadorn {
+  stroke: none;
+}
+
+.bgcircle {
+  fill: #eee;
+}
+
+.triangle {
+  fill: #ddd;
+  stroke: #333;
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+#scores {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100%;
+  background-color: #c1e0de;
+  overflow: auto;
+}
+
+body.showmatrix #scores {
+  display: initial;
+}
+
+#scores table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#scores tr {
+  cursor: pointer;
+}
+
+#scores tr:hover {
+  background-color: #6a807e;
+  color: white;
+}
+
+#scores .distances {
+  font-weight: bold;
+}
+
+article {
+  position: relative;
+}
+div.path-matrix {
+  display: none;
+  position: absolute;
+  bottom: 0;
+}
+
+body.showpathmatrix div.path-matrix {
+  display: initial;
+}
+
+div.path-matrix svg {
+  overflow: visible;
+}
+
+div.path-matrix g {
+  cursor: pointer;
+}
+
+div.path-matrix g.sel circle {
+  fill: #222;
+  stroke: none;
+}
+
+div.path-matrix g.sel text {
+  fill: white;
+}
+
+div.path-matrix circle {
+  fill: white;
+  stroke: #333;
+}
+
+div.path-matrix text {
+  fill: #333;
+  font-weight: bold;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+div.path-matrix text.h-label {
+  fill: #333;
+  text-anchor: start;
+}
+
+div.path-matrix text.v-label {
+  text-anchor: start;
+}

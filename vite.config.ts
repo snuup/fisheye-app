@@ -10,9 +10,11 @@ export default {
         jmxplugin()
     ],
     build: {
+        outDir: 'docs',
         target: 'esnext', // !!
         minify: false,
         rollupOptions: {
+            outDir: '../docs/',
             output: {
                 entryFileNames: `app.js`,
                 assetFileNames: `[name].[ext]`

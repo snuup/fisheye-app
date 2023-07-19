@@ -75,10 +75,61 @@ let words2 = `
     zombie
     `
 
+let redids = [
+    "âvictimâ",
+    "âperpetratorâ",
+    "âVikingâ",
+    "Viking fishing",
+    "Armed Robberyâ",
+    "âunregulatedâ",
+    "Amphibious Warships",
+    "âdevil vesselsâ",
+    "Angela Wheeler",
+    "âSewardâs Follyâ",
+    "Hunter Wheeler",
+    "Spy",
+    "âzombie",
+    "coastguard",
+    "Frederick Hunter",
+    "Coast Guard Cutter Edgar Culbertson",
+    "âtransshipmentâ",
+    "FV Viking",
+    "âpoachedâ",
+    "wheeler",
+    "Hunt",
+    "18 wheelers",
+    "Attorneysâ",
+    "Survivorsâ",
+    "Refugee Benefitsâ",
+    "âExploitationâ",
+    "âcriminally",
+    "The Defendantsâ",
+    "tio MPFâs Special Action Group Combat Organized Crime",
+    "âillegalâ",
+    "âminingâ",
+    "âsnitch",
+    "Patricia Hunter",
+    "Kenworth 18-wheeler",
+    "Crystal Hunter",
+    "Colin Hunter",
+    "Paul Hoover",
+    "âDisastrousâ",
+    "Travis Sparks",
+    "âIllegal",
+    "âTrials",
+    "Firearms Explosives",
+    "Dark Web Vendor Illegal Narcotics",
+    "Heroin Cocaine Exchange Bitcoin",
+    "Spanish Red Snapper GmbH Shipping",
+    "Officer Pleads Guilty",
+    "Bribes Exchange Smuggling Contraband"
+]
+
 let ws = words2.split("\n").map(s => s.trim()).filter(s => s !== "")
 
 export function issuspicious(id: string) {
-    return ws.find(s => id.includes(s)) !== undefined
+    return redids.includes(id)
+    //return ws.find(s => id.includes(s)) !== undefined
 }
 
 mount({ issuspicious })

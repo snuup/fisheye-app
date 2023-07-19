@@ -197,7 +197,7 @@ function rund3(e: SVGElement) {
                     let d = n.suspectdistance ?? 0
                     let ds = distanceScaler(d)
                     n.xgreed = width - 50 - ds
-                    n.ygreed = 10 + susid++ * 16
+                    n.ygreed = 10 + susid++ * 20
                     break
             }
         })

@@ -2,7 +2,11 @@
 
 ### created for the Vast Challenge 2023 - MC1
 
+![Fisheye Data Analyzer!](/image.jpg "")
 
+<br/>
+<br/>
+<br/>
 
 To run it locally:
 
@@ -14,4 +18,3 @@ for development run (globally or locally installed) [vite](https://vitejs.dev/) 
 
     vite
 
-![Fisheye Data Analyzer!](/image.jpg "")

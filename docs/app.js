@@ -151492,9 +151492,9 @@ const Link = ({
 }) => ({
   tag: "A",
   props: () => ({
-    href: "/" + url.join("/"),
+    href: "./" + url.join("/"),
     class: cc({
-      selected: url[0] === m$1.url[0]
+      selected: url[1] === m$1.url[1]
     })
   }),
   children: () => [url[0]]
@@ -153894,12 +153894,12 @@ let App = () => {
       tag: "ARTICLE",
       props: () => ({
         id: "main",
-        class: m$1.url[0]
+        class: m$1.url[1]
       }),
       children: () => [{
         tag: When,
         props: () => ({
-          cond: m$1.url[0] == "nodestats" || m$1.url[0] == ""
+          cond: m$1.url[1] == "nodestats" || m$1.url[1] == ""
         }),
         children: () => [{
           tag: NodeStats,
@@ -153909,7 +153909,7 @@ let App = () => {
       }, {
         tag: When,
         props: () => ({
-          cond: m$1.url[0] == "linkstats"
+          cond: m$1.url[1] == "linkstats"
         }),
         children: () => [{
           tag: LinkStats,
@@ -153921,7 +153921,7 @@ let App = () => {
       }, {
         tag: When,
         props: () => ({
-          cond: m$1.url[0] == "graphstats"
+          cond: m$1.url[1] == "graphstats"
         }),
         children: () => [{
           tag: GraphStats,
@@ -153933,7 +153933,7 @@ let App = () => {
       }, {
         tag: When,
         props: () => ({
-          cond: m$1.url[0] == "network"
+          cond: m$1.url[1] == "network"
         }),
         children: () => [{
           tag: NetworkView,

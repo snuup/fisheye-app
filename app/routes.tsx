@@ -11,4 +11,4 @@ export type Url =
     ["network", string?] |
     ["tree", string?]
 
-export const Link = ({ url }: { url: Url }) => <a href={'/' + url.join('/')} class={cc({ selected: url[0] === m.url[0] })}>{url[0]}</a>
+export const Link = ({ url }: { url: Url }) => <a href={'./' + url.join('/')} class={cc({ selected: url[1] === m.url[1] })}>{url[0]}</a>

@@ -128,9 +128,9 @@ footer {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 400;
-  src: url("/roboto-mono-v12-latin-regular.eot");
+  src: url("./roboto-mono-v12-latin-regular.eot");
   /* IE9 Compat Modes */
-  src: local(""), url("/roboto-mono-v12-latin-regular.woff2") format("woff2"), url("/roboto-mono-v12-latin-regular.woff") format("woff"), url("/roboto-mono-v12-latin-regular.ttf") format("truetype"), url("/roboto-mono-v12-latin-regular.svg#RobotoMono") format("svg");
+  src: local(""), url("./roboto-mono-v12-latin-regular.woff2") format("woff2"), url("./roboto-mono-v12-latin-regular.woff") format("woff"), url("./roboto-mono-v12-latin-regular.ttf") format("truetype"), url("./roboto-mono-v12-latin-regular.svg#RobotoMono") format("svg");
   /* Legacy iOS */
 }
 
@@ -139,9 +139,9 @@ footer {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 700;
-  src: url("/roboto-mono-v12-latin-700.eot");
+  src: url("./roboto-mono-v12-latin-700.eot");
   /* IE9 Compat Modes */
-  src: local(""), url("/roboto-mono-v12-latin-700.woff2") format("woff2"), url("/roboto-mono-v12-latin-700.woff") format("woff"), url("/roboto-mono-v12-latin-700.ttf") format("truetype"), url("/roboto-mono-v12-latin-700.svg#RobotoMono") format("svg");
+  src: local(""), url("./roboto-mono-v12-latin-700.woff2") format("woff2"), url("./roboto-mono-v12-latin-700.woff") format("woff"), url("./roboto-mono-v12-latin-700.ttf") format("truetype"), url("./roboto-mono-v12-latin-700.svg#RobotoMono") format("svg");
   /* Legacy iOS */
 }
 

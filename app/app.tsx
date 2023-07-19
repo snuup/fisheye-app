@@ -28,17 +28,17 @@ let App = () => {
                 </div>
             </header>
 
-            <article id='main' class={m.url[0]}>
-                <When cond={m.url[0] == 'nodestats' || m.url[0] as unknown == ''}>
+            <article id='main' class={m.url[1]}>
+                <When cond={m.url[1] == 'nodestats' || m.url[1] as unknown == ''}>
                     <NodeStats />
                 </When>
-                <When cond={m.url[0] == 'linkstats'}>
+                <When cond={m.url[1] == 'linkstats'}>
                     <LinkStats links={m.graph.links} />
                 </When>
-                <When cond={m.url[0] == 'graphstats'}>
+                <When cond={m.url[1] == 'graphstats'}>
                     <GraphStats links={m.graph.links} />
                 </When>
-                <When cond={m.url[0] == 'network'}>
+                <When cond={m.url[1] == 'network'}>
                     <NetworkView />
                 </When>
             </article>

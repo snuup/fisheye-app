@@ -104,12 +104,6 @@ export class Controller {
             window.reheat()
         }
 
-        // switch (m.url[0]) {
-        //     case "network":
-        //         this.setfocus(m.url[1])
-        //         break
-        // }
-
         // debugger
         updateview(document.body, false, true)
         //updateview("header", false, false)

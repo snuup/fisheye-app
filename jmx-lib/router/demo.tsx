@@ -21,12 +21,12 @@ const RouterApp = () => (
         <Link url={['hase', 2, 'juju']}>hase</Link>
         <Link url={['flap', 'trühh', 3, 4]}>flappy</Link>
         <article id='main'>
-            <When cond={m.url[0] == 'hase'}>
+            <When cond={m.url[1] == 'hase'}>
                 <div>
                     <h1>hasen component</h1>
                 </div>
             </When>
-            <When cond={m.url[0] == 'flap'}>
+            <When cond={m.url[1] == 'flap'}>
                 <div>
                     <h1>flappen component</h1>
                 </div>

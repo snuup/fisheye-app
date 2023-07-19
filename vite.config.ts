@@ -1,7 +1,7 @@
 import { jmxplugin } from "./vite-plugin-jmx" // "./jmx/ plugin/plugin/vite-plugin-jmx"
 
 export default {
-    base: "/",
+    base: "./",
     esbuild: {
         ignoreAnnotations: true,
         target: 'esnext',
